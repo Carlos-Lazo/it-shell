@@ -45,7 +45,10 @@ dataset_builder/webcrawling/**/*.csv
 
 *.yml
 *.yaml
+<<<<<<< HEAD
 !semantic_search_engine/config/default.yaml
+=======
+>>>>>>> a1068cc3 (feat: embedder based on all-mpnet-base-v2 sentence transformer)
 
 
 # Índices FAISS
@@ -70,6 +73,7 @@ Thumbs.db
 # Logs
 # ==========================================
 
+<<<<<<< HEAD
 *.log
 
 # Artefactos y binarios pesados
@@ -77,3 +81,6 @@ Thumbs.db
 *.npy
 *.zip
 *.tar.gz
+=======
+*.log
+>>>>>>> a1068cc3 (feat: embedder based on all-mpnet-base-v2 sentence transformer)
