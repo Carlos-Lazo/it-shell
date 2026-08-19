@@ -1,0 +1,299 @@
+command,description,category
+alias,Manage command aliases,Misc
+ar,Manage library archives,Misc
+at,Execute commands at a later time,Process_management
+awk,Pattern scanning and processing language,Text_processing
+basename,Report non-directory portion of a pathname,File_system
+batch,Schedule commands to be executed in a batch queue,Process_management
+bc,Arbitrary-precision arithmetic calculator,Misc
+cat,Concatenate and print files,File_system
+cd,Change the working directory,File_system
+chgrp,Change file group ownership,File_system
+chmod,Change file modes/attributes/permissions,File_system
+chown,Change file ownership,File_system
+cksum,Report file checksum and size,File_system
+cmp,Compare two files,File_system
+comm,Select or reject lines common to two files,Text_processing
+command,Execute a simple command,Shell_programming
+cp,Copy files,File_system
+cron,Schedule periodic background work,Misc
+csplit,Split files based on context,Text_processing
+cut,Cut out selected fields of each line of a file,Text_processing
+date,Report or change system date and time,Misc
+dd,Convert and copy files,File_system
+df,Report free storage space,File_system
+diff,Compare two files,Text_processing
+dirname,Report the directory portion of a pathname,File_system
+du,Estimate file space usage,File_system
+echo,Write to standard output,Shell_programming
+ed,The standard text editor,Text_processing
+env,Set the environment for command invocation,Misc
+expand,Convert tabs to spaces,Text_processing
+expr,Evaluate arguments as an expression,Shell_programming
+false,Exit immediately with status 1,Shell_programming
+file,Report type of files,File_system
+find,Find files,File_system
+fold,Filter for folding lines,Text_processing
+gencat,Generate a formatted message catalog,Misc
+getconf,Get configuration values,Misc
+getopts,Parse utility options,Shell_programming
+gettext,Retrieve text string from messages object,Misc
+grep,Search text for a pattern,Misc
+hash,Hash database access method,Misc
+head,Copy the first part of files,Text_processing
+iconv,Codeset conversion,Text_processing
+id,Report user identity,Misc
+join,Merges two sorted text files based on the presence of a common field,Text_processing
+kill,Terminate or signal processes,Process_management
+ln,Link files,File_system
+locale,Get locale-specific information,Misc
+localedef,Define locale environment,Misc
+logger,Log messages,Shell_programming
+logname,Report the user's login name,Misc
+lp,Send files to a printer,Text_processing
+ls,List directory contents,File_system
+m4,Macro processor,Misc
+mailx,Process messages,Misc
+man,Display system documentation,Misc
+mesg,Permit or deny messages,Misc
+mkdir,Make directories,File_system
+mkfifo,Make FIFO special files,File_system
+msgfmt,Create messages objects from messages object files,Misc
+mv,Move or rename files,File_system
+newgrp,Change to a new group,Misc
+ngettext,Retrieve text string from messages object with plural form,Misc
+nice,Invoke a utility with an altered nice value,Process_management
+nohup,Invoke a utility immune to hangups,Process_management
+od,Dump files in various formats,Misc
+paste,Merge corresponding or subsequent lines of files,Text_processing
+patch,Apply changes to files,Text_processing
+pathchk,Check pathnames,File_system
+pax,Portable archive interchange,Misc
+pr,Paginate or columnate files for printing,Text_processing
+printf,Write formatted output,Shell_programming
+ps,Report process status,Process_management
+pwd,Print working directory,File_system
+read,Read a line from standard input,Shell_programming
+readlink,Print destination of a symbolic link,File_system
+realpath,Report the fully qualified path of a file,File_system
+renice,Set nice values of running processes,Process_management
+rm,Remove file(s),File_system
+rmdir,Remove empty directory(ies),File_system
+sed,Stream editor,Text_processing
+sh,"Shell, the standard command language interpreter",Shell_programming
+sleep,Suspend execution for an interval,Shell_programming
+sort,"Sort, merge, or sequence check text files",Text_processing
+split,Split files into pieces,Misc
+strings,Find printable strings in files,C programming
+stty,Set the options for a terminal,Misc
+tabs,Set terminal tabs,Misc
+tail,Copy the last part of a file,Text_processing
+tee,Duplicate the standard output,Shell_programming
+test,Evaluate expression,Shell_programming
+time,"Display elapsed, system and kernel time used by the current shell or 
+designated process.",Process_management
+timeout,Run command with a time limit,Process_management
+touch,Change file access and modification times,File_system
+tput,Change terminal characteristics,Misc
+tr,Translate characters,Text_processing
+true,Exit immediately with status 0,Shell_programming
+tsort,Topological sort,Text_processing
+tty,Report user's terminal name,Misc
+umask,Get or set file mode creation mask,Misc
+unalias,Remove alias definitions,Misc
+uname,Report system name,Misc
+unexpand,Convert spaces to tabs,Text_processing
+uniq,Report or filter out repeated lines in a file,Text_processing
+uudecode,Decode a binary file,Networking
+uuencode,Encode a binary file,Networking
+wait,Await process completion,Process_management
+wc,"Line, word and byte or character count",Text_processing
+write,Write to another user's terminal,Misc
+xargs,Construct argument lists and invoke utility,Shell_programming
+editor,"Nano's ANOther editor, inspired by Pico",Text_processing
+nano,"Nano's ANOther editor, inspired by Pico",Text_processing
+vi,"Vi IMproved, a programmer's text editor",Text_processing
+vim,"Vi IMproved, a programmer's text editor",Text_processing
+tac,concatenate and print files in reverse,Text_processing
+rev,reverse lines characterwise,Text_processing
+less,opposite of more,Text_processing
+more,file perusal filter for crt viewing,Text_processing
+nl,number lines of files,Text_processing
+diff3,compare three files line by line,Text_processing
+sdiff,side-by-side merge of file differences,Text_processing
+column,columnate lists,Text_processing
+shuf,generate random permutations,Text_processing
+jq,Command-line JSON processor,Text_processing
+numfmt,Convert numbers from/to human-readable strings,Text_processing
+ptx,produce a permuted index of file contents,Text_processing
+w,Show who is logged on and what they are doing.,User_group
+pinky,lightweight finger,User_group
+whoami,print effective user name,User_group
+lslogins,display information about known users in the system,User_group
+users,print the user names of users currently logged in to the cur-,User_group
+groups,print the groups a user is in,User_group
+passwd,change user password,User_group
+chage,change user password expiry information,User_group
+chfn,change real user name and information,User_group
+pwconv,convert to and from shadow,User_group
+pwunconv,convert to and from shadow,User_group
+grpconv,convert to and from shadow,User_group
+grpunconv,convert to and from shadow,User_group
+pwck,verify the integrity of password files,User_group
+grpck,verify integrity of group files,User_group
+useradd,create a new user or update default new user information,User_group
+userdel,delete a user account and related files,User_group
+usermod,modify a user account,User_group
+groupadd,create a new group,User_group
+groupdel,delete a group,User_group
+groupmod,modify a group definition on the system,User_group
+adduser,add or manipulate users or groups,User_group
+deluser,remove a user or group from the system,User_group
+addgroup,add or manipulate users or groups,User_group
+delgroup,remove a user or group from the system,User_group
+vipw,"edit the password, group, shadow-password or shadow-group",User_group
+vigr,"edit the password, group, shadow-password or shadow-group",User_group
+newusers,update and create new users in batch,User_group
+chpasswd,update passwords in batch mode,User_group
+chsh,change login shell,Shell_programming
+login,begin session on the system,Shell_programming
+sulogin,single-user login,Shell_programming
+logout,write utmp and wtmp entries,Shell_programming
+printenv,print all or part of environment,Shell_programming
+which,locate a command,Shell_programming
+whereis,"locate the binary, source, and manual page files for a",Shell_programming
+bind,bind a name to a socket,Shell_programming
+script,make typescript of terminal session,Shell_programming
+clear,clear the terminal screen,Shell_programming
+history,GNU History Library,Shell_programming
+agetty,alternative Linux getty,Shell_programming
+tset,terminal initialization,Shell_programming
+tic,the terminfo entry-description compiler,Shell_programming
+infocmp,compare or print out terminfo descriptions,Shell_programming
+infotocap,convert a terminfo description into a termcap description,Shell_programming
+captoinfo,convert a termcap description into a terminfo description,Shell_programming
+setterm,set terminal attributes,Shell_programming
+dircolors,color setup for ls,Shell_programming
+setfont,load EGA/VGA console screen font,Shell_programming
+chvt,change foreground virtual terminal,Shell_programming
+openvt,start a program on a new virtual terminal (VT).,Shell_programming
+deallocvt,deallocate unused virtual consoles,Shell_programming
+getopt,parse command options (enhanced),Shell_programming
+select,synchro-,Shell_programming
+break,Scripting keywords,Shell_programming
+continue,Scripting keywords,Shell_programming
+return,Scripting keywords,Shell_programming
+if,Scripting keywords,Shell_programming
+elif,Scripting keywords,Shell_programming
+else,Scripting keywords,Shell_programming
+then,Scripting keywords,Shell_programming
+fi,Scripting keywords,Shell_programming
+case,Scripting keywords,Shell_programming
+esac,Scripting keywords,Shell_programming
+for,Scripting keywords,Shell_programming
+in,Scripting keywords,Shell_programming
+while,Scripting keywords,Shell_programming
+do,Scripting keywords,Shell_programming
+done,Scripting keywords,Shell_programming
+nproc,print the number of processing units available,Hardware_management
+lscpu,display information about the CPU architecture,Hardware_management
+lsusb,list USB devices,Hardware_management
+lspci,list all PCI devices,Hardware_management
+lsmem,list the ranges of available memory with their online status,Hardware_management
+chcpu,configure CPUs,Hardware_management
+chmem,configure memory,Hardware_management
+eject,eject removable media,Hardware_management
+setpci,configure PCI devices,Hardware_management
+dmidecode,DMI table decoder,Hardware_management
+biosdecode,BIOS information decoder,Hardware_management
+vpddecode,VPD structure decoder,Hardware_management
+ownership,Compaq ownership tag retriever,Hardware_management
+xrandr,primitive command line interface to RandR extension,Hardware_management
+rfkill,tool for enabling and disabling wireless devices,Hardware_management
+cvt,calculate VESA CVT mode lines,Hardware_management
+ldattach,attach a line discipline to a serial line,Hardware_management
+taskset,set or retrieve a process's CPU affinity,Hardware_management
+wdctl,show hardware watchdog status,Hardware_management
+fwupdmgr,firmware update manager client utility,Hardware_management
+fwupdtool,standalone firmware update utility,Hardware_management
+dbxtool,modify the dbx revocation list,Hardware_management
+setxkbmap,set the keyboard using the X Keyboard Extension,Keyboard
+xkbbell,XKB extension user utility,Keyboard
+xkbcomp,compile XKB keyboard description,Keyboard
+xkbevd,XKB event daemon,Keyboard
+xkbprint,print an XKB keyboard description,Keyboard
+xkbvleds,XKB extension user utility,Keyboard
+xkbwatch,XKB extension user utility,Keyboard
+codepage,extract a codepage from an MSDOS codepage file,Keyboard
+dumpkeys,dump keyboard translation tables,Keyboard
+fgconsole,print the number of the active VT.,Keyboard
+getkeycodes,print kernel scancode-to-keycode mapping table,Keyboard
+kbdinfo,obtain information about the status of a console,Keyboard
+kbdrate,reset the keyboard repeat rate and delay time,Keyboard
+loadkeys,load keyboard translation tables,Keyboard
+loadunimap,load the kernel unicode-to-font mapping table,Keyboard
+mapscrn,load screen output mapping table,Keyboard
+psfaddtable,add a Unicode character table to a console font,Keyboard
+psfgettable,extract the embedded Unicode character table from a con-,Keyboard
+psfstriptable,remove the embedded Unicode character table from a con-,Keyboard
+psfxtable,handle Unicode character tables for console fonts,Keyboard
+resizecons,change kernel idea of the console size,Keyboard
+screendump,dump the contents of a virtual console to stdout,Keyboard
+setkeycodes,load kernel scancode-to-keycode mapping table entries,Keyboard
+setleds,set the keyboard leds,Keyboard
+setlogcons,Send kernel messages to console N,Keyboard
+setmetamode,define the keyboard meta key handling,Keyboard
+setvesablank,Turn VESA screen blanking on or off,Keyboard
+setvtrgb,customize the console color map,Keyboard
+showconsolefont,Show the current EGA/VGA console screen font,Keyboard
+showkey,examine the codes sent by the keyboard,Keyboard
+splitfont,extract characters from an ISO-type font.,Keyboard
+vcstime,Show time in upper right hand corner of the console screen,Keyboard
+ibus,command line utility for ibus,Keyboard
+ip,"show / manipulate routing, network devices, interfaces and tunnels",Networking
+ss,another utility to investigate sockets,Networking
+host,DNS lookup utility,Networking
+ping,send ICMP ECHO_REQUEST to network hosts,Networking
+nmcli,command-line tool for controlling NetworkManager,Networking
+nmtui,Text User Interface for controlling NetworkManager,Networking
+nft,Administration tool of the nftables framework for packet,Networking
+dig,DNS lookup utility,Networking
+mdig,DNS pipelined lookup utility,Networking
+nslookup,query Internet name servers interactively,Networking
+traceroute,print the route packets trace to network host,Networking
+tc,show / manipulate traffic control settings,Networking
+bridge,show / manipulate bridge addresses and devices,Networking
+iw,show / manipulate wireless devices and their configuration,Networking
+routel,list routes with pretty output format,Networking
+delv,DNS lookup and validation utility,Networking
+nsupdate,dynamic DNS update utility,Networking
+genl,generic netlink utility frontend,Networking
+lnstat,unified linux network statistics,Networking
+nstat,network statistics tools.,Networking
+rtacct,network statistics tools.,Networking
+rtmon,listens to and monitors RTnetlink,Networking
+rtstat,unified linux network statistics,Networking
+arpd,userspace arp daemon.,Networking
+ctstat,unified linux network statistics,Networking
+dcb,show / manipulate DCB (Data Center Bridging) settings,Networking
+devlink,Devlink tool,Networking
+rdma,RDMA tool,Networking
+tipc,a TIPC configuration and management tool,Networking
+vdpa,vdpa management tool,Networking
+capsh,capability shell wrapper,Security
+getcap,examine file capabilities,Security
+getpcaps,display process capabilities,Security
+setcap,set file capabilities,Security
+xauth,X authority file utility,Security
+mcookie,generate magic cookies for xauth,Security
+chcon,change file security context,Security
+keyctl,manipulate the kernel's key management facility,Cryptography
+sum,checksum and count the blocks in a file,Cryptography
+md5sum,compute and check MD5 message digest,Cryptography
+sha1sum,compute and check SHA1 message digest,Cryptography
+sha224sum,compute and check SHA224 message digest,Cryptography
+sha256sum,compute and check SHA256 message digest,Cryptography
+sha384sum,compute and check SHA384 message digest,Cryptography
+sha512sum,compute and check SHA512 message digest,Cryptography
+b2sum,compute and check BLAKE2 message digest,Cryptography
+openssl,OpenSSL command line program,Cryptography
