@@ -5,6 +5,6 @@ embedding_model: sentence-transformers/all-mpnet-base-v2
 reranker_model:
 retrieval_top_k: 50
 selection:
-  min_score: 0.0
+  min_score: 0.45
   alternative_margin: 0.04
   max_alternatives: 3
