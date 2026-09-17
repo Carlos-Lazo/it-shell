@@ -45,6 +45,7 @@ dataset_builder/webcrawling/**/*.csv
 
 *.yml
 *.yaml
+!semantic_search_engine/config/default.yaml
 
 
 # Índices FAISS

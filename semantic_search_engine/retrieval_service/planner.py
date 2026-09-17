@@ -1,5 +1,5 @@
 import re
-from semantic_search.shared.contracts import PlanStep, QueryAnalysis, QueryPlan
+from semantic_search_engine.shared.contracts import PlanStep, QueryAnalysis, QueryPlan
 
 class RulePlanner:
     """Divide secuencias explícitas sin inventar comandos ni argumentos."""

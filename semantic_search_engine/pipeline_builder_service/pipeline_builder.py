@@ -1,4 +1,4 @@
-from semantic_search.shared.contracts import PipelineProposal, PipelineStep
+from semantic_search_engine.shared.contracts import PipelineProposal, PipelineStep
 
 class PipelineBuilder:
     def __init__(self, selection): self.selection=selection

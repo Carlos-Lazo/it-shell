@@ -1,6 +1,6 @@
 from pathlib import Path
 import yaml
-from semantic_search.shared.contracts import CandidateCommand
+from semantic_search_engine.shared.contracts import CandidateCommand
 
 class CommandResolver:
     def __init__(self, corpus_path: Path): self.corpus_path, self.cache=corpus_path, {}

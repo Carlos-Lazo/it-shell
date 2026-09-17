@@ -1,5 +1,5 @@
 import re
-from semantic_search.shared.contracts import QueryAnalysis
+from semantic_search_engine.shared.contracts import QueryAnalysis
 
 class QueryAnalyzer:
     COMPLEX_MARKERS=(' y luego ', ' después ', ' luego ', ' and then ', ' then ')

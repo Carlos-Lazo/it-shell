@@ -1,5 +1,5 @@
 import re
-from semantic_search.shared.contracts import PipelineProposal, ValidationIssue
+from semantic_search_engine.shared.contracts import PipelineProposal, ValidationIssue
 
 class ProposalValidator:
     DANGEROUS=(r'\brm\s+-rf',r'\bdd\b',r'\bmkfs\b',r'\bshutdown\b',r'\breboot\b')

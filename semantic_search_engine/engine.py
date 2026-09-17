@@ -1,4 +1,4 @@
-from semantic_search.shared.contracts import QueryRequest, SearchResponse
+from semantic_search_engine.shared.contracts import QueryRequest, SearchResponse
 class SemanticSearchEngine:
     def __init__(self, retrieval, reranker, pipeline, prompts, formatter): self.retrieval, self.reranker, self.pipeline, self.prompts, self.formatter=retrieval, reranker, pipeline, prompts, formatter
     def search(self, request: QueryRequest):

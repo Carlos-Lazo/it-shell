@@ -1,0 +1,10 @@
+index_path: ../dataset_builder/indexer/artifacts/all-mpnet-base-v2/index.faiss
+aliases_path: ../dataset_builder/indexer/artifacts/all-mpnet-base-v2/aliases.npy
+corpus_path: ../dataset_builder/corpus
+embedding_model: sentence-transformers/all-mpnet-base-v2
+reranker_model:
+retrieval_top_k: 50
+selection:
+  min_score: 0.0
+  alternative_margin: 0.04
+  max_alternatives: 3
