@@ -1,38 +1,120 @@
 # Semantic Search Engine
 
-Motor modular que propone pipelines de comandos; no ejecuta comandos de shell.
+Motor inteligente de recuperación semántica que propone comandos y secuencias CLI a partir de consultas formuladas en lenguaje natural.
 
-## Servicios
+> **Principio de diseño**: El motor asiste, propone alternativas y resalta riesgos potenciales; **por diseño nunca ejecuta comandos en el shell** (`executable: false`).
 
-- `retrieval_service`: análisis, planificación de subconsultas y recuperación FAISS.
-- `reranker_service`: adaptador para ranking identidad o cross-encoder.
-- `pipeline_builder_service`: resolución de aliases, alternativas, dependencias y validación.
-- `prompt_builder_service`: prompts de aclaración sin invocar LLM.
-- `response_formatter_service`: salida JSON, Markdown o CLI.
+---
 
-La evaluación y las métricas son una etapa posterior y no forman parte de esta rama.
+## 1. Servicios y Arquitectura
 
-## Artefactos / Git LFS
+El motor se organiza en componentes modulares con bajo acoplamiento:
 
-Los vectores `.npz`, índices `.faiss` y aliases `.npy` de `dataset_builder/**` están
-marcados en `.gitattributes` para Git LFS. 
+* **`retrieval_service`**:
+  * `QueryAnalyzer`: normaliza el texto, detecta idioma (`en` / `es`) y evalúa complejidad de la consulta.
+  * `RulePlanner`: divide consultas compuestas en pasos explícitos con dependencias secuenciales (`step_1`, `step_2`, etc.) mediante conectores en inglés y español (`and then`, `after that`, `y luego`, `&&`, `|`, etc.).
+  * `FaissRetriever`: codifica los pasos mediante `SentenceTransformer` y consulta el índice vectorial FAISS (`IndexFlatIP`) para recuperar candidatos mediante sus aliases (`categoria:id`).
+* **`reranker_service`**:
+  * Adaptador modular de reordenamiento. Por defecto utiliza `IdentityReranker` (preserva el orden de similitud de FAISS). Puede configurarse opcionalmente con un modelo de `CrossEncoder`.
+* **`pipeline_builder_service`**:
+  * `CommandResolver`: mapea el alias al documento correspondiente del corpus YAML (intención, sintaxis y ejemplos).
+  * `PipelineBuilder`: aplica el umbral de confianza (`min_score`) para abstención y selecciona alternativas dentro del margen configurado (`alternative_margin`).
+  * `ProposalValidator`: analiza plantillas de comandos, extrae parámetros requeridos (`<param>`) y detecta patrones de riesgo destructivos (`rm -rf`, `dd`, `mkfs`, etc.) o privilegiados (`sudo`, `shutdown`, `chmod 777`, etc.).
+* **`prompt_builder_service`**:
+  * Construye el contexto de aclaración cuando se requieren parámetros o se identifican advertencias de seguridad.
+* **`response_formatter_service`**:
+  * Formatea la propuesta para terminal (`cli`), documentación estructurada (`markdown`) o integración de API (`json`).
 
-#### instalado Git LFS 
+---
 
-``sudo apt install git-lfs ``       # Debian/Ubuntu <br>
-``brew install git-lfs    ``        # macOS
-<br>
-####  Ejecutando
+## 2. Instalación y Configuración
 
-`git lfs install`
+### Requisitos previos
+* Python 3.10 o superior.
+* Dependencias principales (`requirements.txt`):
+  ```bash
+  pip install -r semantic_search_engine/requirements.txt
+  ```
 
+### Configuración (`config/default.yaml`)
+El comportamiento del motor se parametriza mediante `semantic_search_engine/config/default.yaml`:
 
-#### Atributos
-
-
-
+```yaml
+index_path: ../dataset_builder/indexer/artifacts/all-mpnet-base-v2/index.faiss
+aliases_path: ../dataset_builder/indexer/artifacts/all-mpnet-base-v2/aliases.npy
+corpus_path: ../dataset_builder/corpus
+embedding_model: sentence-transformers/all-mpnet-base-v2
+reranker_model:                   # Vacío para IdentityReranker; o especificar modelo CrossEncoder
+retrieval_top_k: 50              # Cantidad de vecinos recuperados en FAISS
+selection:
+  min_score: 0.45                # Umbral de abstención ante baja confianza
+  alternative_margin: 0.04       # Margen de similitud para proponer alternativas
+  max_alternatives: 3            # Límite de comandos alternativos
 ```
-git lfs track "dataset_builder/**/*.npz" 
-git lfs track "dataset_builder/**/*.faiss" 
-git lfs track "dataset_builder/**/*.npy" 
+
+---
+
+## 3. Ejecución desde la CLI
+
+El punto de entrada es `semantic_search_engine/cli.py`.
+
+### Ejecución en línea
+```bash
+PYTHONPATH=. python semantic_search_engine/cli.py "list files in a directory"
 ```
+
+### Ejecución fuera de línea (Offline)
+Para asegurar reproducibilidad y evitar llamadas a la red durante la inferencia:
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. \
+python semantic_search_engine/cli.py "list files in a directory"
+```
+
+### Formatos de salida soportados
+* **CLI (texto para terminal)**:
+  ```bash
+  python semantic_search_engine/cli.py "list files" --format cli
+  ```
+* **Markdown**:
+  ```bash
+  python semantic_search_engine/cli.py "list files" --format markdown
+  ```
+* **JSON (estructurado con metadatos y análisis)**:
+  ```bash
+  python semantic_search_engine/cli.py "list files" --format json
+  ```
+
+### Consultas multietapa explícitas
+```bash
+python semantic_search_engine/cli.py "find files and then compress them"
+```
+
+---
+
+## 4. Ejecución de Pruebas Unitarias
+
+La suite de pruebas unitarias evalúa la lógica del motor de manera aislada (sin descargas de red):
+
+```bash
+PYTHONPATH=. python -m unittest discover tests
+```
+
+Pruebas cubiertas:
+* `tests/test_abstention.py`: filtrado por `min_score`, abstención explícita y formateo de advertencias.
+* `tests/test_planner.py`: conectores secuenciales en inglés y español, detección de complejidad y dependencias encadenadas.
+* `tests/test_safety.py`: matriz de comandos seguros vs. riesgosos (destructivos, privilegiados) y garantía de no ejecución.
+* `tests/test_reranker.py`: comportamiento de `IdentityReranker`, integración de `CrossEncoderReranker` y preservación de scores.
+
+---
+
+## 5. Límites Conocidos y Métricas
+
+* **Línea base de recuperación**:
+  * Evaluado con `sentence-transformers/all-mpnet-base-v2` sobre consultas de prueba:
+    * Consultas en inglés: `CommandHit@5` ~41,7 %, `MRR` ~0,207.
+    * Consultas en español: `CommandHit@5` ~8,3 %, `MRR` ~0,042 (debido a que los `intents` del corpus están en inglés y el modelo es monolingüe).
+* **Abstención por baja confianza**:
+  * Consultas fuera de dominio o sin similitud semántica suficiente (< `min_score: 0.45`) devuelven explícitamente `No se encontró una recomendación confiable` y emiten un aviso `[WARNING] no_candidate`.
+* **Aislamiento de materiales**:
+  * Los artefactos pesados (`.faiss`, `.npz`, `.npy`) se rastrean mediante Git LFS.
+  * Los datasets de evaluación y benchmarks se mantienen aislados en la rama dedicada `evaluations`.
