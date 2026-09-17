@@ -1,0 +1,61 @@
+EVALUACION DE RETRIEVAL FAISS
+Fecha: 2026-09-17
+
+Alcance
+
+Se evaluo el nucleo de recuperacion semantica del motor: codificacion de la
+consulta con sentence-transformers/all-mpnet-base-v2 y busqueda sobre el indice
+FAISS existente. No se regeneraron embeddings ni se modificaron los artefactos.
+
+Artefactos evaluados
+
+- index.faiss: 24.687 vectores de 768 dimensiones.
+- aliases.npy: 24.687 aliases, en el mismo orden que el indice.
+- vectors.npz: 24.687 vectores, alineados con aliases y normalizados.
+
+Conjunto de consultas
+
+- 24 consultas humanas: 12 en ingles y 12 en espanol.
+- Cubre ls, find, grep, chmod, df, du, ps, kill, mkdir, tar, curl y ssh.
+- La relevancia se define por comando: un resultado es relevante si su alias
+  corresponde a cualquiera de las opciones indexadas del comando esperado.
+- Las consultas, respuestas y detalle por caso estan en retrieval_queries.json
+  y retrieval_results.json.
+
+Metricas
+
+CommandHit@k es la proporcion de consultas para las cuales aparece al menos una
+opcion del comando esperado en los primeros k resultados. Es mas preciso que
+llamarlo Recall@k, porque cada comando puede tener muchos aliases relevantes.
+
+                    Todas (24)   Ingles (12)   Espanol (12)
+CommandHit@1          4,17 %        8,33 %         0,00 %
+CommandHit@3         20,83 %       33,33 %         8,33 %
+CommandHit@5         25,00 %       41,67 %         8,33 %
+CommandHit@10        29,17 %       50,00 %         8,33 %
+MRR                    0,124         0,207          0,042
+nDCG@5                 0,063         0,097          0,030
+
+Interpretacion
+
+- El estado actual no es suficiente para recomendar comandos de forma fiable:
+  el comando esperado aparece en Top-5 solo en 6 de 24 consultas.
+- La brecha por idioma es critica. El corpus de intents esta en ingles y el
+  modelo/corpus no cuenta con una estrategia explicita de traduccion o
+  recuperacion multilingue; por eso solo 1 de 12 consultas en espanol tiene un
+  comando esperado en Top-5.
+- El indice y los aliases son consistentes entre si, pero no con todo el corpus
+  vigente: hay 2 aliases indexados sin documento actual y 2.644 documentos
+  actuales que no fueron indexados. Git y Docker no estan en el indice.
+- Esta es una evaluacion inicial y de tamano reducido, util como linea base.
+  Se debe ampliar con consultas anotadas por personas y aceptar multiples
+  comandos validos cuando la necesidad admita alternativas reales.
+
+Reproduccion
+
+Desde la raiz del repositorio:
+
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+dataset_builder/indexer/.venv/bin/python evaluation/evaluate_retrieval.py
+
+El modo offline evita toda descarga y solo codifica las 24 consultas del set.

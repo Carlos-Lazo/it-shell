@@ -1,0 +1,22 @@
+[
+  {"id": "en_ls", "language": "en", "query": "list files in a directory", "relevant_commands": ["ls"]},
+  {"id": "en_find", "language": "en", "query": "find files by name under a directory", "relevant_commands": ["find"]},
+  {"id": "en_grep", "language": "en", "query": "search for text inside a file", "relevant_commands": ["grep"]},
+  {"id": "en_chmod", "language": "en", "query": "change a file permissions", "relevant_commands": ["chmod"]},
+  {"id": "en_df", "language": "en", "query": "show available disk space", "relevant_commands": ["df"]},
+  {"id": "en_du", "language": "en", "query": "calculate disk usage of a directory", "relevant_commands": ["du"]},
+  {"id": "en_ps", "language": "en", "query": "display running processes", "relevant_commands": ["ps"]},
+  {"id": "en_kill", "language": "en", "query": "terminate a process by its identifier", "relevant_commands": ["kill"]},
+  {"id": "en_mkdir", "language": "en", "query": "create a new directory", "relevant_commands": ["mkdir"]},
+  {"id": "en_tar", "language": "en", "query": "create a compressed tar archive", "relevant_commands": ["tar"]},
+  {"id": "en_curl", "language": "en", "query": "download a file from a web URL", "relevant_commands": ["curl"]},
+  {"id": "en_ssh", "language": "en", "query": "connect securely to a remote server", "relevant_commands": ["ssh"]},
+  {"id": "en_cat", "language": "en", "query": "print the contents of a text file", "relevant_commands": ["cat"]},
+  {"id": "en_head", "language": "en", "query": "display the first lines of a file", "relevant_commands": ["head"]},
+  {"id": "en_tail", "language": "en", "query": "follow new lines appended to a log file", "relevant_commands": ["tail"]},
+  {"id": "en_free", "language": "en", "query": "show available and used memory", "relevant_commands": ["free"]},
+  {"id": "en_ping", "language": "en", "query": "check whether a remote host is reachable", "relevant_commands": ["ping"]},
+  {"id": "en_scp", "language": "en", "query": "copy a file securely to a remote server", "relevant_commands": ["scp"]},
+  {"id": "en_chown", "language": "en", "query": "change the owner of a file", "relevant_commands": ["chown"]},
+  {"id": "en_whoami", "language": "en", "query": "show the name of the current user", "relevant_commands": ["whoami"]}
+]
