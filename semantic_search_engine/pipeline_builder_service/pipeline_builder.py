@@ -3,12 +3,14 @@ from semantic_search_engine.shared.contracts import PipelineProposal, PipelineSt
 class PipelineBuilder:
     def __init__(self, selection): self.selection=selection
     def choose(self, ranked):
-        if not ranked or ranked[0].score < self.selection.min_score:
+        if not ranked or ranked[0].retrieval_score < self.selection.min_score:
             return None, ()
         primary = ranked[0]
         alternatives = []
         for candidate in ranked[1:]:
-            if candidate.score < self.selection.min_score or (primary.score - candidate.score > self.selection.alternative_margin):
+            if candidate.retrieval_score < self.selection.min_score:
+                break
+            if primary.reranker_score is None and (primary.score - candidate.score > self.selection.alternative_margin):
                 break
             alternatives.append(candidate)
             if len(alternatives) == self.selection.max_alternatives - 1:

@@ -1,0 +1,219 @@
+IT SHELL — DOCUMENTO BASE PARA PLANIFICAR LAS MEJORAS
+Versión: v1.1 (Actualizada con Estado de Baseline y Propuestas de Mejora)
+Fecha: 2026-10-12
+
+PROPÓSITO
+Este documento describe el producto objetivo de IT Shell, las mejoras propuestas,
+el aporte, ubicación, costo y objetivo de cada tecnología, incorporando el estado real
+del repositorio tras el congelamiento del Baseline v1.0 y la integración de la arquitectura.
+
+Sirve como especificación arquitectónica para convertir las mejoras en tareas implementables.
+
+======================================================================
+1. PRODUCTO RESULTANTE
+======================================================================
+
+IT Shell evoluciona de ser un buscador semántico de comandos hacia un
+ASISTENTE SEMÁNTICO PARA PLANIFICAR OPERACIONES DE CONSOLA.
+
+El usuario describe en lenguaje natural un objetivo que desea alcanzar en Linux.
+El sistema analiza la intención, recupera comandos relevantes, descompone tareas complejas,
+ordena los pasos, valida la propuesta y devuelve un plan explicado.
+
+Ejemplo:
+"Encontrá los archivos de más de 100 MB en mi directorio personal y guardá la lista en un archivo".
+
+Propuesta generada:
+Paso 1: buscar archivos grandes.
+    find "$HOME" -type f -size +100M
+Paso 2: guardar la salida.
+    find "$HOME" -type f -size +100M > archivos_grandes.txt
+
+Avisos y explicaciones:
+- Explica los comandos y banderas.
+- Advierte que ">" trunca/reemplaza el contenido si el archivo existe.
+- Garantía de no ejecución: el motor nunca ejecuta llamadas al sistema; el usuario siempre
+  mantiene el control manual.
+
+Medios principales de acceso:
+1. Interfaz de línea de comandos (CLI) enriquecida con formatos texto, Markdown y JSON.
+2. Interfaz MCP (Model Context Protocol) para que agentes o aplicaciones externas invoquen
+   las capacidades del motor de forma desacoplada y estandarizada.
+
+Niveles de producto:
+- Buscador semántico: recupera comandos relevantes para una consulta.
+- Asistente de planificación (OBJETIVO ACTUAL): organiza comandos en un plan de varios pasos,
+  explica el resultado, detecta parámetros obligatorios y aplica validaciones de riesgo.
+- Agente operativo (FUERA DE ALCANCE): ejecución automatizada en shell. Descartado para esta
+  versión por requerir aislamiento en sandbox, gestión de permisos y riesgos de seguridad.
+
+======================================================================
+2. ARQUITECTURA OBJETIVO
+======================================================================
+
+Usuario / Agente Externo
+  |
+  +--------------------------------+
+  |                                |
+  v                                v
+CLI nativa                     Servidor MCP (JSON-RPC)
+  |                                |
+  +----------------+---------------+
+                   |
+                   v
+     [ SemanticSearchEngine (Fachada) ]
+                   |
+                   v
+            Query Analyzer
+       (normalización, idioma, intención,
+        detección de complejidad)
+                   |
+                   v
+             Query Planner
+       (secuencias simples vs complejas,
+        dependencias entre pasos explícitos)
+                   |
+                   v
+           Retrieval Service
+       (SBERT all-mpnet-base-v2 + FAISS IndexFlatIP)
+                   |
+                   v
+           Re-ranker Service
+       (Cross-Encoder ms-marco-MiniLM-L-6-v2)
+                   |
+                   v
+        Pipeline Builder & Resolver
+       (resolución contra corpus YAML, umbral min_score
+        y selección de alternativas)
+                   |
+                   v
+           Proposal Validator
+       (detección de comandos destructivos/privilegiados,
+        parámetros <param> requeridos, executable=False)
+                   |
+                   +------------------------------+
+                   |                              |
+                   v                              v
+      Respuesta estructurada            Prompt Builder + LLM
+                                        (explicación opcional)
+                   |                              |
+                   +--------------+---------------+
+                                  |
+                                  v
+                       Response Formatter
+                     (CLI, Markdown, JSON)
+
+======================================================================
+3. ESTADO ACTUAL Y TECNOLOGÍAS
+======================================================================
+
+3.1. REESTRUCTURACIÓN DEL CÓDIGO (ESTADO: COMPLETADA EN MAIN)
+- Se modularizó el paquete en `semantic_search_engine/` con servicios independientes:
+  retrieval_service, reranker_service, pipeline_builder_service, prompt_builder_service,
+  response_formatter_service y shared.
+- Contratos de datos definidos en `contracts.py` (QueryRequest, SearchResponse, PipelineProposal).
+- Test suite unitario con 17 pruebas unitarias pasando.
+- Fusionado en la rama `main` (commit ad0f81f).
+
+3.2. RETRIEVAL SBERT + FAISS (ESTADO: BASELINE CONGELADO V1.0)
+- Embedder: sentence-transformers/all-mpnet-base-v2 (dimensión 768).
+- Índice FAISS: 24.687 vectores con 24.687 aliases alineados.
+- Métricas del Baseline oficial (evaluations/baseline_v1_metadata.json):
+  * CommandHit@1:  5,00 %
+  * CommandHit@3: 20,00 %
+  * CommandHit@5: 25,00 %
+  * CommandHit@10: 35,00 %
+  * MRR: 0,1317
+  * nDCG@5: 0,0580
+- Conclusión clave: La recuperación cruda sólo acierta en Top-5 un 25% de las veces.
+  Esto fundamenta la prioridad del Re-ranker y la mejora del corpus antes de planificaciones complejas.
+
+3.3. RE-RANKER CON CROSS-ENCODER (ESTADO: INTEGRADO DETRÁS DE CONFIGURACIÓN)
+- Ubicación: `semantic_search_engine/reranker_service/reranker.py`.
+- Soporta IdentityReranker y CrossEncoderReranker lazily-loaded.
+- Aporte: Reordenar los 10-20 candidatos recuperados por FAISS mediante evaluación cruzada
+  consulta-comando. Como Hit@10 es 35% frente a Hit@1 de 5%, el margen de mejora de MRR es sustancial.
+- Próximo paso: Ejecutar benchmark comparativo formal contra el baseline.
+
+3.4. QUERY ANALYZER Y PLANNER DETERMINISTA
+- Ubicación: `retrieval_service/query_analyzer.py` y `retrieval_service/planner.py`.
+- Soporta conectores en inglés y español (&&, ;, |, "and then", "y luego", etc.).
+- Diseñado para secuencias explícitas sin inferir argumentos implícitos.
+- Próximo paso: Manejo de placeholders y subconsultas no lineales.
+
+3.5. PROPOSAL VALIDATOR Y REGLAS DE SEGURIDAD
+- Ubicación: `pipeline_builder_service/validator.py`.
+- Patrones destructivos (rm -rf, dd, mkfs, > a sistema) y privilegiados (sudo, chmod 777, chown root).
+- Garantía explícita de `executable=False` y extracción de `<param>` obligatorios.
+
+3.6. PROMPT BUILDER Y LLM GENERATIVO PARA EXPLICACIÓN (OPCIONAL)
+- Desacoplamiento estricto: El LLM no decide ni busca comandos; sólo recibe el plan estructurado
+  y redacta la explicación amigable en lenguaje natural.
+- Permite fallback offline completo a ResponseFormatter determinista.
+
+3.7. SERVIDOR MCP (MODEL CONTEXT PROTOCOL)
+- Exposición de capacidades como herramientas estándar:
+  * `search_commands(query, top_k)`
+  * `plan_operation(query)`
+  * `validate_command(command)`
+- Permite la integración directa con clientes como Claude Desktop, Cursor o agentes autónomos.
+
+3.8. TECNOLOGÍAS EVALUADAS Y DESCARTADAS
+- Jev (TypeSafe AI): Descartado como dependencia crítica por latencia, costos opacos por API
+  y pérdida de autonomía local.
+- Laya: Descartado por consumo computacional inviable para el entorno de ejecución.
+- Qwen3 offline: Se mantiene como herramienta opcional para enriquecer ejemplos de prueba,
+  fuera del runtime del motor.
+
+======================================================================
+4. RESTRICCIONES DE HARDWARE Y ENTORNO
+======================================================================
+
+A partir de las pruebas experimentales del repositorio se identificaron restricciones críticas:
+1. Concurrencia de hilos en CPU: FAISS y PyTorch deben ejecutarse con límites de hilos
+   (`OMP_NUM_THREADS=2`, `MKL_NUM_THREADS=2`) para evitar saturación del procesador y congelamientos.
+2. Espacio de almacenamiento temporal: La partición de sistema `/dev/sda2` (`/tmp`) cuenta con
+   apenas 1,8 GB libres, mientras que `/home/carlos` dispone de más de 117 GB. Las instalaciones
+   y descargas deben usar `TMPDIR=/home/carlos/tmp`.
+3. Modo offline garantizado: Pruebas y ejecuciones deben mantener `HF_HUB_OFFLINE=1`
+   y `TRANSFORMERS_OFFLINE=1` para asegurar reproducibilidad estricta.
+
+======================================================================
+5. REORDENAMIENTO ESTRATÉGICO DE FASES DE IMPLEMENTACIÓN
+======================================================================
+
+Frente a la versión borrador, se ajusta el orden de ejecución para priorizar la calidad de
+recuperación antes de la orquestación avanzada:
+
+FASE 0 — Baseline Reproducible (COMPLETADA)
+  - Medición congelada en `evaluation/baseline_v1_metadata.json`.
+
+FASE 1 — Consolidación de Arquitectura Modular (COMPLETADA)
+  - Fusión de la rama `engine` a `main`. Suite de pruebas unitarias al 100%.
+
+FASE 2 — Mejora del Retrieval (Cross-Encoder + Expansión de Corpus) (EN CURSO)
+  - Activar Cross-Encoder en evaluación comparativa contra el baseline.
+  - Subsanar comandos faltantes del corpus (Git, Docker) e incorporar consultas bilingües.
+
+FASE 3 — Query Planner y Análisis Semántico Avanzado
+  - Extracción robusta de parámetros faltantes y resolución de dependencias entre pasos.
+
+FASE 4 — Capa de Explicación y Prompt Builder
+  - Implementación del servicio generativo desacoplado con LLM local liviano o API externa opcional.
+
+FASE 5 — Servidor MCP (Model Context Protocol)
+  - Implementación de interfaz estandarizada JSON-RPC para integración con agentes externos.
+
+FASE 6 — Optimización, Empaquetado y Documentación Final
+  - Medición de latencia/RAM, evaluación opcional de ONNX Runtime para el cross-encoder
+    y distribución como paquete CLI instalable.
+
+======================================================================
+6. CRITERIOS DE ÉXITO
+======================================================================
+
+- Retrieval & Reranking: Superar MRR de 0.30 y Hit@5 del 60% tras incorporar el Cross-Encoder.
+- Planificación: 100% de consultas complejas descompuestas en secuencias válidas y con dependencias explícitas.
+- Seguridad: 0 falsos negativos en la detección de patrones destructivos críticos conocidos.
+- Integración: Servidor MCP funcional que responda a llamadas de herramientas en < 500 ms (sin LLM).
+

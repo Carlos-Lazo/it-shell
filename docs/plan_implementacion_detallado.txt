@@ -1,0 +1,227 @@
+IT SHELL — PLAN DE IMPLEMENTACIÓN DETALLADO Y ESTRUCTURADO
+Versión: 1.0
+Fecha: 2026-10-12
+Estado de partida: Baseline v1.0 congelado | Rama main consolidada
+
+======================================================================
+1. RESUMEN DEL ESTADO DE PARTIDA
+======================================================================
+
+El proyecto cuenta con las bases técnicas estabilizadas:
+- Rama principal `main`: Unificada y al día con el motor modular (`semantic_search_engine`),
+  17 pruebas unitarias funcionales y suite de configuración desacoplada.
+- Rama `evaluations`: Baseline v1.0 congelado formalmente en `evaluation/baseline_v1_metadata.json`
+  (20 consultas, MRR 0,1317, Hit@5 25%, modelo all-mpnet-base-v2, 24.687 vectores indexados).
+- Restricciones de entorno identificadas:
+  * Control de concurrencia: `OMP_NUM_THREADS=2` para evitar saturación de CPU.
+  * Almacenamiento temporal: Uso de `TMPDIR=/home/carlos/tmp` (117 GB libres) ante la limitación de 1.8 GB en `/tmp`.
+  * Ejecución offline garantizada: `HF_HUB_OFFLINE=1` y `TRANSFORMERS_OFFLINE=1`.
+
+======================================================================
+2. HOJA DE RUTA ESTRUCTURADA HACIA EL PRODUCTO FINAL
+======================================================================
+
+----------------------------------------------------------------------
+FASE 2: MEJORA DEL RETRIEVAL Y EVALUACIÓN DE RE-RANKING
+----------------------------------------------------------------------
+Objetivo:
+Elevar la precisión del comando recuperado individualmente antes de orquestar planes complejos.
+El baseline demostró que Hit@10 es 35% frente a un Hit@1 de 5%, lo que otorga un margen
+de mejora sustancial mediante reordenamiento contextual.
+
+Tareas:
+2.1. Benchmark del Cross-Encoder:
+     - Ejecutar evaluación comparativa activando `CrossEncoderReranker`
+       (`cross-encoder/ms-marco-MiniLM-L-6-v2`) sobre el conjunto oficial de 20 consultas.
+     - Comparar métricas directamente contra `baseline_v1_metadata.json`.
+     - Registrar delta de ganancia en MRR y nDCG@5, midiendo el incremento de latencia en inferencia.
+
+2.2. Curación y Expansión del Corpus:
+     - Subsanar los comandos ausentes en el índice FAISS actual (ej. git, docker).
+     - Incorporar consultas en español al conjunto de evaluación formal para medir la brecha multilingüe.
+     - Congelar el nuevo conjunto como `evaluation_v2_queries.json`.
+
+2.3. Calibración de Umbrales de Selección:
+     - Ajustar los parámetros de `default.yaml`: `min_score` (actualmente 0.45),
+       `alternative_margin` (0.04) y `max_alternatives` (3).
+     - Verificar que no se generen falsas abstenciones en consultas válidas.
+
+Entregables:
+- Script de benchmark comparativo (`evaluation/evaluate_reranker.py`).
+- Informe de resultados `evaluation/experimento_reranker_v1.json`.
+- Configuración calibrada en `config/default.yaml`.
+
+Criterio de Aceptación:
+- Superar el MRR de 0.25 (vs 0.1317 del baseline) y alcanzar Hit@5 >= 50% con re-ranking.
+
+----------------------------------------------------------------------
+FASE 3: QUERY PLANNER DETERMINÍSTICO AVANZADO
+----------------------------------------------------------------------
+Objetivo:
+Transformar consultas compuestas en secuencias de ejecución lógicas con dependencias
+visibles y extracción precisa de argumentos.
+
+Tareas:
+3.1. Extracción de Parámetros y Placeholders:
+     - Identificar argumentos explícitos en la consulta (ej. rutas como "/var/log", tamaños "+100M",
+       extensiones "*.tar.gz", nombres de archivo).
+     - Mapear estos argumentos a los placeholders `<param>` del corpus para autocompletar plantillas.
+
+3.2. Modelado de Dependencias de Flujo:
+     - Detectar operadores de encadenamiento de shell:
+       * Tuberías (`|`): salida del paso N alimenta entrada del paso N+1.
+       * Redirecciones (`>`, `>>`): salida del paso N dirigida a archivo destino.
+       * Ejecución condicional (`&&`, `;`): secuencialidad estricta.
+     - Generar el grafo estructurado en `QueryPlan` indicando `depends_on`.
+
+3.3. Detección de Ambigüedad e Incompletitud:
+     - Identificar cuando a una intención le falta un dato crítico (ej. "comprimir archivo" sin indicar destino).
+     - Generar la señal `requires_input` con mensaje aclaratorio para el usuario.
+
+Entregables:
+- Módulo `retrieval_service/planner.py` actualizado con resolución de argumentos.
+- Suite de pruebas unitarias `tests/test_planner_advanced.py` cubriendo casos de 1, 2 y 3 pasos.
+
+Criterio de Aceptación:
+- 100% de consultas complejas de prueba descompuestas correctamente con sus dependencias y parámetros.
+
+----------------------------------------------------------------------
+FASE 4: PROPOSAL VALIDATOR Y REGLAS DE SEGURIDAD OPERATIVA
+----------------------------------------------------------------------
+Objetivo:
+Garantizar la protección del usuario mediante la detección estricta de riesgos y advertencias claras.
+
+Tareas:
+4.1. Ampliación de la Matriz de Riesgo:
+     - Comandos destructivos de alto impacto: `rm -rf`, `dd`, `mkfs`, `shred`, `truncate`.
+     - Sobreescritura de archivos críticos: redirecciones `>` hacia directorios de sistema (`/etc`, `/boot`).
+     - Comandos con privilegios elevados: `sudo`, `su`, manipulación permisiva `chmod 777`, `chown root`.
+     - Bifurcaciones peligrosas (fork bombs o bucles infinitos).
+
+4.2. Estructuración de Advertencias en el Contrato:
+     - Cada issue debe contener: nivel de severidad (`critical`, `warning`, `info`), código de regla,
+       descripción del riesgo y recomendación segura.
+     - Garantía inviolable: `executable=False` en todas las respuestas del motor.
+
+4.3. Pruebas de Estrés de Seguridad:
+     - Crear una matriz de 50 comandos (seguros, dudosos y de alto riesgo) para validar que no
+       exista ningún falso negativo en patrones letales.
+
+Entregables:
+- `pipeline_builder_service/validator.py` con catálogo ampliado de reglas.
+- Suite de pruebas `tests/test_safety_matrix.py`.
+
+Criterio de Aceptación:
+- 0 falsos negativos en patrones de riesgo crítico. Advertencias claras y visibles en todos los formatos.
+
+----------------------------------------------------------------------
+FASE 5: CAPA DE EXPLICACIÓN Y PROMPT BUILDER (LLM OPCIONAL)
+----------------------------------------------------------------------
+Objetivo:
+Proveer explicaciones pedagógicas de los comandos en lenguaje natural sin comprometer la
+confiabilidad del motor ni depender obligatoriamente de servicios externos.
+
+Tareas:
+5.1. Implementación de `PromptBuilderService`:
+     - Recibir la propuesta validada (`PipelineProposal`) y armar el contexto estructurado:
+       comando sugerido, banderas utilizadas, advertencias detectadas y objetivo del usuario.
+     - Generar un prompt estricto con restricciones para que el LLM NO modifique el comando ni invente banderas.
+
+5.2. Conector a LLM Desacoplado:
+     - Implementar interfaz genérica de inferencia:
+       * Opción A: API externa (Claude / Gemini) mediante clave opcional configurada.
+       * Opción B: Modelo local liviano (vía Ollama o Qwen pequeño).
+       * Opción C: Modo offline puro (fallback determinista nativo de `ResponseFormatterService`).
+
+5.3. Renderizado y Formato de Salida:
+     - Soporte completo en terminal (ANSI), Markdown y JSON estructurado.
+
+Entregables:
+- `prompt_builder_service/prompt_builder.py` y `prompt_builder_service/llm_client.py`.
+- Formateo enriquecido en `response_formatter_service/service.py`.
+- Pruebas unitarias de construcción de prompts y fallback offline.
+
+Criterio de Aceptación:
+- Si el LLM está deshabilitado o falla la conexión, el sistema responde de forma instantánea y completa
+  utilizando el formateador local determinista.
+
+----------------------------------------------------------------------
+FASE 6: SERVIDOR MCP (MODEL CONTEXT PROTOCOL)
+----------------------------------------------------------------------
+Objetivo:
+Exponer el motor de IT Shell a agentes y clientes externos (Claude Desktop, Cursor, extensiones)
+utilizando el estándar abierto de la industria.
+
+Tareas:
+6.1. Creación del Servidor MCP:
+     - Implementar `semantic_search_engine/mcp/server.py` utilizando la librería oficial `mcp-sdk`.
+     - Configurar transporte estándar por stdio (JSON-RPC).
+
+6.2. Registro de Herramientas (*Tools*):
+     - `search_commands`: Recupera comandos similares para una consulta dada.
+     - `plan_operation`: Ejecuta el flujo completo (análisis, planificación, retrieval, reranking y validación).
+     - `validate_command`: Evalúa un comando provisto por el usuario contra las reglas de seguridad.
+
+6.3. Pruebas de Integración MCP:
+     - Crear script de prueba de cliente MCP que invoque cada herramienta y verifique los contratos.
+     - Documentar configuración de conexión para Claude Desktop (`claude_desktop_config.json`).
+
+Entregables:
+- Subpaquete `semantic_search_engine/mcp/`.
+- Documento de integración `docs/mcp_integration_guide.md`.
+
+Criterio de Aceptación:
+- Un cliente MCP puede consultar el motor, recibir el plan validado y presentar las advertencias
+  con latencia menor a 400 ms en modo local.
+
+----------------------------------------------------------------------
+FASE 7: EMPAQUETADO, OPTIMIZACIÓN Y DOCUMENTACIÓN FINAL
+----------------------------------------------------------------------
+Objetivo:
+Cerrar el producto como una solución instalable, medible y lista para entrega académica/profesional.
+
+Tareas:
+7.1. Empaquetado Estándar:
+     - Crear `pyproject.toml` en la raíz del repositorio para permitir instalación limpia:
+       `pip install -e .`
+     - Generar el comando de consola directo `it-shell` que invoque la CLI.
+
+7.2. Perfilado de Recursos:
+     - Medir consumo de RAM en frío y durante inferencia.
+     - Evaluar la viabilidad de exportar el Cross-Encoder a ONNX Runtime si la latencia en CPU lo amerita.
+
+7.3. Documentación y Entrega:
+     - Actualizar `README.md` principal con guía de inicio rápido, arquitectura, ejemplos de CLI y MCP.
+     - Elaborar reporte comparativo final: Baseline v1.0 vs Versión Final.
+
+Entregables:
+- `pyproject.toml` funcional.
+- Binario CLI `it-shell`.
+- Informe técnico final de rendimiento y comparativa contra el baseline.
+
+======================================================================
+3. CRONOGRAMA DE EJECUCIÓN RECOMENDADO
+======================================================================
+
+Sprint 1: Fase 2 (Benchmark Cross-Encoder + Curación de Corpus)
+Sprint 2: Fase 3 (Planner Avanzado y Extracción de Argumentos)
+Sprint 3: Fase 4 (Validator de Seguridad y Matriz de Riesgo)
+Sprint 4: Fase 5 (Prompt Builder y Explicación desacoplada)
+Sprint 5: Fase 6 (Servidor MCP y Pruebas de Integración con Agentes)
+Sprint 6: Fase 7 (Empaquetado pyproject.toml, Documentación y Métricas Finales)
+
+======================================================================
+4. COMANDOS CLAVE DE OPERACIÓN Y VERIFICACIÓN
+======================================================================
+
+1. Ejecución de la suite de pruebas:
+   PYTHONPATH=. dataset_builder/indexer/.venv/bin/python -m unittest discover tests
+
+2. Ejecución de la CLI en modo consulta:
+   HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. \
+     dataset_builder/indexer/.venv/bin/python semantic_search_engine/cli.py "find large files" --format markdown
+
+3. Ejecución de evaluación del baseline:
+   HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. \
+     dataset_builder/indexer/.venv/bin/python evaluation/evaluate_retrieval.py
+

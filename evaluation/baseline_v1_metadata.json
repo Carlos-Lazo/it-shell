@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-09-26T20:28:50-03:00",
+  "git_commit": "748f6c2b24fef4006384c3e85156bf72ed20301e",
+  "git_branch": "evaluations",
+  "environment": {
+    "python_version": "3.11.2",
+    "faiss_version": "1.10.0",
+    "numpy_version": "2.2.2",
+    "sentence_transformers_version": "3.4.1"
+  },
+  "retrieval_config": {
+    "model_name": "sentence-transformers/all-mpnet-base-v2",
+    "embedding_dim": 768,
+    "vector_count": 24687,
+    "index_path": "dataset_builder/indexer/artifacts/all-mpnet-base-v2/index.faiss",
+    "aliases_path": "dataset_builder/indexer/artifacts/all-mpnet-base-v2/aliases.npy",
+    "vectors_path": "dataset_builder/embedder/artifacts/vectors.npz"
+  },
+  "dataset": {
+    "queries_file": "evaluation/retrieval_queries.json",
+    "total_queries": 20
+  },
+  "metrics": {
+    "queries": 20,
+    "command_hit@1": 0.05,
+    "command_hit@3": 0.20,
+    "command_hit@5": 0.25,
+    "command_hit@10": 0.35,
+    "ndcg@1": 0.05,
+    "ndcg@3": 0.0653,
+    "ndcg@5": 0.058,
+    "ndcg@10": 0.0638,
+    "mrr": 0.1317
+  }
+}

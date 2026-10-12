@@ -1,0 +1,677 @@
+{
+  "index_vectors": 24687,
+  "metrics": {
+    "queries": 20,
+    "command_hit@1": 0.05,
+    "ndcg@1": 0.05,
+    "command_hit@3": 0.2,
+    "ndcg@3": 0.0653,
+    "command_hit@5": 0.25,
+    "ndcg@5": 0.058,
+    "command_hit@10": 0.35,
+    "ndcg@10": 0.0638,
+    "mrr": 0.1317
+  },
+  "queries": [
+    {
+      "id": "en_ls",
+      "language": "en",
+      "query": "list files in a directory",
+      "relevant_commands": [
+        "ls"
+      ],
+      "relevant_aliases": 46,
+      "first_relevant_rank": 10,
+      "top_5": [
+        "filesystem:2734",
+        "filesystem:1513",
+        "filesystem:489",
+        "filesystem:2737",
+        "filesystem:1518"
+      ],
+      "top_5_scores": [
+        0.8355,
+        0.8355,
+        0.8355,
+        0.806,
+        0.806
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.06362078819895171,
+      "mrr": 0.1
+    },
+    {
+      "id": "en_find",
+      "language": "en",
+      "query": "find files by name under a directory",
+      "relevant_commands": [
+        "find"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:754",
+        "misc:27",
+        "misc:16",
+        "misc:5",
+        "networking:1887"
+      ],
+      "top_5_scores": [
+        0.7595,
+        0.6404,
+        0.6404,
+        0.6404,
+        0.6397
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_grep",
+      "language": "en",
+      "query": "search for text inside a file",
+      "relevant_commands": [
+        "grep"
+      ],
+      "relevant_aliases": 48,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:2287",
+        "filesystem:956",
+        "filesystem:722",
+        "filesystem:620",
+        "textprocessing:2882"
+      ],
+      "top_5_scores": [
+        0.5778,
+        0.5778,
+        0.5778,
+        0.5778,
+        0.5737
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_chmod",
+      "language": "en",
+      "query": "change a file permissions",
+      "relevant_commands": [
+        "chmod"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "filesystem:212",
+        "filesystem:243",
+        "filesystem:583",
+        "misc:895",
+        "filesystem:1654"
+      ],
+      "top_5_scores": [
+        0.7705,
+        0.7386,
+        0.7024,
+        0.6678,
+        0.6515
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.13886244387355454,
+      "mrr": 0.5
+    },
+    {
+      "id": "en_df",
+      "language": "en",
+      "query": "show available disk space",
+      "relevant_commands": [
+        "df"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:460",
+        "filesystem:1844",
+        "networking:832",
+        "filesystem:595",
+        "processmanagement:628"
+      ],
+      "top_5_scores": [
+        0.7072,
+        0.6987,
+        0.6416,
+        0.6023,
+        0.5645
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_du",
+      "language": "en",
+      "query": "calculate disk usage of a directory",
+      "relevant_commands": [
+        "du"
+      ],
+      "relevant_aliases": 27,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "filesystem:595",
+        "filesystem:460",
+        "filesystem:607",
+        "filesystem:597",
+        "networking:1455"
+      ],
+      "top_5_scores": [
+        0.7361,
+        0.6616,
+        0.5684,
+        0.5452,
+        0.5387
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.16958010263680806,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.11004588314904008,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "en_ps",
+      "language": "en",
+      "query": "display running processes",
+      "relevant_commands": [
+        "ps"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "processmanagement:2632",
+        "processmanagement:2152",
+        "processmanagement:2146",
+        "processmanagement:916",
+        "processmanagement:970"
+      ],
+      "top_5_scores": [
+        0.8487,
+        0.7512,
+        0.7512,
+        0.7482,
+        0.7132
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.3065735963827292,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3065735963827292,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3065735963827292,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "en_kill",
+      "language": "en",
+      "query": "terminate a process by its identifier",
+      "relevant_commands": [
+        "kill"
+      ],
+      "relevant_aliases": 6,
+      "first_relevant_rank": null,
+      "top_5": [
+        "processmanagement:1020",
+        "c programming:111",
+        "processmanagement:2566",
+        "processmanagement:1023",
+        "processmanagement:2003"
+      ],
+      "top_5_scores": [
+        0.7752,
+        0.6936,
+        0.6771,
+        0.6566,
+        0.645
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_mkdir",
+      "language": "en",
+      "query": "create a new directory",
+      "relevant_commands": [
+        "mkdir"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:1705",
+        "filesystem:1652",
+        "filesystem:1653",
+        "filesystem:170",
+        "filesystem:1704"
+      ],
+      "top_5_scores": [
+        0.8796,
+        0.7904,
+        0.7378,
+        0.6375,
+        0.6263
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_tar",
+      "language": "en",
+      "query": "create a compressed tar archive",
+      "relevant_commands": [
+        "tar"
+      ],
+      "relevant_aliases": 138,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "networking:1313",
+        "textprocessing:2869",
+        "shellprogramming:713",
+        "shellprogramming:712",
+        "shellprogramming:2037"
+      ],
+      "top_5_scores": [
+        0.7683,
+        0.7295,
+        0.7237,
+        0.6825,
+        0.6599
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.36288691033421744,
+      "mrr": 1.0
+    },
+    {
+      "id": "en_curl",
+      "language": "en",
+      "query": "download a file from a web URL",
+      "relevant_commands": [
+        "curl"
+      ],
+      "relevant_aliases": 253,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "filesystem:1554",
+        "textprocessing:1268",
+        "processmanagement:2845",
+        "security:390",
+        "processmanagement:350"
+      ],
+      "top_5_scores": [
+        0.6938,
+        0.5943,
+        0.5758,
+        0.5586,
+        0.5526
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.08514311764162098,
+      "mrr": 0.2
+    },
+    {
+      "id": "en_ssh",
+      "language": "en",
+      "query": "connect securely to a remote server",
+      "relevant_commands": [
+        "ssh"
+      ],
+      "relevant_aliases": 39,
+      "first_relevant_rank": null,
+      "top_5": [
+        "usergroup:305",
+        "usergroup:300",
+        "networking:1282",
+        "security:1447",
+        "textprocessing:1677"
+      ],
+      "top_5_scores": [
+        0.5842,
+        0.5842,
+        0.5387,
+        0.5047,
+        0.4955
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_cat",
+      "language": "en",
+      "query": "print the contents of a text file",
+      "relevant_commands": [
+        "cat"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": null,
+      "top_5": [
+        "security:591",
+        "security:644",
+        "textprocessing:1190",
+        "c programming:75",
+        "security:538"
+      ],
+      "top_5_scores": [
+        0.6755,
+        0.6568,
+        0.6538,
+        0.6439,
+        0.6328
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_head",
+      "language": "en",
+      "query": "display the first lines of a file",
+      "relevant_commands": [
+        "head"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": null,
+      "top_5": [
+        "textprocessing:874",
+        "textprocessing:1183",
+        "security:797",
+        "textprocessing:1527",
+        "security:804"
+      ],
+      "top_5_scores": [
+        0.7301,
+        0.6664,
+        0.616,
+        0.6154,
+        0.6048
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_tail",
+      "language": "en",
+      "query": "follow new lines appended to a log file",
+      "relevant_commands": [
+        "tail"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": null,
+      "top_5": [
+        "processmanagement:1291",
+        "security:1685",
+        "usergroup:1738",
+        "usergroup:1739",
+        "security:1645"
+      ],
+      "top_5_scores": [
+        0.6312,
+        0.5995,
+        0.5933,
+        0.5568,
+        0.5507
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_free",
+      "language": "en",
+      "query": "show available and used memory",
+      "relevant_commands": [
+        "free"
+      ],
+      "relevant_aliases": 15,
+      "first_relevant_rank": 6,
+      "top_5": [
+        "processmanagement:628",
+        "hardwaremanagement:1657",
+        "hardwaremanagement:1644",
+        "hardwaremanagement:699",
+        "hardwaremanagement:683"
+      ],
+      "top_5_scores": [
+        0.9153,
+        0.8002,
+        0.8002,
+        0.8002,
+        0.8002
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.20827328063201608,
+      "mrr": 0.16666666666666666
+    },
+    {
+      "id": "en_ping",
+      "language": "en",
+      "query": "check whether a remote host is reachable",
+      "relevant_commands": [
+        "ping"
+      ],
+      "relevant_aliases": 39,
+      "first_relevant_rank": null,
+      "top_5": [
+        "networking:856",
+        "processmanagement:2435",
+        "networking:1171",
+        "textprocessing:2552",
+        "textprocessing:2510"
+      ],
+      "top_5_scores": [
+        0.6221,
+        0.5377,
+        0.5214,
+        0.5141,
+        0.5141
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_scp",
+      "language": "en",
+      "query": "copy a file securely to a remote server",
+      "relevant_commands": [
+        "scp"
+      ],
+      "relevant_aliases": 23,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:2336",
+        "security:1447",
+        "filesystem:2337",
+        "filesystem:2449",
+        "filesystem:422"
+      ],
+      "top_5_scores": [
+        0.7119,
+        0.5731,
+        0.5409,
+        0.4603,
+        0.4573
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_chown",
+      "language": "en",
+      "query": "change the owner of a file",
+      "relevant_commands": [
+        "chown"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:243",
+        "security:1572",
+        "security:36",
+        "filesystem:583",
+        "filesystem:372"
+      ],
+      "top_5_scores": [
+        0.8776,
+        0.6946,
+        0.6946,
+        0.6939,
+        0.6565
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "en_whoami",
+      "language": "en",
+      "query": "show the name of the current user",
+      "relevant_commands": [
+        "whoami"
+      ],
+      "relevant_aliases": 3,
+      "first_relevant_rank": null,
+      "top_5": [
+        "misc:1244",
+        "usergroup:788",
+        "usergroup:1587",
+        "networking:1259",
+        "networking:566"
+      ],
+      "top_5_scores": [
+        0.7325,
+        0.7156,
+        0.6668,
+        0.6517,
+        0.6517
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+CONSULTAS DE EVALUACION EN INGLES
+
+Cada consulta tiene un comando esperado. El evaluador considera correcta una
+consulta si aparece una variante indexada de ese comando entre los primeros k
+resultados.
+
+ 1. list files in a directory                         -> ls
+ 2. find files by name under a directory               -> find
+ 3. search for text inside a file                      -> grep
+ 4. change a file permissions                          -> chmod
+ 5. show available disk space                          -> df
+ 6. calculate disk usage of a directory                -> du
+ 7. display running processes                          -> ps
+ 8. terminate a process by its identifier              -> kill
+ 9. create a new directory                             -> mkdir
+10. create a compressed tar archive                    -> tar
+11. download a file from a web URL                     -> curl
+12. connect securely to a remote server                -> ssh
+13. print the contents of a text file                  -> cat
+14. display the first lines of a file                  -> head
+15. follow new lines appended to a log file            -> tail
+16. show available and used memory                     -> free
+17. check whether a remote host is reachable           -> ping
+18. copy a file securely to a remote server            -> scp
+19. change the owner of a file                         -> chown
+20. show the name of the current user                  -> whoami
