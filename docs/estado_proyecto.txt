@@ -1,0 +1,165 @@
+ESTADO DEL PROYECTO IT-SHELL
+Actualizado: 2026-09-17
+
+1. PROPOSITO
+
+it-shell recibe una necesidad escrita en lenguaje natural y propone comandos o
+pipelines de CLI. El sistema recupera candidatos, muestra alternativas y marca
+riesgos; por diseno nunca ejecuta comandos en la shell. El objetivo es asistir
+la exploracion de herramientas, no reemplazar la revision humana.
+
+2. ARQUITECTURA Y FLUJOS
+
+Preparacion offline
+
+1. webcrawling obtiene fuentes de Debian 12, Linux, Git y Docker.
+2. classifier (Go) entrena un modelo TF-IDF con 297 ejemplos etiquetados y
+   clasifica documentos Debian en categorias funcionales.
+3. corpus guarda documentos YAML con category, id, intent, command y example.
+4. embedder representa el campo intent con all-mpnet-base-v2, produciendo
+   vectores normalizados de 768 dimensiones y aliases categoria:id.
+5. indexer construye FAISS IndexFlatIP. Con vectores normalizados, el producto
+   interno equivale a similitud coseno.
+
+Atencion de una consulta
+
+1. CLI recibe query, top-k y formato de salida.
+2. QueryAnalyzer normaliza el texto y detecta idioma/complejidad con reglas.
+3. RulePlanner divide secuencias explicitas como "then" o "y luego" en pasos.
+4. SentenceTransformerEncoder codifica cada paso y FaissRetriever busca aliases.
+5. CommandResolver carga el YAML del alias y recupera intent, comando y ejemplo.
+6. RerankerService conserva FAISS o puede usar un CrossEncoder configurable.
+7. PipelineBuilder elige candidato y alternativas segun puntajes y umbrales.
+8. ProposalValidator marca parametros faltantes y comandos sensibles.
+9. PromptBuilder genera una aclaracion; ResponseFormatter responde en CLI,
+   Markdown o JSON. La propuesta queda marcada como no ejecutable.
+
+El diagrama editable de esta ruta esta en docs/flujo_consulta.drawio.
+
+3. ESTADO DEL CORPUS Y ARTEFACTOS
+
+- Corpus actual: 14 YAML y 27.329 documentos.
+- Indice FAISS actual: 24.687 vectores de 768 dimensiones.
+- Artefactos validados y ya ubicados en dataset_builder/: vectors.npz,
+  index.faiss y aliases.npy.
+- El indice, aliases y vectores estan alineados entre si y los vectores estan
+  normalizados.
+- El indice no representa todo el corpus vigente: 2.644 documentos no estan
+  indexados; Git y Docker no tienen documentos en el indice. Hay tambien 2
+  aliases del indice que no se resuelven contra el corpus actual.
+
+Esta desincronizacion debe resolverse antes de presentar el motor como un
+producto integrado: cada release de corpus, embeddings, aliases e indice debe
+compartir una misma version o manifiesto.
+
+4. EVALUACION ACTUAL DEL RETRIEVAL
+
+El set actual tiene 20 consultas en ingles, escritas en
+evaluation/consultas_ingles.txt y versionadas como JSON. Cada una tiene un
+comando esperado. CommandHit@k indica que una opcion indexada de ese comando
+aparece entre los primeros k resultados; MRR premia que aparezca cerca del tope.
+
+La ejecucion se realiza offline y solo codifica las consultas, nunca regenera
+los embeddings del corpus:
+
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+dataset_builder/indexer/.venv/bin/python evaluation/evaluate_retrieval.py
+
+El resultado JSON queda en evaluation/retrieval_results.json. La visualizacion
+HTML se genera con:
+
+dataset_builder/indexer/.venv/bin/python evaluation/visualize_metrics.py
+
+Luego se abre evaluation/metricas_retrieval.html en cualquier navegador local.
+No requiere servidor ni conexion a internet.
+
+5. CALIDAD CONOCIDA
+
+- Clasificador TF-IDF: validacion cruzada estratificada sobre 297 ejemplos:
+  exactitud Top-1 67,7 %. Con sus umbrales, 55,2 % de respuestas concluyentes y
+  84,1 % de precision entre esas respuestas.
+- Retrieval FAISS: linea base sobre 20 consultas inglesas: CommandHit@1 5,0 %,
+  CommandHit@3 20,0 %, CommandHit@5 25,0 %, CommandHit@10 35,0 % y MRR 0,132.
+- Ejecucion end-to-end: la CLI ya carga la configuracion local, el indice FAISS
+  y el corpus, y produce respuestas CLI, Markdown y JSON. La baja calidad del
+  retrieval es un problema de recomendacion, no de arranque del motor.
+
+6. LIMITACIONES DE INTEGRACION
+
+- No hay pruebas del motor Python ni prueba de integracion que cargue indice,
+  corpus y formatee una propuesta real.
+- El clasificador tiene pruebas Go y estas pasan usando una cache temporal.
+- El corpus y los artefactos binarios estan ignorados por Git; faltan manifiesto
+  de version, checksum y una politica de distribucion reproducible.
+
+7. MEJORAS PROPUESTAS, EN ORDEN
+
+1. Sincronizar datos: documentar una version unica de corpus + vectors + aliases
+   + index. Antes de una nueva generacion, guardar conteos y checksums.
+2. Mejorar retrieval: ampliar el set de evaluacion a 100-200 consultas inglesas
+   anotadas, medir CommandHit@k, MRR y nDCG por dominio, y revisar manualmente
+   los fallos Top-10. Agregar luego un set equivalente en espanol.
+3. Mejorar representacion: comparar el modelo actual con un modelo multilingue
+   solo cuando haya conjunto de evaluacion estable. No cambiar modelos por
+   intuicion: elegir por las metricas del set retenido.
+4. Agregar reranking: evaluar un CrossEncoder sobre el Top-50 de FAISS y medir
+   la ganancia neta de MRR/CommandHit@1 frente al costo de latencia.
+5. Robustecer seguridad: ampliar deteccion de comandos peligrosos, pedir valores
+   de parametros faltantes y mostrar la razon de la recomendacion.
+6. Automatizar calidad: ejecutar pruebas Go, pruebas Python y evaluacion de
+   retrieval en CI; publicar el JSON y el tablero HTML como artefactos.
+
+8. ARCHIVOS DE REFERENCIA
+
+- docs/flujo_consulta.drawio: diagrama de la consulta.
+- evaluation/consultas_ingles.txt: consultas legibles para revision humana.
+- evaluation/retrieval_queries.json: mismas consultas y relevancia estructurada.
+- evaluation/retrieval_results.json: resultados de la ultima ejecucion.
+- evaluation/metricas_retrieval.html: tablero HTML generado desde los resultados.
+
+Actualizado: 2026-09-17
+
+1. Estado General del Proyecto (El Resumen Ejecutivo)
+
+Comienza dando la "foto grande" del proyecto para situarlo.
+
+    Flujo End-to-End Funcional: El sistema it-shell ya es capaz de recibir una consulta en lenguaje natural, 
+    procesarla a través de toda la arquitectura y devolver una propuesta formateada (en CLI, Markdown o JSON). No es un problema de arranque; el motor principal ya está operativo.
+
+    La tasa de acierto directo (CommandHit@1) está en un 5%, l o cual identifica claramente dónde hay que poner el esfuerzo ahora.
+    Diagnóstico Actual: El desafío actual dejó de ser la construcción del pipeline y pasó a ser un problema de calidad de recomendación y consistencia de datos. 
+
+    Desincronización Detectada: Actualmente existe un desfase entre el corpus (27.329 documentos) y el índice FAISS (que no incluye ramas críticas como Git o Docker). 
+    Esto está diagnosticado y es la prioridad técnica inmediata.
+
+2. Aspectos a Destacar: Diseño, Arquitectura y Código
+
+Este es el momento de mostrar el valor técnico de las decisiones que tomaste.
+
+    Seguridad por Diseño (Safety-First): Destaca que el sistema está diseñado arquitectónicamente para asistir, no para reemplazar al usuario ni ejecutar ciegamente. 
+    El módulo ProposalValidator marca parámetros faltantes y comandos sensibles, asegurando que la salida generada sea inofensiva hasta que un humano la apruebe.
+
+    Arquitectura Modular Híbrida:
+
+        Tienes un clasificador rápido y eficiente en Go (TF-IDF con 67.7% de exactitud Top-1) encargado del pre-procesamiento y categorización funcional de los documentos.
+
+        Un pipeline en Python que orquesta el análisis, la codificación con SentenceTransformers y la búsqueda vectorial con FAISS (IndexFlatIP con producto interno).
+
+    Infraestructura de Evaluación Offline Autónoma: Subraya que construiste un entorno de evaluación que no depende de APIs externas ni de internet. El pipeline de pruebas codifica las consultas localmente, calcula métricas duras (MRR, CommandHit@k) y genera un tablero HTML visual (metricas_retrieval.html) de forma 100% local.
+
+3. Próximos Pasos (Hoja de Ruta Concreta)
+
+Muestra que tienes un plan de acción priorizado para atacar las debilidades actuales. 
+   
+Preséntalos en este orden:
+
+    Sincronización y Versionado de Datos (Bloqueante): El paso inmediato es unificar y documentar una versión única que alinee el corpus, los vectores, los aliases y el índice FAISS. Se implementarán manifiestos y checksums para garantizar que la distribución sea reproducible.
+
+    Ampliación del Set de Evaluación: Escalar el conjunto de prueba de las 20 consultas actuales en inglés a un set de 100-200 consultas anotadas. Esto permitirá medir con mucha mayor precisión el MRR y el nDCG antes de tocar cualquier modelo de IA.
+
+    Iteración Basada en Métricas, no en Intuición: Una vez que el set de pruebas esté robusto, evaluar el salto a un modelo de embeddings multilingüe (para incorporar consultas en español) y analizar la viabilidad de agregar un servicio de Reranking (CrossEncoder) evaluando el costo de latencia vs. la mejora en los resultados Top-5.
+
+    Madurez del CI/CD: Llevar las pruebas unitarias de Go y Python, junto con el script de evaluación offline, a un entorno de Integración Continua (CI) para automatizar el control de calidad en cada commit.
+
+Tip para la reunión: Si el tutor te pregunta por el bajo rendimiento actual (ese 5% de acierto inicial), enfócalo como un éxito del entorno de evaluación. 
+Saber medir el error es el primer paso indispensable para mejorarlo de forma científica; el motor funciona, ahora toca refinar el índice y el modelo con datos sincronizados.

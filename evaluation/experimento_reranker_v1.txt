@@ -60,3 +60,4 @@ Latencia Total     |           112 ms|          7.313 ms |          1.658 ms |  
 5. PRÓXIMOS PASOS DE LA FASE 2
 - Tarea 2.2: Curar y ampliar el conjunto de evaluación (incorporar consultas en español y comandos no indexados).
 - Tarea 2.3: Configurar `retrieval_top_k: 15` como valor estándar balanceado en `config/default.yaml`.
+

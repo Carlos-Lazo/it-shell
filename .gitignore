@@ -71,3 +71,9 @@ Thumbs.db
 # ==========================================
 
 *.log
+
+# Artefactos y binarios pesados
+*.npz
+*.npy
+*.zip
+*.tar.gz
