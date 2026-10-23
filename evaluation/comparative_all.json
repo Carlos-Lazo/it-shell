@@ -1,0 +1,67 @@
+{
+  "configs": [
+    {
+      "name": "Baseline (FAISS MPNet)",
+      "model": "FAISS + MPNet",
+      "summary": {
+        "queries": 160,
+        "command_hit@1": 0.4062,
+        "ndcg@1": 0.4062,
+        "command_hit@3": 0.5813,
+        "ndcg@3": 0.3626,
+        "command_hit@5": 0.6562,
+        "ndcg@5": 0.3494,
+        "command_hit@10": 0.7875,
+        "ndcg@10": 0.3332,
+        "mrr": 0.5211
+      },
+      "latency_ms": {
+        "retrieval_per_query": 77.73,
+        "rerank_per_query": 978.18,
+        "total_per_query": 1055.92
+      }
+    },
+    {
+      "name": "Reranker DistilRoBERTa‑base",
+      "model": "stsb‑distilroberta‑base",
+      "summary": {
+        "queries": 160,
+        "command_hit@1": 0.4125,
+        "ndcg@1": 0.4125,
+        "command_hit@3": 0.5938,
+        "ndcg@3": 0.371,
+        "command_hit@5": 0.6375,
+        "ndcg@5": 0.344,
+        "command_hit@10": 0.7937,
+        "ndcg@10": 0.3293,
+        "mrr": 0.5291
+      },
+      "latency_ms": {
+        "retrieval_per_query": 65.89,
+        "rerank_per_query": 2955.2,
+        "total_per_query": 3021.09
+      }
+    },
+    {
+      "name": "Reranker BGE‑base",
+      "model": "bge‑reranker‑base",
+      "summary": {
+        "queries": 160,
+        "command_hit@1": 0.3625,
+        "ndcg@1": 0.3625,
+        "command_hit@3": 0.5312,
+        "ndcg@3": 0.3212,
+        "command_hit@5": 0.6562,
+        "ndcg@5": 0.3215,
+        "command_hit@10": 0.7937,
+        "ndcg@10": 0.314,
+        "mrr": 0.4861
+      },
+      "latency_ms": {
+        "retrieval_per_query": 44.03,
+        "rerank_per_query": 6000.87,
+        "total_per_query": 6044.9
+      }
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+EXPERIMENTO DE RETRIEVAL Y RE-RANKING v2 (160 CONSULTAS)
+Fecha: 2026-10-22
+Rama: feat/phase-2-reranking-evaluation
+Dataset de prueba: evaluation/evaluation_v2_queries.json (160 consultas en inglés)
+Índice FAISS: 27.329 vectores (100% corpus sincronizado, incluye Git y Docker)
+Embedder: sentence-transformers/all-mpnet-base-v2
+Reranker: cross-encoder/ms-marco-MiniLM-L-6-v2 (Top-15 inicial)
+Hardware: CPU local (OMP_NUM_THREADS=2, modo offline)
+
+=====================================================================================================
+1. RESULTADOS GLOBALES COMPARATIVOS (N = 160 consultas)
+=====================================================================================================
+
+Métrica            | Baseline FAISS (MPNet) | Con Re-ranker (MiniLM) | Delta vs Baseline
+-----------------------------------------------------------------------------------------------------
+CommandHit@1       |                41,25 % |                40,62 % |           -0,63 %
+CommandHit@3       |                61,88 % |                58,13 % |           -3,75 %
+CommandHit@5       |                71,25 % |                65,62 % |           -5,63 %
+CommandHit@10      |                80,63 % |                78,75 % |           -1,88 %
+nDCG@1             |                 0,4125 |                 0,4062 |           -0,0063
+nDCG@3             |                 0,3773 |                 0,3626 |           -0,0147
+nDCG@5             |                 0,3607 |                 0,3494 |           -0,0113
+nDCG@10            |                 0,3353 |                 0,3332 |           -0,0021
+MRR                |                 0,5385 |                 0,5211 |           -0,0174
+-----------------------------------------------------------------------------------------------------
+Latencia Retrieval |               77,73 ms |               77,73 ms |                 -
+Latencia Rerank    |                   0 ms |              978,18 ms |         +978,18 ms
+Latencia Total     |               77,73 ms |            1055,92 ms |       1,06 s / consulta
+=====================================================================================================
+
+=====================================================================================================
+2. DESGLOSE DE DESEMPEÑO POR CATEGORÍA FUNCIONAL (Re-ranker Top-15)
+=====================================================================================================
+
+Categoría            | Consultas | CommandHit@1 | CommandHit@5 | MRR
+---------------------------------------------------------------------
+Git Version Control  |    16     |      81,2 %  |      93,8 %  | 0,885
+Docker Containers    |    16     |      75,0 %  |      93,8 %  | 0,835
+Filesystem           |    16     |      25,0 %  |      75,0 %  | 0,464
+User & Groups        |    16     |      37,5 %  |      75,0 %  | 0,496
+Hardware & Disks     |    16     |      43,8 %  |      62,5 %  | 0,546
+Networking           |    16     |      43,8 %  |      62,5 %  | 0,524
+Process Management   |    16     |      43,8 %  |      62,5 %  | 0,537
+Security             |    16     |      25,0 %  |      56,2 %  | 0,403
+Text Processing      |    16     |      25,0 %  |      50,0 %  | 0,346
+Shell Programming    |     9     |      11,1 %  |      22,2 %  | 0,161
+Cryptography         |     7     |       0,0 %  |      28,6 %  | 0,189
+---------------------------------------------------------------------
+
+=====================================================================================================
+3. HALLAZGOS Y CONCLUSIONES ACADÉMICAS
+=====================================================================================================
+
+1. Impacto de la Sincronización del Corpus (27.329 vectores):
+   - El cuello de botella principal del Baseline no era el modelo bi-encoder, sino el gap de datos.
+   - Con el índice completo, el Baseline FAISS puro (all-mpnet-base-v2) alcanza un MRR de 0,5385
+     (frente a 0,1317 en el toy-baseline de 20 queries) y un Hit@5 de 71,25% (frente al 25% previo).
+   - En dominios con léxico rico y estructurado como Git y Docker, el Hit@5 alcanza un extraordinario 93,8%.
+
+2. Evaluación del Cross-Encoder (ms-marco-MiniLM-L-6-v2):
+   - El re-ranker MiniLM no logra superar la calidad representacional de MPNet-base en textos cortos de CLI:
+     el MRR disminuye levemente de 0,5385 a 0,5211 (-3,2% relativo).
+   - Explicación teórica: MPNet-base (110M parámetros, 768 dimensiones) posee una capacidad de modelado
+     semántico muy superior a un modelo MiniLM de 6 capas (22M parámetros, 384 dimensiones) preentrenado
+     en pasajes web generales de MS-MARCO.
+   - Costo computacional: El re-ranking agrega ~978 ms de latencia en CPU por consulta (13,6 veces más lento),
+     pasando de 77 ms (instantáneo) a más de 1 segundo.
+
+3. Cumplimiento del Criterio de Aceptación de la Fase 2:
+   - Criterio fijado en plan_implementacion_detallado.txt: MRR > 0,25 y Hit@5 >= 50%.
+   - Resultado obtenido: MRR 0,5385 (más del doble de la meta) y Hit@5 71,25% (superando holgadamente el 50%).
+   - Criterio de aceptación superado con éxito.
+
+=====================================================================================================
+4. DECISIÓN DE INGENIERÍA PARA LA FASE 3
+=====================================================================================================
+- Para `config/default.yaml`:
+  * Mantener como motor primario FAISS con `all-mpnet-base-v2` (`retrieval_top_k: 15`).
+  * Dejar el Cross-Encoder como un componente modular opcional desactivado por defecto (`reranker_model: null`),
+    priorizando la latencia interactiva (< 80 ms) y una precisión sólida (> 71% en Top-5).
+  * La Fase 2 queda formalmente validada y lista para dar paso a la Fase 3 (Query Planner determinístico).
+
