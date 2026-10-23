@@ -20,5 +20,6 @@ class PipelineBuilder:
         steps=[]
         for step in plan.steps:
             selected, alternatives=self.choose(ranked_by_step.get(step.id, []))
-            steps.append(PipelineStep(step.id, step.query, step.depends_on, selected, alternatives, selected.example if selected else None))
+            template = (selected.example or selected.command) if selected else None
+            steps.append(PipelineStep(step.id, step.query, step.depends_on, selected, alternatives, template))
         return PipelineProposal(plan.goal, tuple(steps), executable=False)
