@@ -21,3 +21,12 @@ python search_index.py "set http proxy" --top-k 5
 
 Los resultados relacionan cada posición del índice con `aliases.npy`, usando aliases
 `categoria:id`, por ejemplo `filesystem:12`.
+
+## bm25
+Construcción de índices bm25
+```bash
+python dataset_builder/indexer/bm25_indexer.py \
+    --corpus ../corpus \
+    --output artifacts/bm25_indexs \
+    --threads 4
+```

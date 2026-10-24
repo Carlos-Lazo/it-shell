@@ -54,7 +54,26 @@ dataset_builder/webcrawling/**/*.csv
 # Índices FAISS
 *.index
 *.faiss
-
+# Índices BM25
+*.fdm
+*.fdt
+*.fdx
+*.fnm
+*.nvd
+*.nvm
+*.si
+*.tvd
+*.tvm
+*.tvx
+*.doc
+*.dvd
+*.dvm
+*.tim
+*.tip
+*.tmd
+*.jsonl
+dataset_builder/indexer/artifacts/bm25_indexs/segments_1
+*.lock
 # ==========================================
 # IDE
 # ==========================================
