@@ -1,221 +1,148 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+"""Hybrid BM25 and FAISS retriever used by the search service and benchmarks."""
 
-"""
-bm25_search.py
---------------
+from __future__ import annotations
 
-Wrapper de búsqueda que combina:
+import json
+from pathlib import Path
+from typing import Protocol
 
-* **BM25** (índice Lucene creado con Pyserini) → excelente para coincidencias
-  exactas de palabras, flags, nombres de comandos, etc.
-* **FAISS + dense embeddings** (índice vectorial existente en el proyecto) →
-  captura similitud semántica cuando la redacción de la consulta difiere.
-
-El algoritmo es **linealmente combinable**:
-
-    score = α * dense_norm + (1‑α) * bm25_norm
-
-donde `α` (alpha) controla el peso del modelo denso (0 → solo BM25,
-1 → solo dense).
-
-Los documentos también pueden devolver el campo *intent* que está guardado
-en el índice BM25; lo incluimos en la salida para que la UI o el informe
-lo muestre al usuario.
-
-Requisitos
-----------
-pip install pyserini==0.22.0 faiss-cpu sentence‑transformers
-"""
-
-import pathlib
-from typing import List, Tuple
-
-import numpy as np
 import faiss
-from pyserini.search import SimpleSearcher
-from sentence_transformers import SentenceTransformer
+import numpy as np
+from pyserini.search.lucene import LuceneSearcher
 
-#  Ruta donde guardaste el índice FAISS (vectorial)
-_FAISS_INDEX_PATH = pathlib.Path("../indexes/faiss_mpnet.index")   # ← ajústalo
-_IDS_PATH = pathlib.Path("../data/embeddings_ids.json")
-
-# ----------------------------------------------------------------------
-# Configuración global (una sola carga por proceso)
-# ----------------------------------------------------------------------
-# modelo de embeddings (el mismo que usas para crear
-# el índice FAISS).  Disponible para otros modelos SBERT.
-_EMBEDDER = SentenceTransformer(
-    "sentence-transformers/all-MiniLM-L6-v2",  # modelo rápido (≈ 25 ms/1 k)
-    device="cpu",
-)
-
-if not _FAISS_INDEX_PATH.is_file():
-    raise FileNotFoundError(f"[ERROR] FAISS index not found: {_FAISS_INDEX_PATH}")
-
-_faiss_index = faiss.read_index(str(_FAISS_INDEX_PATH))
-
-#    el mapa id → posición en el índice FAISS.
-#    Normalmente lo guardas en `data/embeddings_ids.json` cuando creas el
-#    índice.  Si no lo tienes, puedes crear uno rápidamente leyendo el
-#    archivo `.ids.json` que genera `generate_embeddings.py`.
-if not _IDS_PATH.is_file():
-    raise FileNotFoundError(f"[ERROR] Embedding IDs file not found: {_IDS_PATH}")
-
-with _IDS_PATH.open("r", encoding="utf-8") as f:
-    _id_list: List[str] = json.load(f)   # lista ordenada que corresponde al FAISS
-
-_id_to_faiss_pos = {doc_id: i for i, doc_id in enumerate(_id_list)}
+from semantic_search_engine.retrieval_service.retriever import Encoder
 
 
-# ----------------------------------------------------------------------
-# Helper – normalizar puntuaciones (0‑1)
-# ----------------------------------------------------------------------
-def _minmax_normalize(arr: np.ndarray) -> np.ndarray:
-    """Lleva un vector de scores a [0, 1] (evita división por 0)."""
-    lo = arr.min()
-    hi = arr.max()
-    if hi - lo < 1e-12:
-        return np.zeros_like(arr)
-    return (arr - lo) / (hi - lo)
+class SearchHit(Protocol):
+    raw: str
+    score: float
 
 
-# ----------------------------------------------------------------------
-# Clase pública -----------------------------------------------------------------
-# ----------------------------------------------------------------------
+class BM25Searcher(Protocol):
+    def search(self, query: str, k: int) -> list[SearchHit]: ...
+
+
 class HybridBM25Retriever:
-    """
-    Uso típico:
+    """Fuse Pyserini BM25 and FAISS dense rankings over shared document aliases."""
 
-    >>> from retrieval_service.bm25_search import HybridBM25Retriever
-    >>> retr = HybridBM25Retriever(bm25_index_dir="artifacts/bm25_indexs")
-    >>> results = retr.search("how do I delete a git branch", top_k=10, alpha=0.7)
-    >>> for doc_id, score, intent in results:
-    ...     print(doc_id, f"{score:.3f}", intent)
-    """
+    def __init__(
+        self,
+        bm25_searcher: BM25Searcher,
+        faiss_index: faiss.Index,
+        aliases: np.ndarray,
+        encoder: Encoder,
+        top_k: int = 15,
+    ) -> None:
+        if top_k <= 0:
+            raise ValueError("top_k debe ser mayor que cero.")
+        if faiss_index.ntotal != len(aliases):
+            raise ValueError("El índice FAISS y sus aliases no están alineados.")
 
-    def __init__(self, bm25_index_dir: str, top_k: int = 15):
-        """
-        Parameters
-        ----------
-        bm25_index_dir : str
-            Directorio donde está el índice Lucene creado por `bm25_indexer.py`.
-        top_k : int, default 15
-            Número máximo de candidatos que devolvemos (se usa tanto para
-            BM25 como para dense; el híbrido puede truncar después de la
-            fusión).
-        """
-        self.bm25 = SimpleSearcher(bm25_index_dir)
-        # Guardamos en memoria el número máximo de resultados a recuperar
+        self.bm25 = bm25_searcher
+        self.faiss_index = faiss_index
+        self.aliases = np.asarray(aliases).astype(str)
+        self.encoder = encoder
         self.top_k = top_k
 
-    # ------------------------------------------------------------------
-    def _bm25_hits(self, query: str) -> List[Tuple[str, float, str]]:
-        """
-        Ejecuta BM25 y devuelve una lista de tuplas:
-        (doc_id, bm25_score, intent)
-        """
-        hits = self.bm25.search(query, k=self.top_k)
+    @classmethod
+    def from_paths(
+        cls,
+        bm25_index_dir: Path,
+        faiss_index_path: Path,
+        aliases_path: Path,
+        encoder: Encoder,
+        top_k: int = 15,
+    ) -> HybridBM25Retriever:
+        """Load the Pyserini and FAISS indices from the project's artifact paths."""
+        return cls(
+            LuceneSearcher(str(bm25_index_dir)),
+            faiss.read_index(str(faiss_index_path)),
+            np.load(aliases_path, allow_pickle=False),
+            encoder,
+            top_k,
+        )
+
+    @staticmethod
+    def _normalize(scores: list[float]) -> list[float]:
+        if not scores:
+            return []
+        low, high = min(scores), max(scores)
+        if high - low < 1e-12:
+            return [0.0] * len(scores)
+        return [(score - low) / (high - low) for score in scores]
+
+    def _bm25_results(self, query: str, top_k: int) -> list[tuple[str, float, str]]:
         results = []
-        for hit in hits:
-            doc_id = hit.docid   # entero interno
-            # En el JSONL guardamos `id` como string; el mapeo entre
-            # entero ↔︎ string está en el índice Lucene automáticamente.
-            # Para obtener la cadena usamos `hit.raw` (si usamos -storeRaw)
-            # o bien guardamos `id` como metadata.
-            # Aquí extraemos `raw` y lo parseamos para obtener el id real
-            raw_json = hit.raw
+        for hit in self.bm25.search(query, k=top_k):
             try:
-                data = json.loads(raw_json)
-                real_id = data["id"]
-                intent = data.get("intent", "")
-            except Exception:
-                # fallback: usamos el número interno como string
-                real_id = str(doc_id)
-                intent = ""
-            results.append((real_id, hit.score, intent))
+                raw = json.loads(hit.raw)
+                alias = raw["id"]
+            except (TypeError, json.JSONDecodeError, KeyError) as exc:
+                raise ValueError("El resultado BM25 no contiene un JSON raw con 'id'.") from exc
+            results.append((str(alias), float(hit.score), str(raw.get("intent", ""))))
         return results
 
-    # ------------------------------------------------------------------
-    def _dense_scores(self, query: str) -> List[Tuple[str, float]]:
+    def _dense_results(self, query: str, top_k: int) -> list[tuple[str, float]]:
+        count = min(top_k, self.faiss_index.ntotal)
+        if count == 0:
+            return []
+        query_vector = self.encoder.encode([query])
+        scores, positions = self.faiss_index.search(query_vector, count)
+        return [
+            (self.aliases[position], float(score))
+            for score, position in zip(scores[0], positions[0], strict=True)
+            if position >= 0
+        ]
+
+    def search(
+        self,
+        query: str,
+        top_k: int | None = None,
+        alpha: float = 0.5,
+    ) -> list[tuple[str, float, str]]:
+        """Return (alias, fused_score, intent), ordered by descending score.
+
+        ``alpha`` is the dense-search weight: 0 selects BM25, 1 selects FAISS.
         """
-        Codifica la consulta con el mismo embedder que usó el índice FAISS
-        y devuelve (doc_id, dense_score) para los `top_k` más cercanos.
-        """
-        q_vec = _EMBEDDER.encode([query], normalize_embeddings=True)
-        D, I = _faiss_index.search(q_vec, self.top_k)   # D: L2 distances
-        # Convertimos distancia L2 a similitud (cuanto menor, mejor)
-        # Usamos `-D` para que valores más altos signifiquen mayor similitud.
-        sim = -D[0]                                   # vector 1‑D
-        sim_norm = _minmax_normalize(sim)             # 0‑1
-        results = []
-        for pos, score in zip(I[0], sim_norm):
-            doc_id = _id_list[pos]                    # id en string
-            results.append((doc_id, float(score)))
-        return results
+        if not 0 <= alpha <= 1:
+            raise ValueError("alpha debe estar entre 0 y 1.")
+        limit = self.top_k if top_k is None else top_k
+        if limit <= 0:
+            raise ValueError("top_k debe ser mayor que cero.")
 
-    # ------------------------------------------------------------------
-    def search(self, query: str, top_k: int = None, alpha: float = 0.7) -> List[Tuple[str, float, str]]:
-        """
-        Devuelve una lista ordenada de (doc_id, hybrid_score, intent).
+        bm25_results = self._bm25_results(query, limit)
+        dense_results = self._dense_results(query, limit)
+        bm25_scores = self._normalize([score for _, score, _ in bm25_results])
+        dense_scores = self._normalize([score for _, score in dense_results])
+        bm25_ranked = {
+            alias: (bm25_scores[rank], intent, rank)
+            for rank, (alias, _, intent) in enumerate(bm25_results)
+        }
+        dense_ranked = {
+            alias: (dense_scores[rank], rank)
+            for rank, (alias, _) in enumerate(dense_results)
+        }
 
-        Parameters
-        ----------
-        query : str
-            Consulta de usuario.
-        top_k : int | None
-            Override del número máximo de resultados (por defecto el que
-            se indicó en el constructor (15)).
-        alpha : float, default 0.7
-            Peso del modelo **dense**.  `alpha=0` → solo BM25,
-            `alpha=1` → solo dense.
-
-        Returns
-        -------
-        List[Tuple[doc_id, score, intent]]
-        """
-        if top_k is None:
-            top_k = self.top_k
-
-        # 1️⃣  BM25
-        bm25_res = self._bm25_hits(query)      # [(id, bm25_score, intent), …]
-
-        # 2️⃣  Dense (FAISS)
-        dense_res = self._dense_scores(query)  # [(id, dense_score), …]
-
-        # 3️⃣  Normalizamos ambas puntuaciones a [0, 1]
-        bm25_scores = np.array([s for _, s, _ in bm25_res])
-        dense_scores = np.array([s for _, s in dense_res])
-
-        bm25_norm = _minmax_normalize(bm25_scores) if bm25_scores.size else np.array([])
-        dense_norm = _minmax_normalize(dense_scores) if dense_scores.size else np.array([])
-
-        # 4️⃣  Unimos por `doc_id`
-        #   Usamos diccionarios temporales para combinar rápidamente.
-        bm25_dict = {doc: (score, intent) for doc, score, intent in bm25_res}
-        dense_dict = {doc: score for doc, score in dense_res}
-
+        aliases = dict.fromkeys(
+            [alias for alias, _, _ in bm25_results]
+            + [alias for alias, _ in dense_results]
+        )
         fused = []
-        # Recorremos la unión de IDs (BM25 ∪ dense)
-        for doc_id in set(bm25_dict) | set(dense_dict):
-            bm25_sc = bm25_dict.get(doc_id, (0.0, ""))[0]
-            dense_sc = dense_dict.get(doc_id, 0.0)
+        for alias in aliases:
+            bm25_score, intent, bm25_position = bm25_ranked.get(alias, (0.0, "", limit))
+            dense_score, dense_position = dense_ranked.get(alias, (0.0, limit))
+            score = alpha * dense_score + (1 - alpha) * bm25_score
+            if alpha == 0:
+                tie_break = bm25_position
+            elif alpha == 1:
+                tie_break = dense_position
+            else:
+                tie_break = min(bm25_position, dense_position)
+            fused.append((alias, score, tie_break, intent))
 
-            # Normalizamos a nivel de documento (usa los vectores ya normalizados)
-            # Si el set es pequeño, simplemente usa los vectores normales:
-            #   bm25_norm[i] ↔ doc_id i ; dense_norm[i] ↔ doc_id i
-            # Para evitar una búsqueda O(N²) usa los índices que ya tenemos:
-            #   - Si está en BM25: usa su posición en `bm25_norm`
-            #   - Si está solo en dense: usa su posición en `dense_norm`
-            # En este ejemplo usa los valores sin volver a normalizar.
-            # (Para una producción real, podrías construir una tabla id→pos.)
+        fused.sort(key=lambda result: (-result[1], result[2], result[0]))
+        return [(alias, score, intent) for alias, score, _, intent in fused[:limit]]
 
-            # Como los vectores están ya normalizados, basta combinarlos:
-            hybrid_score = alpha * dense_sc + (1 - alpha) * bm25_sc
-
-            intent = bm25_dict.get(doc_id, ("", ""))[1]  # intent solo está en BM25
-            fused.append((doc_id, float(hybrid_score), intent))
-
-        # 5️⃣  Ordenar por puntuación descendente y recortar
-        fused.sort(key=lambda x: x[1], reverse=True)
-        return fused[:top_k]
+    def retrieve(self, query: str, top_k: int) -> list[tuple[str, float]]:
+        """Expose the retriever protocol used by the semantic search engine."""
+        return [(alias, score) for alias, score, _ in self.search(query, top_k)]

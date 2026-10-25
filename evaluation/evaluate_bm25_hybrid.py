@@ -44,8 +44,9 @@ import faiss
 import numpy as np
 import yaml
 from pyserini.search.lucene import LuceneSearcher
-from sentence_transformers import SentenceTransformer
 
+from semantic_search_engine.retrieval_service.bm25_search import HybridBM25Retriever
+from semantic_search_engine.retrieval_service.retriever import SentenceTransformerEncoder
 # ---------------------------------------------------------------------------
 # Rutas por defecto
 # ---------------------------------------------------------------------------
@@ -154,49 +155,6 @@ def faiss_ranked(
     return [str(aliases[p]) for p in positions[0]]
 
 
-def hybrid_ranked(
-    query: str,
-    searcher: LuceneSearcher,
-    faiss_index,
-    aliases: np.ndarray,
-    embedder: SentenceTransformer,
-    top_k: int,
-    alpha: float,
-) -> list[str]:
-    """Fusión lineal normalizada BM25 + Dense. Devuelve aliases ordenados."""
-    # Dense
-    q_vec = embedder.encode([query], normalize_embeddings=True, convert_to_numpy=True).astype(np.float32)
-    d_scores, d_positions = faiss_index.search(q_vec, top_k)
-    dense_map: dict[str, float] = {
-        str(aliases[pos]): float(score)
-        for pos, score in zip(d_positions[0], d_scores[0])
-    }
-
-    # BM25
-    bm25_map: dict[str, float] = {}
-    for h in searcher.search(query, k=top_k):
-        try:
-            raw = json.loads(h.raw)
-            alias = raw["id"]
-        except Exception:
-            alias = str(h.docid)
-        bm25_map[alias] = float(h.score)
-
-    # Normalizar
-    d_arr = np.array(list(dense_map.values())) if dense_map else np.array([0.0])
-    b_arr = np.array(list(bm25_map.values()))  if bm25_map  else np.array([0.0])
-    d_norm = dict(zip(dense_map.keys(), _minmax(d_arr).tolist()))
-    b_norm = dict(zip(bm25_map.keys(),  _minmax(b_arr).tolist()))
-
-    # Fusionar
-    all_ids = set(d_norm) | set(b_norm)
-    fused = {
-        alias: alpha * d_norm.get(alias, 0.0) + (1 - alpha) * b_norm.get(alias, 0.0)
-        for alias in all_ids
-    }
-    return sorted(fused, key=lambda a: fused[a], reverse=True)[:top_k]
-
-
 # ---------------------------------------------------------------------------
 # Benchmark principal
 # ---------------------------------------------------------------------------
@@ -205,7 +163,7 @@ def run_benchmark(
     aliases: np.ndarray,
     searcher: LuceneSearcher,
     faiss_index,
-    embedder: SentenceTransformer,
+    embedder: SentenceTransformerEncoder,
     command_aliases: dict[str, set[str]],
     alias_intents: dict[str, str],
     mode: str,
@@ -221,10 +179,14 @@ def run_benchmark(
     t0 = time.perf_counter()
     query_texts = [q["query"] for q in queries]
     q_vecs = embedder.encode(
-        query_texts, convert_to_numpy=True, normalize_embeddings=True
-    ).astype(np.float32)
+        query_texts
+    )
     faiss_scores, faiss_positions = faiss_index.search(q_vecs, top_k)
     retrieval_latency = (time.perf_counter() - t0) / len(queries)
+    hybrid_retriever = (
+        HybridBM25Retriever(searcher, faiss_index, aliases, embedder, top_k)
+        if mode == "hybrid" else None
+    )
 
     baseline_records: list[dict] = []
     experiment_records: list[dict] = []
@@ -244,10 +206,13 @@ def run_benchmark(
         t_exp = time.perf_counter()
         if mode == "bm25":
             exp_aliases = bm25_ranked(searcher, query_text, top_k)
-        else:  # hybrid
-            exp_aliases = hybrid_ranked(
-                query_text, searcher, faiss_index, aliases, embedder, top_k, alpha
-            )
+        elif hybrid_retriever is not None:
+            exp_aliases = [
+                alias
+                for alias, _, _ in hybrid_retriever.search(query_text, top_k, alpha)
+            ]
+        else:
+            raise ValueError(f"Modo de benchmark no soportado: {mode}")
         experiment_times.append(time.perf_counter() - t_exp)
 
         exp_hits = [a in relevant for a in exp_aliases]
@@ -354,7 +319,7 @@ def main() -> None:
     print(f"[INFO] Corpus cargado: {len(alias_intents)} aliases en {args.corpus}")
 
     print(f"[INFO] Cargando embedder: {EMBEDDER_NAME} ...")
-    embedder = SentenceTransformer(EMBEDDER_NAME)
+    embedder = SentenceTransformerEncoder(EMBEDDER_NAME)
 
     # ---- Ejecutar benchmark ----
     label = "BM25 puro" if args.mode == "bm25" else f"Híbrido BM25+Dense (α={args.alpha})"
@@ -376,4 +341,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
