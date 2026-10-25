@@ -1,271 +1,209 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+"""Consolida las métricas de retrieval de la fase 2 en un único reporte.
 
-"""
-Script:  compare_all.py
-<<<<<<< HEAD
-Objetivo: Unificar todos los resultados de evaluación (baseline, rerankers y
-         variante híbrida) en un único JSON y generar una tabla markdown.
-=======
-Objetivo: Unificar todos los resultados de evaluación (baseline, rerankers,
-          BM25 puro e híbrido) en un único JSON y generar una tabla markdown.
-
-Uso (desde la raíz del repo):
-    dataset_builder/indexer/.venv/bin/python evaluation/compare_all.py
->>>>>>> 31829c18 (feat: bm25 dense n hybrid benchmark)
+Los benchmarks de rerankers guardan el baseline FAISS y el resultado del
+cross-encoder. Los de BM25/híbrido usan ``reranked_summary`` para el sistema
+evaluado. Este script hace esa elección explícita y falla ante un esquema
+incompleto, en lugar de presentar ceros engañosos.
 """
 
+from __future__ import annotations
+
+import argparse
 import json
-import pathlib
-from typing import Dict, Any, List
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
 
-# ----------------------------------------------------------------------
-<<<<<<< HEAD
-#   Configuración de rutas (ajusta si cambias la estructura)
-# ----------------------------------------------------------------------
-ROOT = pathlib.Path(__file__).parent.parent   # <repo root>
+
+ROOT = Path(__file__).resolve().parents[1]
 EVAL_DIR = ROOT / "evaluation"
-
-# Archivos que ya existen (baseline + rerankers)
-BASELINE_FILE   = EVAL_DIR / "reranker_benchmark_v2_top15.json"
-DISTIL_FILE     = EVAL_DIR / "reranker_benchmark_distilroberta.json"
-BGE_FILE        = EVAL_DIR / "reranker_benchmark_bge.json"
-HYBRID_FILE     = EVAL_DIR / "hybrid_benchmark_top15.json"   # opcional
-
-OUT_JSON   = EVAL_DIR / "comparative_all.json"
-OUT_TABLE  = EVAL_DIR / "comparative_table.md"
-=======
-#   Configuración de rutas
-# ----------------------------------------------------------------------
-ROOT     = pathlib.Path(__file__).parent.parent   # <repo root>
-EVAL_DIR = ROOT / "evaluation"
-
-# Archivos generados por los distintos benchmarks
-BASELINE_FILE    = EVAL_DIR / "reranker_benchmark_v2_top15.json"       # baseline + MiniLM
-DISTIL_FILE      = EVAL_DIR / "reranker_benchmark_distilroberta.json"  # DistilRoBERTa
-BGE_FILE         = EVAL_DIR / "reranker_benchmark_bge.json"            # BGE reranker
-BM25_FILE        = EVAL_DIR / "bm25_benchmark_top15.json"              # BM25 puro
-HYBRID_FILE      = EVAL_DIR / "hybrid_bm25_dense_top15.json"          # BM25 + Dense
-
-OUT_JSON  = EVAL_DIR / "comparative_all.json"
+OUT_JSON = EVAL_DIR / "comparative_all.json"
 OUT_TABLE = EVAL_DIR / "comparative_table.md"
 
->>>>>>> 31829c18 (feat: bm25 dense n hybrid benchmark)
+METRICS = (
+    "command_hit@1", "command_hit@3", "command_hit@5", "command_hit@10",
+    "mrr", "ndcg@1", "ndcg@3", "ndcg@5", "ndcg@10",
+)
 
-# ----------------------------------------------------------------------
-def load_json(p: pathlib.Path) -> Dict[str, Any]:
-    """Carga un JSON y devuelve su contenido ({} si no existe)."""
-    if not p.is_file():
-<<<<<<< HEAD
-        print(f"[WARN] File not found: {p}")
-=======
-        print(f"[WARN] Archivo no encontrado, se omite: {p}")
->>>>>>> 31829c18 (feat: bm25 dense n hybrid benchmark)
-        return {}
-    with p.open("r", encoding="utf-8") as f:
-        return json.load(f)
 
-<<<<<<< HEAD
-def extract_config(data: Dict[str, Any], label: str, model_name: str) -> Dict[str, Any]:
-    """
-    Normaliza la estructura que aparece en los benchmarks.
-    Cada benchmark tiene: baseline_summary, reranked_summary y latency_ms.
-    """
-    cfg = {
-        "name": label,
-        "model": model_name,
-        "summary": data.get("reranked_summary", data.get("baseline_summary", {})),
-        "latency_ms": data.get("latency_ms", {})
-    }
-    # En el caso del baseline puro el reranked_summary es idéntico al baseline,
-    # así que lo usamos directamente.
-    return cfg
+@dataclass(frozen=True)
+class BenchmarkSpec:
+    name: str
+    model: str
+    files: tuple[str, ...]
+    summary_key: str
+    latency_kind: str
 
-def build_table(configs: List[Dict[str, Any]]) -> str:
-    """Genera tabla markdown alineada con los campos de interés."""
-    header = (
-        "| Config | Model | Hit@1 | Hit@3 | Hit@5 | Hit@10 | MRR | nDCG@1 | nDCG@5 | Total latency ms |\n"
-        "|--------|-------|------:|------:|------:|-------:|-----:|-------:|-------:|-----------------:|\n"
-    )
-    rows = []
-    for c in configs:
-        s = c["summary"]
-=======
 
-def extract_config(data: Dict[str, Any], label: str, model_name: str) -> Dict[str, Any]:
-    """
-    Normaliza la estructura de un benchmark a:
-      { name, model, summary (métricas del experimento), latency_ms }
+SPECS = (
+    BenchmarkSpec("Baseline (FAISS MPNet)", "all-mpnet-base-v2",
+                  ("reranker_benchmark_v2_top15.json",), "baseline_summary", "retrieval"),
+    BenchmarkSpec("Reranker MiniLM-L6", "cross-encoder/ms-marco-MiniLM-L-6-v2",
+                  ("reranker_benchmark_v2_top15.json",), "reranked_summary", "total"),
+    BenchmarkSpec("Reranker DistilRoBERTa", "cross-encoder/stsb-distilroberta-base",
+                  ("reranker_benchmark_distilroberta.json",), "reranked_summary", "total"),
+    BenchmarkSpec("Reranker BGE-base", "BAAI/bge-reranker-base",
+                  ("reranker_benchmark_bge.json",), "reranked_summary", "total"),
+    BenchmarkSpec("BM25 (Pyserini/Lucene)", "BM25",
+                  ("bm25_benchmark_top15.json",), "reranked_summary", "experiment"),
+    BenchmarkSpec("Híbrido BM25 + Dense", "BM25 + all-mpnet-base-v2",
+                  ("hybrid_benchmark_top15.json", "hybrid_bm25_dense_top15.json"),
+                  "reranked_summary", "experiment"),
+)
 
-    Los benchmarks de reranker tienen 'reranked_summary'.
-    El baseline puro usa 'baseline_summary'.
-    Los nuevos benchmarks BM25/hybrid también usan 'reranked_summary'.
-    """
-    summary = data.get("reranked_summary") or data.get("baseline_summary") or {}
+
+def load_json(candidates: tuple[str, ...]) -> tuple[dict[str, Any], Path] | None:
+    """Devuelve el primer artefacto existente de una lista de nombres."""
+    for filename in candidates:
+        path = EVAL_DIR / filename
+        if path.is_file():
+            try:
+                return json.loads(path.read_text(encoding="utf-8")), path
+            except json.JSONDecodeError as exc:
+                raise ValueError(f"JSON inválido en {path}: {exc}") from exc
+    print(f"[WARN] Benchmark no encontrado: {', '.join(candidates)}")
+    return None
+
+
+def validate_summary(summary: Any, source: Path, key: str) -> dict[str, float | int]:
+    if not isinstance(summary, dict):
+        raise ValueError(f"{source}: falta el objeto {key!r}.")
+    missing = [metric for metric in ("queries", *METRICS) if metric not in summary]
+    if missing:
+        raise ValueError(f"{source}: {key!r} no contiene: {', '.join(missing)}.")
+    if not isinstance(summary["queries"], int) or summary["queries"] <= 0:
+        raise ValueError(f"{source}: 'queries' debe ser un entero positivo.")
+    normalized: dict[str, float | int] = {"queries": summary["queries"]}
+    for metric in METRICS:
+        value = summary[metric]
+        if not isinstance(value, (int, float)) or not 0 <= value <= 1:
+            raise ValueError(f"{source}: {metric!r} debe estar entre 0 y 1.")
+        normalized[metric] = float(value)
+    return normalized
+
+
+def normalize_latency(data: dict[str, Any], kind: str, source: Path) -> dict[str, float]:
+    latency = data.get("latency_ms")
+    if not isinstance(latency, dict):
+        raise ValueError(f"{source}: falta el objeto 'latency_ms'.")
+    retrieval = float(latency.get("retrieval_per_query", 0.0))
+    experiment = float(latency.get("rerank_per_query", 0.0))
+    reported_total = float(latency.get("total_per_query", retrieval + experiment))
+    if min(retrieval, experiment, reported_total) < 0:
+        raise ValueError(f"{source}: la latencia no puede ser negativa.")
+
+    # BM25 e híbrido reutilizan el campo histórico "rerank_per_query" para
+    # medir el sistema experimental. Sumar el baseline otra vez lo duplicaría.
+    method = retrieval if kind == "retrieval" else reported_total if kind == "total" else experiment
     return {
-        "name":       label,
-        "model":      model_name,
-        "summary":    summary,
-        "latency_ms": data.get("latency_ms", {}),
+        "method_per_query": round(method, 2),
+        "retrieval_per_query": round(retrieval, 2),
+        "experiment_per_query": round(experiment, 2),
+        "reported_total_per_query": round(reported_total, 2),
     }
 
 
-def build_table(configs: List[Dict[str, Any]]) -> str:
-    """Genera tabla markdown con los campos de interés."""
+def build_config(spec: BenchmarkSpec) -> dict[str, Any] | None:
+    loaded = load_json(spec.files)
+    if loaded is None:
+        return None
+    data, source = loaded
+    summary = validate_summary(data.get(spec.summary_key), source, spec.summary_key)
+    name, model = spec.name, spec.model
+    if data.get("mode") == "hybrid":
+        alpha = data.get("alpha")
+        if not isinstance(alpha, (int, float)) or not 0 <= alpha <= 1:
+            raise ValueError(f"{source}: alpha debe estar entre 0 y 1 para el híbrido.")
+        name, model = f"{name} (α={alpha:g})", f"{model} (α={alpha:g})"
+    source_baseline = data.get("baseline_summary")
+    return {
+        "name": name,
+        "model": model,
+        "source_file": source.name,
+        "summary_source": spec.summary_key,
+        "summary": summary,
+        "latency_ms": normalize_latency(data, spec.latency_kind, source),
+        "source_baseline_summary": (
+            validate_summary(source_baseline, source, "baseline_summary")
+            if source_baseline is not None else None
+        ),
+    }
+
+
+def validate_comparability(configs: list[dict[str, Any]]) -> None:
+    counts = {config["summary"]["queries"] for config in configs}
+    if len(counts) > 1:
+        details = ", ".join(f"{c['name']}={c['summary']['queries']}" for c in configs)
+        raise ValueError(f"Los benchmarks no usan el mismo número de consultas: {details}")
+
+
+def annotate_reference_consistency(configs: list[dict[str, Any]]) -> None:
+    """Marca resultados que fueron producidos con otro baseline FAISS.
+
+    Igualar el número de consultas no prueba que índice, corpus y qrels hayan
+    sido idénticos. Los artefactos disponibles incluyen su baseline interno;
+    usarlo evita mezclar resultados de snapshots distintos como si fueran una
+    comparación experimental válida.
+    """
+    reference = next(config for config in configs if config["name"] == "Baseline (FAISS MPNet)")
+    reference_summary = reference["summary"]
+    for config in configs:
+        source_baseline = config["source_baseline_summary"]
+        matches = source_baseline is None or all(
+            source_baseline[metric] == reference_summary[metric]
+            for metric in ("queries", *METRICS)
+        )
+        config["comparable_with_reference"] = matches
+        config["comparison_note"] = (
+            "Mismo baseline FAISS declarado"
+            if matches else "Baseline FAISS distinto: requiere reejecución con el snapshot de referencia"
+        )
+        del config["source_baseline_summary"]
+
+
+def build_table(configs: list[dict[str, Any]]) -> str:
     header = (
-        "| Config | Model | Hit@1 | Hit@3 | Hit@5 | Hit@10 | MRR | nDCG@1 | nDCG@5 | Lat. total (ms) |\n"
-        "|--------|-------|------:|------:|------:|-------:|----:|-------:|-------:|----------------:|\n"
+        "| Configuración | Comparable | Hit@1 | Hit@3 | Hit@5 | Hit@10 | MRR | nDCG@1 | nDCG@3 | nDCG@5 | nDCG@10 | Latencia método (ms) |\n"
+        "|---|:---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|\n"
     )
     rows = []
-    for c in configs:
-        s   = c["summary"]
->>>>>>> 31829c18 (feat: bm25 dense n hybrid benchmark)
-        lat = c["latency_ms"]
-        total = lat.get("total_per_query") or (
-            lat.get("retrieval_per_query", 0) + lat.get("rerank_per_query", 0)
-        )
+    for config in configs:
+        summary, latency = config["summary"], config["latency_ms"]["method_per_query"]
         rows.append(
-<<<<<<< HEAD
-            f"| {c['name']} | {c['model']} | {s.get('command_hit@1',0):.4f} "
-            f"| {s.get('command_hit@3',0):.4f} | {s.get('command_hit@5',0):.4f} "
-            f"| {s.get('command_hit@10',0):.4f} | {s.get('mrr',0):.4f} "
-            f"| {s.get('ndcg@1',0):.4f} | {s.get('ndcg@5',0):.4f} | {total:.2f} |\n"
-        )
-    return header + "".join(rows)
-
-def main() -> None:
-    configs = []
-
-    # ---------- Baseline (FAISS‑MPNet) ----------
-    base = load_json(BASELINE_FILE)
-    if base:
-        configs.append(
-            extract_config(base, "Baseline (FAISS MPNet)", "FAISS + MPNet")
-=======
-            f"| {c['name']} | {c['model']} "
-            f"| {s.get('command_hit@1',  0):.4f} "
-            f"| {s.get('command_hit@3',  0):.4f} "
-            f"| {s.get('command_hit@5',  0):.4f} "
-            f"| {s.get('command_hit@10', 0):.4f} "
-            f"| {s.get('mrr',            0):.4f} "
-            f"| {s.get('ndcg@1',         0):.4f} "
-            f"| {s.get('ndcg@5',         0):.4f} "
-            f"| {total:.2f} |\n"
+            f"| {config['name']} | {'Sí' if config['comparable_with_reference'] else 'No'} | {summary['command_hit@1']:.4f} | {summary['command_hit@3']:.4f} "
+            f"| {summary['command_hit@5']:.4f} | {summary['command_hit@10']:.4f} | {summary['mrr']:.4f} "
+            f"| {summary['ndcg@1']:.4f} | {summary['ndcg@3']:.4f} | {summary['ndcg@5']:.4f} "
+            f"| {summary['ndcg@10']:.4f} | {latency:.2f} |\n"
         )
     return header + "".join(rows)
 
 
 def main() -> None:
-    configs: List[Dict[str, Any]] = []
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--dry-run", action="store_true", help="Valida e imprime sin sobrescribir los reportes.")
+    args = parser.parse_args()
 
-    # ---------- Baseline (FAISS + MPNet, sin reranker) ----------
-    base = load_json(BASELINE_FILE)
-    if base:
-        # En reranker_benchmark_v2_top15.json el baseline_summary es el FAISS puro
-        baseline_summary = base.get("baseline_summary", {})
-        baseline_lat     = {
-            "retrieval_per_query": base.get("latency_ms", {}).get("retrieval_per_query", 0),
-            "rerank_per_query":    0,
-            "total_per_query":     base.get("latency_ms", {}).get("retrieval_per_query", 0),
-        }
-        configs.append({
-            "name":       "Baseline (FAISS MPNet)",
-            "model":      "all-mpnet-base-v2",
-            "summary":    baseline_summary,
-            "latency_ms": baseline_lat,
-        })
-
-    # ---------- Reranker MiniLM (cross-encoder/ms-marco-MiniLM-L-6-v2) ----------
-    if base:
-        configs.append(
-            extract_config(base, "Reranker MiniLM‑L6", "ms‑marco‑MiniLM‑L‑6‑v2")
->>>>>>> 31829c18 (feat: bm25 dense n hybrid benchmark)
-        )
-
-    # ---------- Reranker DistilRoBERTa ----------
-    dist = load_json(DISTIL_FILE)
-    if dist:
-        configs.append(
-<<<<<<< HEAD
-            extract_config(dist, "Reranker DistilRoBERTa‑base", "stsb‑distilroberta‑base")
-=======
-            extract_config(dist, "Reranker DistilRoBERTa", "stsb‑distilroberta‑base")
->>>>>>> 31829c18 (feat: bm25 dense n hybrid benchmark)
-        )
-
-    # ---------- Reranker BGE ----------
-    bge = load_json(BGE_FILE)
-    if bge:
-        configs.append(
-<<<<<<< HEAD
-            extract_config(bge, "Reranker BGE‑base", "bge‑reranker‑base")
-        )
-
-    # ---------- Híbrido BM25 + dense (opcional) ----------
-    hybrid = load_json(HYBRID_FILE)
-    if hybrid:
-        # el script híbrido ya devuelve sólo la lista rankeada y latencia;
-        # usamos los mismos nombres de métricas que el baseline para comparar.
-        # Si el archivo contiene un bloque "metrics" añádelo aquí.
-        summary = hybrid.get("metrics", {})
-        configs.append(
-            {
-                "name": "Hybrid BM25 + dense",
-                "model": "BM25 + MPNet (alpha=0.7)",
-                "summary": summary,
-                "latency_ms": hybrid.get("latency_ms", {})
-            }
-        )
-
-    # ---------- Escritura de resultados ----------
-    out = {"configs": configs}
-    OUT_JSON.write_text(json.dumps(out, indent=2, ensure_ascii=False))
-    OUT_TABLE.write_text(build_table(configs))
-
-    print(f"[INFO] Unified file → {OUT_JSON}")
-    print(f"[INFO] Markdown table → {OUT_TABLE}")
-
-if __name__ == "__main__":
-    main()
-=======
-            extract_config(bge, "Reranker BGE‑base", "bge‑reranker‑base")
-        )
-
-    # ---------- BM25 puro ----------
-    bm25 = load_json(BM25_FILE)
-    if bm25:
-        configs.append(
-            extract_config(bm25, "BM25 puro (Pyserini)", "BM25 (Lucene)")
-        )
-
-    # ---------- Híbrido BM25 + Dense ----------
-    hybrid = load_json(HYBRID_FILE)
-    if hybrid:
-        alpha = hybrid.get("alpha") or 0.5
-        configs.append(
-            extract_config(
-                hybrid,
-                f"Híbrido BM25+Dense (α={alpha})",
-                f"BM25 + MPNet (α={alpha})",
-            )
-        )
-
+    configs = [config for spec in SPECS if (config := build_config(spec)) is not None]
     if not configs:
-        print("[ERROR] No se encontró ningún archivo de benchmark. Genera al menos uno primero.")
+        raise SystemExit("[ERROR] No se encontró ningún benchmark para consolidar.")
+    validate_comparability(configs)
+    annotate_reference_consistency(configs)
+    report = {
+        "benchmark": {"queries": configs[0]["summary"]["queries"], "metrics": list(METRICS)},
+        "configs": configs,
+    }
+    table = build_table(configs)
+    if args.dry_run:
+        print(table)
         return
 
-    # ---------- Escritura de resultados ----------
-    out = {"configs": configs}
-    OUT_JSON.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
-    OUT_TABLE.write_text(build_table(configs))
-
+    OUT_JSON.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    OUT_TABLE.write_text(table, encoding="utf-8")
     print(f"[INFO] Archivo unificado → {OUT_JSON}")
     print(f"[INFO] Tabla markdown    → {OUT_TABLE}")
-    print(f"\n{'=' * 60}")
-    print(build_table(configs))
+    print(table)
 
 
 if __name__ == "__main__":
     main()
-
->>>>>>> 31829c18 (feat: bm25 dense n hybrid benchmark)
