@@ -93,8 +93,8 @@ mismo corte antes del cálculo de métricas hasta @10.
 3. Comparar granularidad por comando frente a opción y reducir duplicados.
 4. Probar variantes de texto para embeddings, recuperación BM25/híbrida y
    reranking solo sobre el mismo snapshot y conjunto de evaluación.
-5. Retomar el Query Planner avanzado cuando la línea base de retrieval quede
-   estable y reproducible.
+5. Query Planner avanzado completado (Fase 3): extracción de argumentos,
+   conectores de shell, dependencias de flujo y validación de parámetros faltantes.
 6. Automatizar validaciones, pruebas Python/Go y benchmark en CI.
 
 8. ARCHIVOS DE REFERENCIA

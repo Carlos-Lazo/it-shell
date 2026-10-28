@@ -13,6 +13,8 @@ class ResponseFormatterService:
                 lines += ['### Avisos', '']
                 for issue in response.proposal.issues:
                     lines.append(f'- **{issue.level.upper()}**: {issue.message}')
+                    if issue.recommendation:
+                        lines.append(f'  - Recomendación: {issue.recommendation}')
                 lines.append('')
             return '\n'.join(lines)
         if output_format == 'cli':
@@ -24,5 +26,7 @@ class ResponseFormatterService:
                 lines.append('Avisos:')
                 for issue in response.proposal.issues:
                     lines.append(f'  - [{issue.level.upper()}] {issue.message}')
+                    if issue.recommendation:
+                        lines.append(f'    Recomendación: {issue.recommendation}')
             return '\n'.join(lines)
         raise ValueError(f'Formato no soportado: {output_format}')

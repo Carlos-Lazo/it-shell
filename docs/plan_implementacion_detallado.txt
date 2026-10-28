@@ -66,35 +66,45 @@ Criterio de Aceptación:
     comparación controlada en la tabla de cierre.
 
 ----------------------------------------------------------------------
-FASE 3: QUERY PLANNER DETERMINÍSTICO AVANZADO
+FASE 3: QUERY PLANNER DETERMINÍSTICO AVANZADO [CERRADA]
 ----------------------------------------------------------------------
+Estado en `feat/phase-3-query-planner`: 3.1, 3.2 y 3.3 implementadas y validadas al 100%.
+Validación: suite completa aprobada (18/18 pruebas avanzadas en `test_planner_advanced.py`
+y 62 pruebas totales del motor); cubre consultas de 1, 2 y 3 pasos en inglés y español,
+extracción de parámetros (rutas, nombres de archivo, extensiones, tamaños), operadores
+shell (pipes, redirecciones, &&, ||, ;), dependencias de flujo estructuradas (`depends_on`),
+manejo de ambigüedad y detección de información faltante (`requires_input`).
+
 Objetivo:
 Transformar consultas compuestas en secuencias de ejecución lógicas con dependencias
 visibles y extracción precisa de argumentos.
 
 Tareas:
-3.1. Extracción de Parámetros y Placeholders:
+3.1. Extracción de Parámetros y Placeholders: [COMPLETADA]
      - Identificar argumentos explícitos en la consulta (ej. rutas como "/var/log", tamaños "+100M",
        extensiones "*.tar.gz", nombres de archivo).
-     - Mapear estos argumentos a los placeholders `<param>` del corpus para autocompletar plantillas.
+     - Mapear estos argumentos a los placeholders `<param>` y `{param}` del corpus para autocompletar plantillas.
+     - Evitar inferencias arbitrarias ante ambigüedad de argumentos del mismo tipo.
 
-3.2. Modelado de Dependencias de Flujo:
+3.2. Modelado de Dependencias de Flujo: [COMPLETADA]
      - Detectar operadores de encadenamiento de shell:
-       * Tuberías (`|`): salida del paso N alimenta entrada del paso N+1.
-       * Redirecciones (`>`, `>>`): salida del paso N dirigida a archivo destino.
-       * Ejecución condicional (`&&`, `;`): secuencialidad estricta.
+       * Tuberías (`|`): salida del paso N alimenta entrada del paso N+1 (`depends_on`).
+       * Redirecciones (`>`, `>>`): salida del paso N dirigida a archivo destino (`redirect_target`).
+       * Ejecución condicional y secuencial (`&&`, `||`, `;`, conectores naturales): orden de ejecución estricto.
      - Generar el grafo estructurado en `QueryPlan` indicando `depends_on`.
 
-3.3. Detección de Ambigüedad e Incompletitud:
+3.3. Detección de Ambigüedad e Incompletitud: [COMPLETADA]
      - Identificar cuando a una intención le falta un dato crítico (ej. "comprimir archivo" sin indicar destino).
-     - Generar la señal `requires_input` con mensaje aclaratorio para el usuario.
+     - Generar la señal `requires_input` con mensaje aclaratorio para el usuario en `PromptBuilder` y `ResponseFormatterService`.
 
 Entregables:
-- Módulo `retrieval_service/planner.py` actualizado con resolución de argumentos.
+- Módulo `retrieval_service/planner.py` actualizado con resolución de argumentos y dependencias.
 - Suite de pruebas unitarias `tests/test_planner_advanced.py` cubriendo casos de 1, 2 y 3 pasos.
+- Contratos actualizados en `shared/contracts.py` e integración en `PipelineBuilder` y `ProposalValidator`.
 
 Criterio de Aceptación:
 - 100% de consultas complejas de prueba descompuestas correctamente con sus dependencias y parámetros.
+- ESTADO: CUMPLIDO (18/18 pruebas avanzadas aprobadas; 62 pruebas unitarias globales pasando al 100%).
 
 ----------------------------------------------------------------------
 FASE 4: PROPOSAL VALIDATOR Y REGLAS DE SEGURIDAD OPERATIVA
@@ -124,6 +134,11 @@ Entregables:
 
 Criterio de Aceptación:
 - 0 falsos negativos en patrones de riesgo crítico. Advertencias claras y visibles en todos los formatos.
+
+Estado en `feat/phase-3-query-planner`: reglas 4.1 y contrato/renderizado 4.2
+implementados. La matriz 4.3 cubre 56 comandos únicos (seguros y de riesgo,
+con casos de advertencia y críticos); suite completa aprobada. Antes de cerrar
+la fase se recomienda revisar también ejemplos reales del corpus y de uso.
 
 ----------------------------------------------------------------------
 FASE 5: CAPA DE EXPLICACIÓN Y PROMPT BUILDER (LLM OPCIONAL)

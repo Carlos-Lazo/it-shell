@@ -1,3 +1,4 @@
+from semantic_search_engine.retrieval_service.planner import _fill_placeholders
 from semantic_search_engine.shared.contracts import PipelineProposal, PipelineStep
 
 class PipelineBuilder:
@@ -21,5 +22,20 @@ class PipelineBuilder:
         for step in plan.steps:
             selected, alternatives=self.choose(ranked_by_step.get(step.id, []))
             template = (selected.example or selected.command) if selected else None
-            steps.append(PipelineStep(step.id, step.query, step.depends_on, selected, alternatives, template))
+            if template and step.arguments:
+                template = _fill_placeholders(template, step.arguments, step.redirect_target)
+            elif template and step.redirect_target:
+                template = _fill_placeholders(template, (), step.redirect_target)
+            steps.append(PipelineStep(
+                step.id,
+                step.query,
+                step.depends_on,
+                selected,
+                alternatives,
+                template,
+                step.ambiguous_arguments,
+                step.connector_before,
+                step.redirect_operator,
+                step.redirect_target,
+            ))
         return PipelineProposal(plan.goal, tuple(steps), executable=False)

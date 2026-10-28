@@ -20,6 +20,11 @@ class PlanStep:
     id: str
     query: str
     depends_on: tuple[str, ...] = ()
+    arguments: tuple[tuple[str, str], ...] = ()
+    connector_before: str | None = None
+    redirect_operator: str | None = None
+    redirect_target: str | None = None
+    ambiguous_arguments: tuple[str, ...] = ()
 
 @dataclass(frozen=True)
 class QueryPlan:
@@ -47,6 +52,7 @@ class ValidationIssue:
     code: str
     message: str
     step_id: str | None = None
+    recommendation: str = ""
 
 @dataclass(frozen=True)
 class PipelineStep:
@@ -56,6 +62,10 @@ class PipelineStep:
     selected: CandidateCommand | None
     alternatives: tuple[CandidateCommand, ...] = ()
     command_template: str | None = None
+    ambiguous_arguments: tuple[str, ...] = ()
+    connector_before: str | None = None
+    redirect_operator: str | None = None
+    redirect_target: str | None = None
 
 @dataclass(frozen=True)
 class PipelineProposal:
