@@ -112,10 +112,10 @@ El modelo `sentence-transformers/all-mpnet-base-v2` (~419 MB) se descarga autom�
 evaluation/
 ├── evaluate_retrieval.py      ← script principal
 ├── visualize_metrics.py       ← genera HTML de resultados
-├── retrieval_queries.json     ← 20 consultas con ground truth
-├── consultas_ingles.txt       ← fuente de consultas
-├── retrieval_results.json     ← resultados previos
-├── metricas_retrieval.html    ← visualización previa
+├── evaluation_v2_queries.json ← benchmark oficial, 160 consultas
+├── retrieval_snapshot_v2.json ← manifiesto de artefactos y checksums
+├── retrieval_benchmark_v2.json← métricas del baseline FAISS
+├── retrieval_metrics_v2.html  ← visualización de métricas
 └── __pycache__/               ← ⚠️ debería eliminarse
 ```
 

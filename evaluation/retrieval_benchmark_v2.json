@@ -1,0 +1,5323 @@
+{
+  "index_vectors": 30287,
+  "candidate_top_k": 15,
+  "metrics": {
+    "queries": 160,
+    "command_hit@1": 0.4125,
+    "ndcg@1": 0.4125,
+    "command_hit@3": 0.6188,
+    "ndcg@3": 0.3758,
+    "command_hit@5": 0.7125,
+    "ndcg@5": 0.3613,
+    "command_hit@10": 0.8,
+    "ndcg@10": 0.3345,
+    "mrr": 0.5377
+  },
+  "latency_ms": {
+    "retrieval_per_query": 62.47
+  },
+  "provenance": {
+    "snapshot_manifest_sha256": "e0f9ecade6604be52bf6541adcedc7d35c97363547f749750e69ef1b193259c4",
+    "queries_sha256": "af89d5efa1b713fba05f945141eb34ce5e42edda58dbafae7af54a255df0336a",
+    "faiss_index_sha256": "fa2cf360f5d4b0b8e7313455c222b6faddcaaf42c25d384deb75107c0afe7567",
+    "aliases_sha256": "bfbf9faad2464416bb9a475ca3c8e36dfaf5bf25b3ed9249c28aa171f74b74dc"
+  },
+  "queries": [
+    {
+      "id": "git_undo_soft_reset",
+      "language": "en",
+      "query": "discard the last local commit while keeping all modifications unstaged in working directory",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:34",
+        "git:9",
+        "git:39",
+        "git:100",
+        "git:89"
+      ],
+      "top_5_scores": [
+        0.6208,
+        0.5872,
+        0.5425,
+        0.5407,
+        0.4955
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.8553475075669357,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_stash_untracked",
+      "language": "en",
+      "query": "temporarily save dirty working tree changes including untracked files without committing",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:11",
+        "git:39",
+        "git:33",
+        "git:8",
+        "security:450"
+      ],
+      "top_5_scores": [
+        0.6558,
+        0.6483,
+        0.5634,
+        0.549,
+        0.5228
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.8687949224876582,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.715550648768261,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_interactive_rebase",
+      "language": "en",
+      "query": "squash or edit the last five commits interactively before pushing to remote",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:9",
+        "git:34",
+        "git:100",
+        "git:10",
+        "git:88"
+      ],
+      "top_5_scores": [
+        0.5556,
+        0.526,
+        0.5048,
+        0.4723,
+        0.4695
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_cherry_pick",
+      "language": "en",
+      "query": "apply a specific commit from another branch into the current checked out branch",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:9",
+        "git:30",
+        "git:34",
+        "git:82",
+        "git:77"
+      ],
+      "top_5_scores": [
+        0.6365,
+        0.5229,
+        0.5219,
+        0.5097,
+        0.503
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.9363792118010483,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_blame_line",
+      "language": "en",
+      "query": "inspect which author and commit last modified specific lines of a source code file",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:60",
+        "security:287",
+        "git:59",
+        "git:74",
+        "filesystem:3070"
+      ],
+      "top_5_scores": [
+        0.8083,
+        0.6195,
+        0.5878,
+        0.5518,
+        0.5268
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6548086577531307,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.624232247406789,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_clone_recursive",
+      "language": "en",
+      "query": "clone a remote repository and automatically initialize all its submodules",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:12",
+        "git:41",
+        "git:16",
+        "git:57",
+        "filesystem:409"
+      ],
+      "top_5_scores": [
+        0.5637,
+        0.4997,
+        0.4974,
+        0.475,
+        0.4746
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.8687949224876582,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.8364586133797037,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_create_switch_branch",
+      "language": "en",
+      "query": "create a new branch and switch to it immediately",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:42",
+        "textprocessing:1368",
+        "git:6",
+        "git:50",
+        "git:8"
+      ],
+      "top_5_scores": [
+        0.8173,
+        0.6753,
+        0.6508,
+        0.625,
+        0.5271
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.7860137352654724,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5100691314582919,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_log_graph",
+      "language": "en",
+      "query": "display commit history in a one-line graphical tree format",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:10",
+        "git:15",
+        "git:70",
+        "git:23",
+        "git:74"
+      ],
+      "top_5_scores": [
+        0.6935,
+        0.6852,
+        0.6708,
+        0.6178,
+        0.6085
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.8603818544462509,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_diff_branches",
+      "language": "en",
+      "query": "compare the code differences between two branches",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:30",
+        "git:6",
+        "git:15",
+        "git:70",
+        "git:50"
+      ],
+      "top_5_scores": [
+        0.6725,
+        0.5757,
+        0.5615,
+        0.5578,
+        0.5561
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.793584067764911,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_discard_unstaged",
+      "language": "en",
+      "query": "revert all unstaged local file changes back to the last committed state",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "textprocessing:1728",
+        "git:34",
+        "cryptography:174",
+        "textprocessing:3030",
+        "textprocessing:2968"
+      ],
+      "top_5_scores": [
+        0.6068,
+        0.6018,
+        0.5659,
+        0.5503,
+        0.5503
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.13886244387355454,
+      "mrr": 0.5
+    },
+    {
+      "id": "git_amend_commit",
+      "language": "en",
+      "query": "modify the commit message or add staged files to the previous commit",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "docker:623",
+        "docker:396",
+        "git:150",
+        "docker:1099",
+        "git:89"
+      ],
+      "top_5_scores": [
+        0.6755,
+        0.6755,
+        0.6735,
+        0.6651,
+        0.6261
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.30078518014914984,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5462574254588145,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "git_clean_untracked",
+      "language": "en",
+      "query": "remove all untracked files and directories forcefully from working tree",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:11",
+        "git:35",
+        "filesystem:2581",
+        "git:38",
+        "filesystem:2575"
+      ],
+      "top_5_scores": [
+        0.9014,
+        0.6969,
+        0.6103,
+        0.5719,
+        0.5658
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6992148198508501,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5894280199323518,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_create_tag",
+      "language": "en",
+      "query": "create an annotated release tag pointing to the current commit",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:59",
+        "networking:273",
+        "git:89",
+        "git:73",
+        "git:74"
+      ],
+      "top_5_scores": [
+        0.6,
+        0.4982,
+        0.4962,
+        0.4722,
+        0.4512
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.7860137352654724,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.7948833326720564,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_push_upstream",
+      "language": "en",
+      "query": "push local branch to remote repository and set upstream tracking reference",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:28",
+        "git:134",
+        "docker:1699",
+        "git:137",
+        "git:56"
+      ],
+      "top_5_scores": [
+        0.5672,
+        0.5123,
+        0.5038,
+        0.4887,
+        0.4814
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.830419897363192,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.7503359712972109,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_resolve_conflict_abort",
+      "language": "en",
+      "query": "abort an ongoing merge conflict and restore pre-merge branch state",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "git:69",
+        "git:51",
+        "git:68",
+        "git:150",
+        "git:93"
+      ],
+      "top_5_scores": [
+        0.6738,
+        0.6726,
+        0.5612,
+        0.528,
+        0.5168
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.9363792118010483,
+      "mrr": 1.0
+    },
+    {
+      "id": "git_stage_patch",
+      "language": "en",
+      "query": "interactively stage selected hunks or parts of modified files",
+      "relevant_commands": [
+        "git"
+      ],
+      "relevant_aliases": 181,
+      "first_relevant_rank": 10,
+      "top_5": [
+        "textprocessing:2405",
+        "textprocessing:2411",
+        "textprocessing:446",
+        "textprocessing:2630",
+        "filesystem:418"
+      ],
+      "top_5_scores": [
+        0.5463,
+        0.5333,
+        0.5196,
+        0.5138,
+        0.4776
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.06362078819895171,
+      "mrr": 0.1
+    },
+    {
+      "id": "docker_run_detached_port",
+      "language": "en",
+      "query": "start container in detached background mode with port forwarding to host",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:568",
+        "docker:1353",
+        "processmanagement:492",
+        "docker:1665",
+        "docker:854"
+      ],
+      "top_5_scores": [
+        0.7841,
+        0.7071,
+        0.6333,
+        0.6119,
+        0.6119
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.830419897363192,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.8205228949141826,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_stream_logs",
+      "language": "en",
+      "query": "stream and follow output logs of running container in real time",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:1647",
+        "docker:836",
+        "docker:686",
+        "docker:1609",
+        "docker:798"
+      ],
+      "top_5_scores": [
+        0.6518,
+        0.6518,
+        0.6518,
+        0.6002,
+        0.6002
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.8643145546088337,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_exec_interactive",
+      "language": "en",
+      "query": "open an interactive bash shell terminal inside an already running container",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "hardwaremanagement:283",
+        "docker:1353",
+        "docker:568",
+        "docker:1609",
+        "docker:798"
+      ],
+      "top_5_scores": [
+        0.6134,
+        0.5884,
+        0.5707,
+        0.5629,
+        0.5629
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.9363792118010483,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_prune_all",
+      "language": "en",
+      "query": "reclaim disk space by purging all stopped containers unused images and build cache",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:1084",
+        "docker:1073",
+        "docker:1444",
+        "docker:567",
+        "docker:437"
+      ],
+      "top_5_scores": [
+        0.6692,
+        0.5874,
+        0.5863,
+        0.5755,
+        0.5755
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_build_no_cache",
+      "language": "en",
+      "query": "build an image from a Dockerfile without using cached layers",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:1098",
+        "docker:622",
+        "docker:394",
+        "docker:523",
+        "docker:567"
+      ],
+      "top_5_scores": [
+        0.6902,
+        0.6902,
+        0.6902,
+        0.6857,
+        0.6744
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_copy_file",
+      "language": "en",
+      "query": "copy files between local host filesystem and a container",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:1654",
+        "docker:843",
+        "docker:693",
+        "docker:1611",
+        "docker:800"
+      ],
+      "top_5_scores": [
+        0.6044,
+        0.6044,
+        0.6044,
+        0.5772,
+        0.5772
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.8572048559638628,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_inspect_ip",
+      "language": "en",
+      "query": "find the internal IP address and network settings of a container",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "processmanagement:316",
+        "docker:1656",
+        "docker:845",
+        "docker:695",
+        "docker:1649"
+      ],
+      "top_5_scores": [
+        0.6788,
+        0.6762,
+        0.6762,
+        0.6762,
+        0.6421
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.5307212739772434,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6608397947263839,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.7104770117651426,
+      "mrr": 0.5
+    },
+    {
+      "id": "docker_resource_stats",
+      "language": "en",
+      "query": "monitor live streaming CPU and memory resource consumption of active containers",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "processmanagement:492",
+        "misc:1069",
+        "docker:1353",
+        "docker:1609",
+        "docker:798"
+      ],
+      "top_5_scores": [
+        0.5758,
+        0.5388,
+        0.51,
+        0.4898,
+        0.4898
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.4468535299918563,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5716145678915879,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "docker_stop_all_containers",
+      "language": "en",
+      "query": "stop all currently running containers at once",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:491",
+        "docker:1572",
+        "docker:888",
+        "docker:756",
+        "docker:553"
+      ],
+      "top_5_scores": [
+        0.7248,
+        0.7168,
+        0.7168,
+        0.7168,
+        0.7168
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_create_bridge_network",
+      "language": "en",
+      "query": "create a user-defined bridge network for container inter-communication",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "networking:300",
+        "docker:1656",
+        "docker:845",
+        "docker:695",
+        "networking:301"
+      ],
+      "top_5_scores": [
+        0.7805,
+        0.78,
+        0.78,
+        0.78,
+        0.6118
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.5307212739772434,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5296347172140421,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.4073174795910971,
+      "mrr": 0.5
+    },
+    {
+      "id": "docker_list_all_containers",
+      "language": "en",
+      "query": "list all containers including those that exited or stopped",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:491",
+        "docker:563",
+        "docker:1572",
+        "docker:888",
+        "docker:756"
+      ],
+      "top_5_scores": [
+        0.852,
+        0.6957,
+        0.6784,
+        0.6784,
+        0.6784
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_save_tar_archive",
+      "language": "en",
+      "query": "export and save a container image to a tar archive file",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 6,
+      "top_5": [
+        "docker:2692",
+        "shellprogramming:840",
+        "shellprogramming:841",
+        "filesystem:172",
+        "filesystem:170"
+      ],
+      "top_5_scores": [
+        0.6191,
+        0.5953,
+        0.591,
+        0.5406,
+        0.5406
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2848142012137644,
+      "mrr": 0.16666666666666666
+    },
+    {
+      "id": "docker_load_tar_image",
+      "language": "en",
+      "query": "load an image into docker daemon from a tar archive",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:1098",
+        "docker:622",
+        "docker:394",
+        "hardwaremanagement:283",
+        "docker:1105"
+      ],
+      "top_5_scores": [
+        0.6676,
+        0.6676,
+        0.6676,
+        0.6275,
+        0.5527
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.8482378089219645,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_compose_up_detached",
+      "language": "en",
+      "query": "start all services defined in a compose file in background mode",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:582",
+        "docker:540",
+        "docker:470",
+        "docker:447",
+        "docker:443"
+      ],
+      "top_5_scores": [
+        0.5839,
+        0.5839,
+        0.5839,
+        0.5839,
+        0.5839
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_compose_down_volumes",
+      "language": "en",
+      "query": "stop compose services and delete associated networks and named volumes",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:450",
+        "docker:582",
+        "docker:540",
+        "docker:470",
+        "docker:447"
+      ],
+      "top_5_scores": [
+        0.7416,
+        0.7092,
+        0.7092,
+        0.7092,
+        0.7092
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "docker_remove_volume",
+      "language": "en",
+      "query": "delete a persistent storage volume by name",
+      "relevant_commands": [
+        "docker"
+      ],
+      "relevant_aliases": 2263,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "docker:1445",
+        "docker:1440",
+        "docker:776",
+        "docker:2246",
+        "docker:521"
+      ],
+      "top_5_scores": [
+        0.6709,
+        0.6709,
+        0.6414,
+        0.6146,
+        0.6043
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.8482378089219645,
+      "mrr": 1.0
+    },
+    {
+      "id": "fs_find_by_name",
+      "language": "en",
+      "query": "search recursively for files matching a specific pattern or filename",
+      "relevant_commands": [
+        "find"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:877",
+        "misc:27",
+        "misc:16",
+        "misc:5",
+        "security:1796"
+      ],
+      "top_5_scores": [
+        0.7305,
+        0.6447,
+        0.6447,
+        0.6447,
+        0.6362
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2529427027676571,
+      "mrr": 1.0
+    },
+    {
+      "id": "fs_find_large_files",
+      "language": "en",
+      "query": "find all files under root directory larger than 500 megabytes",
+      "relevant_commands": [
+        "find"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:877",
+        "filesystem:2786",
+        "textprocessing:436",
+        "filesystem:2979",
+        "textprocessing:1450"
+      ],
+      "top_5_scores": [
+        0.575,
+        0.488,
+        0.4863,
+        0.4712,
+        0.4697
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2529427027676571,
+      "mrr": 1.0
+    },
+    {
+      "id": "fs_find_modified_days",
+      "language": "en",
+      "query": "search for files modified within the last seven days",
+      "relevant_commands": [
+        "find"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": null,
+      "top_5": [
+        "misc:2651",
+        "git:116",
+        "processmanagement:1212",
+        "security:287",
+        "filesystem:1367"
+      ],
+      "top_5_scores": [
+        0.57,
+        0.5435,
+        0.4914,
+        0.4797,
+        0.4783
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "fs_list_detailed_hidden",
+      "language": "en",
+      "query": "list all files including hidden ones with permissions and sizes in human units",
+      "relevant_commands": [
+        "ls"
+      ],
+      "relevant_aliases": 46,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:3341",
+        "filesystem:2676",
+        "docker:1579",
+        "docker:763",
+        "docker:745"
+      ],
+      "top_5_scores": [
+        0.6386,
+        0.6386,
+        0.6,
+        0.6,
+        0.6
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "fs_mkdir_nested",
+      "language": "en",
+      "query": "create parent directories and nested subdirectory path in a single step",
+      "relevant_commands": [
+        "mkdir"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "filesystem:1280",
+        "filesystem:1868",
+        "filesystem:1928",
+        "processmanagement:3113",
+        "processmanagement:2240"
+      ],
+      "top_5_scores": [
+        0.6549,
+        0.5911,
+        0.5439,
+        0.5419,
+        0.5419
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.249689085777264,
+      "mrr": 0.5
+    },
+    {
+      "id": "fs_remove_recursive_force",
+      "language": "en",
+      "query": "recursively delete a directory and all its contents without asking confirmation",
+      "relevant_commands": [
+        "rm"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2581",
+        "filesystem:2589",
+        "filesystem:2851",
+        "filesystem:2587",
+        "filesystem:2579"
+      ],
+      "top_5_scores": [
+        0.7788,
+        0.6306,
+        0.6163,
+        0.6011,
+        0.6005
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.4703652827859579,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5232512984721256,
+      "mrr": 1.0
+    },
+    {
+      "id": "fs_copy_recursive_preserve",
+      "language": "en",
+      "query": "copy directory recursively while preserving file attributes permissions and timestamps",
+      "relevant_commands": [
+        "cp"
+      ],
+      "relevant_aliases": 30,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:383",
+        "filesystem:370",
+        "filesystem:1276",
+        "filesystem:375",
+        "filesystem:169"
+      ],
+      "top_5_scores": [
+        0.7835,
+        0.6687,
+        0.6681,
+        0.6603,
+        0.5742
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6992148198508501,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.4537425745411855,
+      "mrr": 1.0
+    },
+    {
+      "id": "fs_create_symlink",
+      "language": "en",
+      "query": "create a symbolic link pointing to a target file",
+      "relevant_commands": [
+        "ln"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "processmanagement:239",
+        "filesystem:388",
+        "filesystem:1500",
+        "filesystem:1592",
+        "filesystem:1594"
+      ],
+      "top_5_scores": [
+        0.7338,
+        0.7138,
+        0.7095,
+        0.6943,
+        0.6929
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.27727342735504823,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.32776097292662437,
+      "mrr": 0.25
+    },
+    {
+      "id": "fs_tar_create_gzip",
+      "language": "en",
+      "query": "compress folder into a tarball archive using gzip compression",
+      "relevant_commands": [
+        "tar"
+      ],
+      "relevant_aliases": 138,
+      "first_relevant_rank": null,
+      "top_5": [
+        "textprocessing:1433",
+        "textprocessing:1432",
+        "textprocessing:3197",
+        "docker:1066",
+        "filesystem:3437"
+      ],
+      "top_5_scores": [
+        0.8332,
+        0.7277,
+        0.6586,
+        0.6571,
+        0.6301
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "fs_tar_extract",
+      "language": "en",
+      "query": "unpack and extract files from a compressed tar archive",
+      "relevant_commands": [
+        "tar"
+      ],
+      "relevant_aliases": 138,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2854",
+        "filesystem:3035",
+        "textprocessing:2744",
+        "filesystem:3004",
+        "textprocessing:2248"
+      ],
+      "top_5_scores": [
+        0.7013,
+        0.6919,
+        0.672,
+        0.672,
+        0.6677
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22009176629808017,
+      "mrr": 1.0
+    },
+    {
+      "id": "fs_zip_compress",
+      "language": "en",
+      "query": "package and compress directory into a zip file",
+      "relevant_commands": [
+        "zip"
+      ],
+      "relevant_aliases": 92,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "textprocessing:3197",
+        "textprocessing:1432",
+        "textprocessing:1433",
+        "filesystem:3483",
+        "shellprogramming:2425"
+      ],
+      "top_5_scores": [
+        0.8289,
+        0.7764,
+        0.6837,
+        0.6579,
+        0.6543
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2863459897524692,
+      "mrr": 1.0
+    },
+    {
+      "id": "fs_unzip_extract",
+      "language": "en",
+      "query": "extract files from a zip archive into a destination directory",
+      "relevant_commands": [
+        "unzip"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:3035",
+        "textprocessing:806",
+        "filesystem:2431",
+        "keyboard:235",
+        "keyboard:1141"
+      ],
+      "top_5_scores": [
+        0.7234,
+        0.6989,
+        0.6801,
+        0.676,
+        0.676
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2863459897524692,
+      "mrr": 1.0
+    },
+    {
+      "id": "fs_compress_xz",
+      "language": "en",
+      "query": "compress a large file with high ratio using xz format",
+      "relevant_commands": [
+        "xz"
+      ],
+      "relevant_aliases": 41,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "filesystem:3422",
+        "filesystem:3411",
+        "filesystem:3026",
+        "filesystem:2993",
+        "filesystem:1770"
+      ],
+      "top_5_scores": [
+        0.7343,
+        0.7343,
+        0.7343,
+        0.7343,
+        0.7343
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2082936658103318,
+      "mrr": 0.5
+    },
+    {
+      "id": "fs_decompress_gzip",
+      "language": "en",
+      "query": "decompress a gzip compressed file",
+      "relevant_commands": [
+        "gunzip",
+        "gzip"
+      ],
+      "relevant_aliases": 40,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "docker:1548",
+        "textprocessing:1433",
+        "filesystem:3438",
+        "filesystem:2988",
+        "filesystem:1199"
+      ],
+      "top_5_scores": [
+        0.6993,
+        0.692,
+        0.6836,
+        0.6836,
+        0.6836
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.1635413866202963,
+      "mrr": 0.2
+    },
+    {
+      "id": "fs_touch_timestamp",
+      "language": "en",
+      "query": "update access and modification timestamps of file or create empty file",
+      "relevant_commands": [
+        "touch"
+      ],
+      "relevant_aliases": 9,
+      "first_relevant_rank": 6,
+      "top_5": [
+        "filesystem:3345",
+        "filesystem:2768",
+        "security:1813",
+        "security:35",
+        "filesystem:425"
+      ],
+      "top_5_scores": [
+        0.6896,
+        0.6896,
+        0.6585,
+        0.6585,
+        0.6437
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.08372491399919346,
+      "mrr": 0.16666666666666666
+    },
+    {
+      "id": "fs_paginate_file",
+      "language": "en",
+      "query": "view text file contents with backward and forward keyboard scrolling navigation",
+      "relevant_commands": [
+        "less",
+        "more"
+      ],
+      "relevant_aliases": 83,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "textprocessing:1806",
+        "textprocessing:1249",
+        "textprocessing:2067",
+        "textprocessing:1651",
+        "textprocessing:600"
+      ],
+      "top_5_scores": [
+        0.5501,
+        0.5501,
+        0.5175,
+        0.5175,
+        0.5175
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.13886244387355454,
+      "mrr": 0.5
+    },
+    {
+      "id": "proc_list_user_processes",
+      "language": "en",
+      "query": "display all running processes with user CPU and memory usage columns",
+      "relevant_commands": [
+        "ps"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": null,
+      "top_5": [
+        "processmanagement:2979",
+        "processmanagement:754",
+        "processmanagement:2439",
+        "processmanagement:2433",
+        "processmanagement:817"
+      ],
+      "top_5_scores": [
+        0.6539,
+        0.6099,
+        0.5763,
+        0.5763,
+        0.5708
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "proc_interactive_monitor",
+      "language": "en",
+      "query": "launch real time interactive task manager to view CPU core utilization",
+      "relevant_commands": [
+        "top",
+        "htop"
+      ],
+      "relevant_aliases": 4,
+      "first_relevant_rank": 7,
+      "top_5": [
+        "docker:1599",
+        "docker:788",
+        "docker:640",
+        "docker:1600",
+        "docker:789"
+      ],
+      "top_5_scores": [
+        0.6856,
+        0.6856,
+        0.6856,
+        0.5944,
+        0.5944
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.13012668333070054,
+      "mrr": 0.14285714285714285
+    },
+    {
+      "id": "proc_kill_pid_force",
+      "language": "en",
+      "query": "terminate an unresponsive process forcefully by sending SIGKILL with PID",
+      "relevant_commands": [
+        "kill"
+      ],
+      "relevant_aliases": 6,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "processmanagement:1170",
+        "docker:774",
+        "processmanagement:2296",
+        "processmanagement:2233",
+        "processmanagement:2186"
+      ],
+      "top_5_scores": [
+        0.6594,
+        0.6259,
+        0.6222,
+        0.6222,
+        0.6222
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.4103915680233244,
+      "mrr": 1.0
+    },
+    {
+      "id": "proc_pkill_by_name",
+      "language": "en",
+      "query": "terminate all running process instances matching a given program name",
+      "relevant_commands": [
+        "pkill",
+        "killall"
+      ],
+      "relevant_aliases": 51,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "processmanagement:1175",
+        "c programming:126",
+        "processmanagement:2290",
+        "processmanagement:2227",
+        "processmanagement:2180"
+      ],
+      "top_5_scores": [
+        0.7974,
+        0.6527,
+        0.6084,
+        0.6084,
+        0.6084
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5087403079104241,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5384109300791362,
+      "mrr": 1.0
+    },
+    {
+      "id": "proc_find_pid_by_name",
+      "language": "en",
+      "query": "lookup the process ID of a running program by its command name",
+      "relevant_commands": [
+        "pgrep"
+      ],
+      "relevant_aliases": 33,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "c programming:126",
+        "processmanagement:1123",
+        "processmanagement:2290",
+        "processmanagement:2227",
+        "processmanagement:2180"
+      ],
+      "top_5_scores": [
+        0.8858,
+        0.6502,
+        0.6475,
+        0.6475,
+        0.6475
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.15457433957839825,
+      "mrr": 0.2
+    },
+    {
+      "id": "proc_set_priority_nice",
+      "language": "en",
+      "query": "start a CPU intensive job with lower scheduling priority to avoid lag",
+      "relevant_commands": [
+        "nice"
+      ],
+      "relevant_aliases": 4,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "processmanagement:1757",
+        "processmanagement:2532",
+        "processmanagement:1086",
+        "processmanagement:2530",
+        "docker:1067"
+      ],
+      "top_5_scores": [
+        0.7037,
+        0.6538,
+        0.6364,
+        0.604,
+        0.5728
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3903800499921017,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3903800499921017,
+      "mrr": 1.0
+    },
+    {
+      "id": "proc_list_shell_jobs",
+      "language": "en",
+      "query": "display active background and suspended jobs in current shell session",
+      "relevant_commands": [
+        "jobs"
+      ],
+      "relevant_aliases": 4,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "processmanagement:1125",
+        "processmanagement:1126",
+        "networking:1281",
+        "misc:1034",
+        "processmanagement:206"
+      ],
+      "top_5_scores": [
+        0.806,
+        0.6783,
+        0.5417,
+        0.5369,
+        0.5159
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.8048099750039491,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.8048099750039491,
+      "mrr": 1.0
+    },
+    {
+      "id": "proc_resume_background",
+      "language": "en",
+      "query": "resume a suspended process execution in background",
+      "relevant_commands": [
+        "bg"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 7,
+      "top_5": [
+        "docker:1051",
+        "docker:732",
+        "docker:456",
+        "docker:2306",
+        "processmanagement:3197"
+      ],
+      "top_5_scores": [
+        0.5442,
+        0.5442,
+        0.5442,
+        0.5359,
+        0.5323
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.20438239758848611,
+      "mrr": 0.14285714285714285
+    },
+    {
+      "id": "proc_bring_foreground",
+      "language": "en",
+      "query": "bring a background running task back to interactive foreground",
+      "relevant_commands": [
+        "fg"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 7,
+      "top_5": [
+        "docker:1051",
+        "docker:732",
+        "docker:456",
+        "usergroup:1693",
+        "usergroup:1641"
+      ],
+      "top_5_scores": [
+        0.5705,
+        0.5705,
+        0.5705,
+        0.5496,
+        0.5496
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.20438239758848611,
+      "mrr": 0.14285714285714285
+    },
+    {
+      "id": "proc_service_status",
+      "language": "en",
+      "query": "check if a systemd background service is running and inspect recent logs",
+      "relevant_commands": [
+        "systemctl"
+      ],
+      "relevant_aliases": 58,
+      "first_relevant_rank": 10,
+      "top_5": [
+        "networking:570",
+        "shellprogramming:759",
+        "misc:2560",
+        "keyboard:1026",
+        "usergroup:1610"
+      ],
+      "top_5_scores": [
+        0.6697,
+        0.6268,
+        0.5669,
+        0.548,
+        0.546
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.06362078819895171,
+      "mrr": 0.1
+    },
+    {
+      "id": "proc_service_restart",
+      "language": "en",
+      "query": "restart a system daemon service using systemctl",
+      "relevant_commands": [
+        "systemctl"
+      ],
+      "relevant_aliases": 58,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "processmanagement:436",
+        "processmanagement:2798",
+        "misc:2560",
+        "misc:2558",
+        "shellprogramming:2269"
+      ],
+      "top_5_scores": [
+        0.6487,
+        0.6477,
+        0.6173,
+        0.5957,
+        0.5901
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.36005461457723403,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.37326895379685443,
+      "mrr": 0.5
+    },
+    {
+      "id": "proc_nohup_background",
+      "language": "en",
+      "query": "run a long command that keeps running after logging out of terminal",
+      "relevant_commands": [
+        "nohup"
+      ],
+      "relevant_aliases": 3,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "shellprogramming:775",
+        "misc:3246",
+        "processmanagement:2967",
+        "misc:3242",
+        "processmanagement:1825"
+      ],
+      "top_5_scores": [
+        0.5926,
+        0.5645,
+        0.5495,
+        0.5345,
+        0.5328
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.18154179253735267,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.18154179253735267,
+      "mrr": 0.2
+    },
+    {
+      "id": "proc_run_with_timeout",
+      "language": "en",
+      "query": "run a command with an automatic execution time cutoff limit",
+      "relevant_commands": [
+        "timeout"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "processmanagement:2965",
+        "processmanagement:3245",
+        "docker:979",
+        "docker:973",
+        "docker:970"
+      ],
+      "top_5_scores": [
+        0.9099,
+        0.6759,
+        0.6522,
+        0.6442,
+        0.6442
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.4022028819289506,
+      "mrr": 1.0
+    },
+    {
+      "id": "proc_periodic_watch",
+      "language": "en",
+      "query": "periodically execute a command every two seconds and watch differences",
+      "relevant_commands": [
+        "watch"
+      ],
+      "relevant_aliases": 15,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "processmanagement:3245",
+        "docker:1888",
+        "shellprogramming:2458",
+        "processmanagement:3201",
+        "networking:959"
+      ],
+      "top_5_scores": [
+        0.6073,
+        0.567,
+        0.5628,
+        0.5611,
+        0.5586
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3156484524795145,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2710884709729799,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "proc_terminate_all_browser",
+      "language": "en",
+      "query": "kill all running processes of a browser by process name",
+      "relevant_commands": [
+        "killall",
+        "pkill"
+      ],
+      "relevant_aliases": 51,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "processmanagement:1175",
+        "usergroup:667",
+        "security:837",
+        "processmanagement:2284",
+        "processmanagement:2221"
+      ],
+      "top_5_scores": [
+        0.7208,
+        0.5825,
+        0.5413,
+        0.5187,
+        0.5187
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.8687949224876582,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.7034066032439746,
+      "mrr": 1.0
+    },
+    {
+      "id": "proc_service_enable",
+      "language": "en",
+      "query": "configure a system service to start automatically during boot",
+      "relevant_commands": [
+        "systemctl"
+      ],
+      "relevant_aliases": 58,
+      "first_relevant_rank": 15,
+      "top_5": [
+        "processmanagement:2849",
+        "shellprogramming:2258",
+        "misc:2581",
+        "networking:229",
+        "docker:578"
+      ],
+      "top_5_scores": [
+        0.7069,
+        0.7033,
+        0.6577,
+        0.6265,
+        0.6107
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.06666666666666667
+    },
+    {
+      "id": "net_download_file_url",
+      "language": "en",
+      "query": "download a remote file from a web server URL",
+      "relevant_commands": [
+        "curl",
+        "wget"
+      ],
+      "relevant_aliases": 405,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "git:136",
+        "filesystem:1741",
+        "processmanagement:392",
+        "filesystem:482",
+        "textprocessing:1450"
+      ],
+      "top_5_scores": [
+        0.6665,
+        0.6517,
+        0.584,
+        0.5754,
+        0.5725
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3156484524795145,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5559026721867443,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "net_http_post_json",
+      "language": "en",
+      "query": "send an HTTP POST request with JSON payload and custom headers",
+      "relevant_commands": [
+        "curl"
+      ],
+      "relevant_aliases": 253,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "misc:2845",
+        "textprocessing:398",
+        "filesystem:2035",
+        "filesystem:2019",
+        "filesystem:1345"
+      ],
+      "top_5_scores": [
+        0.5972,
+        0.5577,
+        0.5021,
+        0.5021,
+        0.5021
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.28165758790969186,
+      "mrr": 0.5
+    },
+    {
+      "id": "net_test_latency_ping",
+      "language": "en",
+      "query": "test network connectivity and packet round trip time to a remote server",
+      "relevant_commands": [
+        "ping"
+      ],
+      "relevant_aliases": 39,
+      "first_relevant_rank": 8,
+      "top_5": [
+        "networking:1260",
+        "docker:2509",
+        "processmanagement:1193",
+        "shellprogramming:2175",
+        "processmanagement:1747"
+      ],
+      "top_5_scores": [
+        0.4934,
+        0.4916,
+        0.4885,
+        0.4801,
+        0.48
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.06943122193677727,
+      "mrr": 0.125
+    },
+    {
+      "id": "net_secure_shell_login",
+      "language": "en",
+      "query": "connect securely to remote host using SSH key authentication",
+      "relevant_commands": [
+        "ssh"
+      ],
+      "relevant_aliases": 39,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "networking:1378",
+        "filesystem:2729",
+        "docker:12",
+        "hardwaremanagement:1480",
+        "hardwaremanagement:1453"
+      ],
+      "top_5_scores": [
+        0.5966,
+        0.5868,
+        0.5811,
+        0.5786,
+        0.5786
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.14606834984270645,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.09478836436955078,
+      "mrr": 0.25
+    },
+    {
+      "id": "net_copy_file_remote_scp",
+      "language": "en",
+      "query": "copy a file securely over encrypted network to remote server destination",
+      "relevant_commands": [
+        "scp"
+      ],
+      "relevant_aliases": 23,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2618",
+        "security:1686",
+        "docker:12",
+        "filesystem:2619",
+        "misc:2434"
+      ],
+      "top_5_scores": [
+        0.6514,
+        0.5386,
+        0.4861,
+        0.476,
+        0.4526
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.48522855511632257,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.37850091886658266,
+      "mrr": 1.0
+    },
+    {
+      "id": "net_show_ip_interfaces",
+      "language": "en",
+      "query": "display network interfaces IP addresses and link status",
+      "relevant_commands": [
+        "ip"
+      ],
+      "relevant_aliases": 22,
+      "first_relevant_rank": 11,
+      "top_5": [
+        "networking:903",
+        "networking:1262",
+        "docker:1486",
+        "networking:2306",
+        "networking:911"
+      ],
+      "top_5_scores": [
+        0.6567,
+        0.6186,
+        0.599,
+        0.5987,
+        0.5987
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.09090909090909091
+    },
+    {
+      "id": "net_show_listening_ports",
+      "language": "en",
+      "query": "show all listening TCP sockets and the processes bound to them",
+      "relevant_commands": [
+        "ss"
+      ],
+      "relevant_aliases": 19,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "networking:1372",
+        "processmanagement:2723",
+        "usergroup:1471",
+        "processmanagement:755",
+        "security:1726"
+      ],
+      "top_5_scores": [
+        0.7606,
+        0.748,
+        0.7278,
+        0.6888,
+        0.6629
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.8539316501572937,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.6325414799409712,
+      "mrr": 1.0
+    },
+    {
+      "id": "net_test_port_connectivity",
+      "language": "en",
+      "query": "check if a specific remote TCP port is open and accepting connections",
+      "relevant_commands": [
+        "nc",
+        "telnet"
+      ],
+      "relevant_aliases": 25,
+      "first_relevant_rank": 7,
+      "top_5": [
+        "keyboard:1177",
+        "docker:1243",
+        "networking:1372",
+        "networking:1263",
+        "misc:1657"
+      ],
+      "top_5_scores": [
+        0.6457,
+        0.5545,
+        0.5353,
+        0.5139,
+        0.5103
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.07336392209936005,
+      "mrr": 0.14285714285714285
+    },
+    {
+      "id": "net_query_dns_records",
+      "language": "en",
+      "query": "perform DNS lookup to find MX and A records for domain",
+      "relevant_commands": [
+        "dig",
+        "host"
+      ],
+      "relevant_aliases": 34,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "networking:510",
+        "networking:253",
+        "networking:292",
+        "networking:240",
+        "networking:857"
+      ],
+      "top_5_scores": [
+        0.619,
+        0.619,
+        0.5909,
+        0.5758,
+        0.5334
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5531464700081437,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3589542101716347,
+      "mrr": 1.0
+    },
+    {
+      "id": "net_trace_route_hops",
+      "language": "en",
+      "query": "trace the network gateway hops and packet latency towards destination IP",
+      "relevant_commands": [
+        "traceroute"
+      ],
+      "relevant_aliases": 33,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "networking:1534",
+        "networking:1521",
+        "networking:1505",
+        "networking:1489",
+        "networking:1473"
+      ],
+      "top_5_scores": [
+        0.6423,
+        0.6423,
+        0.6423,
+        0.6423,
+        0.6423
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.08514311764162098,
+      "mrr": 0.2
+    },
+    {
+      "id": "net_show_routing_table",
+      "language": "en",
+      "query": "display the kernel IP routing table and default gateway",
+      "relevant_commands": [
+        "ip"
+      ],
+      "relevant_aliases": 22,
+      "first_relevant_rank": null,
+      "top_5": [
+        "networking:1534",
+        "networking:1521",
+        "networking:1505",
+        "networking:1489",
+        "networking:1473"
+      ],
+      "top_5_scores": [
+        0.6406,
+        0.6406,
+        0.6406,
+        0.6406,
+        0.6406
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "net_download_recursive_website",
+      "language": "en",
+      "query": "recursively mirror and download an entire website hierarchy",
+      "relevant_commands": [
+        "wget"
+      ],
+      "relevant_aliases": 152,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "shellprogramming:2474",
+        "filesystem:3131",
+        "filesystem:383",
+        "hardwaremanagement:1679",
+        "filesystem:3127"
+      ],
+      "top_5_scores": [
+        0.6102,
+        0.5346,
+        0.4895,
+        0.4743,
+        0.4684
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.830419897363192,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.6867151830982591,
+      "mrr": 1.0
+    },
+    {
+      "id": "net_resume_broken_download",
+      "language": "en",
+      "query": "resume an interrupted large file download without restarting from zero",
+      "relevant_commands": [
+        "curl",
+        "wget"
+      ],
+      "relevant_aliases": 405,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "processmanagement:3212",
+        "security:1964",
+        "shellprogramming:2470",
+        "filesystem:3101",
+        "filesystem:3103"
+      ],
+      "top_5_scores": [
+        0.6234,
+        0.5932,
+        0.5438,
+        0.5434,
+        0.5133
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.7917267193679839,
+      "mrr": 1.0
+    },
+    {
+      "id": "net_http_response_headers_only",
+      "language": "en",
+      "query": "fetch and inspect only the HTTP status and response headers of a web endpoint",
+      "relevant_commands": [
+        "curl"
+      ],
+      "relevant_aliases": 253,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "keyboard:540",
+        "security:1954",
+        "keyboard:1172",
+        "misc:388",
+        "filesystem:464"
+      ],
+      "top_5_scores": [
+        0.6441,
+        0.5739,
+        0.5537,
+        0.5372,
+        0.4965
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.27727342735504823,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2532954041105318,
+      "mrr": 0.25
+    },
+    {
+      "id": "net_listen_arbitrary_port",
+      "language": "en",
+      "query": "listen on an arbitrary local TCP port to receive inbound data stream",
+      "relevant_commands": [
+        "nc"
+      ],
+      "relevant_aliases": 7,
+      "first_relevant_rank": null,
+      "top_5": [
+        "keyboard:1177",
+        "docker:1243",
+        "docker:1334",
+        "shellprogramming:2270",
+        "processmanagement:2871"
+      ],
+      "top_5_scores": [
+        0.6543,
+        0.6372,
+        0.6231,
+        0.6102,
+        0.5463
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "net_reverse_ip_lookup",
+      "language": "en",
+      "query": "find the hostname corresponding to a public IP address",
+      "relevant_commands": [
+        "host",
+        "dig"
+      ],
+      "relevant_aliases": 34,
+      "first_relevant_rank": null,
+      "top_5": [
+        "networking:896",
+        "networking:1555",
+        "networking:2305",
+        "networking:910",
+        "networking:526"
+      ],
+      "top_5_scores": [
+        0.6876,
+        0.6258,
+        0.616,
+        0.616,
+        0.616
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sec_make_executable",
+      "language": "en",
+      "query": "grant execute permissions to a shell script file",
+      "relevant_commands": [
+        "chmod"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": null,
+      "top_5": [
+        "misc:2381",
+        "security:1670",
+        "processmanagement:2655",
+        "security:1719",
+        "processmanagement:3326"
+      ],
+      "top_5_scores": [
+        0.6351,
+        0.6054,
+        0.5709,
+        0.5415,
+        0.5363
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sec_chmod_read_write_owner",
+      "language": "en",
+      "query": "restrict file permissions so only file owner can read and write",
+      "relevant_commands": [
+        "chmod"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:3405",
+        "textprocessing:2073",
+        "textprocessing:1658",
+        "textprocessing:609",
+        "security:1677"
+      ],
+      "top_5_scores": [
+        0.6067,
+        0.5639,
+        0.5639,
+        0.5639,
+        0.5595
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sec_change_file_owner",
+      "language": "en",
+      "query": "change the owner user and group of a file",
+      "relevant_commands": [
+        "chown"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:291",
+        "usergroup:160",
+        "filesystem:654",
+        "usergroup:162",
+        "filesystem:2888"
+      ],
+      "top_5_scores": [
+        0.9472,
+        0.7374,
+        0.6787,
+        0.6743,
+        0.6366
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.48522855511632257,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3843113526044082,
+      "mrr": 1.0
+    },
+    {
+      "id": "sec_chown_recursive",
+      "language": "en",
+      "query": "change owner of directory and all its files recursively",
+      "relevant_commands": [
+        "chown"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "filesystem:290",
+        "filesystem:291",
+        "filesystem:949",
+        "filesystem:270",
+        "filesystem:2581"
+      ],
+      "top_5_scores": [
+        0.7339,
+        0.6789,
+        0.6306,
+        0.6277,
+        0.588
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.13886244387355454,
+      "mrr": 0.5
+    },
+    {
+      "id": "sec_change_group_only",
+      "language": "en",
+      "query": "change only the group ownership of a folder",
+      "relevant_commands": [
+        "chgrp",
+        "chown"
+      ],
+      "relevant_aliases": 27,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:291",
+        "usergroup:160",
+        "usergroup:641",
+        "usergroup:162",
+        "filesystem:654"
+      ],
+      "top_5_scores": [
+        0.731,
+        0.704,
+        0.6394,
+        0.6212,
+        0.5881
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6992148198508501,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.4537425745411855,
+      "mrr": 1.0
+    },
+    {
+      "id": "sec_run_as_superuser",
+      "language": "en",
+      "query": "execute administrative maintenance command with root privileges",
+      "relevant_commands": [
+        "sudo"
+      ],
+      "relevant_aliases": 33,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "usergroup:541",
+        "processmanagement:2772",
+        "processmanagement:2766",
+        "docker:461",
+        "docker:2374"
+      ],
+      "top_5_scores": [
+        0.5516,
+        0.5212,
+        0.5212,
+        0.4983,
+        0.4929
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.16958010263680806,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.11004588314904008,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "sec_switch_root_session",
+      "language": "en",
+      "query": "switch current terminal session to superuser root shell",
+      "relevant_commands": [
+        "su",
+        "sudo"
+      ],
+      "relevant_aliases": 47,
+      "first_relevant_rank": 12,
+      "top_5": [
+        "shellprogramming:254",
+        "shellprogramming:2838",
+        "shellprogramming:2512",
+        "misc:2418",
+        "shellprogramming:256"
+      ],
+      "top_5_scores": [
+        0.5894,
+        0.5659,
+        0.5659,
+        0.5297,
+        0.5258
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.08333333333333333
+    },
+    {
+      "id": "sec_change_user_password",
+      "language": "en",
+      "query": "update and change password for existing user account",
+      "relevant_commands": [
+        "passwd"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "usergroup:1091",
+        "usergroup:148",
+        "usergroup:401",
+        "usergroup:8",
+        "usergroup:6"
+      ],
+      "top_5_scores": [
+        0.7959,
+        0.6217,
+        0.5718,
+        0.507,
+        0.507
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3557772116892465,
+      "mrr": 1.0
+    },
+    {
+      "id": "sec_set_umask_permissions",
+      "language": "en",
+      "query": "configure default file creation permissions mask in current session",
+      "relevant_commands": [
+        "umask"
+      ],
+      "relevant_aliases": 3,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "misc:2774",
+        "security:227",
+        "security:1155",
+        "misc:1004",
+        "security:1677"
+      ],
+      "top_5_scores": [
+        0.6886,
+        0.5915,
+        0.5737,
+        0.5563,
+        0.5244
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.46927872602275644,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.46927872602275644,
+      "mrr": 1.0
+    },
+    {
+      "id": "sec_gpg_encrypt_symmetric",
+      "language": "en",
+      "query": "encrypt a confidential file using symmetric AES passphrase encryption",
+      "relevant_commands": [
+        "gpg"
+      ],
+      "relevant_aliases": 203,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "usergroup:1701",
+        "usergroup:1700",
+        "usergroup:1174",
+        "keyboard:1419",
+        "usergroup:562"
+      ],
+      "top_5_scores": [
+        0.5864,
+        0.5864,
+        0.5786,
+        0.5768,
+        0.5335
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.1635413866202963,
+      "mrr": 0.2
+    },
+    {
+      "id": "sec_gpg_decrypt_file",
+      "language": "en",
+      "query": "decrypt a gpg encrypted file and output plain text",
+      "relevant_commands": [
+        "gpg"
+      ],
+      "relevant_aliases": 203,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:1047",
+        "filesystem:1077",
+        "processmanagement:950",
+        "processmanagement:929",
+        "cryptography:219"
+      ],
+      "top_5_scores": [
+        0.6514,
+        0.6117,
+        0.5512,
+        0.5373,
+        0.5184
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.4703652827859579,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.44988737637276544,
+      "mrr": 1.0
+    },
+    {
+      "id": "sec_gpg_generate_keypair",
+      "language": "en",
+      "query": "generate a new public and private PGP keypair for signing",
+      "relevant_commands": [
+        "gpg"
+      ],
+      "relevant_aliases": 203,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "networking:460",
+        "usergroup:589",
+        "processmanagement:522",
+        "misc:493",
+        "security:351"
+      ],
+      "top_5_scores": [
+        0.5715,
+        0.5325,
+        0.518,
+        0.4979,
+        0.4926
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2934556883974402,
+      "mrr": 1.0
+    },
+    {
+      "id": "sec_openssl_self_signed_cert",
+      "language": "en",
+      "query": "generate a self-signed SSL TLS certificate and private key",
+      "relevant_commands": [
+        "openssl"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1435",
+        "docker:1392",
+        "docker:1349",
+        "security:1971",
+        "docker:1324"
+      ],
+      "top_5_scores": [
+        0.5808,
+        0.5808,
+        0.5808,
+        0.5729,
+        0.5006
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sec_openssl_inspect_x509",
+      "language": "en",
+      "query": "inspect validity dates and issuer details of an x509 certificate file",
+      "relevant_commands": [
+        "openssl"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": null,
+      "top_5": [
+        "cryptography:242",
+        "misc:2513",
+        "networking:266",
+        "docker:1432",
+        "docker:1404"
+      ],
+      "top_5_scores": [
+        0.582,
+        0.5426,
+        0.5238,
+        0.5021,
+        0.5021
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sec_openssl_random_bytes",
+      "language": "en",
+      "query": "generate a cryptographically secure random base64 encoded token",
+      "relevant_commands": [
+        "openssl"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": null,
+      "top_5": [
+        "networking:132",
+        "security:164",
+        "cryptography:44",
+        "usergroup:1586",
+        "security:162"
+      ],
+      "top_5_scores": [
+        0.5583,
+        0.5121,
+        0.4771,
+        0.4627,
+        0.4542
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sec_run_as_specific_user",
+      "language": "en",
+      "query": "execute a specific command under identity of another non root user",
+      "relevant_commands": [
+        "sudo",
+        "su"
+      ],
+      "relevant_aliases": 47,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "usergroup:1252",
+        "usergroup:1514",
+        "usergroup:1499",
+        "docker:461",
+        "security:486"
+      ],
+      "top_5_scores": [
+        0.8768,
+        0.7527,
+        0.7527,
+        0.7278,
+        0.6783
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.16958010263680806,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.17947710508581735,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "text_grep_recursive_string",
+      "language": "en",
+      "query": "recursively search all files in folder for occurrences of specific string",
+      "relevant_commands": [
+        "grep"
+      ],
+      "relevant_aliases": 48,
+      "first_relevant_rank": 13,
+      "top_5": [
+        "filesystem:877",
+        "textprocessing:436",
+        "misc:27",
+        "misc:16",
+        "misc:5"
+      ],
+      "top_5_scores": [
+        0.6959,
+        0.6323,
+        0.6106,
+        0.6106,
+        0.6106
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.07692307692307693
+    },
+    {
+      "id": "text_grep_case_insensitive_line_num",
+      "language": "en",
+      "query": "search case-insensitively for keyword and print matching line numbers",
+      "relevant_commands": [
+        "grep"
+      ],
+      "relevant_aliases": 48,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "docker:1005",
+        "docker:1031",
+        "textprocessing:2327",
+        "textprocessing:909",
+        "textprocessing:739"
+      ],
+      "top_5_scores": [
+        0.5782,
+        0.5646,
+        0.5593,
+        0.5593,
+        0.5593
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.14606834984270645,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.09478836436955078,
+      "mrr": 0.25
+    },
+    {
+      "id": "text_grep_invert_match",
+      "language": "en",
+      "query": "filter file and display all lines that do not match given pattern",
+      "relevant_commands": [
+        "grep"
+      ],
+      "relevant_aliases": 48,
+      "first_relevant_rank": 7,
+      "top_5": [
+        "filesystem:681",
+        "filesystem:547",
+        "textprocessing:386",
+        "textprocessing:1100",
+        "git:19"
+      ],
+      "top_5_scores": [
+        0.6996,
+        0.6996,
+        0.6983,
+        0.696,
+        0.6918
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.07336392209936005,
+      "mrr": 0.14285714285714285
+    },
+    {
+      "id": "text_sed_replace_inline",
+      "language": "en",
+      "query": "find and replace text string directly inside file in place without backup",
+      "relevant_commands": [
+        "sed"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "security:1315",
+        "textprocessing:2411",
+        "textprocessing:449",
+        "textprocessing:787",
+        "security:898"
+      ],
+      "top_5_scores": [
+        0.5822,
+        0.5213,
+        0.5171,
+        0.472,
+        0.4689
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.21726071285222986,
+      "mrr": 0.5
+    },
+    {
+      "id": "text_awk_print_column",
+      "language": "en",
+      "query": "print the second and third columns from tab or space delimited text",
+      "relevant_commands": [
+        "awk"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": null,
+      "top_5": [
+        "textprocessing:2897",
+        "textprocessing:244",
+        "textprocessing:2404",
+        "textprocessing:433",
+        "textprocessing:429"
+      ],
+      "top_5_scores": [
+        0.645,
+        0.6343,
+        0.621,
+        0.621,
+        0.6105
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "text_cat_concatenate_files",
+      "language": "en",
+      "query": "concatenate and display contents of multiple files sequentially",
+      "relevant_commands": [
+        "cat"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:236",
+        "textprocessing:2595",
+        "textprocessing:1910",
+        "textprocessing:1003",
+        "filesystem:415"
+      ],
+      "top_5_scores": [
+        0.7777,
+        0.7754,
+        0.5949,
+        0.5745,
+        0.5587
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22009176629808017,
+      "mrr": 1.0
+    },
+    {
+      "id": "text_head_first_n_lines",
+      "language": "en",
+      "query": "display the first 25 lines of a text document",
+      "relevant_commands": [
+        "head"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "textprocessing:2600",
+        "textprocessing:1143",
+        "textprocessing:1140",
+        "textprocessing:1005",
+        "textprocessing:2219"
+      ],
+      "top_5_scores": [
+        0.5683,
+        0.5492,
+        0.5492,
+        0.5472,
+        0.5462
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.14606834984270645,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.10893649261775588,
+      "mrr": 0.25
+    },
+    {
+      "id": "text_tail_follow_log",
+      "language": "en",
+      "query": "monitor file and print new lines continuously as they are appended",
+      "relevant_commands": [
+        "tail"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": null,
+      "top_5": [
+        "security:1918",
+        "docker:473",
+        "docker:1996",
+        "docker:750",
+        "filesystem:2707"
+      ],
+      "top_5_scores": [
+        0.6028,
+        0.5249,
+        0.5249,
+        0.5249,
+        0.51
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "text_sort_numerically",
+      "language": "en",
+      "query": "sort numbers in a text column in ascending numerical order",
+      "relevant_commands": [
+        "sort"
+      ],
+      "relevant_aliases": 34,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "textprocessing:2246",
+        "textprocessing:2243",
+        "textprocessing:2496",
+        "textprocessing:3047",
+        "textprocessing:1702"
+      ],
+      "top_5_scores": [
+        0.6398,
+        0.6398,
+        0.6274,
+        0.5853,
+        0.5853
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.16958010263680806,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.17630010660342912,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "text_sort_reverse_unique",
+      "language": "en",
+      "query": "sort file contents in reverse order and eliminate all duplicate lines",
+      "relevant_commands": [
+        "sort",
+        "uniq"
+      ],
+      "relevant_aliases": 47,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "textprocessing:2483",
+        "textprocessing:2724",
+        "textprocessing:260",
+        "textprocessing:2728",
+        "textprocessing:423"
+      ],
+      "top_5_scores": [
+        0.683,
+        0.6275,
+        0.6235,
+        0.5854,
+        0.5703
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6992148198508501,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5271064966405455,
+      "mrr": 1.0
+    },
+    {
+      "id": "text_uniq_count_duplicates",
+      "language": "en",
+      "query": "count the number of occurrences of each repeated adjacent line",
+      "relevant_commands": [
+        "uniq"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "textprocessing:2876",
+        "textprocessing:2723",
+        "textprocessing:1609",
+        "textprocessing:2724",
+        "textprocessing:1693"
+      ],
+      "top_5_scores": [
+        0.6698,
+        0.6594,
+        0.6074,
+        0.5889,
+        0.5833
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.36005461457723403,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.37326895379685443,
+      "mrr": 0.5
+    },
+    {
+      "id": "text_cut_by_delimiter",
+      "language": "en",
+      "query": "extract specific fields from comma separated values using delimiter",
+      "relevant_commands": [
+        "cut"
+      ],
+      "relevant_aliases": 11,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "shellprogramming:2289",
+        "shellprogramming:293",
+        "textprocessing:406",
+        "textprocessing:1814",
+        "c programming:135"
+      ],
+      "top_5_scores": [
+        0.5794,
+        0.529,
+        0.5248,
+        0.5083,
+        0.4671
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.16958010263680806,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.11004588314904008,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "text_wc_count_lines",
+      "language": "en",
+      "query": "count the total number of lines words and characters in file",
+      "relevant_commands": [
+        "wc"
+      ],
+      "relevant_aliases": 9,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "textprocessing:1686",
+        "textprocessing:2873",
+        "textprocessing:2876",
+        "textprocessing:2878",
+        "keyboard:1178"
+      ],
+      "top_5_scores": [
+        0.7003,
+        0.6988,
+        0.69,
+        0.6696,
+        0.6608
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.5307212739772434,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6608397947263839,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5287324048297514,
+      "mrr": 0.5
+    },
+    {
+      "id": "text_diff_unified_compare",
+      "language": "en",
+      "query": "compare two configuration files and output unified difference patch",
+      "relevant_commands": [
+        "diff"
+      ],
+      "relevant_aliases": 52,
+      "first_relevant_rank": 8,
+      "top_5": [
+        "textprocessing:1922",
+        "networking:1067",
+        "security:1292",
+        "textprocessing:1923",
+        "textprocessing:1914"
+      ],
+      "top_5_scores": [
+        0.6677,
+        0.6137,
+        0.6115,
+        0.6043,
+        0.5762
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.06943122193677727,
+      "mrr": 0.125
+    },
+    {
+      "id": "text_tr_uppercase_to_lower",
+      "language": "en",
+      "query": "translate all uppercase characters to lowercase in standard input stream",
+      "relevant_commands": [
+        "tr"
+      ],
+      "relevant_aliases": 7,
+      "first_relevant_rank": null,
+      "top_5": [
+        "textprocessing:2487",
+        "processmanagement:2652",
+        "textprocessing:1035",
+        "shellprogramming:1969",
+        "textprocessing:1037"
+      ],
+      "top_5_scores": [
+        0.7028,
+        0.5857,
+        0.5671,
+        0.5605,
+        0.5418
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "text_tee_stdout_and_file",
+      "language": "en",
+      "query": "duplicate stream output to both terminal console and log file simultaneously",
+      "relevant_commands": [
+        "tee"
+      ],
+      "relevant_aliases": 6,
+      "first_relevant_rank": null,
+      "top_5": [
+        "security:1666",
+        "shellprogramming:51",
+        "shellprogramming:8",
+        "shellprogramming:5",
+        "shellprogramming:2"
+      ],
+      "top_5_scores": [
+        0.7025,
+        0.5933,
+        0.5846,
+        0.5846,
+        0.5846
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "hw_disk_free_human",
+      "language": "en",
+      "query": "check available and used filesystem disk space in human readable gigabytes",
+      "relevant_commands": [
+        "df"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:529",
+        "filesystem:666",
+        "docker:2191",
+        "filesystem:2073",
+        "docker:1579"
+      ],
+      "top_5_scores": [
+        0.6694,
+        0.6378,
+        0.5814,
+        0.553,
+        0.5459
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22009176629808017,
+      "mrr": 1.0
+    },
+    {
+      "id": "hw_directory_disk_usage",
+      "language": "en",
+      "query": "calculate and summarize total disk space used by a directory tree",
+      "relevant_commands": [
+        "du"
+      ],
+      "relevant_aliases": 27,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "filesystem:529",
+        "filesystem:678",
+        "filesystem:666",
+        "hardwaremanagement:1577",
+        "docker:1579"
+      ],
+      "top_5_scores": [
+        0.6464,
+        0.6207,
+        0.606,
+        0.5762,
+        0.5728
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.5307212739772434,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.38356636737133565,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.31833954895937183,
+      "mrr": 0.5
+    },
+    {
+      "id": "hw_find_heaviest_folders",
+      "language": "en",
+      "query": "estimate which directories consume the most disk space under folder",
+      "relevant_commands": [
+        "du"
+      ],
+      "relevant_aliases": 27,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "filesystem:529",
+        "filesystem:666",
+        "filesystem:678",
+        "docker:2191",
+        "docker:1579"
+      ],
+      "top_5_scores": [
+        0.6641,
+        0.6504,
+        0.6018,
+        0.5666,
+        0.5342
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.5307212739772434,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.38356636737133565,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2489083270225946,
+      "mrr": 0.5
+    },
+    {
+      "id": "hw_free_memory_ram",
+      "language": "en",
+      "query": "display amount of total free used and available system RAM memory",
+      "relevant_commands": [
+        "free"
+      ],
+      "relevant_aliases": 15,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "processmanagement:754",
+        "hardwaremanagement:1783",
+        "hardwaremanagement:1770",
+        "hardwaremanagement:761",
+        "hardwaremanagement:745"
+      ],
+      "top_5_scores": [
+        0.9458,
+        0.7668,
+        0.7668,
+        0.7668,
+        0.7668
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.4354747455750672,
+      "mrr": 1.0
+    },
+    {
+      "id": "hw_list_block_devices",
+      "language": "en",
+      "query": "list storage drives partitions and mount points in hierarchical tree",
+      "relevant_commands": [
+        "lsblk"
+      ],
+      "relevant_aliases": 33,
+      "first_relevant_rank": 10,
+      "top_5": [
+        "hardwaremanagement:1188",
+        "shellprogramming:675",
+        "hardwaremanagement:1538",
+        "hardwaremanagement:1528",
+        "hardwaremanagement:1185"
+      ],
+      "top_5_scores": [
+        0.6551,
+        0.6177,
+        0.577,
+        0.577,
+        0.5632
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.06362078819895171,
+      "mrr": 0.1
+    },
+    {
+      "id": "hw_cpu_hardware_specs",
+      "language": "en",
+      "query": "display CPU architecture model cores clock speed and virtualization flags",
+      "relevant_commands": [
+        "lscpu"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "hardwaremanagement:887",
+        "hardwaremanagement:1069",
+        "hardwaremanagement:892",
+        "hardwaremanagement:1067",
+        "hardwaremanagement:1070"
+      ],
+      "top_5_scores": [
+        0.7549,
+        0.6725,
+        0.6584,
+        0.6555,
+        0.6549
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5087403079104241,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.39375843764607193,
+      "mrr": 1.0
+    },
+    {
+      "id": "hw_system_kernel_version",
+      "language": "en",
+      "query": "show Linux kernel release architecture and OS version",
+      "relevant_commands": [
+        "uname"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "keyboard:1127",
+        "keyboard:1126",
+        "keyboard:457",
+        "networking:273",
+        "networking:1347"
+      ],
+      "top_5_scores": [
+        0.7758,
+        0.7582,
+        0.6875,
+        0.6766,
+        0.6687
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5531464700081437,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.42257499837058643,
+      "mrr": 1.0
+    },
+    {
+      "id": "hw_kernel_ring_dmesg",
+      "language": "en",
+      "query": "print kernel buffer messages to diagnose hardware boot device errors",
+      "relevant_commands": [
+        "dmesg"
+      ],
+      "relevant_aliases": 33,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "keyboard:164",
+        "keyboard:953",
+        "cryptography:110",
+        "misc:2440",
+        "misc:425"
+      ],
+      "top_5_scores": [
+        0.7348,
+        0.6098,
+        0.6016,
+        0.6004,
+        0.5941
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3499667779514209,
+      "mrr": 1.0
+    },
+    {
+      "id": "hw_system_uptime_load",
+      "language": "en",
+      "query": "display system running duration time and average processor load",
+      "relevant_commands": [
+        "uptime"
+      ],
+      "relevant_aliases": 6,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "security:2205",
+        "security:1780",
+        "keyboard:1084",
+        "processmanagement:3155",
+        "processmanagement:2931"
+      ],
+      "top_5_scores": [
+        0.678,
+        0.5756,
+        0.5697,
+        0.5012,
+        0.4991
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.14606834984270645,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.13032376591037062,
+      "mrr": 0.25
+    },
+    {
+      "id": "hw_vmstat_virtual_memory",
+      "language": "en",
+      "query": "monitor virtual memory paging disk IO operations and CPU context switches",
+      "relevant_commands": [
+        "vmstat"
+      ],
+      "relevant_aliases": 15,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "networking:1579",
+        "misc:1699",
+        "misc:1683",
+        "misc:1060",
+        "misc:2577"
+      ],
+      "top_5_scores": [
+        0.682,
+        0.5762,
+        0.5762,
+        0.5762,
+        0.5607
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2934556883974402,
+      "mrr": 1.0
+    },
+    {
+      "id": "hw_mount_filesystem",
+      "language": "en",
+      "query": "mount storage partition or ISO disk image to target directory",
+      "relevant_commands": [
+        "mount"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": null,
+      "top_5": [
+        "hardwaremanagement:558",
+        "docker:1654",
+        "docker:843",
+        "docker:693",
+        "docker:1952"
+      ],
+      "top_5_scores": [
+        0.6575,
+        0.5825,
+        0.5825,
+        0.5825,
+        0.5649
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "hw_unmount_safely",
+      "language": "en",
+      "query": "unmount filesystem device safely before detaching storage",
+      "relevant_commands": [
+        "umount"
+      ],
+      "relevant_aliases": 19,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "keyboard:1125",
+        "networking:1554",
+        "processmanagement:3092",
+        "hardwaremanagement:365",
+        "hardwaremanagement:1539"
+      ],
+      "top_5_scores": [
+        0.6223,
+        0.6197,
+        0.6075,
+        0.5964,
+        0.5775
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.7227265726449519,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.6780494608112012,
+      "mrr": 1.0
+    },
+    {
+      "id": "hw_check_swap_usage",
+      "language": "en",
+      "query": "check how much swap memory space is active and occupied",
+      "relevant_commands": [
+        "free"
+      ],
+      "relevant_aliases": 15,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "processmanagement:754",
+        "hardwaremanagement:527",
+        "hardwaremanagement:525",
+        "hardwaremanagement:921",
+        "keyboard:1168"
+      ],
+      "top_5_scores": [
+        0.5876,
+        0.5482,
+        0.5412,
+        0.5364,
+        0.5281
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.7227265726449519,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.4690000933206748,
+      "mrr": 1.0
+    },
+    {
+      "id": "hw_dmesg_usb_hardware",
+      "language": "en",
+      "query": "inspect recent kernel log events when plugging in new USB device",
+      "relevant_commands": [
+        "dmesg"
+      ],
+      "relevant_aliases": 33,
+      "first_relevant_rank": null,
+      "top_5": [
+        "misc:2821",
+        "keyboard:1122",
+        "misc:480",
+        "docker:2065",
+        "docker:1947"
+      ],
+      "top_5_scores": [
+        0.6301,
+        0.6155,
+        0.5637,
+        0.5633,
+        0.5633
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "hw_inode_disk_usage",
+      "language": "en",
+      "query": "check free and total inode counts on mounted filesystems",
+      "relevant_commands": [
+        "df"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "hardwaremanagement:323",
+        "keyboard:237",
+        "usergroup:420",
+        "textprocessing:776",
+        "hardwaremanagement:256"
+      ],
+      "top_5_scores": [
+        0.6268,
+        0.6159,
+        0.6145,
+        0.6145,
+        0.5677
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.08514311764162098,
+      "mrr": 0.2
+    },
+    {
+      "id": "hw_lsblk_fs_types",
+      "language": "en",
+      "query": "list disk storage partitions along with their filesystem UUIDs and types",
+      "relevant_commands": [
+        "lsblk"
+      ],
+      "relevant_aliases": 33,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "hardwaremanagement:1188",
+        "hardwaremanagement:1189",
+        "hardwaremanagement:1185",
+        "hardwaremanagement:1191",
+        "hardwaremanagement:886"
+      ],
+      "top_5_scores": [
+        0.7184,
+        0.7051,
+        0.6732,
+        0.6509,
+        0.6235
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.08514311764162098,
+      "mrr": 0.2
+    },
+    {
+      "id": "usr_show_current_username",
+      "language": "en",
+      "query": "display the username of the currently logged-in account",
+      "relevant_commands": [
+        "whoami"
+      ],
+      "relevant_aliases": 3,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "misc:1373",
+        "usergroup:1766",
+        "usergroup:1769",
+        "usergroup:1767",
+        "usergroup:1771"
+      ],
+      "top_5_scores": [
+        0.8272,
+        0.6871,
+        0.6579,
+        0.6559,
+        0.6545
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.18154179253735267,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.18154179253735267,
+      "mrr": 0.2
+    },
+    {
+      "id": "usr_print_uid_gid",
+      "language": "en",
+      "query": "print user ID and group IDs for the current active account",
+      "relevant_commands": [
+        "id"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "usergroup:629",
+        "usergroup:594",
+        "usergroup:631",
+        "usergroup:469",
+        "usergroup:632"
+      ],
+      "top_5_scores": [
+        0.8157,
+        0.7628,
+        0.7575,
+        0.7236,
+        0.7209
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.639945385422766,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.4936790360674166,
+      "mrr": 1.0
+    },
+    {
+      "id": "usr_list_user_groups",
+      "language": "en",
+      "query": "list all group names that a specific user belongs to",
+      "relevant_commands": [
+        "groups",
+        "id"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "usergroup:594",
+        "usergroup:469",
+        "usergroup:631",
+        "usergroup:1742",
+        "usergroup:866"
+      ],
+      "top_5_scores": [
+        0.8412,
+        0.7218,
+        0.688,
+        0.6475,
+        0.6475
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5087403079104241,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5391870169376466,
+      "mrr": 1.0
+    },
+    {
+      "id": "usr_inspect_logged_in_users",
+      "language": "en",
+      "query": "show who is currently logged into system and what command they are executing",
+      "relevant_commands": [
+        "w"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "usergroup:1746",
+        "usergroup:1766",
+        "usergroup:1769",
+        "usergroup:1767",
+        "processmanagement:3233"
+      ],
+      "top_5_scores": [
+        0.8236,
+        0.7614,
+        0.7098,
+        0.6932,
+        0.6694
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.6131471927654584,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6131471927654584,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.6131471927654584,
+      "mrr": 1.0
+    },
+    {
+      "id": "usr_login_reboot_history",
+      "language": "en",
+      "query": "display history of previous user login sessions and system reboots",
+      "relevant_commands": [
+        "last"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "usergroup:882",
+        "usergroup:678",
+        "usergroup:676",
+        "processmanagement:3233",
+        "usergroup:1746"
+      ],
+      "top_5_scores": [
+        0.6706,
+        0.6122,
+        0.6122,
+        0.5816,
+        0.5655
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.16958010263680806,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.17630010660342912,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "usr_lock_account_password",
+      "language": "en",
+      "query": "lock user account by disabling their password authentication",
+      "relevant_commands": [
+        "passwd"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "usergroup:1097",
+        "usergroup:1365",
+        "usergroup:1093",
+        "usergroup:401",
+        "processmanagement:671"
+      ],
+      "top_5_scores": [
+        0.6949,
+        0.6282,
+        0.5923,
+        0.5799,
+        0.5783
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5087403079104241,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.4729327934832575,
+      "mrr": 1.0
+    },
+    {
+      "id": "usr_expire_password_force_change",
+      "language": "en",
+      "query": "force a user to change their password upon their next login attempt",
+      "relevant_commands": [
+        "passwd"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "usergroup:401",
+        "usergroup:149",
+        "usergroup:1094",
+        "usergroup:152",
+        "usergroup:1098"
+      ],
+      "top_5_scores": [
+        0.7452,
+        0.7263,
+        0.6452,
+        0.6175,
+        0.5896
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.30078518014914984,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.39842793454336184,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "usr_switch_user_login_shell",
+      "language": "en",
+      "query": "switch to another user account loading its full profile environment",
+      "relevant_commands": [
+        "su"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": null,
+      "top_5": [
+        "networking:1234",
+        "networking:802",
+        "misc:770",
+        "misc:735",
+        "usergroup:165"
+      ],
+      "top_5_scores": [
+        0.5518,
+        0.5518,
+        0.5103,
+        0.5103,
+        0.5023
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "usr_print_current_date_utc",
+      "language": "en",
+      "query": "display current system date and time formatted in UTC timezone",
+      "relevant_commands": [
+        "date"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "processmanagement:424",
+        "misc:413",
+        "misc:415",
+        "processmanagement:1090",
+        "processmanagement:2961"
+      ],
+      "top_5_scores": [
+        0.6857,
+        0.6676,
+        0.6227,
+        0.5873,
+        0.5783
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.7227265726449519,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5384313152574521,
+      "mrr": 1.0
+    },
+    {
+      "id": "usr_print_unix_epoch_timestamp",
+      "language": "en",
+      "query": "print current system time as unix epoch timestamp in seconds",
+      "relevant_commands": [
+        "date"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "processmanagement:3236",
+        "misc:413",
+        "processmanagement:2926",
+        "misc:415",
+        "processmanagement:2263"
+      ],
+      "top_5_scores": [
+        0.6269,
+        0.5943,
+        0.5913,
+        0.5869,
+        0.5835
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.36005461457723403,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.23365080824310533,
+      "mrr": 0.5
+    },
+    {
+      "id": "usr_check_effective_uid",
+      "language": "en",
+      "query": "check effective user ID and real user ID during setuid execution",
+      "relevant_commands": [
+        "id"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": 6,
+      "top_5": [
+        "security:1683",
+        "usergroup:1705",
+        "usergroup:1704",
+        "security:1816",
+        "security:38"
+      ],
+      "top_5_scores": [
+        0.6204,
+        0.6026,
+        0.5633,
+        0.5632,
+        0.5632
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.15176219107803537,
+      "mrr": 0.16666666666666666
+    },
+    {
+      "id": "usr_view_last_shutdown",
+      "language": "en",
+      "query": "inspect timestamps of system shutdowns and boot cycles",
+      "relevant_commands": [
+        "last"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "processmanagement:3231",
+        "processmanagement:1210",
+        "processmanagement:1205",
+        "docker:960",
+        "processmanagement:3236"
+      ],
+      "top_5_scores": [
+        0.6843,
+        0.6718,
+        0.6718,
+        0.5753,
+        0.5634
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.16958010263680806,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.11004588314904008,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "usr_check_who_idle_time",
+      "language": "en",
+      "query": "view active user terminal sessions and their idle time",
+      "relevant_commands": [
+        "w"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "usergroup:1746",
+        "shellprogramming:1078",
+        "shellprogramming:1076",
+        "usergroup:1766",
+        "usergroup:882"
+      ],
+      "top_5_scores": [
+        0.5919,
+        0.4994,
+        0.4994,
+        0.4934,
+        0.491
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.6131471927654584,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6131471927654584,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.6131471927654584,
+      "mrr": 1.0
+    },
+    {
+      "id": "usr_check_user_status_passwd",
+      "language": "en",
+      "query": "inspect account password status expiration and encryption algorithm",
+      "relevant_commands": [
+        "passwd"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "usergroup:877",
+        "usergroup:1101",
+        "usergroup:398",
+        "usergroup:1241",
+        "usergroup:1239"
+      ],
+      "top_5_scores": [
+        0.6763,
+        0.6539,
+        0.6075,
+        0.5352,
+        0.5352
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.13886244387355454,
+      "mrr": 0.5
+    },
+    {
+      "id": "usr_format_custom_date",
+      "language": "en",
+      "query": "format and print current date as year month day with custom separators",
+      "relevant_commands": [
+        "date"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "misc:2143",
+        "misc:2397",
+        "misc:414",
+        "misc:3356",
+        "docker:1093"
+      ],
+      "top_5_scores": [
+        0.5782,
+        0.5465,
+        0.5064,
+        0.4982,
+        0.4887
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.16958010263680806,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.17630010660342912,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "usr_verify_root_privilege",
+      "language": "en",
+      "query": "check whether current session has effective user ID of zero",
+      "relevant_commands": [
+        "id",
+        "whoami"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "networking:826",
+        "usergroup:632",
+        "cryptography:453",
+        "misc:716",
+        "processmanagement:1640"
+      ],
+      "top_5_scores": [
+        0.5609,
+        0.5284,
+        0.5158,
+        0.509,
+        0.4833
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.13886244387355454,
+      "mrr": 0.5
+    },
+    {
+      "id": "sh_sha256_checksum",
+      "language": "en",
+      "query": "calculate SHA-256 cryptographic checksum hash of downloaded file",
+      "relevant_commands": [
+        "sha256sum"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "textprocessing:2464",
+        "security:1691",
+        "cryptography:76",
+        "cryptography:505",
+        "cryptography:511"
+      ],
+      "top_5_scores": [
+        0.6746,
+        0.6636,
+        0.6519,
+        0.6428,
+        0.6128
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.36005461457723403,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.23365080824310533,
+      "mrr": 0.5
+    },
+    {
+      "id": "sh_verify_sha256_file",
+      "language": "en",
+      "query": "verify integrity of files against a formatted sha256 checksums list",
+      "relevant_commands": [
+        "sha256sum"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "cryptography:76",
+        "cryptography:510",
+        "cryptography:508",
+        "cryptography:506",
+        "cryptography:504"
+      ],
+      "top_5_scores": [
+        0.7903,
+        0.7089,
+        0.7089,
+        0.7089,
+        0.7089
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.14606834984270645,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.09478836436955078,
+      "mrr": 0.25
+    },
+    {
+      "id": "sh_md5_hash_file",
+      "language": "en",
+      "query": "compute MD5 message digest hash of a file",
+      "relevant_commands": [
+        "md5sum"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "cryptography:378",
+        "cryptography:376",
+        "security:1089",
+        "security:1088",
+        "cryptography:505"
+      ],
+      "top_5_scores": [
+        0.8389,
+        0.8389,
+        0.7025,
+        0.7025,
+        0.6802
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.36005461457723403,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.23365080824310533,
+      "mrr": 0.5
+    },
+    {
+      "id": "sh_export_env_variable",
+      "language": "en",
+      "query": "set and export an environment variable for all child subshell processes",
+      "relevant_commands": [
+        "export"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 15,
+      "top_5": [
+        "processmanagement:3436",
+        "docker:2371",
+        "docker:2331",
+        "docker:1928",
+        "docker:1622"
+      ],
+      "top_5_scores": [
+        0.6432,
+        0.5712,
+        0.5712,
+        0.5712,
+        0.5712
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.06666666666666667
+    },
+    {
+      "id": "sh_create_command_alias",
+      "language": "en",
+      "query": "create a persistent shortcut alias for a frequently executed command",
+      "relevant_commands": [
+        "alias"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "usergroup:396",
+        "misc:69",
+        "misc:57",
+        "processmanagement:3142",
+        "processmanagement:50"
+      ],
+      "top_5_scores": [
+        0.5384,
+        0.4789,
+        0.4719,
+        0.4705,
+        0.4535
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.38685280723454163,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.38685280723454163,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.38685280723454163,
+      "mrr": 0.5
+    },
+    {
+      "id": "sh_list_active_aliases",
+      "language": "en",
+      "query": "display all aliases currently defined in the active shell",
+      "relevant_commands": [
+        "alias"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "misc:68",
+        "misc:69",
+        "hardwaremanagement:544",
+        "misc:449",
+        "misc:1291"
+      ],
+      "top_5_scores": [
+        0.7353,
+        0.6448,
+        0.563,
+        0.5217,
+        0.5055
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "sh_print_all_env_vars",
+      "language": "en",
+      "query": "print all exported environment variables in the current shell",
+      "relevant_commands": [
+        "env"
+      ],
+      "relevant_aliases": 4,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:2372",
+        "docker:2334",
+        "docker:1929",
+        "docker:1623",
+        "docker:812"
+      ],
+      "top_5_scores": [
+        0.671,
+        0.671,
+        0.671,
+        0.671,
+        0.671
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sh_locate_executable_which",
+      "language": "en",
+      "query": "locate the exact binary file path of an executable in system PATH",
+      "relevant_commands": [
+        "which"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": null,
+      "top_5": [
+        "misc:325",
+        "misc:318",
+        "filesystem:1579",
+        "misc:1098",
+        "filesystem:328"
+      ],
+      "top_5_scores": [
+        0.6367,
+        0.6367,
+        0.5933,
+        0.5914,
+        0.5809
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sh_view_command_history",
+      "language": "en",
+      "query": "display numbered list of previously executed shell commands",
+      "relevant_commands": [
+        "history"
+      ],
+      "relevant_aliases": 1,
+      "first_relevant_rank": null,
+      "top_5": [
+        "processmanagement:51",
+        "hardwaremanagement:1570",
+        "hardwaremanagement:410",
+        "processmanagement:428",
+        "networking:2170"
+      ],
+      "top_5_scores": [
+        0.5963,
+        0.5767,
+        0.5518,
+        0.5385,
+        0.5158
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sh_print_echo_variable",
+      "language": "en",
+      "query": "print a text string or expand an environment variable to terminal output",
+      "relevant_commands": [
+        "echo"
+      ],
+      "relevant_aliases": 3,
+      "first_relevant_rank": null,
+      "top_5": [
+        "c programming:37",
+        "misc:1095",
+        "shellprogramming:579",
+        "docker:2372",
+        "docker:2334"
+      ],
+      "top_5_scores": [
+        0.6717,
+        0.6184,
+        0.6041,
+        0.5932,
+        0.5932
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sh_openssl_digest_hash",
+      "language": "en",
+      "query": "calculate message digest using openssl crypto algorithm",
+      "relevant_commands": [
+        "openssl"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": 8,
+      "top_5": [
+        "cryptography:505",
+        "cryptography:509",
+        "cryptography:501",
+        "cryptography:503",
+        "cryptography:507"
+      ],
+      "top_5_scores": [
+        0.6415,
+        0.6051,
+        0.5998,
+        0.5959,
+        0.5712
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.06943122193677727,
+      "mrr": 0.125
+    },
+    {
+      "id": "sh_gpg_verify_signature",
+      "language": "en",
+      "query": "verify authenticity and digital signature of software archive with GPG",
+      "relevant_commands": [
+        "gpg"
+      ],
+      "relevant_aliases": 203,
+      "first_relevant_rank": null,
+      "top_5": [
+        "git:72",
+        "git:71",
+        "usergroup:589",
+        "textprocessing:1087",
+        "docker:1884"
+      ],
+      "top_5_scores": [
+        0.691,
+        0.65,
+        0.6236,
+        0.5813,
+        0.5655
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sh_gpg_sign_detached",
+      "language": "en",
+      "query": "create a detached cryptographic signature file for distribution",
+      "relevant_commands": [
+        "gpg"
+      ],
+      "relevant_aliases": 203,
+      "first_relevant_rank": null,
+      "top_5": [
+        "security:694",
+        "security:688",
+        "security:685",
+        "security:679",
+        "shellprogramming:568"
+      ],
+      "top_5_scores": [
+        0.6301,
+        0.6301,
+        0.6301,
+        0.6301,
+        0.5717
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "sh_verify_md5_file",
+      "language": "en",
+      "query": "check file integrity by reading MD5 sums from text file",
+      "relevant_commands": [
+        "md5sum"
+      ],
+      "relevant_aliases": 12,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "cryptography:76",
+        "security:1089",
+        "security:1088",
+        "cryptography:378",
+        "cryptography:376"
+      ],
+      "top_5_scores": [
+        0.7081,
+        0.6841,
+        0.6841,
+        0.6769,
+        0.6769
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.30078518014914984,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.19518900079066107,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "sh_run_clean_environment",
+      "language": "en",
+      "query": "execute a command in a completely empty and clean environment without exported variables",
+      "relevant_commands": [
+        "env"
+      ],
+      "relevant_aliases": 4,
+      "first_relevant_rank": 14,
+      "top_5": [
+        "processmanagement:2909",
+        "docker:2366",
+        "docker:2355",
+        "docker:2326",
+        "docker:2041"
+      ],
+      "top_5_scores": [
+        0.5609,
+        0.5589,
+        0.5589,
+        0.5589,
+        0.5427
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.07142857142857142
+    },
+    {
+      "id": "sh_append_to_path",
+      "language": "en",
+      "query": "append custom directory to system PATH environment variable",
+      "relevant_commands": [
+        "export"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:1143",
+        "docker:2040",
+        "misc:2484",
+        "misc:268",
+        "filesystem:2004"
+      ],
+      "top_5_scores": [
+        0.6619,
+        0.6474,
+        0.6346,
+        0.6131,
+        0.5915
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    }
+  ]
+}

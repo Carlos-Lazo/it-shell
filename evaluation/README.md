@@ -20,7 +20,7 @@ También deben existir estos artefactos locales:
 
 - Índice FAISS: `dataset_builder/indexer/artifacts/all-mpnet-base-v2/index.faiss`
 - Aliases FAISS: `dataset_builder/indexer/artifacts/all-mpnet-base-v2/aliases.npy`
-- Índice BM25: `dataset_builder/indexer/artifacts/bm25_indexs/`
+- Índice BM25: `dataset_builder/indexer/artifacts/bm25_indexs_v2/`
 - Corpus: `dataset_builder/corpus/`
 
 Si es necesario reconstruir el índice BM25, desde la raíz:
@@ -29,7 +29,7 @@ Si es necesario reconstruir el índice BM25, desde la raíz:
 dataset_builder/indexer/.venv/bin/python \
   dataset_builder/indexer/bm25_indexer.py \
   --corpus dataset_builder/corpus \
-  --output dataset_builder/indexer/artifacts/bm25_indexs \
+  --output dataset_builder/indexer/artifacts/bm25_indexs_v2 \
   --threads 4
 ```
 
@@ -38,6 +38,34 @@ deben estar ya disponibles en la caché local. `HF_HUB_OFFLINE=1` y
 `TRANSFORMERS_OFFLINE=1` evitan descargas durante el benchmark.
 
 ## Baseline FAISS y rerankers
+
+El benchmark oficial de retrieval usa `evaluation/evaluation_v2_queries.json`
+(160 consultas). Antes de medir, validá y registrá el snapshot de corpus,
+vectores, aliases e índice:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. \
+dataset_builder/indexer/.venv/bin/python evaluation/create_snapshot_manifest.py
+```
+
+El manifiesto `evaluation/retrieval_snapshot_v2.json` incluye conteos, hashes
+SHA-256 y comprobaciones de alineación de FAISS, BM25 y corpus. Ejecutá el
+baseline FAISS sobre el mismo snapshot:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 PYTHONPATH=. \
+dataset_builder/indexer/.venv/bin/python evaluation/evaluate_retrieval.py
+```
+
+La recuperación de candidatos usa Top-15 para que el baseline FAISS y BM25
+compartan el mismo corte antes de calcular métricas hasta @10. El resultado
+queda en `evaluation/retrieval_benchmark_v2.json`. Para generar el tablero HTML:
+
+```bash
+dataset_builder/indexer/.venv/bin/python evaluation/visualize_metrics.py
+```
+
+El archivo generado es `evaluation/retrieval_metrics_v2.html`.
 
 `evaluate_reranker.py` evalúa a la vez FAISS puro y un Cross-Encoder sobre los
 candidatos iniciales. El JSON generado contiene `baseline_summary` y
@@ -94,11 +122,11 @@ dataset_builder/indexer/.venv/bin/python evaluation/evaluate_bm25_hybrid.py \
   --mode bm25 \
   --queries evaluation/evaluation_v2_queries.json \
   --corpus dataset_builder/corpus \
-  --bm25-index dataset_builder/indexer/artifacts/bm25_indexs \
+  --bm25-index dataset_builder/indexer/artifacts/bm25_indexs_v2 \
   --faiss-index dataset_builder/indexer/artifacts/all-mpnet-base-v2/index.faiss \
   --aliases dataset_builder/indexer/artifacts/all-mpnet-base-v2/aliases.npy \
   --initial-top-k 15 \
-  --output evaluation/bm25_benchmark_top15.json
+  --output evaluation/bm25_benchmark_v2_top15.json
 ```
 
 ## Búsqueda híbrida BM25 + dense
@@ -114,11 +142,11 @@ dataset_builder/indexer/.venv/bin/python evaluation/evaluate_bm25_hybrid.py \
   --alpha 0.5 \
   --queries evaluation/evaluation_v2_queries.json \
   --corpus dataset_builder/corpus \
-  --bm25-index dataset_builder/indexer/artifacts/bm25_indexs \
+  --bm25-index dataset_builder/indexer/artifacts/bm25_indexs_v2 \
   --faiss-index dataset_builder/indexer/artifacts/all-mpnet-base-v2/index.faiss \
   --aliases dataset_builder/indexer/artifacts/all-mpnet-base-v2/aliases.npy \
   --initial-top-k 15 \
-  --output evaluation/hybrid_benchmark_top15.json
+  --output evaluation/hybrid_benchmark_v2_top15.json
 ```
 
 ## Generación del informe comparativo completo
@@ -141,13 +169,10 @@ Los resultados quedan en:
 - `evaluation/comparative_all.json`: métricas, latencias y marca de comparabilidad.
 - `evaluation/conclusiones_fase_2.txt`: interpretación y decisión para cerrar la fase.
 
-El comparador verifica que las configuraciones cubran el mismo número de
-consultas y contrasta el baseline interno de cada experimento con el baseline
-FAISS de referencia. Tener 160 consultas no garantiza por sí solo una
-comparación equivalente: los BM25 e híbrido actuales quedan marcados como no
-comparables porque sus JSON declaran un baseline interno distinto. Para una
-comparación controlada, repetir esas evaluaciones usando el mismo snapshot de
-corpus, índices, aliases y relevancias.
+Todas las evaluaciones nuevas deben usar `evaluation/evaluation_v2_queries.json`
+y un snapshot registrado. Los artefactos BM25 e híbrido existentes son
+resultados históricos; para compararlos con el baseline actual, repetí sus
+evaluaciones con el mismo snapshot de corpus, índices, aliases y relevancias.
 
 ## Pruebas funcionales de índices
 

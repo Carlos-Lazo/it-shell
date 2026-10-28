@@ -1,67 +1,235 @@
 {
+  "benchmark": {
+    "queries": 160,
+    "metrics": [
+      "command_hit@1",
+      "command_hit@3",
+      "command_hit@5",
+      "command_hit@10",
+      "mrr",
+      "ndcg@1",
+      "ndcg@3",
+      "ndcg@5",
+      "ndcg@10"
+    ]
+  },
   "configs": [
     {
-      "name": "Baseline (FAISS MPNet)",
-      "model": "FAISS + MPNet",
-      "summary": {
-        "queries": 160,
-        "command_hit@1": 0.4062,
-        "ndcg@1": 0.4062,
-        "command_hit@3": 0.5813,
-        "ndcg@3": 0.3626,
-        "command_hit@5": 0.6562,
-        "ndcg@5": 0.3494,
-        "command_hit@10": 0.7875,
-        "ndcg@10": 0.3332,
-        "mrr": 0.5211
-      },
-      "latency_ms": {
-        "retrieval_per_query": 77.73,
-        "rerank_per_query": 978.18,
-        "total_per_query": 1055.92
-      }
-    },
-    {
-      "name": "Reranker DistilRoBERTa‑base",
-      "model": "stsb‑distilroberta‑base",
+      "name": "Baseline (FAISS MPNet)",
+      "model": "all-mpnet-base-v2",
+      "source_file": "retrieval_benchmark_v2.json",
+      "summary_source": "metrics",
       "summary": {
         "queries": 160,
         "command_hit@1": 0.4125,
+        "command_hit@3": 0.6188,
+        "command_hit@5": 0.7125,
+        "command_hit@10": 0.8,
+        "mrr": 0.5377,
         "ndcg@1": 0.4125,
-        "command_hit@3": 0.5938,
-        "ndcg@3": 0.371,
-        "command_hit@5": 0.6375,
-        "ndcg@5": 0.344,
-        "command_hit@10": 0.7937,
-        "ndcg@10": 0.3293,
-        "mrr": 0.5291
+        "ndcg@3": 0.3758,
+        "ndcg@5": 0.3613,
+        "ndcg@10": 0.3345
       },
       "latency_ms": {
-        "retrieval_per_query": 65.89,
-        "rerank_per_query": 2955.2,
-        "total_per_query": 3021.09
-      }
+        "method_per_query": 62.47,
+        "retrieval_per_query": 62.47,
+        "experiment_per_query": 0.0,
+        "reported_total_per_query": 62.47
+      },
+      "provenance": {
+        "snapshot_manifest_sha256": "e0f9ecade6604be52bf6541adcedc7d35c97363547f749750e69ef1b193259c4",
+        "queries_sha256": "af89d5efa1b713fba05f945141eb34ce5e42edda58dbafae7af54a255df0336a",
+        "faiss_index_sha256": "fa2cf360f5d4b0b8e7313455c222b6faddcaaf42c25d384deb75107c0afe7567",
+        "aliases_sha256": "bfbf9faad2464416bb9a475ca3c8e36dfaf5bf25b3ed9249c28aa171f74b74dc"
+      },
+      "comparable_with_reference": true,
+      "comparison_note": "Snapshot y baseline FAISS coinciden"
     },
     {
-      "name": "Reranker BGE‑base",
-      "model": "bge‑reranker‑base",
+      "name": "Reranker MiniLM-L6",
+      "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+      "source_file": "reranker_benchmark_v2_top15.json",
+      "summary_source": "reranked_summary",
+      "summary": {
+        "queries": 160,
+        "command_hit@1": 0.4062,
+        "command_hit@3": 0.5813,
+        "command_hit@5": 0.6562,
+        "command_hit@10": 0.7875,
+        "mrr": 0.5211,
+        "ndcg@1": 0.4062,
+        "ndcg@3": 0.3626,
+        "ndcg@5": 0.3494,
+        "ndcg@10": 0.3332
+      },
+      "latency_ms": {
+        "method_per_query": 1055.92,
+        "retrieval_per_query": 77.73,
+        "experiment_per_query": 978.18,
+        "reported_total_per_query": 1055.92
+      },
+      "provenance": null,
+      "comparable_with_reference": false,
+      "comparison_note": "Snapshot no verificado o baseline FAISS distinto: requiere reejecución"
+    },
+    {
+      "name": "Reranker DistilRoBERTa",
+      "model": "cross-encoder/stsb-distilroberta-base",
+      "source_file": "reranker_benchmark_distilroberta.json",
+      "summary_source": "reranked_summary",
+      "summary": {
+        "queries": 160,
+        "command_hit@1": 0.4125,
+        "command_hit@3": 0.5938,
+        "command_hit@5": 0.6375,
+        "command_hit@10": 0.7937,
+        "mrr": 0.5291,
+        "ndcg@1": 0.4125,
+        "ndcg@3": 0.371,
+        "ndcg@5": 0.344,
+        "ndcg@10": 0.3293
+      },
+      "latency_ms": {
+        "method_per_query": 3021.09,
+        "retrieval_per_query": 65.89,
+        "experiment_per_query": 2955.2,
+        "reported_total_per_query": 3021.09
+      },
+      "provenance": null,
+      "comparable_with_reference": false,
+      "comparison_note": "Snapshot no verificado o baseline FAISS distinto: requiere reejecución"
+    },
+    {
+      "name": "Reranker BGE-base",
+      "model": "BAAI/bge-reranker-base",
+      "source_file": "reranker_benchmark_bge.json",
+      "summary_source": "reranked_summary",
       "summary": {
         "queries": 160,
         "command_hit@1": 0.3625,
-        "ndcg@1": 0.3625,
         "command_hit@3": 0.5312,
-        "ndcg@3": 0.3212,
         "command_hit@5": 0.6562,
-        "ndcg@5": 0.3215,
         "command_hit@10": 0.7937,
-        "ndcg@10": 0.314,
-        "mrr": 0.4861
+        "mrr": 0.4861,
+        "ndcg@1": 0.3625,
+        "ndcg@3": 0.3212,
+        "ndcg@5": 0.3215,
+        "ndcg@10": 0.314
       },
       "latency_ms": {
+        "method_per_query": 6044.9,
         "retrieval_per_query": 44.03,
-        "rerank_per_query": 6000.87,
-        "total_per_query": 6044.9
-      }
+        "experiment_per_query": 6000.87,
+        "reported_total_per_query": 6044.9
+      },
+      "provenance": null,
+      "comparable_with_reference": false,
+      "comparison_note": "Snapshot no verificado o baseline FAISS distinto: requiere reejecución"
+    },
+    {
+      "name": "BM25 (Pyserini/Lucene)",
+      "model": "BM25",
+      "source_file": "bm25_benchmark_v2_top15.json",
+      "summary_source": "reranked_summary",
+      "summary": {
+        "queries": 160,
+        "command_hit@1": 0.2125,
+        "command_hit@3": 0.2625,
+        "command_hit@5": 0.2687,
+        "command_hit@10": 0.3125,
+        "mrr": 0.2408,
+        "ndcg@1": 0.2125,
+        "ndcg@3": 0.2103,
+        "ndcg@5": 0.2056,
+        "ndcg@10": 0.2048
+      },
+      "latency_ms": {
+        "method_per_query": 3.99,
+        "retrieval_per_query": 65.41,
+        "experiment_per_query": 3.99,
+        "reported_total_per_query": 69.41
+      },
+      "provenance": {
+        "snapshot_manifest_sha256": "e0f9ecade6604be52bf6541adcedc7d35c97363547f749750e69ef1b193259c4",
+        "queries_sha256": "af89d5efa1b713fba05f945141eb34ce5e42edda58dbafae7af54a255df0336a",
+        "faiss_index_sha256": "fa2cf360f5d4b0b8e7313455c222b6faddcaaf42c25d384deb75107c0afe7567",
+        "aliases_sha256": "bfbf9faad2464416bb9a475ca3c8e36dfaf5bf25b3ed9249c28aa171f74b74dc",
+        "bm25_index_files": {
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fdm": "7b3408b96208e0c6f1171808fefd361e106126d8ade54050f9cebbf6afbe651b",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fdt": "8a6e6e036f6044075a212bc6323d4a8649aa85e2967afa852547ed1be1d8813d",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fdx": "8c53969fa8b7b07eed060acf75a396baae9e05f664bc5c7a6281701c7862330a",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fnm": "52922cec1df60155ddb9afc36a9ff0928695ab5087fa459454b7f8d37543ff00",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.nvd": "a607acb0be78ddffb73ac4387552d7fea6fcc87c54468a0a38d519a970c547a8",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.nvm": "5387b970bf51a8861f0d7919658c9baf6819101411420bf78e67360519f75b0d",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.si": "1559ff84ecbe1020ea5d858395716f675f6f356a5a644ad2aec8e7fa9a4a07c5",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.tvd": "c5ee2ea780813d87881fc32e14c37310392b3d4ea2db10b7dca492c4ec093a47",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.tvm": "bffd6b7cdac6bbcab1cab1ccaa2551a2c920a6b5ac0f0f1673e3814589cebd3e",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.tvx": "27822131cd97997ed13bbb03c04901384379898a343e8aef69bece90156b7b8e",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.doc": "7abe4008e2ca44cc9b347304c11ca3b3d7d26c3541fa3ca40d510891ea665bde",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.dvd": "7213d8cad8ad91beda2b42a8023e6e2389e3b4b409f30c5559e90e88e8ba337c",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.dvm": "c7fea76cb7667cfc85e65ea575bcdc56900592ea83274c75401a35be882d87e0",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.tim": "3fe2fc7992290cc44b646c93aac503ecab16f70ad724f27c9c76ca16962344a4",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.tip": "027e921fb943a03df1b7562a65c845463c648023f9a9b8c73bf0a05b93831a34",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.tmd": "9e7e9af26ce21bf9e8fd3ee53c775ef1319c74a102bf6c486ea5f56a5268c376",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/segments_1": "b853c2cb832f68b72d5500e48186120c6f15ebc4a190d192c6afd3864a5d9f44"
+        },
+        "bm25_index_directory": "dataset_builder/indexer/artifacts/bm25_indexs_v2"
+      },
+      "comparable_with_reference": true,
+      "comparison_note": "Snapshot y baseline FAISS coinciden"
+    },
+    {
+      "name": "Híbrido BM25 + Dense (α=0.5)",
+      "model": "BM25 + all-mpnet-base-v2 (α=0.5)",
+      "source_file": "hybrid_benchmark_v2_top15.json",
+      "summary_source": "reranked_summary",
+      "summary": {
+        "queries": 160,
+        "command_hit@1": 0.3125,
+        "command_hit@3": 0.5375,
+        "command_hit@5": 0.6125,
+        "command_hit@10": 0.7312,
+        "mrr": 0.4518,
+        "ndcg@1": 0.3125,
+        "ndcg@3": 0.3142,
+        "ndcg@5": 0.3073,
+        "ndcg@10": 0.2976
+      },
+      "latency_ms": {
+        "method_per_query": 172.76,
+        "retrieval_per_query": 56.97,
+        "experiment_per_query": 172.76,
+        "reported_total_per_query": 229.73
+      },
+      "provenance": {
+        "snapshot_manifest_sha256": "e0f9ecade6604be52bf6541adcedc7d35c97363547f749750e69ef1b193259c4",
+        "queries_sha256": "af89d5efa1b713fba05f945141eb34ce5e42edda58dbafae7af54a255df0336a",
+        "faiss_index_sha256": "fa2cf360f5d4b0b8e7313455c222b6faddcaaf42c25d384deb75107c0afe7567",
+        "aliases_sha256": "bfbf9faad2464416bb9a475ca3c8e36dfaf5bf25b3ed9249c28aa171f74b74dc",
+        "bm25_index_files": {
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fdm": "7b3408b96208e0c6f1171808fefd361e106126d8ade54050f9cebbf6afbe651b",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fdt": "8a6e6e036f6044075a212bc6323d4a8649aa85e2967afa852547ed1be1d8813d",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fdx": "8c53969fa8b7b07eed060acf75a396baae9e05f664bc5c7a6281701c7862330a",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fnm": "52922cec1df60155ddb9afc36a9ff0928695ab5087fa459454b7f8d37543ff00",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.nvd": "a607acb0be78ddffb73ac4387552d7fea6fcc87c54468a0a38d519a970c547a8",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.nvm": "5387b970bf51a8861f0d7919658c9baf6819101411420bf78e67360519f75b0d",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.si": "1559ff84ecbe1020ea5d858395716f675f6f356a5a644ad2aec8e7fa9a4a07c5",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.tvd": "c5ee2ea780813d87881fc32e14c37310392b3d4ea2db10b7dca492c4ec093a47",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.tvm": "bffd6b7cdac6bbcab1cab1ccaa2551a2c920a6b5ac0f0f1673e3814589cebd3e",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.tvx": "27822131cd97997ed13bbb03c04901384379898a343e8aef69bece90156b7b8e",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.doc": "7abe4008e2ca44cc9b347304c11ca3b3d7d26c3541fa3ca40d510891ea665bde",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.dvd": "7213d8cad8ad91beda2b42a8023e6e2389e3b4b409f30c5559e90e88e8ba337c",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.dvm": "c7fea76cb7667cfc85e65ea575bcdc56900592ea83274c75401a35be882d87e0",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.tim": "3fe2fc7992290cc44b646c93aac503ecab16f70ad724f27c9c76ca16962344a4",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.tip": "027e921fb943a03df1b7562a65c845463c648023f9a9b8c73bf0a05b93831a34",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.tmd": "9e7e9af26ce21bf9e8fd3ee53c775ef1319c74a102bf6c486ea5f56a5268c376",
+          "dataset_builder/indexer/artifacts/bm25_indexs_v2/segments_1": "b853c2cb832f68b72d5500e48186120c6f15ebc4a190d192c6afd3864a5d9f44"
+        },
+        "bm25_index_directory": "dataset_builder/indexer/artifacts/bm25_indexs_v2"
+      },
+      "comparable_with_reference": true,
+      "comparison_note": "Snapshot y baseline FAISS coinciden"
     }
   ]
 }

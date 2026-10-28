@@ -12,12 +12,10 @@
 
 En el desarrollo de asistentes inteligentes basados en recuperación de información (IR) y modelos de lenguaje (NLP), la representatividad estadística del conjunto de evaluación es crítica para la validez de los resultados experimentales.
 
-El baseline inicial del proyecto contaba con **20 consultas en inglés** (`evaluation/retrieval_queries.json`). En dicho escenario:
-* **Varianza estadística inaceptable:** Cada consulta individual representaba un **5,0%** del valor total de `Hit@1` o `Hit@5`. Un fallo fortuito o un acierto aislado alteraba las métricas drásticamente, impidiendo detectar mejoras algorítmicas sutiles.
-* **Sesgo por desincronización del corpus:** El índice FAISS inicial poseía un *gap* de 2.644 documentos no indexados, omitiendo categorías clave como Git y Docker. Cualquier consulta de estas áreas fallaba de forma artificial.
-* **Ausencia de estratificación:** No existía una graduación de dificultad ni equilibrio temático.
-
-Para subsanar estas limitaciones, se diseñó e implementó el **Benchmark v2** de **160 consultas**, reduciendo el peso de cada consulta individual al **0,625%** y cubriendo de forma uniforme el espectro funcional del sistema.
+El conjunto oficial del proyecto es el **Benchmark v2** de **160 consultas en
+inglés**. Cada consulta representa el **0,625%** de una métrica de acierto
+promedio. El conjunto está estratificado por dominio y dificultad, y se valida
+contra los aliases y documentos disponibles en el corpus.
 
 ---
 
@@ -201,5 +199,4 @@ Para ejecutar la evaluación comparativa formal entre los tres enfoques de re-ra
      --initial-top-k 15 \
      --output evaluation/reranker_benchmark_bge.json
    ```
-
 

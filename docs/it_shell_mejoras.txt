@@ -1,11 +1,10 @@
 IT SHELL — DOCUMENTO BASE PARA PLANIFICAR LAS MEJORAS
-Versión: v1.1 (Actualizada con Estado de Baseline y Propuestas de Mejora)
-Fecha: 2026-10-12
+Versión: v1.2 (Benchmark oficial de 160 consultas)
+Fecha: 2026-10-28
 
 PROPÓSITO
 Este documento describe el producto objetivo de IT Shell, las mejoras propuestas,
-el aporte, ubicación, costo y objetivo de cada tecnología, incorporando el estado real
-del repositorio tras el congelamiento del Baseline v1.0 y la integración de la arquitectura.
+el aporte, ubicación, costo y objetivo de cada tecnología, incorporando el estado real del repositorio y la integración de la arquitectura.
 
 Sirve como especificación arquitectónica para convertir las mejoras en tareas implementables.
 
@@ -115,25 +114,22 @@ CLI nativa                     Servidor MCP (JSON-RPC)
 - Test suite unitario con 17 pruebas unitarias pasando.
 - Fusionado en la rama `main` (commit ad0f81f).
 
-3.2. RETRIEVAL SBERT + FAISS (ESTADO: BASELINE CONGELADO V1.0)
+3.2. RETRIEVAL SBERT + FAISS (ESTADO: BENCHMARK OFICIAL V2)
 - Embedder: sentence-transformers/all-mpnet-base-v2 (dimensión 768).
-- Índice FAISS: 24.687 vectores con 24.687 aliases alineados.
-- Métricas del Baseline oficial (evaluations/baseline_v1_metadata.json):
-  * CommandHit@1:  5,00 %
-  * CommandHit@3: 20,00 %
-  * CommandHit@5: 25,00 %
-  * CommandHit@10: 35,00 %
-  * MRR: 0,1317
-  * nDCG@5: 0,0580
-- Conclusión clave: La recuperación cruda sólo acierta en Top-5 un 25% de las veces.
-  Esto fundamenta la prioridad del Re-ranker y la mejora del corpus antes de planificaciones complejas.
+- Benchmark oficial: `evaluation/evaluation_v2_queries.json` (160 consultas).
+- Los artefactos de corpus, vectores, aliases e índice se validan y registran
+  juntos en `evaluation/retrieval_snapshot_v2.json`.
+- Las métricas vigentes se generan en `evaluation/retrieval_benchmark_v2.json`.
 
 3.3. RE-RANKER CON CROSS-ENCODER (ESTADO: INTEGRADO DETRÁS DE CONFIGURACIÓN)
 - Ubicación: `semantic_search_engine/reranker_service/reranker.py`.
 - Soporta IdentityReranker y CrossEncoderReranker lazily-loaded.
-- Aporte: Reordenar los 10-20 candidatos recuperados por FAISS mediante evaluación cruzada
-  consulta-comando. Como Hit@10 es 35% frente a Hit@1 de 5%, el margen de mejora de MRR es sustancial.
-- Próximo paso: Ejecutar benchmark comparativo formal contra el baseline.
+- Aporte: Reordenar candidatos recuperados por FAISS mediante evaluación cruzada
+  consulta-comando. La evaluación oficial de 160 consultas da Hit@1 41,25% y
+  Hit@10 80,00% para la recuperación FAISS.
+- Los Cross-Encoders se mantienen opcionales; sus resultados oficiales se
+  documentan en `evaluation/experimento_reranker_v2.txt`; esos valores son
+  históricos hasta volver a medirlos con provenance del snapshot actual.
 
 3.4. QUERY ANALYZER Y PLANNER DETERMINISTA
 - Ubicación: `retrieval_service/query_analyzer.py` y `retrieval_service/planner.py`.
@@ -185,15 +181,18 @@ A partir de las pruebas experimentales del repositorio se identificaron restricc
 Frente a la versión borrador, se ajusta el orden de ejecución para priorizar la calidad de
 recuperación antes de la orquestación avanzada:
 
-FASE 0 — Baseline Reproducible (COMPLETADA)
-  - Medición congelada en `evaluation/baseline_v1_metadata.json`.
+FASE 0 — Baseline Reproducible (ACTUALIZADA)
+  - Benchmark oficial de 160 consultas: `evaluation/evaluation_v2_queries.json`.
+  - Snapshot denso registrado en `evaluation/retrieval_snapshot_v2.json`.
+  - Métricas oficiales generadas en `evaluation/retrieval_benchmark_v2.json`.
 
 FASE 1 — Consolidación de Arquitectura Modular (COMPLETADA)
   - Fusión de la rama `engine` a `main`. Suite de pruebas unitarias al 100%.
 
-FASE 2 — Mejora del Retrieval (Cross-Encoder + Expansión de Corpus) (EN CURSO)
-  - Activar Cross-Encoder en evaluación comparativa contra el baseline.
-  - Subsanar comandos faltantes del corpus (Git, Docker) e incorporar consultas bilingües.
+FASE 2 — Mejora del Retrieval (EN CURSO)
+  - Comparar FAISS, BM25, búsqueda híbrida y Cross-Encoders sobre el benchmark
+    oficial y snapshots alineados.
+  - Revisar errores de relevancia y latencia antes de elegir una configuración.
 
 FASE 3 — Query Planner y Análisis Semántico Avanzado
   - Extracción robusta de parámetros faltantes y resolución de dependencias entre pasos.
@@ -216,4 +215,3 @@ FASE 6 — Optimización, Empaquetado y Documentación Final
 - Planificación: 100% de consultas complejas descompuestas en secuencias válidas y con dependencias explícitas.
 - Seguridad: 0 falsos negativos en la detección de patrones destructivos críticos conocidos.
 - Integración: Servidor MCP funcional que responda a llamadas de herramientas en < 500 ms (sin LLM).
-

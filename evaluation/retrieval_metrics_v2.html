@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang='en'><meta charset='utf-8'><title>it-shell retrieval metrics</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 44px auto; max-width: 820px; color: #17212b; }
+h1 { margin-bottom: 6px; } p { color: #52606d; } table { border-collapse: collapse; width: 100%; margin: 28px 0; }
+th, td { border-bottom: 1px solid #d8dee4; padding: 12px; text-align: left; }
+.bar { height: 18px; width: 100%; background: #edf2f5; } .bar span { display:block; height:100%; background:#167c80; }
+code { background:#edf2f5; padding:2px 5px; }
+</style>
+<body><h1>it-shell retrieval metrics</h1><p>Index vectors: 30287 | Queries: 160</p>
+<table><thead><tr><th>Metric</th><th>Value</th><th>Scale</th></tr></thead><tbody><tr><th>command_hit@1</th><td>0.4125</td><td><div class='bar'><span style='width:41.25%'></span></div></td></tr><tr><th>command_hit@3</th><td>0.6188</td><td><div class='bar'><span style='width:61.88%'></span></div></td></tr><tr><th>command_hit@5</th><td>0.7125</td><td><div class='bar'><span style='width:71.25%'></span></div></td></tr><tr><th>command_hit@10</th><td>0.8000</td><td><div class='bar'><span style='width:80.00%'></span></div></td></tr><tr><th>mrr</th><td>0.5377</td><td><div class='bar'><span style='width:53.77%'></span></div></td></tr><tr><th>ndcg@5</th><td>0.3613</td><td><div class='bar'><span style='width:36.13%'></span></div></td></tr></tbody></table>
+<h2>Queries without a relevant result in Top-10</h2>
+<p>fs_find_modified_days, fs_list_detailed_hidden, fs_tar_create_gzip, proc_list_user_processes, net_show_routing_table, net_listen_arbitrary_port, net_reverse_ip_lookup, sec_make_executable, sec_chmod_read_write_owner, sec_openssl_self_signed_cert, sec_openssl_inspect_x509, sec_openssl_random_bytes, text_awk_print_column, text_tail_follow_log, text_tr_uppercase_to_lower, text_tee_stdout_and_file, hw_mount_filesystem, hw_dmesg_usb_hardware, usr_switch_user_login_shell, sh_print_all_env_vars, sh_locate_executable_which, sh_view_command_history, sh_print_echo_variable, sh_gpg_verify_signature, sh_gpg_sign_detached, sh_append_to_path</p>
+<p><code>CommandHit@k</code> means that a variant of the expected command occurred in the first k results.</p>
+</body></html>

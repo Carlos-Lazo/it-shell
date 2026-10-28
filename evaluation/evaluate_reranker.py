@@ -126,11 +126,11 @@ def run_benchmark(
 
 def main():
     parser = argparse.ArgumentParser(description="Evalua Cross-Encoder Reranker contra Baseline.")
-    parser.add_argument("--queries", type=Path, default=Path("evaluation/retrieval_queries.json"))
+    parser.add_argument("--queries", type=Path, default=Path("evaluation/evaluation_v2_queries.json"))
     parser.add_argument("--corpus", type=Path, default=Path("dataset_builder/corpus"))
     parser.add_argument("--index", type=Path, default=Path("dataset_builder/indexer/artifacts/all-mpnet-base-v2/index.faiss"))
     parser.add_argument("--aliases", type=Path, default=Path("dataset_builder/indexer/artifacts/all-mpnet-base-v2/aliases.npy"))
-    parser.add_argument("--output", type=Path, default=Path("evaluation/reranker_benchmark_results.json"))
+    parser.add_argument("--output", type=Path, default=Path("evaluation/reranker_benchmark_v2_top15.json"))
     parser.add_argument("--initial-top-k", type=int, default=50, help="Cantidad de candidatos iniciales de FAISS para reordenar")
     parser.add_argument("--cross-encoder", type=str, default="cross-encoder/ms-marco-MiniLM-L-6-v2")
     args = parser.parse_args()
@@ -160,7 +160,7 @@ def main():
     print("\n" + "=" * 65)
     print(" RESULTADOS COMPARATIVOS: BASELINE (FAISS) vs RERANKER (CROSS-ENCODER)")
     print("=" * 65)
-    print(f"{'Métrica':<18} | {'Baseline v1.0':<15} | {'Con Reranker':<15} | {'Delta':<10}")
+    print(f"{'Métrica':<18} | {'Baseline FAISS':<15} | {'Con Reranker':<15} | {'Delta':<10}")
     print("-" * 65)
     for m in ["command_hit@1", "command_hit@3", "command_hit@5", "command_hit@10", "ndcg@1", "ndcg@3", "ndcg@5", "ndcg@10", "mrr"]:
         b_val = base[m]
@@ -180,4 +180,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

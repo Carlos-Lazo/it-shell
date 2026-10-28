@@ -1,7 +1,7 @@
 IT SHELL — PLAN DE IMPLEMENTACIÓN DETALLADO Y ESTRUCTURADO
 Versión: 1.0
 Fecha: 2026-10-12
-Estado de partida: Baseline v1.0 congelado | Rama main consolidada
+Estado de partida: Benchmark oficial v2 (160 consultas) | Rama main consolidada
 
 ======================================================================
 1. RESUMEN DEL ESTADO DE PARTIDA
@@ -10,8 +10,8 @@ Estado de partida: Baseline v1.0 congelado | Rama main consolidada
 El proyecto cuenta con las bases técnicas estabilizadas:
 - Rama principal `main`: Unificada y al día con el motor modular (`semantic_search_engine`),
   17 pruebas unitarias funcionales y suite de configuración desacoplada.
-- Rama `evaluations`: Baseline v1.0 congelado formalmente en `evaluation/baseline_v1_metadata.json`
-  (20 consultas, MRR 0,1317, Hit@5 25%, modelo all-mpnet-base-v2, 24.687 vectores indexados).
+- Benchmark oficial: `evaluation/evaluation_v2_queries.json` (160 consultas en inglés);
+  el snapshot vigente se valida y registra en `evaluation/retrieval_snapshot_v2.json`.
 - Restricciones de entorno identificadas:
   * Control de concurrencia: `OMP_NUM_THREADS=2` para evitar saturación de CPU.
   * Almacenamiento temporal: Uso de `TMPDIR=/home/carlos/tmp` (117 GB libres) ante la limitación de 1.8 GB en `/tmp`.
@@ -22,41 +22,48 @@ El proyecto cuenta con las bases técnicas estabilizadas:
 ======================================================================
 
 ----------------------------------------------------------------------
-FASE 2: MEJORA DEL RETRIEVAL Y EVALUACIÓN DE RE-RANKING [COMPLETADA]
+FASE 2: MEJORA DEL RETRIEVAL Y EVALUACIÓN DE RE-RANKING [CERRADA]
 ----------------------------------------------------------------------
 Objetivo:
 Elevar la precisión del comando recuperado individualmente antes de orquestar planes complejos.
-El baseline demostró que Hit@10 es 35% frente a un Hit@1 de 5%, lo que otorga un margen
-de mejora sustancial mediante reordenamiento contextual y sincronización del corpus.
+El baseline oficial se midió sobre 160 consultas y un snapshot sincronizado de
+30.287 documentos. FAISS supera los umbrales de aceptación; BM25 se midió de nuevo
+con el mismo snapshot y no alcanza esos umbrales.
 
 Tareas:
 2.1. Benchmark del Cross-Encoder: [COMPLETADA]
      - Evaluación comparativa ejecutada con `CrossEncoderReranker` (`ms-marco-MiniLM-L-6-v2`).
-     - Resultados iniciales documentados en `evaluation/experimento_reranker_v1.txt`.
+     - Resultados documentados en `evaluation/experimento_reranker_v2.txt`.
      - Corrección del bug de abstención en `PipelineBuilder` para evitar colisión de logits de re-ranking con umbral coseno.
 
 2.2. Curación y Expansión del Corpus y Benchmark: [COMPLETADA]
-     - Sincronización del 100% de los 27.329 comandos del corpus (incluidos Git con 160 docs y Docker con 2.388 docs) en el índice FAISS.
+     - Sincronización de 30.287 documentos entre corpus, embeddings, aliases e índice FAISS.
      - Generación y validación del Benchmark formal de 160 consultas en inglés (`evaluation/evaluation_v2_queries.json`).
      - Documentación metodológica en `docs/metodologia_benchmark_v2.md`.
 
 2.3. Calibración de Umbrales y Configuración Oficial: [COMPLETADA]
-     - `config/default.yaml` calibrado con `retrieval_top_k: 15` y `reranker_model: null` (FAISS puro optimizado a 77 ms).
+     - `config/default.yaml` calibrado con `retrieval_top_k: 15` y `reranker_model: null`.
      - Validación de abstención: umbral `min_score: 0.45` verificado sin falsas abstenciones en consultas válidas.
      - Fallback de templates en `PipelineBuilder`: resolución a comando base cuando `example` está vacío.
 
 Entregables:
 - Script de benchmark comparativo (`evaluation/evaluate_reranker.py`).
 - Conjunto de evaluación formal congelado (`evaluation/evaluation_v2_queries.json`).
-- Informes de resultados consolidados (`evaluation/experimento_reranker_v1.txt` y `evaluation/experimento_reranker_v2.txt`).
+- Informe de resultados del benchmark oficial (`evaluation/experimento_reranker_v2.txt`).
 - Configuración calibrada en `semantic_search_engine/config/default.yaml`.
 - Suite de 17 pruebas unitarias funcionales pasando al 100%.
 
 Criterio de Aceptación:
 - Superar el MRR de 0.25 y alcanzar Hit@5 >= 50%.
-- ESTADO: AMPLIAMENTE SUPERADO.
-  * Baseline FAISS sincronizado: MRR = 0,5385 (meta: 0,25) | Hit@5 = 71,25% (meta: 50%) | Latencia = 77,7 ms.
-  * Hit@5 en Git: 93,8% | Hit@5 en Docker: 93,8%.
+- ESTADO: SUPERADO POR FAISS; BM25 NO ALCANZA LOS UMBRALES.
+  * FAISS: MRR = 0,5377 (meta: 0,25) | Hit@5 = 71,25% (meta: 50%) | latencia observada = 62,47 ms.
+  * BM25: MRR = 0,2408 | Hit@5 = 26,87% | latencia observada = 3,99 ms.
+  * Híbrido BM25 + denso: MRR = 0,4518 | Hit@5 = 61,25% | latencia total observada = 229,73 ms.
+  * BM25 es rápido pero no ofrece calidad suficiente; el híbrido mejora BM25, aunque
+    sigue por debajo de FAISS y añade latencia.
+  * Resultados de rerankers e híbrido de ejecuciones previas quedan como históricos:
+    no tienen provenance que demuestre el mismo snapshot y no se usan como
+    comparación controlada en la tabla de cierre.
 
 ----------------------------------------------------------------------
 FASE 3: QUERY PLANNER DETERMINÍSTICO AVANZADO
@@ -228,4 +235,3 @@ Sprint 6: Fase 7 (Empaquetado pyproject.toml, Documentación y Métricas Finales
 3. Ejecución de evaluación del baseline:
    HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. \
      dataset_builder/indexer/.venv/bin/python evaluation/evaluate_retrieval.py
-

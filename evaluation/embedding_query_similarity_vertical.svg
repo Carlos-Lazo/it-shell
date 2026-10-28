@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="990" viewBox="0 0 960 990" role="img" aria-labelledby="title description">
+  <title id="title">Similitud entre consultas sobre redes</title>
+  <desc id="description">Mapa de calor vertical de similitud coseno entre cuatro consultas reales sobre operaciones de red, codificadas con all-mpnet-base-v2.</desc>
+  <style>
+    text { font-family: Inter, "Segoe UI", Arial, sans-serif; fill: #14243a; }
+    .muted { fill: #52647a; }
+    .small { font-size: 15px; }
+    .axis { font-size: 16px; font-weight: 700; }
+    .cell { font-size: 21px; font-weight: 700; stroke: none; }
+    .light { fill: #ffffff; stroke: none; }
+  </style>
+  <rect width="960" height="990" fill="#ffffff"/>
+  <text x="52" y="62" font-size="30" font-weight="750">Consultas de red: similitud semántica</text>
+  <text x="52" y="96" font-size="16" class="muted">Embeddings de all-mpnet-base-v2 · coseno · consultas seleccionadas para visualización</text>
+  <text x="575" y="157" text-anchor="middle" class="axis">Comparar con</text>
+  <text x="52" y="490" text-anchor="middle" class="axis" transform="rotate(-90 52 490)">Consulta</text>
+
+  <g text-anchor="middle" font-size="14" font-weight="650">
+    <text x="410" y="215"><tspan x="410">Descargar</tspan><tspan x="410" dy="19">archivo</tspan></text>
+    <text x="525" y="215"><tspan x="525">Conectar a</tspan><tspan x="525" dy="19">servidor</tspan></text>
+    <text x="640" y="215"><tspan x="640">Comprobar</tspan><tspan x="640" dy="19">conectividad</tspan></text>
+    <text x="755" y="215"><tspan x="755">Copiar a</tspan><tspan x="755" dy="19">servidor</tspan></text>
+  </g>
+  <g text-anchor="end" font-size="15" font-weight="600">
+    <text x="333" y="335"><tspan x="333">Descargar archivo</tspan><tspan x="333" dy="20" class="muted">desde una URL</tspan></text>
+    <text x="333" y="450"><tspan x="333">Conectar de forma</tspan><tspan x="333" dy="20" class="muted">segura a un servidor</tspan></text>
+    <text x="333" y="565"><tspan x="333">Comprobar si un host</tspan><tspan x="333" dy="20" class="muted">remoto responde</tspan></text>
+    <text x="333" y="680"><tspan x="333">Copiar un archivo</tspan><tspan x="333" dy="20" class="muted">a un servidor remoto</tspan></text>
+  </g>
+
+  <g stroke="#ffffff" stroke-width="4">
+    <rect x="353" y="275" width="115" height="115" rx="7" fill="#173f73"/><text x="410.5" y="343" text-anchor="middle" class="cell light">1.00</text>
+    <rect x="468" y="275" width="115" height="115" rx="7" fill="#e1edf2"/><text x="525.5" y="343" text-anchor="middle" class="cell">0.20</text>
+    <rect x="583" y="275" width="115" height="115" rx="7" fill="#eef4f6"/><text x="640.5" y="343" text-anchor="middle" class="cell">0.12</text>
+    <rect x="698" y="275" width="115" height="115" rx="7" fill="#c5dce6"/><text x="755.5" y="343" text-anchor="middle" class="cell">0.39</text>
+
+    <rect x="353" y="390" width="115" height="115" rx="7" fill="#e1edf2"/><text x="410.5" y="458" text-anchor="middle" class="cell">0.20</text>
+    <rect x="468" y="390" width="115" height="115" rx="7" fill="#173f73"/><text x="525.5" y="458" text-anchor="middle" class="cell light">1.00</text>
+    <rect x="583" y="390" width="115" height="115" rx="7" fill="#d3e5ec"/><text x="640.5" y="458" text-anchor="middle" class="cell">0.32</text>
+    <rect x="698" y="390" width="115" height="115" rx="7" fill="#4b91b7"/><text x="755.5" y="458" text-anchor="middle" class="cell">0.62</text>
+
+    <rect x="353" y="505" width="115" height="115" rx="7" fill="#eef4f6"/><text x="410.5" y="573" text-anchor="middle" class="cell">0.12</text>
+    <rect x="468" y="505" width="115" height="115" rx="7" fill="#d3e5ec"/><text x="525.5" y="573" text-anchor="middle" class="cell">0.32</text>
+    <rect x="583" y="505" width="115" height="115" rx="7" fill="#173f73"/><text x="640.5" y="573" text-anchor="middle" class="cell light">1.00</text>
+    <rect x="698" y="505" width="115" height="115" rx="7" fill="#e7f0f4"/><text x="755.5" y="573" text-anchor="middle" class="cell">0.16</text>
+
+    <rect x="353" y="620" width="115" height="115" rx="7" fill="#c5dce6"/><text x="410.5" y="688" text-anchor="middle" class="cell">0.39</text>
+    <rect x="468" y="620" width="115" height="115" rx="7" fill="#4b91b7"/><text x="525.5" y="688" text-anchor="middle" class="cell">0.62</text>
+    <rect x="583" y="620" width="115" height="115" rx="7" fill="#e7f0f4"/><text x="640.5" y="688" text-anchor="middle" class="cell">0.16</text>
+    <rect x="698" y="620" width="115" height="115" rx="7" fill="#173f73"/><text x="755.5" y="688" text-anchor="middle" class="cell light">1.00</text>
+  </g>
+
+  <text x="52" y="802" font-size="16" font-weight="700">Cómo leerlo</text>
+  <text x="52" y="832" font-size="15" class="muted">Más oscuro = mayor similitud. Por ejemplo, “conectar” y “copiar a un servidor” marcan 0.62.</text>
+  <text x="52" y="857" font-size="15" class="muted">La diagonal vale 1.00 porque cada consulta se compara consigo misma.</text>
+  <text x="52" y="925" font-size="14" class="muted">Valores calculados como producto interno de embeddings normalizados; redondeados a dos decimales.</text>
+</svg>

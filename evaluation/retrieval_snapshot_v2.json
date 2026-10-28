@@ -1,0 +1,76 @@
+{
+  "snapshot_version": 2,
+  "created_at_utc": "2026-10-28T14:26:04.328202+00:00",
+  "git_commit": "1c791e46cba33e6f8bdadfca8583c20211bb8d80",
+  "runtime": {
+    "python": "3.11.2",
+    "numpy": "2.4.6",
+    "faiss": "1.15.1"
+  },
+  "embedding": {
+    "model": "sentence-transformers/all-mpnet-base-v2",
+    "dimensions": 768,
+    "vectors": 30287,
+    "normalized": true,
+    "index_metric": "inner_product"
+  },
+  "bm25": {
+    "directory": "dataset_builder/indexer/artifacts/bm25_indexs_v2",
+    "documents": 30287,
+    "files": {
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fdm": "7b3408b96208e0c6f1171808fefd361e106126d8ade54050f9cebbf6afbe651b",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fdt": "8a6e6e036f6044075a212bc6323d4a8649aa85e2967afa852547ed1be1d8813d",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fdx": "8c53969fa8b7b07eed060acf75a396baae9e05f664bc5c7a6281701c7862330a",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.fnm": "52922cec1df60155ddb9afc36a9ff0928695ab5087fa459454b7f8d37543ff00",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.nvd": "a607acb0be78ddffb73ac4387552d7fea6fcc87c54468a0a38d519a970c547a8",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.nvm": "5387b970bf51a8861f0d7919658c9baf6819101411420bf78e67360519f75b0d",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.si": "1559ff84ecbe1020ea5d858395716f675f6f356a5a644ad2aec8e7fa9a4a07c5",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.tvd": "c5ee2ea780813d87881fc32e14c37310392b3d4ea2db10b7dca492c4ec093a47",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.tvm": "bffd6b7cdac6bbcab1cab1ccaa2551a2c920a6b5ac0f0f1673e3814589cebd3e",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0.tvx": "27822131cd97997ed13bbb03c04901384379898a343e8aef69bece90156b7b8e",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.doc": "7abe4008e2ca44cc9b347304c11ca3b3d7d26c3541fa3ca40d510891ea665bde",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.dvd": "7213d8cad8ad91beda2b42a8023e6e2389e3b4b409f30c5559e90e88e8ba337c",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.dvm": "c7fea76cb7667cfc85e65ea575bcdc56900592ea83274c75401a35be882d87e0",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.tim": "3fe2fc7992290cc44b646c93aac503ecab16f70ad724f27c9c76ca16962344a4",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.tip": "027e921fb943a03df1b7562a65c845463c648023f9a9b8c73bf0a05b93831a34",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/_0_Lucene90_0.tmd": "9e7e9af26ce21bf9e8fd3ee53c775ef1319c74a102bf6c486ea5f56a5268c376",
+      "dataset_builder/indexer/artifacts/bm25_indexs_v2/segments_1": "b853c2cb832f68b72d5500e48186120c6f15ebc4a190d192c6afd3864a5d9f44"
+    }
+  },
+  "corpus": {
+    "directory": "dataset_builder/corpus",
+    "yaml_files": 14,
+    "documents": 30287
+  },
+  "evaluation": {
+    "queries_file": "evaluation/evaluation_v2_queries.json",
+    "queries": 160,
+    "sha256": "af89d5efa1b713fba05f945141eb34ce5e42edda58dbafae7af54a255df0336a"
+  },
+  "validation": {
+    "vector_ids_match_aliases_in_order": true,
+    "index_reconstructs_vectors_in_order": true,
+    "index_aliases_match_corpus": true,
+    "all_relevant_commands_present": true
+  },
+  "artifacts": {
+    "evaluation/evaluation_v2_queries.json": "af89d5efa1b713fba05f945141eb34ce5e42edda58dbafae7af54a255df0336a",
+    "dataset_builder/embedder/artifacts/vectors.npz": "04928d3a601681027691950fee2c021cc40795fa494016127102481340494759",
+    "dataset_builder/indexer/artifacts/all-mpnet-base-v2/aliases.npy": "bfbf9faad2464416bb9a475ca3c8e36dfaf5bf25b3ed9249c28aa171f74b74dc",
+    "dataset_builder/indexer/artifacts/all-mpnet-base-v2/index.faiss": "fa2cf360f5d4b0b8e7313455c222b6faddcaaf42c25d384deb75107c0afe7567",
+    "dataset_builder/corpus/c programming.yaml": "ab830a7494a27ededb5af86780f98b4741ca1786e44594ddf71b53439fff64eb",
+    "dataset_builder/corpus/cryptography.yaml": "f7466a674abe308ceeb27481b38c9cd65a9e76b9df5d7e883053118369fdfd9c",
+    "dataset_builder/corpus/docker.yaml": "18f781ac507d273d45a3cd0b4a4535d251f9109449a6d20b64e4593ad74b7cba",
+    "dataset_builder/corpus/filesystem.yaml": "5bf85b27cfa15ab2bac4fee48606a5e9e45f64fd4d60f4a824a609de4b4ebe65",
+    "dataset_builder/corpus/git.yaml": "cfaca497a9d1b52b11c3fc337f219447b37676140d1a6383f2c55b743cf05d40",
+    "dataset_builder/corpus/hardwaremanagement.yaml": "e11f6c1cf83b1c2bfac7bdad5a43e2453903d04fd01d6b547422de806adbf5a7",
+    "dataset_builder/corpus/keyboard.yaml": "6f623947596eebad4fd208649808d40929e1f8a25bab95a8096551d695c079ea",
+    "dataset_builder/corpus/misc.yaml": "0f13a9f3aea6e390d8e4471105f74dd5bdf01ae0fa7186950bc97c9717525df9",
+    "dataset_builder/corpus/networking.yaml": "41a63019669ab2ecd1127b7f8056dd12d6e90b5adda4d21686bf3f216ed1eab4",
+    "dataset_builder/corpus/processmanagement.yaml": "a48470248f357a10ab08153ec842747a415ee1e6b3152ee5f3c7bb2403400498",
+    "dataset_builder/corpus/security.yaml": "0e3b25aceb30449049a1e2341f664ca00c5e6db6c810388417375b1e18943e79",
+    "dataset_builder/corpus/shellprogramming.yaml": "ced8f0e57979c50f32778c1b3709d325c61806abb5f35a48fb571354fbc400df",
+    "dataset_builder/corpus/textprocessing.yaml": "b2e0302c45767016fb218cae24bf4fad5122236d5872733e473b06f94a6162fc",
+    "dataset_builder/corpus/usergroup.yaml": "8cac903183c5442cc7e0208fe5872b8daee93fee967be1921ef022177f963e09"
+  }
+}

@@ -34,6 +34,7 @@ Uso (desde la raíz del repo, con el venv del indexer):
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import time
@@ -54,14 +55,64 @@ _ROOT = Path(__file__).resolve().parents[1]
 
 DEFAULT_QUERIES  = _ROOT / "evaluation" / "evaluation_v2_queries.json"
 DEFAULT_CORPUS   = _ROOT / "dataset_builder" / "corpus"
-DEFAULT_BM25     = _ROOT / "dataset_builder" / "indexer" / "artifacts" / "bm25_indexs"
+DEFAULT_BM25     = _ROOT / "dataset_builder" / "indexer" / "artifacts" / "bm25_indexs_v2"
 DEFAULT_FAISS    = _ROOT / "dataset_builder" / "indexer" / "artifacts" / "all-mpnet-base-v2" / "index.faiss"
 DEFAULT_ALIASES  = _ROOT / "dataset_builder" / "indexer" / "artifacts" / "all-mpnet-base-v2" / "aliases.npy"
+DEFAULT_SNAPSHOT = _ROOT / "evaluation" / "retrieval_snapshot_v2.json"
 DEFAULT_OUT      = _ROOT / "evaluation" / "bm25_benchmark_top15.json"
 EMBEDDER_NAME    = "sentence-transformers/all-mpnet-base-v2"
 
 K_VALUES: tuple[int, ...] = (1, 3, 5, 10)
 INITIAL_TOP_K = 15
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as file:
+        for chunk in iter(lambda: file.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def hash_index_files(index_dir: Path) -> dict[str, str]:
+    index_dir = index_dir.resolve()
+    files = sorted(path for path in index_dir.rglob("*") if path.is_file() and path.name != "write.lock")
+    if not files:
+        raise ValueError(f"No se encontraron archivos de índice en {index_dir}")
+    return {
+        path.relative_to(_ROOT).as_posix(): sha256_file(path)
+        for path in files
+    }
+
+
+def validate_snapshot(
+    manifest_path: Path,
+    queries_path: Path,
+    faiss_path: Path,
+    aliases_path: Path,
+    bm25_path: Path,
+) -> str:
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    expected_bm25_dir = manifest["bm25"]["directory"]
+    actual_bm25_dir = bm25_path.resolve().relative_to(_ROOT).as_posix()
+    if actual_bm25_dir != expected_bm25_dir:
+        raise ValueError(
+            f"El índice BM25 no coincide con el snapshot: esperado {expected_bm25_dir}, "
+            f"recibido {actual_bm25_dir}"
+        )
+    expected_files = manifest["bm25"]["files"]
+    actual_files = hash_index_files(bm25_path)
+    if expected_files != actual_files:
+        raise ValueError("Los checksums del índice BM25 no coinciden con el manifiesto")
+    checks = (
+        (queries_path, manifest["evaluation"]["sha256"], "consultas"),
+        (faiss_path, manifest["artifacts"][faiss_path.resolve().relative_to(_ROOT).as_posix()], "índice FAISS"),
+        (aliases_path, manifest["artifacts"][aliases_path.resolve().relative_to(_ROOT).as_posix()], "aliases"),
+    )
+    for path, expected_hash, label in checks:
+        if sha256_file(path) != expected_hash:
+            raise ValueError(f"El checksum de {label} no coincide con el snapshot")
+    return sha256_file(manifest_path)
 
 
 # ---------------------------------------------------------------------------
@@ -301,8 +352,17 @@ def main() -> None:
     parser.add_argument("--faiss-index",   type=Path, default=DEFAULT_FAISS)
     parser.add_argument("--aliases",       type=Path, default=DEFAULT_ALIASES)
     parser.add_argument("--initial-top-k", type=int,  default=INITIAL_TOP_K)
+    parser.add_argument("--snapshot-manifest", type=Path, default=DEFAULT_SNAPSHOT)
     parser.add_argument("--output",        type=Path, default=DEFAULT_OUT)
     args = parser.parse_args()
+
+    snapshot_sha256 = validate_snapshot(
+        args.snapshot_manifest,
+        args.queries,
+        args.faiss_index,
+        args.aliases,
+        args.bm25_index,
+    )
 
     # ---- Cargar recursos ----
     queries = json.loads(args.queries.read_text(encoding="utf-8"))
@@ -329,6 +389,14 @@ def main() -> None:
         command_aliases, alias_intents,
         mode=args.mode, alpha=args.alpha, top_k=args.initial_top_k,
     )
+    results["provenance"] = {
+        "snapshot_manifest_sha256": snapshot_sha256,
+        "queries_sha256": sha256_file(args.queries),
+        "faiss_index_sha256": sha256_file(args.faiss_index),
+        "aliases_sha256": sha256_file(args.aliases),
+        "bm25_index_files": hash_index_files(args.bm25_index),
+        "bm25_index_directory": args.bm25_index.resolve().relative_to(_ROOT).as_posix(),
+    }
 
     # ---- Guardar JSON ----
     args.output.parent.mkdir(parents=True, exist_ok=True)

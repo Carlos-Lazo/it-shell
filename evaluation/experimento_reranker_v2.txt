@@ -7,6 +7,11 @@ Embedder: sentence-transformers/all-mpnet-base-v2
 Reranker: cross-encoder/ms-marco-MiniLM-L-6-v2 (Top-15 inicial)
 Hardware: CPU local (OMP_NUM_THREADS=2, modo offline)
 
+NOTA DE VIGENCIA: Este reporte conserva los resultados de la ejecución del
+2026-10-22. No incluye hashes de los artefactos evaluados y el comparador actual
+lo marca como histórico/no comparable con el snapshot FAISS + BM25 v2 del
+2026-10-28. No usar sus métricas como comparación controlada de cierre.
+
 =====================================================================================================
 1. RESULTADOS GLOBALES COMPARATIVOS (N = 160 consultas)
 =====================================================================================================
@@ -54,7 +59,7 @@ Cryptography         |     7     |       0,0 %  |      28,6 %  | 0,189
 1. Impacto de la Sincronización del Corpus (27.329 vectores):
    - El cuello de botella principal del Baseline no era el modelo bi-encoder, sino el gap de datos.
    - Con el índice completo, el Baseline FAISS puro (all-mpnet-base-v2) alcanza un MRR de 0,5385
-     (frente a 0,1317 en el toy-baseline de 20 queries) y un Hit@5 de 71,25% (frente al 25% previo).
+     y un Hit@5 de 71,25% en el benchmark oficial de 160 consultas.
    - En dominios con léxico rico y estructurado como Git y Docker, el Hit@5 alcanza un extraordinario 93,8%.
 
 2. Evaluación del Cross-Encoder (ms-marco-MiniLM-L-6-v2):
@@ -79,4 +84,3 @@ Cryptography         |     7     |       0,0 %  |      28,6 %  | 0,189
   * Dejar el Cross-Encoder como un componente modular opcional desactivado por defecto (`reranker_model: null`),
     priorizando la latencia interactiva (< 80 ms) y una precisión sólida (> 71% en Top-5).
   * La Fase 2 queda formalmente validada y lista para dar paso a la Fase 3 (Query Planner determinístico).
-

@@ -19,14 +19,14 @@ Requisitos:
 import argparse
 import json
 import pathlib
-import shutil
 import sys
+import tempfile
 from typing import List, Dict, Any
 
 # La clase LuceneIndexer no expone un método .main en la versión 0.22.0.
 # En su lugar utilizamos el módulo ejecutable de Pyserini vía subprocess, que
 # acepta los mismos argumentos de línea de comandos.
-import subprocess, shlex, sys
+import subprocess
 
 import yaml                     # PyYAML (ya está en requirements.txt)
 
@@ -34,7 +34,7 @@ import yaml                     # PyYAML (ya está en requirements.txt)
 from pyserini.index.lucene import LuceneIndexer   # clase que implementa la indexación
 
 CORPUS_PATH = "../corpus"
-OUTPUT_INDEX_PATH = "artifacts/bm25_indexs"
+OUTPUT_INDEX_PATH = "artifacts/bm25_indexs_v2"
 BASE_THREADS = 4
 # ----------------------------------------------------------------------
 # Helpers
@@ -49,7 +49,7 @@ def _load_yaml_folder(folder: pathlib.Path = CORPUS_PATH) -> List[Dict[str, Any]
     """
     records: List[Dict[str, Any]] = []
 
-    for yaml_path in folder.glob("*.yaml"):
+    for yaml_path in sorted(folder.glob("*.yaml")):
         with yaml_path.open("r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
 
@@ -141,29 +141,26 @@ def build_bm25_index(
     # -----------------------------------------------------------------
     # 2️⃣  Preparar el archivo JSONL temporal que Pyserini consume
     # -----------------------------------------------------------------
-    tmp_input = pathlib.Path("_tmp_bm25_input")
-    if tmp_input.exists():
-        shutil.rmtree(tmp_input)
-    _prepare_input(records, tmp_input)
+    with tempfile.TemporaryDirectory(prefix="it-shell-bm25-input-") as temp_dir:
+        tmp_input = pathlib.Path(temp_dir)
+        _prepare_input(records, tmp_input)
 
-    # -----------------------------------------------------------------
-    # 3️⃣  Ejecutar el indexador de Pyserini
-    # -----------------------------------------------------------------
-    # IMPORTANTE: --input apunta al directorio JSONL temporal (no al corpus YAML),
-    #             --index apunta al destino final del índice Lucene.
-    #             Se usan los argumentos de la función, no las constantes del módulo.
-    pyserini_args = [
-        "--input",   str(tmp_input.resolve()),   # directorio con corpus.jsonl
-        "--index",   str(index_dir.resolve()),   # destino del índice Lucene
-        "--collection", "JsonCollection",        # formato: un JSONL con campo "contents"
-        "--threads", str(threads),
-        "--storeRaw",         # guarda el JSON completo → hit.raw incluye id, intent
-        "--storeDocvectors",  # habilita pseudo-relevance feedback
-    ]
+        # -----------------------------------------------------------------
+        # 3️⃣  Ejecutar el indexador de Pyserini
+        # -----------------------------------------------------------------
+        # --input apunta al JSONL temporal y --index al destino Lucene.
+        pyserini_args = [
+            "--input", str(tmp_input.resolve()),
+            "--index", str(index_dir.resolve()),
+            "--collection", "JsonCollection",
+            "--threads", str(threads),
+            "--storeRaw",
+            "--storeDocvectors",
+        ]
 
-    print(f"[INFO] Building BM25 index at {index_dir}")
-    cmd = [sys.executable, "-m", "pyserini.index.lucene"] + pyserini_args
-    result = subprocess.run(cmd, capture_output=True, text=True)
+        print(f"[INFO] Building BM25 index at {index_dir}")
+        cmd = [sys.executable, "-m", "pyserini.index.lucene"] + pyserini_args
+        result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
         print(result.stdout)
         print(result.stderr, file=sys.stderr)

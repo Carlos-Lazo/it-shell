@@ -38,7 +38,7 @@ class BenchmarkSpec:
 
 SPECS = (
     BenchmarkSpec("Baseline (FAISS MPNet)", "all-mpnet-base-v2",
-                  ("reranker_benchmark_v2_top15.json",), "baseline_summary", "retrieval"),
+                  ("retrieval_benchmark_v2.json",), "metrics", "retrieval"),
     BenchmarkSpec("Reranker MiniLM-L6", "cross-encoder/ms-marco-MiniLM-L-6-v2",
                   ("reranker_benchmark_v2_top15.json",), "reranked_summary", "total"),
     BenchmarkSpec("Reranker DistilRoBERTa", "cross-encoder/stsb-distilroberta-base",
@@ -46,9 +46,9 @@ SPECS = (
     BenchmarkSpec("Reranker BGE-base", "BAAI/bge-reranker-base",
                   ("reranker_benchmark_bge.json",), "reranked_summary", "total"),
     BenchmarkSpec("BM25 (Pyserini/Lucene)", "BM25",
-                  ("bm25_benchmark_top15.json",), "reranked_summary", "experiment"),
+                  ("bm25_benchmark_v2_top15.json",), "reranked_summary", "experiment"),
     BenchmarkSpec("Híbrido BM25 + Dense", "BM25 + all-mpnet-base-v2",
-                  ("hybrid_benchmark_top15.json", "hybrid_bm25_dense_top15.json"),
+                  ("hybrid_benchmark_v2_top15.json", "hybrid_benchmark_top15.json", "hybrid_bm25_dense_top15.json"),
                   "reranked_summary", "experiment"),
 )
 
@@ -128,6 +128,7 @@ def build_config(spec: BenchmarkSpec) -> dict[str, Any] | None:
             validate_summary(source_baseline, source, "baseline_summary")
             if source_baseline is not None else None
         ),
+        "provenance": data.get("provenance"),
     }
 
 
@@ -148,16 +149,23 @@ def annotate_reference_consistency(configs: list[dict[str, Any]]) -> None:
     """
     reference = next(config for config in configs if config["name"] == "Baseline (FAISS MPNet)")
     reference_summary = reference["summary"]
+    reference_snapshot = (reference["provenance"] or {}).get("snapshot_manifest_sha256")
     for config in configs:
         source_baseline = config["source_baseline_summary"]
-        matches = source_baseline is None or all(
+        summary_matches = source_baseline is None or all(
             source_baseline[metric] == reference_summary[metric]
             for metric in ("queries", *METRICS)
         )
+        snapshot = (config["provenance"] or {}).get("snapshot_manifest_sha256")
+        snapshot_matches = (
+            config["name"] == "Baseline (FAISS MPNet)"
+            or (reference_snapshot is not None and snapshot == reference_snapshot)
+        )
+        matches = summary_matches and snapshot_matches
         config["comparable_with_reference"] = matches
         config["comparison_note"] = (
-            "Mismo baseline FAISS declarado"
-            if matches else "Baseline FAISS distinto: requiere reejecución con el snapshot de referencia"
+            "Snapshot y baseline FAISS coinciden"
+            if matches else "Snapshot no verificado o baseline FAISS distinto: requiere reejecución"
         )
         del config["source_baseline_summary"]
 

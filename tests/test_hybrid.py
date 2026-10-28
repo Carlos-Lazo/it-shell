@@ -8,7 +8,7 @@ Ejecutar desde la raíz del repo con el venv del indexer:
     dataset_builder/indexer/.venv/bin/python -m pytest tests/test_hybrid.py -v
 
 Requisitos previos:
-  1. Índice BM25: dataset_builder/indexer/artifacts/bm25_indexs/
+  1. Índice BM25: dataset_builder/indexer/artifacts/bm25_indexs_v2/
   2. Índice FAISS: dataset_builder/indexer/artifacts/all-mpnet-base-v2/index.faiss
   3. Aliases FAISS: dataset_builder/indexer/artifacts/all-mpnet-base-v2/aliases.npy
 """
@@ -30,7 +30,7 @@ from sentence_transformers import SentenceTransformer
 # Rutas absolutas derivadas de la ubicación de este archivo
 # ---------------------------------------------------------------------------
 REPO_ROOT    = pathlib.Path(__file__).resolve().parents[1]
-BM25_INDEX   = REPO_ROOT / "dataset_builder" / "indexer" / "artifacts" / "bm25_indexs"
+BM25_INDEX   = REPO_ROOT / "dataset_builder" / "indexer" / "artifacts" / "bm25_indexs_v2"
 FAISS_INDEX  = REPO_ROOT / "dataset_builder" / "indexer" / "artifacts" / "all-mpnet-base-v2" / "index.faiss"
 ALIASES_FILE = REPO_ROOT / "dataset_builder" / "indexer" / "artifacts" / "all-mpnet-base-v2" / "aliases.npy"
 EMBEDDER_NAME = "sentence-transformers/all-mpnet-base-v2"

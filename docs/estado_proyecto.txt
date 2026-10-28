@@ -1,5 +1,5 @@
 ESTADO DEL PROYECTO IT-SHELL
-Actualizado: 2026-09-17
+Actualizado: 2026-10-28
 
 1. PROPOSITO
 
@@ -38,128 +38,98 @@ El diagrama editable de esta ruta esta en docs/flujo_consulta.drawio.
 
 3. ESTADO DEL CORPUS Y ARTEFACTOS
 
-- Corpus actual: 14 YAML y 27.329 documentos.
-- Indice FAISS actual: 24.687 vectores de 768 dimensiones.
-- Artefactos validados y ya ubicados en dataset_builder/: vectors.npz,
-  index.faiss y aliases.npy.
-- El indice, aliases y vectores estan alineados entre si y los vectores estan
-  normalizados.
-- El indice no representa todo el corpus vigente: 2.644 documentos no estan
-  indexados; Git y Docker no tienen documentos en el indice. Hay tambien 2
-  aliases del indice que no se resuelven contra el corpus actual.
+- Corpus actual: 14 archivos YAML y 30.287 documentos.
+- Snapshot denso generado el 2026-10-28: 30.287 vectores normalizados de 768
+  dimensiones, 30.287 aliases y 30.287 entradas FAISS.
+- Los IDs de vectors.npz coinciden con aliases.npy en el mismo orden; FAISS
+  reconstruye los mismos vectores y cada alias resuelve contra el corpus.
+- El índice FAISS usa producto interno sobre vectores normalizados, equivalente
+  a similitud coseno.
+- El índice BM25 v2 también fue reconstruido sobre los 30.287 documentos y sus
+  checksums están incluidos en el manifiesto.
 
-Esta desincronizacion debe resolverse antes de presentar el motor como un
-producto integrado: cada release de corpus, embeddings, aliases e indice debe
-compartir una misma version o manifiesto.
+El manifiesto `evaluation/retrieval_snapshot_v2.json` registra los conteos,
+hashes SHA-256, versión del modelo y validaciones de los artefactos.
 
-4. EVALUACION ACTUAL DEL RETRIEVAL
+4. EVALUACION OFICIAL DEL RETRIEVAL
 
-El set actual tiene 20 consultas en ingles, escritas en
-evaluation/consultas_ingles.txt y versionadas como JSON. Cada una tiene un
-comando esperado. CommandHit@k indica que una opcion indexada de ese comando
-aparece entre los primeros k resultados; MRR premia que aparezca cerca del tope.
+El conjunto oficial es `evaluation/evaluation_v2_queries.json`, con 160
+consultas en inglés anotadas por comando. Antes de evaluar se valida y registra
+el snapshot:
 
-La ejecucion se realiza offline y solo codifica las consultas, nunca regenera
-los embeddings del corpus:
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. \
+dataset_builder/indexer/.venv/bin/python evaluation/create_snapshot_manifest.py
 
-HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
-dataset_builder/indexer/.venv/bin/python evaluation/evaluate_retrieval.py
-
-El resultado JSON queda en evaluation/retrieval_results.json. La visualizacion
-HTML se genera con:
-
-dataset_builder/indexer/.venv/bin/python evaluation/visualize_metrics.py
-
-Luego se abre evaluation/metricas_retrieval.html en cualquier navegador local.
-No requiere servidor ni conexion a internet.
+La línea base FAISS se guarda en `evaluation/retrieval_benchmark_v2.json` y el
+tablero en `evaluation/retrieval_metrics_v2.html`. Las métricas se reportan a
+nivel de comando esperado, aunque la recuperación subyacente opera sobre aliases.
+La última medición común usa Top-15 candidatos para que FAISS y BM25 partan del
+mismo corte antes del cálculo de métricas hasta @10.
 
 5. CALIDAD CONOCIDA
 
-- Clasificador TF-IDF: validacion cruzada estratificada sobre 297 ejemplos:
+- Clasificador TF-IDF: validación cruzada estratificada sobre 297 ejemplos:
   exactitud Top-1 67,7 %. Con sus umbrales, 55,2 % de respuestas concluyentes y
-  84,1 % de precision entre esas respuestas.
-- Retrieval FAISS: linea base sobre 20 consultas inglesas: CommandHit@1 5,0 %,
-  CommandHit@3 20,0 %, CommandHit@5 25,0 %, CommandHit@10 35,0 % y MRR 0,132.
-- Ejecucion end-to-end: la CLI ya carga la configuracion local, el indice FAISS
-  y el corpus, y produce respuestas CLI, Markdown y JSON. La baja calidad del
-  retrieval es un problema de recomendacion, no de arranque del motor.
+  84,1 % de precisión entre esas respuestas.
+- Baseline FAISS oficial: MRR 0,5377, Hit@5 0,7125 y Hit@10 0,8000.
+- BM25 sobre el mismo conjunto: MRR 0,2408, Hit@5 0,2687 y Hit@10 0,3125;
+  su búsqueda observó 3,99 ms por consulta. No alcanza el umbral de calidad
+  establecido para reemplazar FAISS.
+- La CLI procesa consultas con FAISS y genera respuestas CLI, Markdown o JSON;
+  la propuesta queda marcada como no ejecutable.
 
 6. LIMITACIONES DE INTEGRACION
 
-- No hay pruebas del motor Python ni prueba de integracion que cargue indice,
+- No hay pruebas del motor Python ni prueba de integración que cargue índice,
   corpus y formatee una propuesta real.
-- El clasificador tiene pruebas Go y estas pasan usando una cache temporal.
-- El corpus y los artefactos binarios estan ignorados por Git; faltan manifiesto
-  de version, checksum y una politica de distribucion reproducible.
+- El clasificador tiene pruebas Go; conviene conservar su ejecución en CI.
+- El corpus y los artefactos binarios están ignorados por Git; el manifiesto
+  proporciona checksums, pero falta definir una política de distribución.
 
 7. MEJORAS PROPUESTAS, EN ORDEN
 
-1. Sincronizar datos: documentar una version unica de corpus + vectors + aliases
-   + index. Antes de una nueva generacion, guardar conteos y checksums.
-2. Mejorar retrieval: ampliar el set de evaluacion a 100-200 consultas inglesas
-   anotadas, medir CommandHit@k, MRR y nDCG por dominio, y revisar manualmente
-   los fallos Top-10. Agregar luego un set equivalente en espanol.
-3. Mejorar representacion: comparar el modelo actual con un modelo multilingue
-   solo cuando haya conjunto de evaluacion estable. No cambiar modelos por
-   intuicion: elegir por las metricas del set retenido.
-4. Agregar reranking: evaluar un CrossEncoder sobre el Top-50 de FAISS y medir
-   la ganancia neta de MRR/CommandHit@1 frente al costo de latencia.
-5. Robustecer seguridad: ampliar deteccion de comandos peligrosos, pedir valores
-   de parametros faltantes y mostrar la razon de la recomendacion.
-6. Automatizar calidad: ejecutar pruebas Go, pruebas Python y evaluacion de
-   retrieval en CI; publicar el JSON y el tablero HTML como artefactos.
+1. Establecer el baseline reproducible sobre el conjunto oficial de 160 consultas.
+2. Revisar fallos por consulta y dominio; ampliar después la evaluación en español.
+3. Comparar granularidad por comando frente a opción y reducir duplicados.
+4. Probar variantes de texto para embeddings, recuperación BM25/híbrida y
+   reranking solo sobre el mismo snapshot y conjunto de evaluación.
+5. Retomar el Query Planner avanzado cuando la línea base de retrieval quede
+   estable y reproducible.
+6. Automatizar validaciones, pruebas Python/Go y benchmark en CI.
 
 8. ARCHIVOS DE REFERENCIA
 
-- docs/flujo_consulta.drawio: diagrama de la consulta.
-- evaluation/consultas_ingles.txt: consultas legibles para revision humana.
-- evaluation/retrieval_queries.json: mismas consultas y relevancia estructurada.
-- evaluation/retrieval_results.json: resultados de la ultima ejecucion.
-- evaluation/metricas_retrieval.html: tablero HTML generado desde los resultados.
+- `docs/flujo_consulta.drawio`: diagrama de la consulta.
+- `evaluation/evaluation_v2_queries.json`: conjunto oficial y relevancias.
+- `evaluation/create_snapshot_manifest.py`: validación y manifiesto del snapshot.
+- `evaluation/retrieval_snapshot_v2.json`: identidad y checksums de los artefactos.
+- `evaluation/retrieval_benchmark_v2.json`: resultados del baseline oficial.
+- `evaluation/retrieval_metrics_v2.html`: visualización de resultados.
 
-Actualizado: 2026-09-17
+RESUMEN EJECUTIVO
 
-1. Estado General del Proyecto (El Resumen Ejecutivo)
+El motor recibe consultas en lenguaje natural y propone comandos sin ejecutarlos.
+La Fase 2 se enfoca en mejorar y medir la recuperación usando el benchmark
+oficial de 160 consultas y snapshots reproducibles de corpus e índices. Las
+métricas vigentes deben citarse desde `evaluation/retrieval_benchmark_v2.json`,
+no desde resultados históricos.
 
-Comienza dando la "foto grande" del proyecto para situarlo.
+ASPECTOS A DESTACAR
 
-    Flujo End-to-End Funcional: El sistema it-shell ya es capaz de recibir una consulta en lenguaje natural, 
-    procesarla a través de toda la arquitectura y devolver una propuesta formateada (en CLI, Markdown o JSON). No es un problema de arranque; el motor principal ya está operativo.
+- Diseño Safety-First: ProposalValidator identifica parámetros faltantes y
+  comandos sensibles; la propuesta queda para revisión humana.
+- Arquitectura modular: clasificador TF-IDF en Go y recuperación semántica
+  en Python mediante Sentence Transformers y FAISS.
+- Evaluación local: los scripts calculan CommandHit@k, MRR y nDCG sin APIs
+  externas, y generan un tablero HTML.
+- Trazabilidad: `evaluation/retrieval_snapshot_v2.json` registra los artefactos
+  y sus hashes para que las métricas se vinculen a un snapshot concreto.
 
-    La tasa de acierto directo (CommandHit@1) está en un 5%, l o cual identifica claramente dónde hay que poner el esfuerzo ahora.
-    Diagnóstico Actual: El desafío actual dejó de ser la construcción del pipeline y pasó a ser un problema de calidad de recomendación y consistencia de datos. 
+PRÓXIMOS PASOS
 
-    Desincronización Detectada: Actualmente existe un desfase entre el corpus (27.329 documentos) y el índice FAISS (que no incluye ramas críticas como Git o Docker). 
-    Esto está diagnosticado y es la prioridad técnica inmediata.
-
-2. Aspectos a Destacar: Diseño, Arquitectura y Código
-
-Este es el momento de mostrar el valor técnico de las decisiones que tomaste.
-
-    Seguridad por Diseño (Safety-First): Destaca que el sistema está diseñado arquitectónicamente para asistir, no para reemplazar al usuario ni ejecutar ciegamente. 
-    El módulo ProposalValidator marca parámetros faltantes y comandos sensibles, asegurando que la salida generada sea inofensiva hasta que un humano la apruebe.
-
-    Arquitectura Modular Híbrida:
-
-        Tienes un clasificador rápido y eficiente en Go (TF-IDF con 67.7% de exactitud Top-1) encargado del pre-procesamiento y categorización funcional de los documentos.
-
-        Un pipeline en Python que orquesta el análisis, la codificación con SentenceTransformers y la búsqueda vectorial con FAISS (IndexFlatIP con producto interno).
-
-    Infraestructura de Evaluación Offline Autónoma: Subraya que construiste un entorno de evaluación que no depende de APIs externas ni de internet. El pipeline de pruebas codifica las consultas localmente, calcula métricas duras (MRR, CommandHit@k) y genera un tablero HTML visual (metricas_retrieval.html) de forma 100% local.
-
-3. Próximos Pasos (Hoja de Ruta Concreta)
-
-Muestra que tienes un plan de acción priorizado para atacar las debilidades actuales. 
-   
-Preséntalos en este orden:
-
-    Sincronización y Versionado de Datos (Bloqueante): El paso inmediato es unificar y documentar una versión única que alinee el corpus, los vectores, los aliases y el índice FAISS. Se implementarán manifiestos y checksums para garantizar que la distribución sea reproducible.
-
-    Ampliación del Set de Evaluación: Escalar el conjunto de prueba de las 20 consultas actuales en inglés a un set de 100-200 consultas anotadas. Esto permitirá medir con mucha mayor precisión el MRR y el nDCG antes de tocar cualquier modelo de IA.
-
-    Iteración Basada en Métricas, no en Intuición: Una vez que el set de pruebas esté robusto, evaluar el salto a un modelo de embeddings multilingüe (para incorporar consultas en español) y analizar la viabilidad de agregar un servicio de Reranking (CrossEncoder) evaluando el costo de latencia vs. la mejora en los resultados Top-5.
-
-    Madurez del CI/CD: Llevar las pruebas unitarias de Go y Python, junto con el script de evaluación offline, a un entorno de Integración Continua (CI) para automatizar el control de calidad en cada commit.
-
-Tip para la reunión: Si el tutor te pregunta por el bajo rendimiento actual (ese 5% de acierto inicial), enfócalo como un éxito del entorno de evaluación. 
-Saber medir el error es el primer paso indispensable para mejorarlo de forma científica; el motor funciona, ahora toca refinar el índice y el modelo con datos sincronizados.
+1. Ejecutar y archivar el baseline FAISS sobre el snapshot oficial.
+2. Regenerar BM25 para que corpus, consulta e índice compartan la misma versión;
+   luego medir BM25 e híbrido de forma comparable.
+3. Analizar errores por consulta/dominio y evaluar rerankers bajo los mismos
+   candidatos y parámetros.
+4. Llevar validaciones y pruebas Python/Go a CI.

@@ -1,82 +1,86 @@
-CONCLUSIONES DE LA EVALUACION DE RETRIEVAL — FASE 2
-Fecha de consolidacion: 2026-10-24
+CONCLUSIONES FASE 2 — COMPARACION DE RETRIEVAL
+Fecha de consolidacion: 2026-10-28
 
-ALCANCE
+ALCANCE Y SNAPSHOT
 
-Se consolidaron los resultados de 160 consultas del benchmark
-evaluation/evaluation_v2_queries.json para FAISS con all-mpnet-base-v2,
-tres re-rankers, BM25 con Pyserini/Lucene y la busqueda hibrida BM25 + densa
-(alpha = 0.5). Las metricas completas por configuracion estan en
-comparative_table.md y comparative_all.json.
+La evaluacion oficial usa 160 consultas de `evaluation/evaluation_v2_queries.json`.
+El manifiesto `evaluation/retrieval_snapshot_v2.json` registra los checksums del
+corpus, el índice FAISS, aliases y el índice BM25 v2. Los dos recuperadores se
+midieron con el mismo conjunto, corpus y snapshot; ambos usan Top-15 candidatos
+para calcular las métricas hasta @10.
 
-RESULTADO PRINCIPAL
+BASELINE FAISS + all-mpnet-base-v2
 
-El baseline FAISS con all-mpnet-base-v2 es la mejor configuracion de referencia:
-MRR = 0.5385, Hit@5 = 0.7125 y Hit@10 = 0.8063, con 77.73 ms por consulta.
-Cumple el criterio de aceptacion de la fase 2 indicado en
-docs/plan_implementacion_detallado.txt (MRR > 0.25 y Hit@5 >= 0.50).
+- CommandHit@1: 0.4125
+- CommandHit@3: 0.6188
+- CommandHit@5: 0.7125
+- CommandHit@10: 0.8000
+- MRR: 0.5377
+- nDCG@5: 0.3613
+- Latencia observada de retrieval: 62.47 ms/consulta
 
-Ninguno de los re-rankers supera al baseline en el conjunto global:
+FAISS supera el criterio de aceptación de la fase (MRR > 0.25 y Hit@5 >= 0.50)
+y se conserva como motor de recuperación predeterminado.
 
-- MiniLM-L6: MRR 0.5211 y Hit@5 0.6562; agrega latencia total y llega a
-  1055.92 ms por consulta.
-- DistilRoBERTa: MRR 0.5291 y Hit@5 0.6375; latencia total de 3021.09 ms.
-  Igualar Hit@1 del baseline (0.4125) no compensa las caidas en las demas
-  metricas evaluadas.
-- BGE-base: MRR 0.4861 y Hit@5 0.6562; es el resultado mas bajo de los tres
-  re-rankers y el mas lento, con 6044.90 ms por consulta.
+BM25 Pyserini/Lucene
 
-Por tanto, para la configuracion global se recomienda conservar FAISS/MPNet
-como motor predeterminado y dejar los re-rankers desactivados por defecto.
-En estos resultados, su mayor costo de CPU no produce una mejora global de
-calidad.
+- CommandHit@1: 0.2125
+- CommandHit@3: 0.2625
+- CommandHit@5: 0.2687
+- CommandHit@10: 0.3125
+- MRR: 0.2408
+- nDCG@5: 0.2056
+- Latencia observada BM25: 3.99 ms/consulta
 
-BM25 Y BUSQUEDA HIBRIDA
+BM25 es significativamente más rápido, pero queda por debajo de FAISS en todas
+las métricas de calidad y no alcanza los umbrales de aceptación. No reemplaza
+FAISS como recuperación principal. El índice utilizado se reconstruyó desde los
+30.287 documentos actuales y sus hashes constan en el manifiesto.
 
-Los resultados registrados son:
+HIBRIDO BM25 + DENSE (ALPHA = 0.5)
 
-- BM25: MRR 0.2379, Hit@5 0.2625, Hit@10 0.3000 y 5.79 ms de latencia del
-  metodo experimental.
-- Hibrido BM25 + denso (alpha = 0.5): MRR 0.2349, Hit@5 0.2687,
-  Hit@10 0.2812 y 2362.13 ms de latencia del metodo experimental.
+- CommandHit@1: 0.3125
+- CommandHit@3: 0.5375
+- CommandHit@5: 0.6125
+- CommandHit@10: 0.7312
+- MRR: 0.4518
+- nDCG@5: 0.3073
+- Latencia observada del método híbrido: 172.76 ms/consulta
+- Latencia total observada: 229.73 ms/consulta
 
-Ambas variantes quedan por debajo de los umbrales de aceptacion de fase 2 si
-se consideran sus metricas tal como estan registradas. El hibrido aumenta
-Hit@5 solo 0.62 puntos porcentuales frente a BM25, pero reduce MRR de 0.2379
-a 0.2349, reduce Hit@1 y Hit@10 y tiene una latencia experimental mucho mayor.
-No hay evidencia suficiente para recomendarlo como reemplazo del baseline.
+El híbrido mejora claramente BM25 puro, pero no alcanza a FAISS en ninguna de
+las métricas de calidad. Su latencia total también es mayor que la búsqueda
+densa. No se recomienda como configuración predeterminada.
 
-LIMITACION DE COMPARABILIDAD
+RERANKERS
 
-Aunque los artefactos cubren 160 consultas, los archivos de BM25 e hibrido
-declaran un baseline FAISS interno con MRR 0.1768 y Hit@5 0.2000, mientras que
-el baseline de referencia usado por los benchmarks de re-rankers tiene MRR
-0.5385 y Hit@5 0.7125. El comparador marca por ello BM25 e hibrido como "No
-comparables" con la referencia. El mismo numero de consultas no garantiza que
-se hayan usado los mismos indices, corpus, aliases y juicios de relevancia.
+Los JSON existentes de MiniLM, DistilRoBERTa y BGE no incluyen el checksum del
+snapshot que permitiría verificar que usaron exactamente los artefactos
+actuales. El comparador los marca como no comparables y sus cifras previas se
+conservan como resultados históricos. BM25 puro y el híbrido sí incluyen
+provenance del snapshot actual.
 
-Las cifras de BM25 e hibrido deben tratarse como resultados descriptivos de
-sus ejecuciones, no como una comparacion controlada contra FAISS. Antes de
-tomar una decision definitiva sobre estas alternativas, hay que repetir ambos
-benchmarks con el mismo snapshot versionado de corpus, indices, aliases,
-consultas y relevancias del baseline oficial. Tambien conviene guardar esos
-identificadores o checksums en los JSON de resultados.
+CIERRE Y DECISION
 
-DECISION PARA CERRAR LA FASE 2
+1. Fase 2 queda cerrada con FAISS + all-mpnet-base-v2 como configuración elegida.
+2. BM25 queda evaluado y reproducible, pero no sustituye FAISS: su MRR (0.2408)
+   y Hit@5 (0.2687) no alcanzan los umbrales.
+3. El híbrido mejora BM25, pero sigue por debajo de FAISS y es más lento; no se
+   adopta como configuración oficial.
+4. Los rerankers quedan como históricos hasta repetirlos con provenance del
+   mismo snapshot.
+5. El benchmark de 20 consultas está retirado y no se mezcla con estos resultados.
 
-La fase 2 cumple sus criterios cuantitativos gracias al baseline FAISS
-sincronizado, y los experimentos actuales no justifican activar un re-ranker
-por defecto ni sustituir FAISS por BM25 o por la variante hibrida. La
-conclusion sobre BM25/hibrido es provisional hasta repetir la evaluacion con
-artefactos de referencia comparables. El benchmark inicial v1.0 de 20
-consultas tampoco se mezcla numericamente con este informe, porque usa un
-conjunto de evaluacion distinto.
+REPRODUCCION
 
-REPRODUCCION DEL INFORME CONSOLIDADO
+Desde la raíz del proyecto:
 
-Desde la raiz del repositorio:
+1. `TMPDIR=/home/carlos/tmp dataset_builder/indexer/.venv/bin/python dataset_builder/indexer/bm25_indexer.py --corpus dataset_builder/corpus --output dataset_builder/indexer/artifacts/bm25_indexs_v2 --threads 4`
+2. `HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. dataset_builder/indexer/.venv/bin/python evaluation/create_snapshot_manifest.py`
+3. `HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 PYTHONPATH=. dataset_builder/indexer/.venv/bin/python evaluation/evaluate_retrieval.py`
+4. `HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 PYTHONPATH=. dataset_builder/indexer/.venv/bin/python evaluation/evaluate_bm25_hybrid.py --mode bm25 --initial-top-k 15 --output evaluation/bm25_benchmark_v2_top15.json`
+5. `python3 evaluation/compare_all.py`
 
-    python3 evaluation/compare_all.py
-
-El comando genera evaluation/comparative_all.json y
-evaluation/comparative_table.md a partir de los JSON de benchmark disponibles.
+Los reportes oficiales están en `evaluation/retrieval_snapshot_v2.json`,
+`evaluation/retrieval_benchmark_v2.json`, `evaluation/bm25_benchmark_v2_top15.json`,
+`evaluation/comparative_all.json` y `evaluation/comparative_table.md`.

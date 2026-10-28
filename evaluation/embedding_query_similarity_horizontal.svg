@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="960" viewBox="0 0 1320 960" role="img" aria-labelledby="title description">
+  <title id="title">Similitud entre consultas sobre archivos</title>
+  <desc id="description">Mapa de calor horizontal de similitud coseno entre seis consultas reales sobre archivos, codificadas con all-mpnet-base-v2.</desc>
+  <style>
+    text { font-family: Inter, "Segoe UI", Arial, sans-serif; fill: #14243a; }
+    .muted { fill: #52647a; }
+    .axis { font-size: 15px; font-weight: 700; }
+    .cell { font-size: 17px; font-weight: 750; stroke: none; }
+    .light { fill: #ffffff; stroke: none; }
+  </style>
+  <rect width="1320" height="960" fill="#ffffff"/>
+  <text x="52" y="60" font-size="30" font-weight="750">Consultas sobre archivos: similitud semántica</text>
+  <text x="52" y="94" font-size="16" class="muted">Embeddings de all-mpnet-base-v2 · coseno · consultas seleccionadas para visualización</text>
+  <text x="586" y="145" text-anchor="middle" class="axis">Comparar con →</text>
+  <text x="56" y="507" text-anchor="middle" class="axis" transform="rotate(-90 56 507)">Consulta</text>
+
+  <g text-anchor="middle" class="axis">
+    <text x="356" y="190"><tspan x="356">Listar</tspan><tspan x="356" dy="19">archivos</tspan></text>
+    <text x="448" y="190"><tspan x="448">Encontrar</tspan><tspan x="448" dy="19">archivos</tspan></text>
+    <text x="540" y="190"><tspan x="540">Buscar texto</tspan><tspan x="540" dy="19">en archivo</tspan></text>
+    <text x="632" y="190"><tspan x="632">Leer</tspan><tspan x="632" dy="19">archivo</tspan></text>
+    <text x="724" y="190"><tspan x="724">Ver primeras</tspan><tspan x="724" dy="19">líneas</tspan></text>
+    <text x="816" y="190"><tspan x="816">Seguir</tspan><tspan x="816" dy="19">un log</tspan></text>
+  </g>
+  <g text-anchor="end" class="axis">
+    <text x="292" y="286">Listar archivos</text>
+    <text x="292" y="378">Encontrar archivos</text>
+    <text x="292" y="470">Buscar texto</text>
+    <text x="292" y="562">Leer archivo</text>
+    <text x="292" y="654">Ver primeras líneas</text>
+    <text x="292" y="746">Seguir un log</text>
+  </g>
+
+  <g stroke="#ffffff" stroke-width="3">
+    <rect x="310" y="235" width="92" height="92" rx="6" fill="#173f73"/><text x="356" y="290" text-anchor="middle" class="cell light">1.00</text>
+    <rect x="402" y="235" width="92" height="92" rx="6" fill="#2d6fa6"/><text x="448" y="290" text-anchor="middle" class="cell light">0.72</text>
+    <rect x="494" y="235" width="92" height="92" rx="6" fill="#cbe0e9"/><text x="540" y="290" text-anchor="middle" class="cell">0.34</text>
+    <rect x="586" y="235" width="92" height="92" rx="6" fill="#c5dce6"/><text x="632" y="290" text-anchor="middle" class="cell">0.36</text>
+    <rect x="678" y="235" width="92" height="92" rx="6" fill="#bed7e2"/><text x="724" y="290" text-anchor="middle" class="cell">0.38</text>
+    <rect x="770" y="235" width="92" height="92" rx="6" fill="#f2f6f8"/><text x="816" y="290" text-anchor="middle" class="cell">0.08</text>
+
+    <rect x="310" y="327" width="92" height="92" rx="6" fill="#2d6fa6"/><text x="356" y="382" text-anchor="middle" class="cell light">0.72</text>
+    <rect x="402" y="327" width="92" height="92" rx="6" fill="#173f73"/><text x="448" y="382" text-anchor="middle" class="cell light">1.00</text>
+    <rect x="494" y="327" width="92" height="92" rx="6" fill="#91c2d4"/><text x="540" y="382" text-anchor="middle" class="cell">0.50</text>
+    <rect x="586" y="327" width="92" height="92" rx="6" fill="#ebf2f5"/><text x="632" y="382" text-anchor="middle" class="cell">0.14</text>
+    <rect x="678" y="327" width="92" height="92" rx="6" fill="#e1edf2"/><text x="724" y="382" text-anchor="middle" class="cell">0.20</text>
+    <rect x="770" y="327" width="92" height="92" rx="6" fill="#f5f8fa"/><text x="816" y="382" text-anchor="middle" class="cell">0.05</text>
+
+    <rect x="310" y="419" width="92" height="92" rx="6" fill="#cbe0e9"/><text x="356" y="474" text-anchor="middle" class="cell">0.34</text>
+    <rect x="402" y="419" width="92" height="92" rx="6" fill="#91c2d4"/><text x="448" y="474" text-anchor="middle" class="cell">0.50</text>
+    <rect x="494" y="419" width="92" height="92" rx="6" fill="#173f73"/><text x="540" y="474" text-anchor="middle" class="cell light">1.00</text>
+    <rect x="586" y="419" width="92" height="92" rx="6" fill="#8bbdd1"/><text x="632" y="474" text-anchor="middle" class="cell">0.51</text>
+    <rect x="678" y="419" width="92" height="92" rx="6" fill="#b9d3df"/><text x="724" y="474" text-anchor="middle" class="cell">0.39</text>
+    <rect x="770" y="419" width="92" height="92" rx="6" fill="#d3e5ec"/><text x="816" y="474" text-anchor="middle" class="cell">0.30</text>
+
+    <rect x="310" y="511" width="92" height="92" rx="6" fill="#c5dce6"/><text x="356" y="566" text-anchor="middle" class="cell">0.36</text>
+    <rect x="402" y="511" width="92" height="92" rx="6" fill="#ebf2f5"/><text x="448" y="566" text-anchor="middle" class="cell">0.14</text>
+    <rect x="494" y="511" width="92" height="92" rx="6" fill="#8bbdd1"/><text x="540" y="566" text-anchor="middle" class="cell">0.51</text>
+    <rect x="586" y="511" width="92" height="92" rx="6" fill="#173f73"/><text x="632" y="566" text-anchor="middle" class="cell light">1.00</text>
+    <rect x="678" y="511" width="92" height="92" rx="6" fill="#5da1c3"/><text x="724" y="566" text-anchor="middle" class="cell">0.60</text>
+    <rect x="770" y="511" width="92" height="92" rx="6" fill="#d3e5ec"/><text x="816" y="566" text-anchor="middle" class="cell">0.30</text>
+
+    <rect x="310" y="603" width="92" height="92" rx="6" fill="#bed7e2"/><text x="356" y="658" text-anchor="middle" class="cell">0.38</text>
+    <rect x="402" y="603" width="92" height="92" rx="6" fill="#e1edf2"/><text x="448" y="658" text-anchor="middle" class="cell">0.20</text>
+    <rect x="494" y="603" width="92" height="92" rx="6" fill="#b9d3df"/><text x="540" y="658" text-anchor="middle" class="cell">0.39</text>
+    <rect x="586" y="603" width="92" height="92" rx="6" fill="#5da1c3"/><text x="632" y="658" text-anchor="middle" class="cell">0.60</text>
+    <rect x="678" y="603" width="92" height="92" rx="6" fill="#173f73"/><text x="724" y="658" text-anchor="middle" class="cell light">1.00</text>
+    <rect x="770" y="603" width="92" height="92" rx="6" fill="#cbe0e9"/><text x="816" y="658" text-anchor="middle" class="cell">0.34</text>
+
+    <rect x="310" y="695" width="92" height="92" rx="6" fill="#f2f6f8"/><text x="356" y="750" text-anchor="middle" class="cell">0.08</text>
+    <rect x="402" y="695" width="92" height="92" rx="6" fill="#f5f8fa"/><text x="448" y="750" text-anchor="middle" class="cell">0.05</text>
+    <rect x="494" y="695" width="92" height="92" rx="6" fill="#d3e5ec"/><text x="540" y="750" text-anchor="middle" class="cell">0.30</text>
+    <rect x="586" y="695" width="92" height="92" rx="6" fill="#d3e5ec"/><text x="632" y="750" text-anchor="middle" class="cell">0.30</text>
+    <rect x="678" y="695" width="92" height="92" rx="6" fill="#cbe0e9"/><text x="724" y="750" text-anchor="middle" class="cell">0.34</text>
+    <rect x="770" y="695" width="92" height="92" rx="6" fill="#173f73"/><text x="816" y="750" text-anchor="middle" class="cell light">1.00</text>
+  </g>
+
+  <text x="930" y="258" font-size="16" font-weight="700">Similitud coseno</text>
+  <rect x="940" y="280" width="26" height="260" rx="6" fill="#173f73"/>
+  <rect x="940" y="345" width="26" height="65" fill="#5da1c3"/>
+  <rect x="940" y="410" width="26" height="65" fill="#91c2d4"/>
+  <rect x="940" y="475" width="26" height="65" rx="6" fill="#f2f6f8"/>
+  <g font-size="14" class="muted">
+    <text x="980" y="291">1.0 · muy alta</text>
+    <text x="980" y="421">0.5</text>
+    <text x="980" y="545">0.0 · baja</text>
+  </g>
+  <text x="930" y="600" font-size="14" class="muted">Ejemplo: “listar” y</text>
+  <text x="930" y="622" font-size="14" class="muted">“encontrar archivos”</text>
+  <text x="930" y="644" font-size="14" class="muted">tienen similitud 0.72.</text>
+
+  <line x1="52" y1="850" x2="1268" y2="850" stroke="#dbe3ed"/>
+  <text x="52" y="884" font-size="14" class="muted">Cada celda compara dos consultas; la diagonal es 1.00 porque compara cada consulta consigo misma.</text>
+  <text x="52" y="910" font-size="14" class="muted">Valores calculados como producto interno de embeddings normalizados; redondeados a dos decimales.</text>
+</svg>

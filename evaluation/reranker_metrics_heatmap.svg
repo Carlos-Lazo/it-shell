@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title description">
+  <title id="title">Comparación de métricas de retrieval y rerankers</title>
+  <desc id="description">Heatmap histórico de Hit@1, Hit@3, Hit@5, Hit@10, MRR y nDCG para el baseline FAISS MPNet y los rerankers MiniLM, DistilRoBERTa y BGE, en orden experimental. Estos modelos no tienen hashes que acrediten el snapshot actual. La latencia total se muestra en barras separadas.</desc>
+  <style>
+    text { font-family: Inter, "Segoe UI", Arial, sans-serif; fill: #14243a; }
+    .muted { fill: #53657b; }
+    .column { font-size: 19px; font-weight: 700; }
+    .row { font-size: 20px; font-weight: 700; }
+    .cell { font-size: 20px; font-weight: 750; fill: #14243a !important; stroke: none !important; }
+    .light { fill: #ffffff !important; stroke: none !important; }
+    .latency-label { font-size: 17px; font-weight: 650; }
+  </style>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <text x="70" y="78" font-size="38" font-weight="750">Comparación de métricas de retrieval</text>
+  <text x="70" y="118" font-size="19" class="muted">Resultados históricos: rerankers sin snapshot actual verificado</text>
+
+  <text x="555" y="203" text-anchor="middle" class="column">Hit@1</text>
+  <text x="685" y="203" text-anchor="middle" class="column">Hit@3</text>
+  <text x="815" y="203" text-anchor="middle" class="column">Hit@5</text>
+  <text x="945" y="203" text-anchor="middle" class="column">Hit@10</text>
+  <text x="1075" y="203" text-anchor="middle" class="column">MRR</text>
+  <text x="1205" y="203" text-anchor="middle" class="column">nDCG@1</text>
+  <text x="1335" y="203" text-anchor="middle" class="column">nDCG@3</text>
+  <text x="1465" y="203" text-anchor="middle" class="column">nDCG@5</text>
+  <text x="1595" y="203" text-anchor="middle" class="column">nDCG@10</text>
+  <text x="1778" y="203" text-anchor="middle" class="column">Latencia</text>
+
+  <g text-anchor="end">
+    <text x="385" y="326" class="row">FAISS + MPNet</text>
+    <text x="385" y="476" class="row">1 · MiniLM-L6</text>
+    <text x="385" y="626" class="row">2 · DistilRoBERTa</text>
+    <text x="385" y="776" class="row">3 · BGE-base</text>
+  </g>
+
+  <g stroke="#ffffff" stroke-width="4">
+    <rect x="490" y="255" width="130" height="110" rx="8" fill="#dbe9f5"/><text x="555" y="321" text-anchor="middle" class="cell">0.4125</text>
+    <rect x="620" y="255" width="130" height="110" rx="8" fill="#78acd6"/><text x="685" y="321" text-anchor="middle" class="cell">0.6188</text>
+    <rect x="750" y="255" width="130" height="110" rx="8" fill="#4e8fc5"/><text x="815" y="321" text-anchor="middle" class="cell light">0.7125</text>
+    <rect x="880" y="255" width="130" height="110" rx="8" fill="#174f80"/><text x="945" y="321" text-anchor="middle" class="cell light">0.8063</text>
+    <rect x="1010" y="255" width="130" height="110" rx="8" fill="#aed0eb"/><text x="1075" y="321" text-anchor="middle" class="cell">0.5385</text>
+    <rect x="1140" y="255" width="130" height="110" rx="8" fill="#dbe9f5"/><text x="1205" y="321" text-anchor="middle" class="cell">0.4125</text>
+    <rect x="1270" y="255" width="130" height="110" rx="8" fill="#e5eff7"/><text x="1335" y="321" text-anchor="middle" class="cell">0.3773</text>
+    <rect x="1400" y="255" width="130" height="110" rx="8" fill="#e5eff7"/><text x="1465" y="321" text-anchor="middle" class="cell">0.3607</text>
+    <rect x="1530" y="255" width="130" height="110" rx="8" fill="#edf3f8"/><text x="1595" y="321" text-anchor="middle" class="cell">0.3353</text>
+
+    <rect x="490" y="405" width="130" height="110" rx="8" fill="#dbe9f5"/><text x="555" y="471" text-anchor="middle" class="cell">0.4062</text>
+    <rect x="620" y="405" width="130" height="110" rx="8" fill="#8bb8dc"/><text x="685" y="471" text-anchor="middle" class="cell">0.5813</text>
+    <rect x="750" y="405" width="130" height="110" rx="8" fill="#6ba2cf"/><text x="815" y="471" text-anchor="middle" class="cell">0.6562</text>
+    <rect x="880" y="405" width="130" height="110" rx="8" fill="#1e5d91"/><text x="945" y="471" text-anchor="middle" class="cell light">0.7875</text>
+    <rect x="1010" y="405" width="130" height="110" rx="8" fill="#b4d2ec"/><text x="1075" y="471" text-anchor="middle" class="cell">0.5211</text>
+    <rect x="1140" y="405" width="130" height="110" rx="8" fill="#dbe9f5"/><text x="1205" y="471" text-anchor="middle" class="cell">0.4062</text>
+    <rect x="1270" y="405" width="130" height="110" rx="8" fill="#eaf2f8"/><text x="1335" y="471" text-anchor="middle" class="cell">0.3626</text>
+    <rect x="1400" y="405" width="130" height="110" rx="8" fill="#edf3f8"/><text x="1465" y="471" text-anchor="middle" class="cell">0.3494</text>
+    <rect x="1530" y="405" width="130" height="110" rx="8" fill="#edf3f8"/><text x="1595" y="471" text-anchor="middle" class="cell">0.3332</text>
+
+    <rect x="490" y="555" width="130" height="110" rx="8" fill="#dbe9f5"/><text x="555" y="621" text-anchor="middle" class="cell">0.4125</text>
+    <rect x="620" y="555" width="130" height="110" rx="8" fill="#84b4da"/><text x="685" y="621" text-anchor="middle" class="cell">0.5938</text>
+    <rect x="750" y="555" width="130" height="110" rx="8" fill="#78acd6"/><text x="815" y="621" text-anchor="middle" class="cell">0.6375</text>
+    <rect x="880" y="555" width="130" height="110" rx="8" fill="#1c598a"/><text x="945" y="621" text-anchor="middle" class="cell light">0.7937</text>
+    <rect x="1010" y="555" width="130" height="110" rx="8" fill="#aed0eb"/><text x="1075" y="621" text-anchor="middle" class="cell">0.5291</text>
+    <rect x="1140" y="555" width="130" height="110" rx="8" fill="#dbe9f5"/><text x="1205" y="621" text-anchor="middle" class="cell">0.4125</text>
+    <rect x="1270" y="555" width="130" height="110" rx="8" fill="#e5eff7"/><text x="1335" y="621" text-anchor="middle" class="cell">0.3710</text>
+    <rect x="1400" y="555" width="130" height="110" rx="8" fill="#edf3f8"/><text x="1465" y="621" text-anchor="middle" class="cell">0.3440</text>
+    <rect x="1530" y="555" width="130" height="110" rx="8" fill="#edf3f8"/><text x="1595" y="621" text-anchor="middle" class="cell">0.3293</text>
+
+    <rect x="490" y="705" width="130" height="110" rx="8" fill="#e5eff7"/><text x="555" y="771" text-anchor="middle" class="cell">0.3625</text>
+    <rect x="620" y="705" width="130" height="110" rx="8" fill="#a2c7e5"/><text x="685" y="771" text-anchor="middle" class="cell">0.5312</text>
+    <rect x="750" y="705" width="130" height="110" rx="8" fill="#6ba2cf"/><text x="815" y="771" text-anchor="middle" class="cell">0.6562</text>
+    <rect x="880" y="705" width="130" height="110" rx="8" fill="#1c598a"/><text x="945" y="771" text-anchor="middle" class="cell light">0.7937</text>
+    <rect x="1010" y="705" width="130" height="110" rx="8" fill="#c1d9ed"/><text x="1075" y="771" text-anchor="middle" class="cell">0.4861</text>
+    <rect x="1140" y="705" width="130" height="110" rx="8" fill="#e5eff7"/><text x="1205" y="771" text-anchor="middle" class="cell">0.3625</text>
+    <rect x="1270" y="705" width="130" height="110" rx="8" fill="#edf3f8"/><text x="1335" y="771" text-anchor="middle" class="cell">0.3212</text>
+    <rect x="1400" y="705" width="130" height="110" rx="8" fill="#edf3f8"/><text x="1465" y="771" text-anchor="middle" class="cell">0.3215</text>
+    <rect x="1530" y="705" width="130" height="110" rx="8" fill="#edf3f8"/><text x="1595" y="771" text-anchor="middle" class="cell">0.3140</text>
+  </g>
+
+  <text x="1688" y="237" font-size="14" class="muted">ms por consulta · escala lineal</text>
+  <g>
+    <rect x="1688" y="287" width="180" height="16" rx="8" fill="#edf2f7"/>
+    <rect x="1688" y="287" width="3" height="16" rx="2" fill="#426f9b"/>
+    <text x="1688" y="338" class="latency-label">77.73 ms</text>
+    <rect x="1688" y="437" width="180" height="16" rx="8" fill="#edf2f7"/>
+    <rect x="1688" y="437" width="31.4" height="16" rx="8" fill="#426f9b"/>
+    <text x="1688" y="488" class="latency-label">1,055.92 ms</text>
+    <rect x="1688" y="587" width="180" height="16" rx="8" fill="#edf2f7"/>
+    <rect x="1688" y="587" width="90" height="16" rx="8" fill="#426f9b"/>
+    <text x="1688" y="638" class="latency-label">3,021.09 ms</text>
+    <rect x="1688" y="737" width="180" height="16" rx="8" fill="#edf2f7"/>
+    <rect x="1688" y="737" width="180" height="16" rx="8" fill="#426f9b"/>
+    <text x="1688" y="788" class="latency-label">6,044.90 ms</text>
+  </g>
+
+  <text x="70" y="900" font-size="17" font-weight="700">Lectura</text>
+  <text x="70" y="930" font-size="16" class="muted">En el heatmap, el color más oscuro representa un valor mayor (escala de 0 a 1). La latencia está expresada aparte en milisegundos.</text>
+  <rect x="70" y="968" width="28" height="22" rx="4" fill="#edf3f8"/>
+  <rect x="98" y="968" width="28" height="22" fill="#b4d2ec"/>
+  <rect x="126" y="968" width="28" height="22" fill="#78acd6"/>
+  <rect x="154" y="968" width="28" height="22" rx="4" fill="#174f80"/>
+  <text x="194" y="985" font-size="14" class="muted">menor</text>
+  <text x="300" y="985" font-size="14" class="muted">mayor rendimiento</text>
+</svg>

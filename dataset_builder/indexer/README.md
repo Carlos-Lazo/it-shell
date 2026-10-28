@@ -27,6 +27,6 @@ Construcción de índices bm25
 ```bash
 python dataset_builder/indexer/bm25_indexer.py \
     --corpus ../corpus \
-    --output artifacts/bm25_indexs \
+    --output artifacts/bm25_indexs_v2 \
     --threads 4
 ```

@@ -20,7 +20,7 @@ from pyserini.search.lucene import LuceneSearcher
 # Rutas absolutas derivadas de la ubicación de este archivo
 # ---------------------------------------------------------------------------
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]   # tests/ -> code/
-BM25_INDEX = REPO_ROOT / "dataset_builder" / "indexer" / "artifacts" / "bm25_indexs"
+BM25_INDEX = REPO_ROOT / "dataset_builder" / "indexer" / "artifacts" / "bm25_indexs_v2"
 
 
 class TestBM25Index(unittest.TestCase):

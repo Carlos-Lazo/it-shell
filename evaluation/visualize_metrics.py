@@ -11,8 +11,8 @@ from pathlib import Path
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input", type=Path, default=Path("evaluation/retrieval_results.json"))
-    parser.add_argument("--output", type=Path, default=Path("evaluation/metricas_retrieval.html"))
+    parser.add_argument("--input", type=Path, default=Path("evaluation/retrieval_benchmark_v2.json"))
+    parser.add_argument("--output", type=Path, default=Path("evaluation/retrieval_metrics_v2.html"))
     args = parser.parse_args()
 
     report = json.loads(args.input.read_text(encoding="utf-8"))
