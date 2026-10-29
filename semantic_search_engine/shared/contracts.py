@@ -81,6 +81,7 @@ class SearchResponse:
     plan: QueryPlan
     proposal: PipelineProposal
     clarification_prompt: str | None = None
+    explanation: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

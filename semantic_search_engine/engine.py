@@ -4,5 +4,11 @@ class SemanticSearchEngine:
     def search(self, request: QueryRequest):
         analysis, plan, retrieved=self.retrieval.retrieve_plan(request.query, request.retrieval_top_k)
         proposal=self.pipeline.propose(plan, retrieved, self.reranker)
-        response=SearchResponse(analysis, plan, proposal, self.prompts.clarification(proposal))
+        response=SearchResponse(
+            analysis,
+            plan,
+            proposal,
+            self.prompts.clarification(proposal),
+            self.prompts.explain(proposal),
+        )
         return self.formatter.format(response, request.output_format)

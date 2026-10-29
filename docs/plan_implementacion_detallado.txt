@@ -135,7 +135,7 @@ Entregables:
 Criterio de Aceptación:
 - 0 falsos negativos en patrones de riesgo crítico. Advertencias claras y visibles en todos los formatos.
 
-Estado en `feat/phase-3-query-planner`: reglas 4.1 y contrato/renderizado 4.2
+Estado en `feat/phase-4-safety-validator`: reglas 4.1 y contrato/renderizado 4.2
 implementados. La matriz 4.3 cubre 56 comandos únicos (seguros y de riesgo,
 con casos de advertencia y críticos); suite completa aprobada. Antes de cerrar
 la fase se recomienda revisar también ejemplos reales del corpus y de uso.
@@ -170,6 +170,12 @@ Entregables:
 Criterio de Aceptación:
 - Si el LLM está deshabilitado o falla la conexión, el sistema responde de forma instantánea y completa
   utilizando el formateador local determinista.
+
+Estado en `feat/phase-5-explanation`: contexto de explicación, prompt restringido,
+interfaz opcional `LLMClient`, fallback determinista sin servicios externos y renderizado
+CLI/terminal ANSI, Markdown y JSON implementados. No se configura un proveedor LLM por
+defecto. La suite específica cubre fallback offline y errores del proveedor; Fase 5
+pendiente de validación completa antes de cerrar.
 
 ----------------------------------------------------------------------
 FASE 6: SERVIDOR MCP (MODEL CONTEXT PROTOCOL)
