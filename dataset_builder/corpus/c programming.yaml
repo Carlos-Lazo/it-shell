@@ -1,0 +1,838 @@
+category: "c programming"
+documents:
+- id: 1
+  intent: "the length of STRING is zero STRING1 = STRING2 the strings are equal STRING1 != STRING2 the strings are not equal INTEGER1 -eq INTEGER2 INTEGER1 is equal to INTEGER2 INTEGER1 -ge INTEGER2 INTEGER1 is greater than or equal to INTEGER2 INTEGER1 -gt INTEGER2 INTEGER1 is greater than INTEGER2 INTEGER1 -le INTEGER2 INTEGER1 is less than or equal to INTEGER2 INTEGER1 -lt INTEGER2 INTEGER1 is less than INTEGER2 INTEGER1 -ne INTEGER2 INTEGER1 is not equal to INTEGER2 FILE1 -ef FILE2 FILE1 and FILE2 have the same device and inode numbers FILE1 -nt FILE2 FILE1 is newer (modification date) than FILE2 FILE1 -ot FILE2 FILE1 is older than FILE2"
+  command: "["
+  example: "[ -z STRING"
+- id: 2
+  intent: "Give  the channel map to override or follow.  Pass channel posi- tion strings like FL, FR, etc. If a device supports the override  of  the  channel  map,  aplay tries  to pass the given channel map.  If it doesn't support the channel map override but still it provides the channel  map  in- formation,  aplay  tries  to  rearrange the channel order in the buffer to match with the returned channel map from the device."
+  command: "aplay"
+  example: "aplay -m, --chmap=ch1,ch2,..."
+- id: 3
+  intent: "Give  the channel map to override or follow.  Pass channel posi- tion strings like FL, FR, etc. If a device supports the override  of  the  channel  map,  aplay tries  to pass the given channel map.  If it doesn't support the channel map override but still it provides the channel  map  in- formation,  aplay  tries  to  rearrange the channel order in the buffer to match with the returned channel map from the device."
+  command: "arecord"
+  example: "arecord -m, --chmap=ch1,ch2,..."
+- id: 4
+  intent: "Equivalent  to -D, but the output is in the GNU gettext po (por- table object) file format."
+  command: "bash"
+  example: "bash --dump-po-strings"
+- id: 5
+  intent: "Equivalent to -D."
+  command: "bash"
+  example: "bash --dump-strings"
+- id: 6
+  intent: "allow ## unique strings."
+  command: "bibtex8"
+  example: "bibtex8 --mstrings ##"
+- id: 7
+  intent: "use language LANG to convert strings to low case.  This argument is passed to ICU library."
+  command: "bibtexu"
+  example: "bibtexu -l  --language LANG"
+- id: 8
+  intent: "allow ## unique strings."
+  command: "bibtexu"
+  example: "bibtexu --mstrings ##"
+- id: 9
+  intent: "find optimum parameter settings for bogofilter"
+  command: "bogotune"
+  example: "bogotune"
+- id: 10
+  intent: "find optimum parameter settings for bogofilter"
+  command: "bogotune-bdb"
+  example: "bogotune-bdb"
+- id: 11
+  intent: "Do  not  run the specified passes to clean up and reduce the size of the test program. By default, bugpoint uses these passes  internally when attempting to reduce test programs.  If you're trying to find a bug in one of these passes, bugpoint may crash."
+  command: "bugpoint-14"
+  example: "bugpoint-14 -disable-{dce,simplifycfg}"
+- id: 12
+  intent: "Use valgrind to find faults in the optimization phase. This will al- low  bugpoint to find otherwise asymptomatic problems caused by mem- ory mis-management."
+  command: "bugpoint-14"
+  example: "bugpoint-14 -enable-valgrind"
+- id: 13
+  intent: "Continually randomize the specified passes and run them on the  test program until a bug is found or the user kills bugpoint."
+  command: "bugpoint-14"
+  example: "bugpoint-14 -find-bugs"
+- id: 14
+  intent: "Enables or disables a limit on the amount of recursion performed whilst demangling strings.  Since the name mangling formats allow for an infinite level of recursion it is possible to create strings whose decoding will exhaust the amount of stack space available on the host machine, triggering a memory fault.  The limit tries to prevent this from happening by restricting recursion to 2048 levels of nesting. The default is for this limit to be enabled, but disabling it may be necessary in order to demangle truly complicated names.  Note however that if the recursion limit is disabled then stack exhaustion is possible and any bug reports about such an event will be rejected. The -r option is a synonym for the --no-recurse-limit option.  The -R option is a synonym for the --recurse-limit option."
+  command: "c++filt"
+  example: "c++filt --no-recursion-limit"
+- id: 15
+  intent: "Use  the  color balance specified by the camera.  If cameratopam can't find this, it prints a warning and reverts to the default."
+  command: "cameratopam"
+  example: "cameratopam -balance_camera"
+- id: 16
+  intent: "Enable support for Pascal-style strings with \"\\pfoo\"."
+  command: "clang"
+  example: "clang -fpascal-strings"
+- id: 17
+  intent: "Make  all  string  literals  default to writable.  This disables uniquing of strings and other optimizations."
+  command: "clang"
+  example: "clang -fwritable-strings"
+- id: 18
+  intent: "Enable support for Pascal-style strings with \"\\pfoo\"."
+  command: "clang-14"
+  example: "clang-14 -fpascal-strings"
+- id: 19
+  intent: "Make  all  string  literals  default to writable.  This disables uniquing of strings and other optimizations."
+  command: "clang-14"
+  example: "clang-14 -fwritable-strings"
+- id: 20
+  intent: "find clusters in a graph and augment the graph with this in- formation."
+  command: "cluster"
+  example: "cluster"
+- id: 21
+  intent: "that is guaranteed to find all of the standard utilities."
+  command: "command"
+  example: "command -p        Perform  the  command  search  using a default value for PATH"
+- id: 22
+  intent: "Turns on extra information to find out what is happening."
+  command: "compose"
+  example: "compose --debug"
+- id: 23
+  intent: "A comma-separated list of mirrors to use for just this run. The \"-P\" option can find them for you automatically."
+  command: "cpan"
+  example: "cpan -M mirror1,mirror2,..."
+- id: 24
+  intent: "current session."
+  command: "cpan"
+  example: "cpan -P  Find the best mirrors you could be using and use them for the"
+- id: 25
+  intent: "Find close matches to the named modules that you think you might have mistyped. This requires the optional installation of Text::Levenshtein or Text::Levenshtein::Damerau."
+  command: "cpan"
+  example: "cpan -x module [ module ... ]"
+- id: 26
+  intent: "A comma-separated list of mirrors to use for just this run. The \"-P\" option can find them for you automatically."
+  command: "cpan5.36-x86_64-linux-gnu"
+  example: "cpan5.36-x86_64-linux-gnu -M mirror1,mirror2,..."
+- id: 27
+  intent: "current session."
+  command: "cpan5.36-x86_64-linux-gnu"
+  example: "cpan5.36-x86_64-linux-gnu -P  Find the best mirrors you could be using and use them for the"
+- id: 28
+  intent: "Find close matches to the named modules that you think you might have mistyped. This requires the optional installation of Text::Levenshtein or Text::Levenshtein::Damerau."
+  command: "cpan5.36-x86_64-linux-gnu"
+  example: "cpan5.36-x86_64-linux-gnu -x module [ module ... ]"
+- id: 29
+  intent: "Truncate  individual  resources (strings or binary data) to size bytes. The default if size is not specified is 80 bytes."
+  command: "derb"
+  example: "derb -t, --truncate [ size ]"
+- id: 30
+  intent: "try hard to find a smaller set of changes"
+  command: "diff"
+  example: "diff -d, --minimal"
+- id: 31
+  intent: "Set   encoding  for  interpreting  `xxx:'  strings  [default: `none'].  Allowed values are: `none', `utf8', `sjis' and `eu- cjp'. This  option allows users to specify the correct encoding for dumping/compiling the contents of \\special. Typical usages are as follows: 1) By default, the contents of \\special are dumped/compiled as  byte-to-byte  escape  sequences in `\\x..' format.  This would suffice when you don't need to read/edit the contents of \\special. 3)  For  XeTeX  and  upTeX users, `-x utf8' would be useful since these engines use  UTF-8  to  encode  strings  inside \\special commands. 2) For pTeX users with ISO-2022-JP-encoded DVI, it would be helpful to select the appropriate option  `-x  eucjp'  (for Unix)  or `-x sjis' (for Windows) to be consistent with the internal Kanji encoding used by pTeX engine."
+  command: "dviasm"
+  example: "dviasm -x <STR>, --xxx-encoding=<STR>"
+- id: 32
+  intent: "This will disable the use of pTeX extensions  when  interpreting DVI  files.   By default, the additional opcodes 130 and 135 are recognized by dvips as pTeX extensions and  interpreted  as  re- quests  to  set  3-byte characters, and 255 as request to change the typesetting direction. The only drawback is that the virtual font array will (at  least temporarily)  require 65536 or more positions instead of the de- fault 256 positions, i.e., the memory requirements of dvips will be  somewhat larger.  If you find this unacceptable or encounter another problem with the  Omega  or  pTeX  extensions,  you  can switch off the pTeX extension by using -noptex, or both by using -noomega (but please do send a bug report if you find such prob- lems - see the bug address in the AUTHORS section below)."
+  command: "dvips"
+  example: "dvips -noptex"
+- id: 33
+  intent: "accuracy with which to find the maximally different coloring for each node with regard to its neighbors. Default e = 0.01."
+  command: "edgepaint"
+  example: "edgepaint -accuracy=e"
+- id: 34
+  intent: "Turns on extra information to find out what is happening."
+  command: "edit"
+  example: "edit --debug"
+- id: 35
+  intent: "Save the last hundred search strings and replacement strings and executed  commands,  so  they can be easily reused in later ses- sions."
+  command: "editor"
+  example: "editor -H, --historylog"
+- id: 36
+  intent: "Interpret PATTERNS as fixed strings, not regular expressions."
+  command: "egrep"
+  example: "egrep -F, --fixed-strings"
+- id: 37
+  intent: "substitutes environment variables in shell format strings"
+  command: "envsubst"
+  example: "envsubst"
+- id: 38
+  intent: "If TYPE is \"ExifTool\" or not specified, this option sets the ExifTool character encoding for output tag values when reading and input values when writing, with a default of \"UTF8\".  If no CHARSET is given, a list of available character sets is returned. Valid CHARSET values are: CHARSET     Alias(es)        Description ----------  ---------------  ---------------------------------- UTF8        cp65001, UTF-8   UTF-8 characters (default) Latin       cp1252, Latin1   Windows Latin1 (West European) Latin2      cp1250           Windows Latin2 (Central European) Cyrillic    cp1251, Russian  Windows Cyrillic Greek       cp1253           Windows Greek Turkish     cp1254           Windows Turkish Hebrew      cp1255           Windows Hebrew Arabic      cp1256           Windows Arabic Baltic      cp1257           Windows Baltic Vietnam     cp1258           Windows Vietnamese Thai        cp874            Windows Thai DOSLatinUS  cp437            DOS Latin US DOSLatin1   cp850            DOS Latin1 DOSCyrillic cp866            DOS Cyrillic MacRoman    cp10000, Roman   Macintosh Roman MacLatin2   cp10029          Macintosh Latin2 (Central Europe) MacCyrillic cp10007          Macintosh Cyrillic MacGreek    cp10006          Macintosh Greek MacTurkish  cp10081          Macintosh Turkish MacRomanian cp10010          Macintosh Romanian MacIceland  cp10079          Macintosh Icelandic MacCroatian cp10082          Macintosh Croatian TYPE may be \"FileName\" to specify the encoding of file names on the command line (ie. FILE arguments).  In Windows, this triggers use of wide-character i/o routines, thus providing support for Unicode file names.  See the \"WINDOWS UNICODE FILE NAMES\" section below for details. Other values of TYPE listed below are used to specify the internal encoding of various meta information formats. TYPE       Description                                  Default ---------  -------------------------------------------  ------- EXIF       Internal encoding of EXIF \"ASCII\" strings    (none) ID3        Internal encoding of ID3v1 information       Latin IPTC       Internal IPTC encoding to assume when        Latin IPTC:CodedCharacterSet is not defined Photoshop  Internal encoding of Photoshop IRB strings   Latin QuickTime  Internal encoding of QuickTime strings       MacRoman RIFF       Internal encoding of RIFF strings            0 See <https://exiftool.org/faq.html#Q10> for more information about coded character sets, and the Image::ExifTool Options for more details about the -charset settings."
+  command: "exiftool"
+  example: "exiftool -charset [[TYPE=]CHARSET]"
+- id: 39
+  intent: "Ignore minor errors and warnings.  This enables writing to files with minor errors and disables some validation checks which could result in minor warnings.  Generally, minor errors/warnings indicate a problem which usually won't result in loss of metadata if ignored.  However, there are exceptions, so ExifTool leaves it up to you to make the final decision.  Minor errors and warnings are indicated by \"[minor]\" at the start of the message.  Warnings which affect processing when ignored are indicated by \"[Minor]\" (with a capital \"M\").  Note that this causes missing values in -tagsFromFile, -p and -if strings to be set to an empty string rather than an undefined value."
+  command: "exiftool"
+  example: "exiftool -m (-ignoreMinorErrors)"
+- id: 40
+  intent: "Interpret PATTERNS as fixed strings, not regular expressions."
+  command: "fgrep"
+  example: "fgrep -F, --fixed-strings"
+- id: 41
+  intent: "find [-H] [-L] [-P] [-D debugopts] [-Olevel] [starting-point...] [ex- pression]"
+  command: "find"
+  example: "find"
+- id: 42
+  intent: "Print  diagnostic  information;  this can be helpful to diagnose problems with why find is not doing what you want.  The list  of debug  options  should be comma separated.  Compatibility of the debug options is not guaranteed between releases  of  findutils. For  a  complete  list of valid debug options, see the output of find -D help.  Valid debug options include exec   Show diagnostic information relating to -exec,  -execdir, -ok and -okdir opt    Prints  diagnostic  information relating to the optimisa- tion of the expression tree; see the -O option. rates  Prints a summary indicating how often each predicate suc- ceeded or failed. search Navigate the directory tree verbosely. stat   Print  messages  as  files are examined with the stat and lstat system calls.  The find program tries  to  minimise such calls. tree   Show  the  expression  tree in its original and optimised form. all    Enable all of the other debug options (but help). help   Explain the debugging options."
+  command: "find"
+  example: "find -D debugopts"
+- id: 43
+  intent: "find words hyphenated by TeX in a document"
+  command: "findhyph"
+  example: "findhyph"
+- id: 44
+  intent: "character"
+  command: "findhyph"
+  example: "findhyph -f  display font selectors and other strings starting with a backslash"
+- id: 45
+  intent: "find a filesystem"
+  command: "findmnt"
+  example: "findmnt"
+- id: 46
+  intent: "Takes the next argument as a file name as usual, but  takes  all remaining  arguments  (even  if  they have the syntactic form of switches) and defines the name \"ARGUMENTS\"  in  \"userdict\"  (not \"systemdict\")  as  an array of those strings, before running the file.  When Ghostscript finishes executing the  file,  it  exits back to the shell."
+  command: "ghostscript"
+  example: "ghostscript -- filename arg1 ..."
+- id: 47
+  intent: "Assume  that  command line arguments are given as UTF-8 strings. The default (--no-utf8-strings) is to assume that arguments  are encoded  in the character set as specified by --display-charset. These options affect all following arguments. Both  options  may be  used  multiple  times.  This option should not be used in an option file. This option has no effect on Windows.  There the  internal  used UTF-8  encoding is translated for console input and output.  The command line arguments are expected as Unicode and translated to UTF-8.   Thus  when calling this program from another, make sure to use the Unicode version of CreateProcess."
+  command: "gpg"
+  example: "gpg --no-utf8-strings"
+- id: 48
+  intent: "Write  special status strings to the file descriptor n.  See the file DETAILS in the documentation for a listing of them."
+  command: "gpg"
+  example: "gpg --status-fd n"
+- id: 49
+  intent: "Write special status strings to the  file  descriptor  n.   This program returns the status messages SUCCESS or FAILURE which are helpful when the caller uses a double fork  approach  and  can't easily get the return code of the process."
+  command: "gpgconf"
+  example: "gpgconf --status-fd n"
+- id: 50
+  intent: "Use  the  cipher  algorithm with the ASN.1 object identifier oid for encryption.  For  convenience  the  strings  3DES,  AES  and AES256  may  be  used instead of their OIDs.  The default is AES (2.16.840.1.101.3.4.1.2)."
+  command: "gpgsm"
+  example: "gpgsm --cipher-algo oid"
+- id: 51
+  intent: "Assume  that  the  file names read by --files-from are UTF-8 en- coded.  This option has an effect only on Windows where the  ac- tive code page is otherwise assumed."
+  command: "gpgtar"
+  example: "gpgtar --utf8-strings"
+- id: 52
+  intent: "Write special status strings to the file descriptor n.  See  the file DETAILS in the documentation for a listing of them."
+  command: "gpgtar"
+  example: "gpgtar --status-fd n"
+- id: 53
+  intent: "Write  special status strings to the file descriptor n.  See the file DETAILS in the documentation for a listing of them."
+  command: "gpgv"
+  example: "gpgv --status-fd n"
+- id: 54
+  intent: "Interpret PATTERNS as fixed strings, not regular expressions."
+  command: "grep"
+  example: "grep -F, --fixed-strings"
+- id: 55
+  intent: "Takes the next argument as a file name as usual, but  takes  all remaining  arguments  (even  if  they have the syntactic form of switches) and defines the name \"ARGUMENTS\"  in  \"userdict\"  (not \"systemdict\")  as  an array of those strings, before running the file.  When Ghostscript finishes executing the  file,  it  exits back to the shell."
+  command: "gs"
+  example: "gs -- filename arg1 ..."
+- id: 56
+  intent: "find clusters and create a geographical map highlighting clus- ters."
+  command: "gvmap"
+  example: "gvmap"
+- id: 57
+  intent: "The  string args is split into whitespace-separated tokens, with the individual tokens available as strings in the  gvpr  program as  ARGV[0],...,ARGV[ARGC-1].  Whitespace characters within sin- gle or double quoted substrings, or preceded by a backslash, are ignored  as separators.  In general, a backslash character turns off any special meaning of the following character.   Note  that the tokens derived from multiple -a flags are concatenated."
+  command: "gvpr"
+  example: "gvpr -a args"
+- id: 58
+  intent: "Print version and exit. For each input file, hexdump sequentially copies the input to standard output, transforming the data according to the format strings specified by the -e and -f options, in the order that they were specified."
+  command: "hd"
+  example: "hd -V, --version"
+- id: 59
+  intent: "Print version and exit. For each input file, hexdump sequentially copies the input to standard output, transforming the data according to the format strings specified by the -e and -f options, in the order that they were specified."
+  command: "hexdump"
+  example: "hexdump -V, --version"
+- id: 60
+  intent: "expressions indented for readability."
+  command: "infocmp"
+  example: "infocmp -f   Display  complex terminfo strings which contain if/then/else/endif"
+- id: 61
+  intent: "wrapped.  Use the -W option to do this."
+  command: "infocmp"
+  example: "infocmp -W   By  itself,  the  -w  option  will  not  force  long strings to be"
+- id: 62
+  intent: "find internet printing protocol printers"
+  command: "ippfind"
+  example: "ippfind"
+- id: 63
+  intent: "Specify  find  timeout in seconds.  If 1 or less, ippfind stops as soon as it thinks it has found everything.  The default timeout is 1 second."
+  command: "ippfind"
+  example: "ippfind -T seconds"
+- id: 64
+  intent: "Specifies where to find application modules."
+  command: "javac"
+  example: "javac --module-path path or -p path"
+- id: 65
+  intent: "find and fix bugs in Java platform programs"
+  command: "jdb"
+  example: "jdb"
+- id: 66
+  intent: "Make built-in language features like `eval` and `new Function` that generate code from strings throw an exception instead. This does not affect the Node.js `vm` module."
+  command: "js"
+  example: "js --disallow-code-generation-from-strings"
+- id: 67
+  intent: "jsesc -- escape strings for use in JavaScript string literals"
+  command: "jsesc"
+  example: "jsesc"
+- id: 68
+  intent: "Escape all the symbols in the output, even printable ASCII symbols."
+  command: "jsesc"
+  example: "jsesc -e, --escape-everything"
+- id: 69
+  intent: "Export bookmarks to a file in a printable HTML format"
+  command: "keditbookmarks"
+  example: "keditbookmarks --exporthtml <filename>"
+- id: 70
+  intent: "Be default the language of your system is used but you can overwrite this with this parameter. Currently this script only supports English and German. If you need a translation to another language then you can either create a .po file or I can register this project on one of those websites for online translation. Example You can use it like this: latex-git-log --width=6 --lang=en > example-output.tex"
+  command: "latex-git-log"
+  example: "latex-git-log --lang  Set the language of the legend and all strings in the output."
+- id: 71
+  intent: "This option is supported for HP/UX compatibility.  The keyword argument must be one of the strings archive, shared, or default. -aarchive is functionally equivalent to -Bstatic, and the other two keywords are functionally equivalent to -Bdynamic.  This option may be used any number of times."
+  command: "ld"
+  example: "ld -a keyword"
+- id: 72
+  intent: "This option is supported for HP/UX compatibility.  The keyword argument must be one of the strings archive, shared, or default. -aarchive is functionally equivalent to -Bstatic, and the other two keywords are functionally equivalent to -Bdynamic.  This option may be used any number of times."
+  command: "ld.bfd"
+  example: "ld.bfd -a keyword"
+- id: 73
+  intent: "Normally,  less  will highlight ALL strings which match the last search command.  The -g option changes this  behavior  to  high- light  only  the  particular  string which was found by the last search command.  This can cause less to run somewhat faster than the default."
+  command: "less"
+  example: "less -g or --hilite-search"
+- id: 74
+  intent: "The  -G  option  suppresses all highlighting of strings found by search commands."
+  command: "less"
+  example: "less -G or --HILITE-SEARCH"
+- id: 75
+  intent: "Disables sending the termcap initialization and deinitialization strings  to  the  terminal.   This is sometimes desirable if the deinitialization string does something unnecessary, like  clear- ing the screen."
+  command: "less"
+  example: "less -X or --no-init"
+- id: 76
+  intent: "Disables  sending the keypad initialization and deinitialization strings to the terminal.  This is sometimes useful if the keypad strings make the numeric keypad behave in an undesirable manner."
+  command: "less"
+  example: "less --no-keypad"
+- id: 77
+  intent: "This  option changes the interpretations of options which follow this one.  After the --use-backslash option, any backslash in an option  string  is  removed and the following character is taken literally.  This allows a dollar sign to be included  in  option strings."
+  command: "less"
+  example: "less --use-backslash"
+- id: 78
+  intent: "operate on Linux kernel version strings"
+  command: "linux-version"
+  example: "linux-version"
+- id: 79
+  intent: "pressions when searching with --name. If --ignore-case  is  also specified, the regular expression becomes case-insensitive."
+  command: "llvm-dwarfdump-14"
+  example: "llvm-dwarfdump-14 --regex                    - Treat any <pattern> strings as regular ex-"
+- id: 80
+  intent: "of hex bytes"
+  command: "llvm-mc-14"
+  example: "llvm-mc-14 --disassemble                                    - Disassemble  strings"
+- id: 81
+  intent: "bly of strings of hex bytes"
+  command: "llvm-mc-14"
+  example: "llvm-mc-14 --mdis                                            - Marked up disassem-"
+- id: 82
+  intent: "Print  the info plist section as strings for Mach-O objects (re- quires --macho)"
+  command: "llvm-objdump-14"
+  example: "llvm-objdump-14 --info-plist"
+- id: 83
+  intent: "Display  the  specified section(s) as a list of strings. section may be a section index or section name."
+  command: "llvm-readelf-14"
+  example: "llvm-readelf-14 --string-dump=<section[,section,...]>, -p"
+- id: 84
+  intent: "print strings"
+  command: "llvm-strings-14"
+  example: "llvm-strings-14"
+- id: 85
+  intent: "llvm-strings [options] [input]"
+  command: "llvm-strings-14"
+  example: "llvm-strings-14"
+- id: 86
+  intent: "Silently ignored. Present for GNU strings compatibility."
+  command: "llvm-strings-14"
+  example: "llvm-strings-14 --all, -a"
+- id: 87
+  intent: "Set  the  minimum  number of printable ASCII characters required for a sequence of bytes to be considered a string.  The  default value is 4."
+  command: "llvm-strings-14"
+  example: "llvm-strings-14 --bytes=<length>, -n"
+- id: 88
+  intent: "Display a summary of command line options."
+  command: "llvm-strings-14"
+  example: "llvm-strings-14 --help, -h"
+- id: 89
+  intent: "Display the name of the containing file before each string. Example: $ llvm-strings --print-file-name test.o test.elf test.o: _Z5hellov test.o: some_bss test.o: test.cpp test.o: main test.elf: test.cpp test.elf: test2.cpp test.elf: _Z5hellov test.elf: main test.elf: some_bss"
+  command: "llvm-strings-14"
+  example: "llvm-strings-14 --print-file-name, -f"
+- id: 90
+  intent: "Display  the  offset  within the file of each string, before the string and using the specified radix. Valid <radix>  values  are o, d and x for octal, decimal and hexadecimal respectively. Example: $ llvm-strings --radix=o test.o 1054 _Z5hellov 1066 .rela.text 1101 .comment 1112 some_bss 1123 .bss 1130 test.cpp 1141 main $ llvm-strings --radix=d test.o 556 _Z5hellov 566 .rela.text 577 .comment 586 some_bss 595 .bss 600 test.cpp 609 main $ llvm-strings -t x test.o 22c _Z5hellov 236 .rela.text 241 .comment 24a some_bss 253 .bss 258 test.cpp 261 main"
+  command: "llvm-strings-14"
+  example: "llvm-strings-14 --radix=<radix>, -t"
+- id: 91
+  intent: "Display the version of the llvm-strings executable. @<FILE> Read command-line options from response file <FILE>."
+  command: "llvm-strings-14"
+  example: "llvm-strings-14 --version"
+- id: 92
+  intent: "Do not transform author and title input strings, assume they are valid XML. The usual \"--help\" and \"--version\" options are also supported. Options can begin with either \"-\" or \"--\", and ordered arbitrarily."
+  command: "ltx2crossrefxml"
+  example: "ltx2crossrefxml -rpi-is-xml"
+- id: 93
+  intent: "Suppress  auto-updates  to  the  database  (e.g.  when --find is passed an unknown name)."
+  command: "luaotfload-tool"
+  example: "luaotfload-tool --no-reload, -n"
+- id: 94
+  intent: "Resolve  a  font  name; this looks up <name> in the database and prints the file name it is mapped to.  --find  also  understands request  syntax, i.e. --find=file:foo.otf checks whether foo.otf is indexed."
+  command: "luaotfload-tool"
+  example: "luaotfload-tool --find=NAME"
+- id: 95
+  intent: "Display  basic  information  to  a  resolved font file (requires --find)."
+  command: "luaotfload-tool"
+  example: "luaotfload-tool --info, -i"
+- id: 96
+  intent: "read  keystroke  commands  from the specified file.  You can use the data written using the -cmd_log option.   Lynx  will  ignore other  information which the command-logging may have written to the logfile.  Each line of the command script contains either  a comment beginning with \"#\", or a keyword: exit causes   the   script  to  stop,  and  forces  Lynx  to  exit immediately. key the character value, in printable  form.   Cursor  and  other special   keys  are  given  as  names,  e.g.,  \"Down  Arrow\". Printable 7-bit ASCII codes are given as-is, and  hexadecimal values represent other 8-bit codes. set followed  by a \"name=value\" allows one to override values set in the lynx.cfg or .lynxrc files.  Lynx  tries  the  cfg-file setting first."
+  command: "lynx"
+  example: "lynx -cmd_script=FILENAME"
+- id: 97
+  intent: "toggle memory leak-checking.  Normally this is not compiled-into your executable, but when it  is,  it  can  be  disabled  for  a session."
+  command: "lynx"
+  example: "lynx -find_leaks"
+- id: 98
+  intent: "Search  for  text  in  all  manual pages.  This is a brute-force search, and is likely to take some time; if you can, you  should specify  a section to reduce the number of pages that need to be searched.  Search terms may be simple strings (the default),  or regular expressions if the --regex option is used. Note that this searches the sources of the manual pages, not the rendered text, and so may include false positives due to  things like  comments  in  source  files.   Searching the rendered text would be much slower."
+  command: "man"
+  example: "man -K, --global-apropos"
+- id: 99
+  intent: "Save the last hundred search strings and replacement strings and executed  commands,  so  they can be easily reused in later ses- sions."
+  command: "nano"
+  example: "nano -H, --historylog"
+- id: 100
+  intent: "Enables or disables a limit on the amount of recursion performed whilst demangling strings.  Since the name mangling formats allow for an infinite level of recursion it is possible to create strings whose decoding will exhaust the amount of stack space available on the host machine, triggering a memory fault.  The limit tries to prevent this from happening by restricting recursion to 2048 levels of nesting. The default is for this limit to be enabled, but disabling it may be necessary in order to demangle truly complicated names.  Note however that if the recursion limit is disabled then stack exhaustion is possible and any bug reports about such an event will be rejected."
+  command: "nm"
+  example: "nm --no-recursion-limit"
+- id: 101
+  intent: "Make built-in language features like `eval` and `new Function` that generate code from strings throw an exception instead. This does not affect the Node.js `vm` module."
+  command: "node"
+  example: "node --disallow-code-generation-from-strings"
+- id: 102
+  intent: "Make built-in language features like `eval` and `new Function` that generate code from strings throw an exception instead. This does not affect the Node.js `vm` module."
+  command: "nodejs"
+  example: "nodejs --disallow-code-generation-from-strings"
+- id: 103
+  intent: "Convert numbers from/to human-readable strings"
+  command: "numfmt"
+  example: "numfmt"
+- id: 104
+  intent: "specify an explicit path to find nyc configuration"
+  command: "nyc"
+  example: "nyc --nycrc-path"
+- id: 105
+  intent: "Enables or disables a limit on the amount of recursion performed whilst demangling strings.  Since the name mangling formats allow for an infinite level of recursion it is possible to create strings whose decoding will exhaust the amount of stack space available on the host machine, triggering a memory fault.  The limit tries to prevent this from happening by restricting recursion to 2048 levels of nesting. The default is for this limit to be enabled, but disabling it may be necessary in order to demangle truly complicated names.  Note however that if the recursion limit is disabled then stack exhaustion is possible and any bug reports about such an event will be rejected."
+  command: "objdump"
+  example: "objdump --no-recursion-limit"
+- id: 106
+  intent: "output strings of at least BYTES graphic  chars;  3  is  implied when BYTES is not specified"
+  command: "od"
+  example: "od -S BYTES, --strings[=BYTES]"
+- id: 107
+  intent: "Normally,  less  will highlight ALL strings which match the last search command.  The -g option changes this  behavior  to  high- light  only  the  particular  string which was found by the last search command.  This can cause less to run somewhat faster than the default."
+  command: "pager"
+  example: "pager -g or --hilite-search"
+- id: 108
+  intent: "The  -G  option  suppresses all highlighting of strings found by search commands."
+  command: "pager"
+  example: "pager -G or --HILITE-SEARCH"
+- id: 109
+  intent: "Disables sending the termcap initialization and deinitialization strings  to  the  terminal.   This is sometimes desirable if the deinitialization string does something unnecessary, like  clear- ing the screen."
+  command: "pager"
+  example: "pager -X or --no-init"
+- id: 110
+  intent: "Disables  sending the keypad initialization and deinitialization strings to the terminal.  This is sometimes useful if the keypad strings make the numeric keypad behave in an undesirable manner."
+  command: "pager"
+  example: "pager --no-keypad"
+- id: 111
+  intent: "This  option changes the interpretations of options which follow this one.  After the --use-backslash option, any backslash in an option  string  is  removed and the following character is taken literally.  This allows a dollar sign to be included  in  option strings."
+  command: "pager"
+  example: "pager --use-backslash"
+- id: 112
+  intent: "Expand  class  members.  Useful  to find in what member of inner structs where an offset from the beginning of a struct is."
+  command: "pahole"
+  example: "pahole -E, --expand_types"
+- id: 113
+  intent: "Find pointers to CLASS_NAME."
+  command: "pahole"
+  example: "pahole -f, --find_pointers_to=CLASS_NAME"
+- id: 114
+  intent: "These consider the  input  and  output  images  to  contain  bit strings;  they  compute  bitwise logic operations.  Note that if the maxval is 1, you can also look at these as logic  operations on  boolean input values.  See section Maxval <#maxval>  for the special meaning of maxval with respect to bit string  operations such as these."
+  command: "pamarith"
+  example: "pamarith -and, -nand, -or, -nor, -xor"
+- id: 115
+  intent: "These  consider the left input image and output image to contain bit strings.  They compute a  bit  shift  operation,  with  bits falling off the left or right end and zeroes shifting in, as op- posed to bits off one end to the other.  The right  input  image sample value is the number of bit positions to shift. Note  that  the  maxval  (see  Maxval <#maxval> ) determines the width of the frame within which you are shifting. Other"
+  command: "pamarith"
+  example: "pamarith -shiftleft, -shiftright"
+- id: 116
+  intent: "This specifies the tuple value to find.  You specify the  sample values  in  order,  and must specify the proper number of sample values for the depth of the image (e.g. 3 if it is a  color  im- age). You must specify exactly one of -target and -color."
+  command: "pamfind"
+  example: "pamfind -target=sample0,sample1, ... |"
+- id: 117
+  intent: "This  is the color to find, assuming the image is a color visual image. color is as described for the argument of  the  pnm_parsecolor() library routine <libnetpbm_image.html#colorname> . You must specify exactly one of -target and -color."
+  command: "pamfind"
+  example: "pamfind -color=color"
+- id: 118
+  intent: "This option causes the output  not  to  contain  any  GIF  clear codes. In  GIF, the stream defines codes that represent strings of pix- els as it goes.  The stream contains definitions of codes  mixed in  with  the references to those codes that describe the pixels of the image.  GIF specifies a maximum number of codes that  can be  defined;  when  the stream has defined that many, the stream can either just use those for the rest of the image or include a clear code, deleting all the string codes so that the stream can start over defining new ones. By far the most common choice is the clear code.   This  usually results in a smaller stream because the set of strings of pixels that occur in an image vary over the parts of the image.  Hardly any GIF encoders produce streams that don't use the clear code. But it is conceivable that a stream could be smaller without the use of the clear code because it saves the stream having to  re- define the same string codes over and over.  It could even avoid a thrashing situation where the stream continually defines a set of  strings  that  never  get  used  again before the maximum is reached. The default is to use the clear codes. This option was new in Netpbm 10.82 (March 2018).  Before  that, the program aways uses the clear codes."
+  command: "pamtogif"
+  example: "pamtogif -noclear"
+- id: 119
+  intent: "pbmnoise  internally  generates  random 32-bit integers and uses the machine's binary encoding of those integers  as  strings  of pixels.   Because  the  integers are random, it doesn't normally matter what binaary encoding is used for them, but if  you  need consistent results between machines using the same random number generator, it matters.  For that reason (mainly for testing  the program),  this  option  lets you control that encoding, between big-endian and little-endian. mode is one of the following: big    Force big-endian output by rearranging  bytes  on  little-endian machines.  No effect on big-endian machines. little Likewise, force little-endian output. native Do not rearrange anything.  This is the default. swap   Always swap regardless of system endianness."
+  command: "pbmnoise"
+  example: "pbmnoise -endian=mode"
+- id: 120
+  intent: "The  resolution  is  normally 60H by 72V.  If you specify the -h option, resolution is 120H by 144V.  You may find it  useful  to rotate landscape images before printing."
+  command: "pbmto10x"
+  example: "pbmto10x -h"
+- id: 121
+  intent: "pler  are  listed.   Currently,  this is limited to Annotations. Note: only URLs referenced by the PDF objects such as Link Anno- tations  are listed. pdfinfo does not attempt to extract strings matching http://... from the text content."
+  command: "pdfinfo"
+  example: "pdfinfo -url   Print all URLs in the PDF. Only the URL types supported by  Pop-"
+- id: 122
+  intent: "Prints the raw (undecoded) date strings, directly from  the  PDF file."
+  command: "pdfinfo"
+  example: "pdfinfo -rawdates"
+- id: 123
+  intent: "This  option  selects which method to use to find median regard- less of cutoff value.  Choices are histogram_sort and select. By default, pgmmedian decides which method to use  as  described under the -cutoff option."
+  command: "pgmmedian"
+  example: "pgmmedian -type median_type"
+- id: 124
+  intent: "Save the last hundred search strings and replacement strings and executed  commands,  so  they can be easily reused in later ses- sions."
+  command: "pico"
+  example: "pico -H, --historylog"
+- id: 125
+  intent: "Selects which scheme is to be used for conversion.  Available schemes are as follows: from_to Uses Encode::from_to for conversion.  This is the default. decode_encode Input strings are decode()d then encode()d.  A straight two- step implementation. perlio The new perlIO layer is used.  NI-S' favorite. You should use this option if you are using UTF-16 and others which linefeed is not $/. Like the -D option, this is also for Encode hackers."
+  command: "piconv"
+  example: "piconv -S,--scheme scheme"
+- id: 126
+  intent: "find the process ID of a running program"
+  command: "pidof"
+  example: "pidof"
+- id: 127
+  intent: "Before attempting to place the subimages, pnmmontage will calcu- late a minimum possible area for the montage; this is either the total  of  the  areas  of all the subimages, or the width of the widest subimage times the height of the tallest subimage, which- ever  is  greater.   pnmmontage  then  initiates a problem-space search to find the best packing; if it finds a solution that  is (at  least)  as  good as the minimum area times the quality as a percent, it will break out of the  search.   Thus,  -quality=100 will  find  the  best  possible solution; however, it may take a very long time to do so.  The default is -quality=200."
+  command: "pnmmontage"
+  example: "pnmmontage -quality"
+- id: 128
+  intent: "Instead of using exhaustive search  the  \"Cross-B-Search\"  algo- rithm  is  used  to  find the best interpolated prediction of B- frames."
+  command: "pnmtofiasco"
+  example: "pnmtofiasco --cross-B-search"
+- id: 129
+  intent: "Specifies a single message catalog  file  in  GNU  gettext  (file- name.po) or Apple strings (filename.strings) format to be used for localization."
+  command: "ppdc"
+  example: "ppdc -c message-catalog"
+- id: 130
+  intent: "Specifies  the  output  file.  The supported extensions are .po or .po.gz for GNU gettext format message catalogs  and  .strings  for macOS strings files."
+  command: "ppdpo"
+  example: "ppdpo -o output-file"
+- id: 131
+  intent: "This option says never to put color names in the XPM  file,  but rather  to identify names by hexadecimal strings that explicitly identify RGB component intensities.  This means  the  reader  of the  file need not have access to a suitable color dictionary to interpret it. This option was introduced in Netpbm 10.15 (April 2003).  Before that, it was the default, overridden by specifying -rgb."
+  command: "ppmtoxpm"
+  example: "ppmtoxpm -hexonly"
+- id: 132
+  intent: "Turns on extra information to find out what is happening."
+  command: "print"
+  example: "print --debug"
+- id: 133
+  intent: "Extract all strings."
+  command: "pygettext3"
+  example: "pygettext3 -a, --extract-all"
+- id: 134
+  intent: "Specify  a  file that contains a list of strings that are not be extracted from the input files.  Each string to be excluded must appear on a line by itself in the file."
+  command: "pygettext3"
+  example: "pygettext3 -x, --exclude-file=FILENAME"
+- id: 135
+  intent: "Extract all strings."
+  command: "pygettext3.11"
+  example: "pygettext3.11 -a, --extract-all"
+- id: 136
+  intent: "Specify  a  file that contains a list of strings that are not be extracted from the input files.  Each string to be excluded must appear on a line by itself in the file."
+  command: "pygettext3.11"
+  example: "pygettext3.11 -x, --exclude-file=FILENAME"
+- id: 137
+  intent: "Enables or disables a limit on the amount of recursion performed whilst demangling strings.  Since the name mangling formats allow for an infinite level of recursion it is possible to create strings whose decoding will exhaust the amount of stack space available on the host machine, triggering a memory fault.  The limit tries to prevent this from happening by restricting recursion to 2048 levels of nesting. The default is for this limit to be enabled, but disabling it may be necessary in order to demangle truly complicated names.  Note however that if the recursion limit is disabled then stack exhaustion is possible and any bug reports about such an event will be rejected."
+  command: "readelf"
+  example: "readelf --no-recursion-limit"
+- id: 138
+  intent: "Displays the contents of the indicated section as printable strings.  A number identifies a particular section by index in the section table; any other string identifies all sections with that name in the object file."
+  command: "readelf"
+  example: "readelf --string-dump=<number or name>"
+- id: 139
+  intent: "Specify the name of another section from which the CTF file can inherit strings and symbols.  By default, the \".symtab\" and its linked string table are used. If either of --ctf-symbols or --ctf-strings is specified, the other must be specified as well."
+  command: "readelf"
+  example: "readelf --ctf-strings=section"
+- id: 140
+  intent: "minal."
+  command: "reset"
+  example: "reset -I   Do not send the terminal or tab initialization strings to the ter-"
+- id: 141
+  intent: "Interpret PATTERNS as fixed strings, not regular expressions."
+  command: "rgrep"
+  example: "rgrep -F, --fixed-strings"
+- id: 142
+  intent: "Turns on extra information to find out what is happening."
+  command: "run-mailcap"
+  example: "run-mailcap --debug"
+- id: 143
+  intent: "find SCSI and USB scanners and their device files"
+  command: "sane-find-scanner"
+  example: "sane-find-scanner"
+- id: 144
+  intent: "sane-find-scanner [-?|-h|--help] [-v] [-q] [-p] [-f] [-F filename] [de- vname]"
+  command: "sane-find-scanner"
+  example: "sane-find-scanner"
+- id: 145
+  intent: "vice name and the test result.  If used twice, SCSI inquiry in- formation and the USB device descriptors are also printed."
+  command: "sane-find-scanner"
+  example: "sane-find-scanner -v      Verbose output. If used once, sane-find-scanner shows every de-"
+- id: 146
+  intent: "vices. That's useful if sane-find-scanner is wrong in determin- ing the device type."
+  command: "sane-find-scanner"
+  example: "sane-find-scanner -f      Force opening all explicitly given devices as SCSI and USB  de-"
+- id: 147
+  intent: "Selects the scan mode (e.g., lineart or color). The description above shows that option --mode accepts an  argu- ment  that  must  be one of the strings Lineart, Gray, or Color. The value in the square bracket indicates  that  the  option  is currently set to Gray.  For convenience, it is legal to abbrevi- ate the string values as long as they remain unique.  Also,  the case  of  the spelling doesn't matter.  For example, option set- ting --mode col is identical to --mode Color."
+  command: "scanimage"
+  example: "scanimage --mode Lineart|Gray|Color [Gray]"
+- id: 148
+  intent: "try hard to find a smaller set of changes"
+  command: "sdiff"
+  example: "sdiff -d, --minimal"
+- id: 149
+  intent: "Turns on extra information to find out what is happening."
+  command: "see"
+  example: "see --debug"
+- id: 150
+  intent: "consider only printable characters"
+  command: "sort"
+  example: "sort -i, --ignore-nonprinting"
+- id: 151
+  intent: "Pass the channel map to override.  If the playback in a specific channel order or channel positions is required, pass the channel position strings to this option."
+  command: "speaker-test"
+  example: "speaker-test -m | --chmap MAP"
+- id: 152
+  intent: "Find the principal(s) associated with the public key of a signa- ture, provided using the -s flag in an authorized signers file provided using the -f flag.  The format of the allowed signers file is documented in the ALLOWED SIGNERS section below.  If one or more matching principals are found, they are returned on stan- dard output."
+  command: "ssh-keygen"
+  example: "ssh-keygen -Y find-principals"
+- id: 153
+  intent: "Find principal matching the principal name provided using the -I flag in the authorized signers file specified using the -f flag. If one or more matching principals are found, they are returned on standard output."
+  command: "ssh-keygen"
+  example: "ssh-keygen -Y match-principals"
+- id: 154
+  intent: "print the sequences of printable characters in files"
+  command: "strings"
+  example: "strings"
+- id: 155
+  intent: "strings [-afovV] [-min-len] [-n min-len] [--bytes=min-len] [-t radix] [--radix=radix] [-e encoding] [--encoding=encoding] [-U method] [--unicode=method] [-] [--all] [--print-file-name] [-T bfdname] [--target=bfdname] [-w] [--include-all-whitespace] [-s] [--output-separator sep_string] [--help] [--version] file..."
+  command: "strings"
+  example: "strings"
+- id: 156
+  intent: "whether those sections are loaded or initialized.  Normally this is the default behaviour, but strings can be configured so that the -d is the default instead. The - option is position dependent and forces strings to perform full scans of any file that is mentioned after the - on the command line, even if the -d option has been specified."
+  command: "strings"
+  example: "strings -   Scan the whole file, regardless of what sections it contains or"
+- id: 157
+  intent: "Only print strings from initialized, loaded data sections in the file.  This may reduce the amount of garbage in the output, but it also exposes the strings program to any security flaws that may be present in the BFD library used to scan and load sections.  Strings can be configured so that this option is the default behaviour.  In such cases the -a option can be used to avoid using the BFD library and instead just print all of the strings found in the file."
+  command: "strings"
+  example: "strings --data"
+- id: 158
+  intent: "Print the name of the file before each string."
+  command: "strings"
+  example: "strings --print-file-name"
+- id: 159
+  intent: "Print a summary of the program usage on the standard output and exit."
+  command: "strings"
+  example: "strings --help"
+- id: 160
+  intent: "Print sequences of displayable characters that are at least min-len characters long.  If not specified a default minimum length of 4 is used.  The distinction between displayable and non-displayable characters depends upon the setting of the -e and -U options. Sequences are always terminated at control characters such as new- line and carriage-return, but not the tab character."
+  command: "strings"
+  example: "strings --bytes=min-len"
+- id: 161
+  intent: "instead.  Since we can not be compatible with both ways, we simply chose one."
+  command: "strings"
+  example: "strings -o  Like -t o.  Some other versions of strings have -o act like -t d"
+- id: 162
+  intent: "Print the offset within the file before each string.  The single character argument specifies the radix of the offset---o for octal, x for hexadecimal, or d for decimal."
+  command: "strings"
+  example: "strings --radix=radix"
+- id: 163
+  intent: "Select the character encoding of the strings that are to be found. Possible values for encoding are: s = single-7-bit-byte characters (default), S = single-8-bit-byte characters, b = 16-bit bigendian, l = 16-bit littleendian, B = 32-bit bigendian, L = 32-bit littleendian.  Useful for finding wide character strings. (l and b apply to, for example, Unicode UTF-16/UCS-2 encodings)."
+  command: "strings"
+  example: "strings --encoding=encoding"
+- id: 164
+  intent: "Specify an object code format other than your system's default format."
+  command: "strings"
+  example: "strings --target=bfdname"
+- id: 165
+  intent: "Print the program version number on the standard output and exit."
+  command: "strings"
+  example: "strings --version"
+- id: 166
+  intent: "By default tab and space characters are included in the strings that are displayed, but other whitespace characters, such a newlines and carriage returns, are not.  The -w option changes this so that all whitespace characters are considered to be part of a string."
+  command: "strings"
+  example: "strings --include-all-whitespace"
+- id: 167
+  intent: "By default, output strings are delimited by a new-line. This option allows you to supply any string to be used as the output record separator.  Useful with --include-all-whitespace where strings may contain new-lines internally. @file Read command-line options from file.  The options read are inserted in place of the original @file option.  If file does not exist, or cannot be read, then the option will be treated literally, and not removed. Options in file are separated by whitespace.  A whitespace character may be included in an option by surrounding the entire option in either single or double quotes.  Any character (including a backslash) may be included by prefixing the character to be included with a backslash.  The file may itself contain additional @file options; any such options will be processed recursively."
+  command: "strings"
+  example: "strings --output-separator"
+- id: 168
+  intent: "Find overridden configuration files"
+  command: "systemd-delta"
+  example: "systemd-delta"
+- id: 169
+  intent: "Escape strings for usage in systemd unit names"
+  command: "systemd-escape"
+  example: "systemd-escape"
+- id: 170
+  intent: "Inserts the escaped strings in a unit name template. Takes a unit name template such as foobar@.service. With --unescape, expects instantiated unit names for this template and extracts and unescapes just the instance part. May not be used in conjunction with --suffix=, --instance or --mangle."
+  command: "systemd-escape"
+  example: "systemd-escape --template="
+- id: 171
+  intent: "When escaping or unescaping a string, assume it refers to a file system path. This eliminates leading, trailing or duplicate \"/\" characters and rejects \".\"  and \"..\"  path components. This is particularly useful for generating strings suitable for unescaping with the \"%f\" specifier in unit files, see systemd.unit(5)."
+  command: "systemd-escape"
+  example: "systemd-escape --path, -p"
+- id: 172
+  intent: "Instead of escaping the specified strings, undo the escaping, reversing the operation. May not be used in conjunction with --suffix= or --mangle."
+  command: "systemd-escape"
+  example: "systemd-escape --unescape, -u"
+- id: 173
+  intent: "the length of STRING is zero STRING1 = STRING2 the strings are equal STRING1 != STRING2 the strings are not equal INTEGER1 -eq INTEGER2 INTEGER1 is equal to INTEGER2 INTEGER1 -ge INTEGER2 INTEGER1 is greater than or equal to INTEGER2 INTEGER1 -gt INTEGER2 INTEGER1 is greater than INTEGER2 INTEGER1 -le INTEGER2 INTEGER1 is less than or equal to INTEGER2 INTEGER1 -lt INTEGER2 INTEGER1 is less than INTEGER2 INTEGER1 -ne INTEGER2 INTEGER1 is not equal to INTEGER2 FILE1 -ef FILE2 FILE1 and FILE2 have the same device and inode numbers FILE1 -nt FILE2 FILE1 is newer (modification date) than FILE2 FILE1 -ot FILE2 FILE1 is older than FILE2"
+  command: "test"
+  example: "test -z STRING"
+- id: 174
+  intent: "find & view documentation in TeX Live"
+  command: "texdoc"
+  example: "texdoc"
+- id: 175
+  intent: "dif expressions indented for readability."
+  command: "tic"
+  example: "tic -f     Display  complex terminfo strings which contain if/then/else/en-"
+- id: 176
+  intent: "wrapped.  Use the -W option to do this. If  you specify both -f and -W options, the latter is ignored when -f has already split the line."
+  command: "tic"
+  example: "tic -W   By itself, the -w  option  will  not  force  long  strings  to  be"
+- id: 177
+  intent: "output version information and exit ARRAYs  are  specified  as strings of characters.  Most represent them- selves.  Interpreted sequences are: \\NNN   character with octal value NNN (1 to 3 octal digits) \\\\     backslash \\a     audible BEL \\b     backspace \\f     form feed \\n     new line \\r     return \\t     horizontal tab \\v     vertical tab CHAR1-CHAR2 all characters from CHAR1 to CHAR2 in ascending order [CHAR*] in ARRAY2, copies of CHAR until length of ARRAY1 [CHAR*REPEAT] REPEAT copies of CHAR, REPEAT octal if starting with 0 [:alnum:] all letters and digits [:alpha:] all letters [:blank:] all horizontal whitespace [:cntrl:] all control characters [:digit:] all digits [:graph:] all printable characters, not including space [:lower:] all lower case letters [:print:] all printable characters, including space [:punct:] all punctuation characters [:space:] all horizontal or vertical whitespace [:upper:] all upper case letters [:xdigit:] all hexadecimal digits [=CHAR=] all characters which are equivalent to CHAR Translation occurs if -d is not given and both STRING1 and STRING2  ap- pear.   -t  may  be  used only when translating.  ARRAY2 is extended to length of ARRAY1 by repeating its last character as necessary.   Excess characters of ARRAY2 are ignored.  Character classes expand in unspeci- fied order; while translating, [:lower:] and [:upper:] may be  used  in pairs  to  specify case conversion.  Squeezing occurs after translation or deletion."
+  command: "tr"
+  example: "tr --version"
+- id: 178
+  intent: "minal."
+  command: "tset"
+  example: "tset -I   Do not send the terminal or tab initialization strings to the ter-"
+- id: 179
+  intent: "Output the list of effective lookup paths that whereis is using. When none of -B, -M, or -S is specified, the option will output the hard-coded paths that the command was able to find on the system."
+  command: "whereis"
+  example: "whereis -l"
+- id: 180
+  intent: "The menu, checklist and  radiolist  widgets  will  display  tags only,  not  the  item  strings. The menu widget still needs some items specified, but checklist and radiolist expect only tag and status."
+  command: "whiptail"
+  example: "whiptail --noitem"
+- id: 181
+  intent: "read  keystroke  commands  from the specified file.  You can use the data written using the -cmd_log option.   Lynx  will  ignore other  information which the command-logging may have written to the logfile.  Each line of the command script contains either  a comment beginning with \"#\", or a keyword: exit causes   the   script  to  stop,  and  forces  Lynx  to  exit immediately. key the character value, in printable  form.   Cursor  and  other special   keys  are  given  as  names,  e.g.,  \"Down  Arrow\". Printable 7-bit ASCII codes are given as-is, and  hexadecimal values represent other 8-bit codes. set followed  by a \"name=value\" allows one to override values set in the lynx.cfg or .lynxrc files.  Lynx  tries  the  cfg-file setting first."
+  command: "www-browser"
+  example: "www-browser -cmd_script=FILENAME"
+- id: 182
+  intent: "toggle memory leak-checking.  Normally this is not compiled-into your executable, but when it  is,  it  can  be  disabled  for  a session."
+  command: "www-browser"
+  example: "www-browser -find_leaks"
+- id: 183
+  intent: "Enables or disables a limit on the amount of recursion performed whilst demangling strings.  Since the name mangling formats allow for an infinite level of recursion it is possible to create strings whose decoding will exhaust the amount of stack space available on the host machine, triggering a memory fault.  The limit tries to prevent this from happening by restricting recursion to 2048 levels of nesting. The default is for this limit to be enabled, but disabling it may be necessary in order to demangle truly complicated names.  Note however that if the recursion limit is disabled then stack exhaustion is possible and any bug reports about such an event will be rejected. The -r option is a synonym for the --no-recurse-limit option.  The -R option is a synonym for the --recurse-limit option."
+  command: "x86_64-linux-gnu-c++filt"
+  example: "x86_64-linux-gnu-c++filt --no-recursion-limit"
+- id: 184
+  intent: "This option is supported for HP/UX compatibility.  The keyword argument must be one of the strings archive, shared, or default. -aarchive is functionally equivalent to -Bstatic, and the other two keywords are functionally equivalent to -Bdynamic.  This option may be used any number of times."
+  command: "x86_64-linux-gnu-ld"
+  example: "x86_64-linux-gnu-ld -a keyword"
+- id: 185
+  intent: "This option is supported for HP/UX compatibility.  The keyword argument must be one of the strings archive, shared, or default. -aarchive is functionally equivalent to -Bstatic, and the other two keywords are functionally equivalent to -Bdynamic.  This option may be used any number of times."
+  command: "x86_64-linux-gnu-ld.bfd"
+  example: "x86_64-linux-gnu-ld.bfd -a keyword"
+- id: 186
+  intent: "Enables or disables a limit on the amount of recursion performed whilst demangling strings.  Since the name mangling formats allow for an infinite level of recursion it is possible to create strings whose decoding will exhaust the amount of stack space available on the host machine, triggering a memory fault.  The limit tries to prevent this from happening by restricting recursion to 2048 levels of nesting. The default is for this limit to be enabled, but disabling it may be necessary in order to demangle truly complicated names.  Note however that if the recursion limit is disabled then stack exhaustion is possible and any bug reports about such an event will be rejected."
+  command: "x86_64-linux-gnu-nm"
+  example: "x86_64-linux-gnu-nm --no-recursion-limit"
+- id: 187
+  intent: "Enables or disables a limit on the amount of recursion performed whilst demangling strings.  Since the name mangling formats allow for an infinite level of recursion it is possible to create strings whose decoding will exhaust the amount of stack space available on the host machine, triggering a memory fault.  The limit tries to prevent this from happening by restricting recursion to 2048 levels of nesting. The default is for this limit to be enabled, but disabling it may be necessary in order to demangle truly complicated names.  Note however that if the recursion limit is disabled then stack exhaustion is possible and any bug reports about such an event will be rejected."
+  command: "x86_64-linux-gnu-objdump"
+  example: "x86_64-linux-gnu-objdump --no-recursion-limit"
+- id: 188
+  intent: "Enables or disables a limit on the amount of recursion performed whilst demangling strings.  Since the name mangling formats allow for an infinite level of recursion it is possible to create strings whose decoding will exhaust the amount of stack space available on the host machine, triggering a memory fault.  The limit tries to prevent this from happening by restricting recursion to 2048 levels of nesting. The default is for this limit to be enabled, but disabling it may be necessary in order to demangle truly complicated names.  Note however that if the recursion limit is disabled then stack exhaustion is possible and any bug reports about such an event will be rejected."
+  command: "x86_64-linux-gnu-readelf"
+  example: "x86_64-linux-gnu-readelf --no-recursion-limit"
+- id: 189
+  intent: "Displays the contents of the indicated section as printable strings.  A number identifies a particular section by index in the section table; any other string identifies all sections with that name in the object file."
+  command: "x86_64-linux-gnu-readelf"
+  example: "x86_64-linux-gnu-readelf --string-dump=<number or name>"
+- id: 190
+  intent: "Specify the name of another section from which the CTF file can inherit strings and symbols.  By default, the \".symtab\" and its linked string table are used. If either of --ctf-symbols or --ctf-strings is specified, the other must be specified as well."
+  command: "x86_64-linux-gnu-readelf"
+  example: "x86_64-linux-gnu-readelf --ctf-strings=section"
+- id: 191
+  intent: "print the sequences of printable characters in files"
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings"
+- id: 192
+  intent: "strings [-afovV] [-min-len] [-n min-len] [--bytes=min-len] [-t radix] [--radix=radix] [-e encoding] [--encoding=encoding] [-U method] [--unicode=method] [-] [--all] [--print-file-name] [-T bfdname] [--target=bfdname] [-w] [--include-all-whitespace] [-s] [--output-separator sep_string] [--help] [--version] file..."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings"
+- id: 193
+  intent: "whether those sections are loaded or initialized.  Normally this is the default behaviour, but strings can be configured so that the -d is the default instead. The - option is position dependent and forces strings to perform full scans of any file that is mentioned after the - on the command line, even if the -d option has been specified."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings -   Scan the whole file, regardless of what sections it contains or"
+- id: 194
+  intent: "Only print strings from initialized, loaded data sections in the file.  This may reduce the amount of garbage in the output, but it also exposes the strings program to any security flaws that may be present in the BFD library used to scan and load sections.  Strings can be configured so that this option is the default behaviour.  In such cases the -a option can be used to avoid using the BFD library and instead just print all of the strings found in the file."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings --data"
+- id: 195
+  intent: "Print the name of the file before each string."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings --print-file-name"
+- id: 196
+  intent: "Print a summary of the program usage on the standard output and exit."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings --help"
+- id: 197
+  intent: "Print sequences of displayable characters that are at least min-len characters long.  If not specified a default minimum length of 4 is used.  The distinction between displayable and non-displayable characters depends upon the setting of the -e and -U options. Sequences are always terminated at control characters such as new- line and carriage-return, but not the tab character."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings --bytes=min-len"
+- id: 198
+  intent: "instead.  Since we can not be compatible with both ways, we simply chose one."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings -o  Like -t o.  Some other versions of strings have -o act like -t d"
+- id: 199
+  intent: "Print the offset within the file before each string.  The single character argument specifies the radix of the offset---o for octal, x for hexadecimal, or d for decimal."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings --radix=radix"
+- id: 200
+  intent: "Select the character encoding of the strings that are to be found. Possible values for encoding are: s = single-7-bit-byte characters (default), S = single-8-bit-byte characters, b = 16-bit bigendian, l = 16-bit littleendian, B = 32-bit bigendian, L = 32-bit littleendian.  Useful for finding wide character strings. (l and b apply to, for example, Unicode UTF-16/UCS-2 encodings)."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings --encoding=encoding"
+- id: 201
+  intent: "Specify an object code format other than your system's default format."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings --target=bfdname"
+- id: 202
+  intent: "Print the program version number on the standard output and exit."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings --version"
+- id: 203
+  intent: "By default tab and space characters are included in the strings that are displayed, but other whitespace characters, such a newlines and carriage returns, are not.  The -w option changes this so that all whitespace characters are considered to be part of a string."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings --include-all-whitespace"
+- id: 204
+  intent: "By default, output strings are delimited by a new-line. This option allows you to supply any string to be used as the output record separator.  Useful with --include-all-whitespace where strings may contain new-lines internally. @file Read command-line options from file.  The options read are inserted in place of the original @file option.  If file does not exist, or cannot be read, then the option will be treated literally, and not removed. Options in file are separated by whitespace.  A whitespace character may be included in an option by surrounding the entire option in either single or double quotes.  Any character (including a backslash) may be included by prefixing the character to be included with a backslash.  The file may itself contain additional @file options; any such options will be processed recursively."
+  command: "x86_64-linux-gnu-strings"
+  example: "x86_64-linux-gnu-strings --output-separator"
+- id: 205
+  intent: "Some X servers incorrectly  implement  PolyText  with  multiple strings  per  request.   This option suppresses the use of this feature in xditview."
+  command: "xditview"
+  example: "xditview -noPolyText"
+- id: 206
+  intent: "(.debugLevel) If nonzero, prints additional information on stan- dard  output.  The argument can be either a bitmask specified as a decimal number, or comma-separated list of strings. For the bitmask representation, multiple values can be specified by  adding  the numbers that represent the individual bits; e.g. to debug all file searching and opening commands,  use  4032  (= 2048 + 1024 + 512 + 256 + 128 + 64). Use -1 to turn on debugging of everything (this will produce huge output). For the string representation, use the  strings  listed  in  the following  table,  with  a comma to separate the values; e.g. to debug all file searching and opening  commands,  use  search,ex- pand,paths,hash,stat,open.   (The  option `kpathsea' is provided as a shorthand for these.)  Note that such a list may need to be quoted  to  prevent the shell from interpreting commas or spaces in the list. The individual numbers and strings have the following meanings: 1       bitmap      Bitmap creation 2       dvi         DVI translation 4       pk          PK fonts 8       batch       Batch mode: Exit after reading the DVI file 16      event       Event handling 32      ps          PostScript interpreter calls 64      stat        Kpathsea stat(2) calls 128     hash        Kpathsea hash table lookups 256     open        Kpathsea file opening 512     paths       Kpathsea path definitions 1024    expand      Kpathsea path expansion 2048    search      Kpathsea searching 4032    kpathsea    All Kpathsea options 4096    htex        Hypertex specials 8192    src         Source specials 16384   client      Client/server mode (see -unique and -sourceposition options) 32768   ft          FreeType library messages (Type 1 fonts) 65536   ft_verbose  Verbose FreeType library messages (currently unused) 131072  gui         GUI elements 262144  find        Searching for strings in the DVI file 524288  files       File history and opening DVI files Some of the Kpathsea debugging options are actually provided  by Kpathsea;  see  the Debugging section in the Kpathsea manual for more information on these."
+  command: "xdvi"
+  example: "xdvi -debug bitmask|string[,string ...]"
+- id: 207
+  intent: "(.omega)  This will disable the use of Omega extensions when in- terpreting DVI files.  By default, the  additional  opcodes  129 and  134  are  recognized by xdvi as Omega extensions and inter- preted as requests to set 2-byte characters. The  only  drawback is  that the virtual font array will require 65536 positions in- stead of the default 256 positions, i.e. the memory requirements of  xdvi  will be slightly larger. If you find this unacceptable or encounter another problem with the Omega extensions, you  can switch  this extension off by using -noomega (but please do send a bug report if you find such problems - see the bug address  in the AUTHORS section below). (Note:  -noomega  corresponds  to omega: off; +noomega to omega: on.)"
+  command: "xdvi"
+  example: "xdvi -noomega"
+- id: 208
+  intent: "(.warnSpecials)  Causes  xdvi  to  print warnings about \\special strings that it cannot process to  stderr.  These  warnings  are suppressed by default."
+  command: "xdvi"
+  example: "xdvi -warnspecials"
+- id: 209
+  intent: "This option allows you to specify a particular visual or visual class.   The  default  is to pick the \"best\" one.  A particular class can be  specified:  \"StaticGray\",  \"GrayScale\",  \"Static- Color\",   \"PseudoColor\",  \"DirectColor\",  or  \"TrueColor\".   Or \"Match\" can be specified, meaning use the  same  class  as  the source  image.   Alternatively, an exact visual id (specific to the server) can be specified, either as  a  hexadecimal  number (prefixed  with  \"0x\")  or  as a decimal number.  Finally, \"de- fault\" can be specified, meaning to use the same class  as  the colormap of the root window.  Case is not significant in any of these strings."
+  command: "xwud"
+  example: "xwud -vis vis-type-or-id"

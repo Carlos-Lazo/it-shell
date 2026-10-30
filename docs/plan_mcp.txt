@@ -1,0 +1,55 @@
+La Fase 6 se implementa en `feat/phase-6-mcp-server`, basada en `main`. Se dividió en entregas pequeñas para validar cada capa antes de exponerla.
+
+### 1. Definir contratos para las herramientas
+
+Crear tres operaciones MCP, con argumentos y respuestas estructurados:
+
+- **`search_commands`**: recibe una consulta y un límite; devuelve candidatos recuperados con alias, intención, comando, ejemplo y score.
+- **`plan_operation`**: recibe una consulta y devuelve el análisis, los pasos, sus dependencias, la propuesta y las advertencias.
+- **`validate_command`**: recibe un comando como texto y devuelve su nivel de riesgo, hallazgos y recomendaciones.
+
+Ninguna herramienta ejecutaría comandos. Para `validate_command`, el comando sería solo texto que se pasa al validador.
+
+### 2. Separar la lógica del motor del formato de la CLI
+
+Ahora el motor termina formateando su respuesta como texto. Para MCP conviene exponer también un método interno que devuelva el `SearchResponse` tipado, y dejar que la CLI y el servidor lo serialicen cada uno a su formato. Así evitamos que el servidor tenga que interpretar JSON o Markdown generado para humanos.
+
+### 3. Implementar el servidor MCP
+
+Agregar `semantic_search_engine/mcp/` con un servidor basado en el SDK oficial de MCP para Python y transporte **stdio**. El servidor adaptaría las herramientas a los servicios existentes de retrieval, pipeline y validación. Configuraría la creación del motor en un único punto compartido con la CLI.
+
+### 4. Validar entradas y errores
+
+Definir límites razonables para longitud de consulta y `top_k`, validar argumentos y devolver errores estructurados cuando haya datos inválidos o no estén disponibles corpus/índices. Los errores no deben convertirse en resultados vacíos que parezcan exitosos.
+
+### 5. Probar primero en memoria y luego con un cliente MCP
+
+Añadir pruebas para cada herramienta: formato de entrada/salida, consulta sin resultados, entradas inválidas y detección de riesgos. Después, probar el protocolo con un cliente MCP de prueba que invoque las tres operaciones, sin requerir un cliente externo durante la suite normal.
+
+### 6. Documentar integración y medir latencia
+
+Crear `docs/mcp_integration_guide.md` con instalación, comando para iniciar el servidor por stdio y un ejemplo de configuración de cliente. Medir por separado arranque frío y consultas con el modelo ya cargado; el criterio de **menos de 400 ms** debería aplicarse a latencia en caliente y definirse con el mismo conjunto de datos y entorno, porque la carga inicial de embeddings puede superarlo.
+
+**Orden propuesto:** contratos y respuesta tipada → `search_commands` → `plan_operation` → `validate_command` → pruebas de cliente → guía de integración y mediciones. Después de cada etapa correríamos sus pruebas; al completar la fase, la suite completa y una prueba integrada con el cliente MCP.
+
+## Avance de implementación
+
+- Rama de trabajo: `feat/phase-6-mcp-server`, creada desde `main`.
+- Completado: respuesta tipada del motor separada del formateo CLI.
+- Completado: servidor MCP Python por `stdio`, con `search_commands`,
+  `plan_operation` y `validate_command`.
+- Completado: límites de entrada para consultas, comandos y `top_k`; entradas
+  inválidas y excepciones se exponen como errores de herramienta.
+- Completado: pruebas unitarias y de protocolo cliente-servidor en memoria.
+- Completado: guía de integración en `docs/mcp_integration_guide.md`.
+- Completado: prueba end-to-end con el servidor `stdio`, cliente MCP y artefactos
+  locales; se invocaron las tres herramientas.
+- Medición local con `top_k=10`, CPU, MPNet local y 10 solicitudes calientes:
+  `plan_operation` mediana 162,24 ms / p95 341,52 ms; `search_commands` mediana
+  152,83 ms / p95 162,02 ms. La primera búsqueda tardó 15,91 s al cargar el modelo.
+- **FASE 6 CERRADA** en el entorno local validado: la suite completa pasó (77 tests
+  y 140 subtests), la integración stdio invocó las tres herramientas y el p95 caliente
+  de `plan_operation` fue inferior a 400 ms.
+- Las cifras son una medición de referencia de esta máquina, no una garantía para
+  otros equipos. Si cambia el entorno de ejecución, volver a medir latencia caliente
+  y reportar por separado el arranque frío.

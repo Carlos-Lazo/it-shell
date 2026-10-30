@@ -1,0 +1,482 @@
+category: "git"
+documents:
+- id: 1
+  intent: "Add file contents to the index"
+  command: "git add"
+- id: 2
+  intent: "Apply a series of patches from a mailbox"
+  command: "git am"
+- id: 3
+  intent: "Create an archive of files from a named tree"
+  command: "git archive"
+- id: 4
+  intent: "Download missing objects in a partial clone"
+  command: "git backfill"
+- id: 5
+  intent: "Use binary search to find the commit that introduced a bug"
+  command: "git bisect"
+- id: 6
+  intent: "List, create, or delete branches"
+  command: "git branch"
+- id: 7
+  intent: "Move objects and refs by archive"
+  command: "git bundle"
+- id: 8
+  intent: "Switch branches or restore working tree files"
+  command: "git checkout"
+- id: 9
+  intent: "Apply the changes introduced by some existing commits"
+  command: "git cherry pick"
+- id: 10
+  intent: "Graphical alternative to git-commit"
+  command: "git citool"
+- id: 11
+  intent: "Remove untracked files from the working tree"
+  command: "git clean"
+- id: 12
+  intent: "Clone a repository into a new directory"
+  command: "git clone"
+- id: 13
+  intent: "Record changes to the repository"
+  command: "git commit"
+- id: 14
+  intent: "Give an object a human readable name based on an available ref"
+  command: "git describe"
+- id: 15
+  intent: "Show changes between commits, commit and working tree, etc"
+  command: "git diff"
+- id: 16
+  intent: "Download objects and refs from another repository"
+  command: "git fetch"
+- id: 17
+  intent: "Prepare patches for e-mail submission"
+  command: "git format patch"
+- id: 18
+  intent: "Cleanup unnecessary files and optimize the local repository"
+  command: "git gc"
+- id: 19
+  intent: "Print lines matching a pattern"
+  command: "git grep"
+- id: 20
+  intent: "A portable graphical interface to Git"
+  command: "git gui"
+- id: 21
+  intent: "EXPERIMENTAL: Rewrite history"
+  command: "git history"
+- id: 22
+  intent: "Create an empty Git repository or reinitialize an existing one"
+  command: "git init"
+- id: 23
+  intent: "Show commit logs"
+  command: "git log"
+- id: 24
+  intent: "Run tasks to optimize Git repository data"
+  command: "git maintenance"
+- id: 25
+  intent: "Join two or more development histories together"
+  command: "git merge"
+- id: 26
+  intent: "Move or rename a file, a directory, or a symlink"
+  command: "git mv"
+- id: 27
+  intent: "Add or inspect object notes"
+  command: "git notes"
+- id: 28
+  intent: "Fetch from and integrate with another repository or a local branch"
+  command: "git pull"
+- id: 29
+  intent: "Update remote refs along with associated objects"
+  command: "git push"
+- id: 30
+  intent: "Compare two commit ranges (e.g. two versions of a branch)"
+  command: "git range diff"
+- id: 31
+  intent: "Reapply commits on top of another base tip"
+  command: "git rebase"
+- id: 32
+  intent: "Set HEAD or the index to a known state"
+  command: "git reset"
+- id: 33
+  intent: "Restore working tree files"
+  command: "git restore"
+- id: 34
+  intent: "Revert some existing commits"
+  command: "git revert"
+- id: 35
+  intent: "Remove files from the working tree and from the index"
+  command: "git rm"
+- id: 36
+  intent: "Summarize git log output"
+  command: "git shortlog"
+- id: 37
+  intent: "Show various types of objects"
+  command: "git show"
+- id: 38
+  intent: "Reduce your working tree to a subset of tracked files"
+  command: "git sparse checkout"
+- id: 39
+  intent: "Stash the changes in a dirty working directory away"
+  command: "git stash"
+- id: 40
+  intent: "Show the working tree status"
+  command: "git status"
+- id: 41
+  intent: "Initialize, update or inspect submodules"
+  command: "git submodule"
+- id: 42
+  intent: "Switch branches"
+  command: "git switch"
+- id: 43
+  intent: "Create, list, delete or verify tags"
+  command: "git tag"
+- id: 44
+  intent: "Manage multiple working trees"
+  command: "git worktree"
+- id: 45
+  intent: "The Git repository browser"
+  command: "gitk"
+- id: 46
+  intent: "A tool for managing large Git repositories"
+  command: "scalar"
+- id: 47
+  intent: "Get and set repository or global options"
+  command: "git config"
+- id: 48
+  intent: "Git data exporter"
+  command: "git fast export"
+- id: 49
+  intent: "Backend for fast Git data importers"
+  command: "git fast import"
+- id: 50
+  intent: "Rewrite branches"
+  command: "git filter branch"
+- id: 51
+  intent: "Run merge conflict resolution tools to resolve merge conflicts"
+  command: "git mergetool"
+- id: 52
+  intent: "Pack heads and tags for efficient repository access"
+  command: "git pack refs"
+- id: 53
+  intent: "Prune all unreachable objects from the object database"
+  command: "git prune"
+- id: 54
+  intent: "Manage reflog information"
+  command: "git reflog"
+- id: 55
+  intent: "Low-level access to refs"
+  command: "git refs"
+- id: 56
+  intent: "Manage set of tracked repositories"
+  command: "git remote"
+- id: 57
+  intent: "Pack unpacked objects in a repository"
+  command: "git repack"
+- id: 58
+  intent: "Create, list, delete refs to replace objects"
+  command: "git replace"
+- id: 59
+  intent: "Annotate file lines with commit information"
+  command: "git annotate"
+- id: 60
+  intent: "Show what revision and author last modified each line of a file"
+  command: "git blame"
+- id: 61
+  intent: "Collect information for user to file a bug report"
+  command: "git bugreport"
+- id: 62
+  intent: "Count unpacked number of objects and their disk consumption"
+  command: "git count objects"
+- id: 63
+  intent: "Generate a zip archive of diagnostic information"
+  command: "git diagnose"
+- id: 64
+  intent: "Show changes using common diff tools"
+  command: "git difftool"
+- id: 65
+  intent: "Verifies the connectivity and validity of the objects in the database"
+  command: "git fsck"
+- id: 66
+  intent: "Display help information about Git"
+  command: "git help"
+- id: 67
+  intent: "Instantly browse your working repository in gitweb"
+  command: "git instaweb"
+- id: 68
+  intent: "Perform merge without touching index or working tree"
+  command: "git merge tree"
+- id: 69
+  intent: "Reuse recorded resolution of conflicted merges"
+  command: "git rerere"
+- id: 70
+  intent: "Show branches and their commits"
+  command: "git show branch"
+- id: 71
+  intent: "Check the GPG signature of commits"
+  command: "git verify commit"
+- id: 72
+  intent: "Check the GPG signature of tags"
+  command: "git verify tag"
+- id: 73
+  intent: "Display version information about Git"
+  command: "git version"
+- id: 74
+  intent: "Show logs with differences each commit introduces"
+  command: "git whatchanged"
+- id: 75
+  intent: "Git web interface (web frontend to Git repositories)"
+  command: "gitweb"
+- id: 76
+  intent: "Import a GNU Arch repository into Git"
+  command: "git archimport"
+- id: 77
+  intent: "Export a single commit to a CVS checkout"
+  command: "git cvsexportcommit"
+- id: 78
+  intent: "Salvage your data out of another SCM people love to hate"
+  command: "git cvsimport"
+- id: 79
+  intent: "A CVS server emulator for Git"
+  command: "git cvsserver"
+- id: 80
+  intent: "Send a collection of patches from stdin to an IMAP folder"
+  command: "git imap send"
+- id: 81
+  intent: "Import from and submit to Perforce repositories"
+  command: "git p4"
+- id: 82
+  intent: "Applies a quilt patchset onto the current branch"
+  command: "git quiltimport"
+- id: 83
+  intent: "Generates a summary of pending changes"
+  command: "git request pull"
+- id: 84
+  intent: "Send a collection of patches as emails"
+  command: "git send email"
+- id: 85
+  intent: "Bidirectional operation between a Subversion repository and Git"
+  command: "git svn"
+- id: 86
+  intent: "Apply a patch to files and/or to the index"
+  command: "git apply"
+- id: 87
+  intent: "Copy files from the index to the working tree"
+  command: "git checkout index"
+- id: 88
+  intent: "Write and verify Git commit-graph files"
+  command: "git commit graph"
+- id: 89
+  intent: "Create a new commit object"
+  command: "git commit tree"
+- id: 90
+  intent: "Compute object ID and optionally create an object from a file"
+  command: "git hash object"
+- id: 91
+  intent: "Build pack index file for an existing packed archive"
+  command: "git index pack"
+- id: 92
+  intent: "Run a three-way file merge"
+  command: "git merge file"
+- id: 93
+  intent: "Run a merge for files needing merging"
+  command: "git merge index"
+- id: 94
+  intent: "Creates a tag object with extra validation"
+  command: "git mktag"
+- id: 95
+  intent: "Build a tree-object from ls-tree formatted text"
+  command: "git mktree"
+- id: 96
+  intent: "Write and verify multi-pack-indexes"
+  command: "git multi pack index"
+- id: 97
+  intent: "Create a packed archive of objects"
+  command: "git pack objects"
+- id: 98
+  intent: "Remove extra objects that are already in pack files"
+  command: "git prune packed"
+- id: 99
+  intent: "Reads tree information into the index"
+  command: "git read tree"
+- id: 100
+  intent: "EXPERIMENTAL: Replay commits on a new base, works with bare repos too"
+  command: "git replay"
+- id: 101
+  intent: "Read, modify and delete symbolic refs"
+  command: "git symbolic ref"
+- id: 102
+  intent: "Unpack objects from a packed archive"
+  command: "git unpack objects"
+- id: 103
+  intent: "Register file contents in the working tree to the index"
+  command: "git update index"
+- id: 104
+  intent: "Update the object name stored in a ref safely"
+  command: "git update ref"
+- id: 105
+  intent: "Create a tree object from the current index"
+  command: "git write tree"
+- id: 106
+  intent: "Provide contents or details of repository objects"
+  command: "git cat file"
+- id: 107
+  intent: "Find commits yet to be applied to upstream"
+  command: "git cherry"
+- id: 108
+  intent: "Compares files in the working tree and the index"
+  command: "git diff files"
+- id: 109
+  intent: "Compare a tree to the working tree or index"
+  command: "git diff index"
+- id: 110
+  intent: "Compare the content and mode of provided blob pairs"
+  command: "git diff pairs"
+- id: 111
+  intent: "Compares the content and mode of blobs found via two tree objects"
+  command: "git diff tree"
+- id: 112
+  intent: "Output information on each ref"
+  command: "git for each ref"
+- id: 113
+  intent: "Run a Git command on a list of repositories"
+  command: "git for each repo"
+- id: 114
+  intent: "EXPERIMENTAL: Pretty format revisions on demand"
+  command: "git format rev"
+- id: 115
+  intent: "Extract commit ID from an archive created using git-archive"
+  command: "git get tar commit id"
+- id: 116
+  intent: "EXPERIMENTAL: Show when files were last modified"
+  command: "git last modified"
+- id: 117
+  intent: "Show information about files in the index and the working tree"
+  command: "git ls files"
+- id: 118
+  intent: "List references in a remote repository"
+  command: "git ls remote"
+- id: 119
+  intent: "List the contents of a tree object"
+  command: "git ls tree"
+- id: 120
+  intent: "Find as good common ancestors as possible for a merge"
+  command: "git merge base"
+- id: 121
+  intent: "Find symbolic names for given revs"
+  command: "git name rev"
+- id: 122
+  intent: "Find redundant pack files"
+  command: "git pack redundant"
+- id: 123
+  intent: "Retrieve information about the repository"
+  command: "git repo"
+- id: 124
+  intent: "Lists commit objects in reverse chronological order"
+  command: "git rev list"
+- id: 125
+  intent: "Pick out and massage parameters"
+  command: "git rev parse"
+- id: 126
+  intent: "Show packed archive index"
+  command: "git show index"
+- id: 127
+  intent: "List references in a local repository"
+  command: "git show ref"
+- id: 128
+  intent: "Creates a temporary file with a blob’s contents"
+  command: "git unpack file"
+- id: 129
+  intent: "Show a Git logical variable"
+  command: "git var"
+- id: 130
+  intent: "Validate packed Git archive files"
+  command: "git verify pack"
+- id: 131
+  intent: "A really simple server for Git repositories"
+  command: "git daemon"
+- id: 132
+  intent: "Receive missing objects from another repository"
+  command: "git fetch pack"
+- id: 133
+  intent: "Server side implementation of Git over HTTP"
+  command: "git http backend"
+- id: 134
+  intent: "Push objects over Git protocol to another repository"
+  command: "git send pack"
+- id: 135
+  intent: "Update auxiliary info file to help dumb servers"
+  command: "git update server info"
+- id: 136
+  intent: "Download from a remote Git repository via HTTP"
+  command: "git http fetch"
+- id: 137
+  intent: "Push objects over HTTP/DAV to another repository"
+  command: "git http push"
+- id: 138
+  intent: "Receive what is pushed into the repository"
+  command: "git receive pack"
+- id: 139
+  intent: "Restricted login shell for Git-only SSH access"
+  command: "git shell"
+- id: 140
+  intent: "Send archive back to git-archive"
+  command: "git upload archive"
+- id: 141
+  intent: "Send objects packed back to git-fetch-pack"
+  command: "git upload pack"
+- id: 142
+  intent: "Display gitattributes information"
+  command: "git check attr"
+- id: 143
+  intent: "Debug gitignore / exclude files"
+  command: "git check ignore"
+- id: 144
+  intent: "Show canonical names and email addresses of contacts"
+  command: "git check mailmap"
+- id: 145
+  intent: "Ensures that a reference name is well formed"
+  command: "git check ref format"
+- id: 146
+  intent: "Display data in columns"
+  command: "git column"
+- id: 147
+  intent: "Retrieve and store user credentials"
+  command: "git credential"
+- id: 148
+  intent: "Helper to temporarily store passwords in memory"
+  command: "git credential cache"
+- id: 149
+  intent: "Helper to store credentials on disk"
+  command: "git credential store"
+- id: 150
+  intent: "Produce a merge commit message"
+  command: "git fmt merge msg"
+- id: 151
+  intent: "Run Git hooks"
+  command: "git hook"
+- id: 152
+  intent: "Add or parse structured information in commit messages"
+  command: "git interpret trailers"
+- id: 153
+  intent: "Extracts patch and authorship from a single e-mail message"
+  command: "git mailinfo"
+- id: 154
+  intent: "Simple UNIX mbox splitter program"
+  command: "git mailsplit"
+- id: 155
+  intent: "The standard helper program to use with git-merge-index"
+  command: "git merge one file"
+- id: 156
+  intent: "Compute unique IDs for patches"
+  command: "git patch id"
+- id: 157
+  intent: "Git’s i18n setup code for shell scripts"
+  command: "git sh i18n"
+- id: 158
+  intent: "Common Git shell script setup code"
+  command: "git sh setup"
+- id: 159
+  intent: "Remove unnecessary whitespace"
+  command: "git stripspace"
+- id: 160
+  intent: "Parse and extract git URL components"
+  command: "git url parse"

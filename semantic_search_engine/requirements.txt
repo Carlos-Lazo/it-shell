@@ -2,3 +2,4 @@ faiss-cpu==1.10.0
 numpy==2.2.2
 PyYAML==6.0.2
 sentence-transformers==3.4.1
+mcp>=1.9,<2

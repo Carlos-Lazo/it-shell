@@ -1,0 +1,170 @@
+# IT SHELL — PLAN DE FORMALIZACIÓN Y DISTRIBUCIÓN DEL CORPUS
+Versión: 1.0  
+Fecha: 2026-10-29  
+Estado: Planificación previa a Fase 7 (Empaquetado y Distribución)  
+Corpus objetivo: 14 archivos YAML (30.287 documentos estructurados en `dataset_builder/corpus/`)
+
+======================================================================
+1. DIAGNÓSTICO Y MOTIVACIÓN TÉCNICA
+======================================================================
+
+Antes de abordar la Fase 7 (empaquetado estándar vía `pyproject.toml` y/o `.deb`),
+es imperativo formalizar el corpus. Empaquetar sin auditar licencias ni fijar una
+estrategia de distribución de datos traslada problemas de redistribución y
+tamaño al instalador final.
+
+Estado actual del corpus y artefactos:
+1. Volumen y estructura:
+   - 14 archivos YAML en `dataset_builder/corpus/` con 30.287 comandos.
+   - Cada documento contiene `category`, `id`, `command`, `intent` y opcionalmente `example`.
+2. Procedencia histórica:
+   - Recolección distribuida en `dataset_builder/webcrawling/` (Debian 12 man pages, Docker docs, Git docs, Linux man-pages).
+   - Clasificación funcional con clasificador léxico TF-IDF en Go (`dataset_builder/classifier/`).
+3. Bloqueos para distribución:
+   - Git excluye todos los `.yaml` por regla en `.gitignore` (`*.yaml`), por lo que el corpus no viaja en el clone estándar.
+   - Los artefactos derivados (`index.faiss` de ~73 MB y `aliases.npy` de ~2.7 MB) están igualmente excluidos.
+   - No existe un archivo consolidado de licencias (`LICENSES/`, `NOTICE`, `sources.csv`) que certifique los derechos de redistribución de los textos extraídos.
+
+======================================================================
+2. HOJA DE RUTA DE FORMALIZACIÓN (SPRINTS Y TAREAS)
+======================================================================
+
+----------------------------------------------------------------------
+ETAPA 1: INVENTARIO, AUDITORÍA Y TRAZABILIDAD DE FUENTES
+----------------------------------------------------------------------
+Objetivo:
+Mapear con precisión quirúrgica el origen de cada uno de los 30.287 documentos
+para determinar su licencia de origen y compatibilidad de redistribución.
+
+Tareas:
+1.1. Auditoría por subdirectorio de crawler:
+     - `webcrawling/debian12`: Páginas de manual de Debian (DFSG compliant, licencias mixtas GPL, BSD, MIT, GFDL).
+     - `webcrawling/docker`: Documentación oficial de Docker (Apache 2.0).
+     - `webcrawling/git`: Documentación oficial de Git (GPLv2 / Creative Commons).
+     - `webcrawling/linux`: Linux Man-Pages Project (varias licencias permisivas / copyleft).
+1.2. Mapeo a nivel de comando/archivo:
+     - Crear script de trazabilidad `dataset_builder/corpus/audit_sources.py` que verifique la fuente de cada categoría.
+     - Documentar transformaciones aplicadas: extracción de banderas, generación sintética de `intent`, limpieza de formato.
+1.3. Matriz de permisos de redistribución:
+     - Identificar si alguna fuente impone copyleft viral estricto o incompatibilidades con la licencia del motor.
+     - Registrar decisión explícita: Incluir con atribución, sanear o excluir.
+
+Entregables:
+- Archivo tabular `dataset_builder/corpus/sources.csv` con:
+  `category,source_project,source_url,upstream_version,license,attribution_required`
+- Informe de auditoría legal preliminar en `docs/auditoria_licencias_corpus.md`.
+
+----------------------------------------------------------------------
+ETAPA 2: MANIFIESTO, CONGELAMIENTO Y CONTROL DE VERSIONES
+----------------------------------------------------------------------
+Objetivo:
+Fijar la identidad criptográfica del corpus para garantizar reproducibilidad
+entre el dataset de texto, los vectores y los índices FAISS/BM25.
+
+Tareas:
+2.1. Manifiesto formal del corpus:
+     - Extender `evaluation/retrieval_snapshot_v2.json` o generar `dataset_builder/corpus/manifest.json`.
+     - Incluir por cada archivo YAML: nombre, categoría, cantidad de documentos, rango de IDs y hash SHA-256.
+2.2. Política de control de versiones en Git:
+     - Modificar `.gitignore` para permitir el rastreo del corpus YAML:
+       `!dataset_builder/corpus/*.yaml`
+     - Evaluar la inclusión de `index.faiss` y `aliases.npy` mediante Git LFS (Large File Storage) o definir su descarga desacoplada en el build.
+2.3. Congelamiento v1.0:
+     - Etiquetar la versión oficial del dataset: `corpus-v2.0` (alineada al benchmark de 160 consultas y 30.287 vectores).
+
+Entregables:
+- `dataset_builder/corpus/manifest.json` firmado con hashes SHA-256.
+- Reglas de `.gitignore` actualizadas.
+
+----------------------------------------------------------------------
+ETAPA 3: VALIDACIÓN AUTOMATIZADA DE INTEGRIDAD (CI/CD READY)
+----------------------------------------------------------------------
+Objetivo:
+Garantizar programáticamente que el corpus nunca se corrompa, sufra de IDs
+duplicados o rompa la compatibilidad con el motor de búsqueda.
+
+Tareas:
+3.1. Script de validación de esquema y datos:
+     - Desarrollar `dataset_builder/corpus/validate_corpus.py`.
+     - Validaciones obligatorias:
+       * Sintaxis YAML estricta.
+       * Presencia de campos requeridos: `category`, `documents` (`id`, `command`, `intent`).
+       * Unicidad global del alias `category:id`.
+       * Ausencia de comandos vacíos o intents nulos.
+       * Consistencia entre el total de documentos y el manifiesto.
+3.2. Verificación cruzada con artefactos del engine:
+     - Validar que cada alias en `aliases.npy` resuelva exactamente contra un documento del corpus YAML.
+     - Validar que el índice Lucene/BM25 contenga exactamente los mismos identificadores.
+3.3. Integración en la suite de pruebas:
+     - Añadir `tests/test_corpus_integrity.py` ejecutable con `unittest`.
+
+Entregables:
+- Script `dataset_builder/corpus/validate_corpus.py`.
+- Prueba unitaria `tests/test_corpus_integrity.py`.
+
+----------------------------------------------------------------------
+ETAPA 4: METADATOS, AVISOS LEGALES Y ATRIBUCIONES (COMPLIANCE)
+----------------------------------------------------------------------
+Objetivo:
+Publicar el dataset con toda la documentación estándar requerida por la comunidad
+de código abierto y la academia.
+
+Tareas:
+4.1. Documentación del Dataset:
+     - Redactar `dataset_builder/corpus/README.md` (Dataset Card):
+       * Descripción funcional, estadísticas por categoría.
+       * Metodología de recolección y clasificación TF-IDF.
+       * Estructura de los registros y ejemplos.
+       * Guía de regeneración y contribución.
+4.2. Avisos de Copyright y Atribución:
+     - Crear directorio `LICENSES/` con los textos completos de licencias upstream (GPL-2.0, GPL-3.0, Apache-2.0, MIT, CC-BY-SA, etc.).
+     - Crear archivo `NOTICE` en la raíz del repositorio especificando las atribuciones correspondientes a Debian, Docker, Git y Linux Man-Pages.
+     - Crear plantilla `debian/copyright` siguiendo el formato Machine-Readable Debian Copyright Format 1.0 (DEP-5).
+
+Entregables:
+- `dataset_builder/corpus/README.md`.
+- Archivos `NOTICE`, `LICENSES/*` y borrador `debian/copyright`.
+
+----------------------------------------------------------------------
+ETAPA 5: ESTRATEGIA DE DISTRIBUCIÓN (PUENTE CON FASE 7)
+----------------------------------------------------------------------
+Objetivo:
+Definir cómo el usuario final o administrador instala el corpus y los índices
+al desplegar `it-shell`.
+
+Tareas:
+5.1. Desacoplamiento Paquete Motor vs Paquete Datos:
+     - Opción recomendada:
+       * `it-shell` (código Python vía `pyproject.toml`): contiene el motor, CLI, MCP y lógica de búsqueda.
+       * `it-shell-data` (paquete de datos / release asset / deb): contiene `corpus/`, `index.faiss` y `aliases.npy` (~85 MB comprimido).
+5.2. Ubicación canónica en sistema de archivos Linux:
+     - Definir rutas de instalación FHS (Filesystem Hierarchy Standard):
+       * Datos: `/usr/share/it-shell/corpus/` e `/usr/share/it-shell/indexes/`
+       * Fallback local para desarrollo: `dataset_builder/corpus/` y `dataset_builder/indexer/artifacts/`
+5.3. Bootstrap / Downloader opcional:
+     - Proveer un comando CLI de aprovisionamiento si el usuario instala solo por `pip`:
+       `it-shell download-data` (descarga el release congelado con checksums verificados).
+
+Entregables:
+- Especificación de empaquetado de datos documentada en `docs/estrategia_distribucion_datos.md`.
+
+======================================================================
+3. CRITERIO DE ACEPTACIÓN PARA CONSIDERAR FORMALIZADO EL CORPUS
+======================================================================
+
+El corpus se considerará FORMALIZADO y listo para la Fase 7 cuando:
+1. Procedencia y Licencias: El 100% de las 14 categorías tenga su origen y licencia documentados en `sources.csv`.
+2. Cumplimiento Legal: Los archivos `NOTICE` y `LICENSES/` reflejen todas las atribuciones requeridas.
+3. Validación Estructural: `validate_corpus.py` y `test_corpus_integrity.py` aprueben el 100% de los 30.287 registros sin fallos ni duplicados.
+4. Trazabilidad Criptográfica: `manifest.json` valide todos los hashes de los archivos YAML y certifique coincidencia exacta con `aliases.npy` e `index.faiss`.
+5. Preparación para Empaquetado: Las excepciones en `.gitignore` y las rutas canónicas `/usr/share/it-shell/` estén definidas.
+
+======================================================================
+4. ORDEN DE EJECUCIÓN RECOMENDADO
+======================================================================
+
+1. Etapa 1: Completar `audit_sources.py` y generar `sources.csv`.
+2. Etapa 3: Escribir y ejecutar `validate_corpus.py` y `tests/test_corpus_integrity.py`.
+3. Etapa 2: Generar `manifest.json` y actualizar reglas de `.gitignore`.
+4. Etapa 4: Redactar `README.md` del corpus, `NOTICE` y `debian/copyright`.
+5. Etapa 5: Especificar la separación de paquetes para la Fase 7.

@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "it-shell"
+version = "0.1.0"
+description = "Semantic search and planning assistant for CLI commands"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "faiss-cpu==1.10.0",
+    "numpy==2.2.2",
+    "PyYAML==6.0.2",
+    "sentence-transformers==3.4.1",
+    "mcp>=1.9,<2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+it-shell = "semantic_search_engine.cli:main"
+it-shell-mcp = "semantic_search_engine.mcp.server:main"
+
+[tool.setuptools.packages.find]
+include = ["semantic_search_engine*"]
+
+[tool.setuptools.package-data]
+semantic_search_engine = ["config/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

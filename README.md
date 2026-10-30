@@ -43,42 +43,81 @@ La configuración predeterminada está en
 [`semantic_search_engine/config/default.yaml`](semantic_search_engine/config/default.yaml).
 El detalle de arquitectura está en
 [`semantic_search_engine/README.md`](semantic_search_engine/README.md).
+Los resultados de rendimiento y la comparación controlada están en
+[`docs/fase7_informe_rendimiento.md`](docs/fase7_informe_rendimiento.md).
 
 ## Inicio rápido: instalar y ejecutar
 
-Requisitos: Python 3.10 o superior. Desde la raíz del repositorio:
+Requisitos: Python 3.10 o superior. Desde la raíz del repositorio, crea un entorno
+virtual e instala el proyecto en modo editable:
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install -r semantic_search_engine/requirements.txt
+python -m pip install -e ".[dev]"
 ```
 
 La ejecución requiere que existan el corpus YAML y los artefactos indicados en la
 configuración: el índice FAISS, `aliases.npy` y el modelo
 `sentence-transformers/all-mpnet-base-v2` (se descarga al primer uso si no está en
-caché). Los corpus YAML y algunos artefactos generados no se distribuyen en Git.
-Si aún no están disponibles en tu entorno, consulta la sección siguiente antes de
-ejecutar la CLI.
+caché). En un checkout editable, se usan los artefactos locales. En una instalación
+normal, el paquete espera los datos en `/usr/share/it-shell/`; para una ubicación
+distinta, indica un YAML propio mediante `--config`. La guía de reproducción está
+en [`dataset_builder/corpus/REPRODUCING.md`](dataset_builder/corpus/REPRODUCING.md).
+
+En Debian, el corpus y el índice FAISS se distribuyen separadamente en
+`it-shell-data.deb`. Para construirlo desde el checkout y luego instalarlo:
+
+```bash
+./packaging/build-data-deb.sh 0.1.0
+sudo apt install ./dist/it-shell-data_0.1.0_all.deb
+```
+
+La construcción necesita los 14 YAML, `index.faiss` y `aliases.npy` del checkout.
+El script no altera esos archivos. Para publicar actualizaciones con `apt` en
+lugar de instalar un `.deb` local, el paquete deberá publicarse en un repositorio
+APT.
 
 Con los datos preparados, ejecuta una consulta:
 
 ```bash
-PYTHONPATH=. python semantic_search_engine/cli.py "List files in a directory"
+it-shell "List files in a directory"
 ```
 
 Formatos disponibles:
 
 ```bash
-PYTHONPATH=. python semantic_search_engine/cli.py "find large log files" --format terminal
-PYTHONPATH=. python semantic_search_engine/cli.py "find large log files" --format markdown
-PYTHONPATH=. python semantic_search_engine/cli.py "find large log files" --format json
+it-shell "find large log files" --format terminal
+it-shell "find large log files" --format markdown
+it-shell "find large log files" --format json
 ```
 
 `terminal` incluye colores ANSI para los avisos; `cli` es texto plano. También se
 puede indicar la cantidad de candidatos con `--top-k 10` y una configuración
 alternativa con `--config ruta/al/config.yaml`.
+
+El servidor MCP está disponible como comando de consola:
+
+```bash
+it-shell-mcp --config ruta/al/config.yaml
+```
+
+La instalación del paquete incluye la dependencia MCP y expone búsqueda,
+planificación y validación de comandos; ninguna herramienta ejecuta comandos.
+
+### Servidor MCP
+
+El motor también se puede conectar a clientes compatibles con Model Context Protocol
+mediante transporte `stdio`:
+
+```bash
+PYTHONPATH=. .venv/bin/python -m semantic_search_engine.mcp.server
+```
+
+Expone búsqueda de comandos, planificación de operaciones y validación de texto de
+comandos; ninguna herramienta ejecuta comandos. Consulta la
+[guía de integración MCP](docs/mcp_integration_guide.md) para configurar un cliente.
 
 ### Preparar embeddings e índice FAISS
 
@@ -95,18 +134,17 @@ PYTHONPATH=. .venv/bin/python dataset_builder/indexer/build_index.py \
   --output dataset_builder/indexer/artifacts/all-mpnet-base-v2
 ```
 
-Para obtener o generar el corpus (incluyendo la descarga/procesamiento de fuentes),
-consulta [`dataset_builder/README.md`](dataset_builder/README.md) y los README de
-[`webcrawling/`](dataset_builder/webcrawling/README.md) y
-[`classifier/`](dataset_builder/classifier/README.md). La generación de embeddings
-puede requerir descargar el modelo de Hugging Face la primera vez.
+Para reproducir el corpus, consulta
+[`dataset_builder/corpus/REPRODUCING.md`](dataset_builder/corpus/REPRODUCING.md).
+La generación de embeddings puede requerir descargar el modelo de Hugging Face la
+primera vez.
 
 ## Pruebas
 
-Con pytest instalado:
+Con las dependencias de desarrollo instaladas:
 
 ```bash
-PYTHONPATH=. python -m pytest -q
+python -m pytest -q
 ```
 
 La suite cubre planificación, recuperación, propuestas, reglas de seguridad,

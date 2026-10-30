@@ -46,11 +46,12 @@ dataset_builder/webcrawling/**/*.csv
 *.yml
 *.yaml
 !semantic_search_engine/config/default.yaml
-
+!dataset_builder/corpus/*.yaml
 
 # Índices FAISS
 *.index
 *.faiss
+!dataset_builder/indexer/artifacts/all-mpnet-base-v2/index.faiss
 # Índices BM25
 *.fdm
 *.fdt
@@ -94,5 +95,6 @@ Thumbs.db
 # Artefactos y binarios pesados
 *.npz
 *.npy
+!dataset_builder/indexer/artifacts/all-mpnet-base-v2/aliases.npy
 *.zip
 *.tar.gz

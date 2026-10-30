@@ -1,0 +1,2642 @@
+category: "cryptography"
+documents:
+- id: 1
+  intent: "FileCheck match-filename [-check-prefix=XXX] [-strict-whitespace]"
+  command: "FileCheck-14"
+  example: "FileCheck-14"
+- id: 2
+  intent: "FileCheck searches the contents of match-filename  for  patterns to   match.   By  default,  these  patterns  are  prefixed  with \"CHECK:\".  If you'd like to use a different prefix (e.g. because the  same  input file is checking multiple different tool or op- tions), the --check-prefix argument allows you to specify (with- out  the  trailing  \":\") one or more prefixes to match. Multiple prefixes are useful for tests which might change  for  different run options, but most lines remain the same. FileCheck  does  not permit duplicate prefixes, even if one is a check prefix and one is a comment prefix (see --comment-prefixes below)."
+  command: "FileCheck-14"
+  example: "FileCheck-14 --check-prefix prefix"
+- id: 3
+  intent: "An  alias  of --check-prefix that allows multiple prefixes to be specified as a comma separated list."
+  command: "FileCheck-14"
+  example: "FileCheck-14 --check-prefixes prefix1,prefix2,..."
+- id: 4
+  intent: "This  option controls the behavior when using more than one pre- fix as specified by --check-prefix or --check-prefixes, and some of these prefixes are missing in the test file. If true, this is allowed, if false, FileCheck will report an error,  listing  the missing prefixes. It  is currently, temporarily, true by default, and will be sub- sequently switched to false."
+  command: "FileCheck-14"
+  example: "FileCheck-14 --allow-unused-prefixes"
+- id: 5
+  intent: "By default, FileCheck allows matches of anywhere on a line. This option  will  require  all  positive  matches to cover an entire line.  Leading  and  trailing  whitespace  is  ignored,   unless --strict-whitespace  is  also specified. (Note: negative matches from CHECK-NOT are not affected by this option!) Passing this option is equivalent to inserting {{^ *}} or  {{^}} before, and {{ *$}} or {{$}} after every positive check pattern."
+  command: "FileCheck-14"
+  example: "FileCheck-14 --match-full-lines"
+- id: 6
+  intent: "Adds implicit negative checks for the specified patterns between positive  checks. The option allows writing stricter tests with- out stuffing them with CHECK-NOTs. For example, \"--implicit-check-not warning:\" can be useful  when testing diagnostic messages from tools that don't have an option similar to clang -verify. With this option FileCheck will verify that  input  does not contain warnings not covered by any CHECK: patterns."
+  command: "FileCheck-14"
+  example: "FileCheck-14 --implicit-check-not check-pattern"
+- id: 7
+  intent: "Enables scope for regex variables. Variables with names that start with $ are considered global and remain set throughout the file. All  other  variables  get  undefined  after  each   encountered CHECK-LABEL."
+  command: "FileCheck-14"
+  example: "FileCheck-14 --enable-var-scope"
+- id: 8
+  intent: "Sets a filecheck numeric variable NUMVAR of matching format  FMT to  the  result  of  evaluating <NUMERIC EXPRESSION> that can be used in CHECK: lines.  See section FileCheck  Numeric  Variables and Expressions for details on supported numeric expressions."
+  command: "FileCheck-14"
+  example: "FileCheck-14 -D#<FMT>,<NUMVAR>=<NUMERIC EXPRESSION>"
+- id: 9
+  intent: "sues, such as discarded overlapping CHECK-DAG: matches, implicit EOF  pattern  matches,  and CHECK-NOT: patterns that do not have matches.  Implies -v.  However, if -dump-input=fail or -dump-in- put=always,  just  add that information as input annotations in- stead."
+  command: "FileCheck-14"
+  example: "FileCheck-14 -vv    Print  information  helpful in diagnosing internal FileCheck is-"
+- id: 10
+  intent: "Enable overlapping among  matches  in  a  group  of  consecutive CHECK-DAG:  directives.   This  option is deprecated and is only provided for convenience as old tests are migrated  to  the  new non-overlapping CHECK-DAG: implementation."
+  command: "FileCheck-14"
+  example: "FileCheck-14 --allow-deprecated-dag-overlap"
+- id: 11
+  intent: "Vertical & horizontal tile count for uniform tiling"
+  command: "JxrEncApp"
+  example: "JxrEncApp -U num_v_tiles num_h_tiles"
+- id: 12
+  intent: "check file types and compare values"
+  command: "["
+  example: "["
+- id: 13
+  intent: "Method for determining the BoundingBox  (default: guess)"
+  command: "a2ping"
+  example: "a2ping --bboxfrom=adsc|compute-gs|guess|pagesize"
+- id: 14
+  intent: "Do not check asciidoc output with xmllint(1)."
+  command: "a2x"
+  example: "a2x -L, --no-xmllint"
+- id: 15
+  intent: "Check EPUB output with epubcheck(1)."
+  command: "a2x"
+  example: "a2x ---epubcheck"
+- id: 16
+  intent: "Print a help message."
+  command: "a5toa4"
+  example: "a5toa4 -h, --help"
+- id: 17
+  intent: "confine a program with the specified AppArmor profile"
+  command: "aa-exec"
+  example: "aa-exec"
+- id: 18
+  intent: "Show help message and exit."
+  command: "add-apt-repository"
+  example: "add-apt-repository -h, --help"
+- id: 19
+  intent: "Display a short usage message."
+  command: "afm2pl"
+  example: "afm2pl --help"
+- id: 20
+  intent: "save the configuration without additional integrity check"
+  command: "alsatplg"
+  example: "alsatplg -x, --nocheck"
+- id: 21
+  intent: "Adds a delay in between each SysEx message sent to a device.  It is  useful when sending firmware updates via SysEx messages to a remote device."
+  command: "amidi"
+  example: "amidi -i, --sysex-interval=mseconds"
+- id: 22
+  intent: "Check generated passwords for their appearance in dictfile"
+  command: "apg"
+  example: "apg -r dictfile"
+- id: 23
+  intent: "check word for appearance in the filter."
+  command: "apgbfm"
+  example: "apgbfm -c word"
+- id: 24
+  intent: "check every word from dictfile for appearance in the filter."
+  command: "apgbfm"
+  example: "apgbfm -C dictfile"
+- id: 25
+  intent: "Print a help message and exit."
+  command: "apropos"
+  example: "apropos -?, --help"
+- id: 26
+  intent: "Print a short usage message and exit."
+  command: "apropos"
+  example: "apropos --usage"
+- id: 27
+  intent: "Show help message and exit."
+  command: "apt-add-repository"
+  example: "apt-add-repository -h, --help"
+- id: 28
+  intent: "Generate the given checksum. These options default to on, when turned off the generated index files will not have the checksum fields where possible. Configuration Items: APT::FTPArchive::Checksum and APT::FTPArchive::Index::Checksum where Index can be Packages, Sources or Release and Checksum can be MD5, SHA1, SHA256 or SHA512."
+  command: "apt-ftparchive"
+  example: "apt-ftparchive --md5, --sha1, --sha256, --sha512"
+- id: 29
+  intent: "Display additional (usually unwanted) information. For instance, print a message when a package of the same or older version is to be installed, or when a package is to be newly installed."
+  command: "apt-listchanges"
+  example: "apt-listchanges -v, --verbose"
+- id: 30
+  intent: "Issue an error or warning for invalid ELF .size directive."
+  command: "as"
+  example: "as --size-check=warning"
+- id: 31
+  intent: "This option specifies the target processor.  The optional sirevision is not used in assembler.  It's here such that GCC can easily pass down its \"-mcpu=\" option.  The assembler will issue an error message if an attempt is made to assemble an instruction which will not execute on the target processor.  The following processor names are recognized: \"bf504\", \"bf506\", \"bf512\", \"bf514\", \"bf516\", \"bf518\", \"bf522\", \"bf523\", \"bf524\", \"bf525\", \"bf526\", \"bf527\", \"bf531\", \"bf532\", \"bf533\", \"bf534\", \"bf535\" (not implemented yet), \"bf536\", \"bf537\", \"bf538\", \"bf539\", \"bf542\", \"bf542m\", \"bf544\", \"bf544m\", \"bf547\", \"bf547m\", \"bf548\", \"bf548m\", \"bf549\", \"bf549m\", \"bf561\", and \"bf592\"."
+  command: "as"
+  example: "as -mcpu=processor[-sirevision]"
+- id: 32
+  intent: "These options control if the assembler should check SSE instructions.  -msse-check=none will make the assembler not to check SSE instructions,  which is the default.  -msse-check=warning will make the assembler issue a warning for any SSE instruction. -msse-check=error will make the assembler issue an error for any SSE instruction."
+  command: "as"
+  example: "as -msse-check=error"
+- id: 33
+  intent: "Generate code for the MIPS cyclic redundancy check (CRC) Application Specific Extension.  This tells the assembler to accept CRC instructions.  -mno-crc turns off this option."
+  command: "as"
+  example: "as -mno-crc"
+- id: 34
+  intent: "Select the privileged spec version.  We can decide whether the CSR is valid or not according to the chosen spec.  If this option and the privilege attributes aren't set, then assembler will check the default configure setting --with-priv-spec=PRIVspec."
+  command: "as"
+  example: "as -mpriv-spec=PRIVspec"
+- id: 35
+  intent: "Enable the CSR checking for the ISA-dependent CRS and the read-only CSR.  The ISA-dependent CSR are only valid when the specific ISA is set.  The read-only CSR can not be written by the CSR instructions."
+  command: "as"
+  example: "as -mcsr-check"
+- id: 36
+  intent: "Don't do CSR checking."
+  command: "as"
+  example: "as -mno-csr-check"
+- id: 37
+  intent: "This option specifies the target architecture.  If an attempt is made to assemble an instruction that will not execute on the target architecture, the assembler will issue an error message. The following names are recognized: \"mcm24\" \"mcm\" \"gr5\" \"gr6\" The following options are available when as is configured for an Xtensa processor."
+  command: "as"
+  example: "as -mtune=arch"
+- id: 38
+  intent: "\"-W usage\")."
+  command: "awk"
+  example: "awk -W help        prints  a  usage  message  to  stderr and exits (same as"
+- id: 39
+  intent: "\"-W help\")."
+  command: "awk"
+  example: "awk -W usage       prints  a  usage  message  to  stderr and exits (same as"
+- id: 40
+  intent: "helper program for use of LaTeX package axodraw2 with pdfla- tex."
+  command: "axohelp"
+  example: "axohelp"
+- id: 41
+  intent: "compute and check BLAKE2 message digest"
+  command: "b2sum"
+  example: "b2sum"
+- id: 42
+  intent: "read checksums from the FILEs and check them"
+  command: "b2sum"
+  example: "b2sum -c, --check"
+- id: 43
+  intent: "digest length in bits; must not exceed the max  for  the  blake2 algorithm and must be a multiple of 8"
+  command: "b2sum"
+  example: "b2sum -l, --length=BITS"
+- id: 44
+  intent: "same as 'base64' program (RFC4648 section 4)"
+  command: "basenc"
+  example: "basenc --base64"
+- id: 45
+  intent: "same as 'base32' program (RFC4648 section 6)"
+  command: "basenc"
+  example: "basenc --base32"
+- id: 46
+  intent: "fully."
+  command: "bash"
+  example: "bash --help Display a usage message on standard  output  and  exit  success-"
+- id: 47
+  intent: "Show a brief usage message and exit."
+  command: "bashbug"
+  example: "bashbug --help"
+- id: 48
+  intent: "Display help message and exit."
+  command: "bib2gls"
+  example: "bib2gls --help or -h"
+- id: 49
+  intent: "Don't check for instances of \"\\citation\" in the .aux file (default)."
+  command: "bib2gls"
+  example: "bib2gls --no-cite-as-record"
+- id: 50
+  intent: "Check each field listed in list for potentially problematic nested link text. (Default list: name, text, plural, first, firstplural, short, shortplural, long, longplural, symbol). If none, disable check."
+  command: "bib2gls"
+  example: "bib2gls --nested-link-check list|none"
+- id: 51
+  intent: "Don't check for potentially problematic nested link text. (Equivalent to --nested-link-check none)"
+  command: "bib2gls"
+  example: "bib2gls --no-nested-link-check"
+- id: 52
+  intent: "Check firmware image"
+  command: "bluemoon"
+  example: "bluemoon -C, --check <file>"
+- id: 53
+  intent: "is used for a message that wasn't registered as spam, the counts will still be decremented. The -N option tells bogofilter to undo a prior registration of the same message as non-spam. If a message was incorrectly entered as non-spam by -n or -u and you want to remove it and enter it as spam, then use"
+  command: "bogofilter"
+  example: "bogofilter -u and you want to remove it and enter it as non-spam, use -Sn. If -S"
+- id: 54
+  intent: "is used for a message that wasn't registered as spam, the counts will still be decremented. The -N option tells bogofilter to undo a prior registration of the same message as non-spam. If a message was incorrectly entered as non-spam by -n or -u and you want to remove it and enter it as spam, then use"
+  command: "bogofilter-bdb"
+  example: "bogofilter-bdb -u and you want to remove it and enter it as non-spam, use -Sn. If -S"
+- id: 55
+  intent: "Give a brief usage message.  This overrides all of the remaining options."
+  command: "bundledoc"
+  example: "bundledoc --help"
+- id: 56
+  intent: "Check  integrity  of the specified file(s), but don't decompress them.  This really performs a  trial  decompression  and  throws away the result."
+  command: "bunzip2"
+  example: "bunzip2 -t --test"
+- id: 57
+  intent: "Print a help message and exit."
+  command: "bunzip2"
+  example: "bunzip2 -h --help"
+- id: 58
+  intent: "When used with the capture command, specifies the maximum bus message size to capture (\"snaplen\"). Defaults to 4096 bytes."
+  command: "busctl"
+  example: "busctl --size="
+- id: 59
+  intent: "Check  integrity  of the specified file(s), but don't decompress them.  This really performs a  trial  decompression  and  throws away the result."
+  command: "bzcat"
+  example: "bzcat -t --test"
+- id: 60
+  intent: "Print a help message and exit."
+  command: "bzcat"
+  example: "bzcat -h --help"
+- id: 61
+  intent: "Check  integrity  of the specified file(s), but don't decompress them.  This really performs a  trial  decompression  and  throws away the result."
+  command: "bzip2"
+  example: "bzip2 -t --test"
+- id: 62
+  intent: "Print a help message and exit."
+  command: "bzip2"
+  example: "bzip2 -h --help"
+- id: 63
+  intent: "Check  integrity  of the specified file(s), but don't decompress them.  This really performs a  trial  decompression  and  throws away the result."
+  command: "bzip2recover"
+  example: "bzip2recover -t --test"
+- id: 64
+  intent: "Print a help message and exit."
+  command: "bzip2recover"
+  example: "bzip2recover -h --help"
+- id: 65
+  intent: "Display a brief usage message."
+  command: "c_rehash"
+  example: "c_rehash -help -h"
+- id: 66
+  intent: "Generate links for both old-style (MD5) and new-style (SHA1) hashing.  This allows releases before 1.0.0 to use these links along-side newer releases."
+  command: "c_rehash"
+  example: "c_rehash -compat"
+- id: 67
+  intent: "See \"Provider Options\" in openssl(1), provider(7), and property(7)."
+  command: "c_rehash"
+  example: "c_rehash -propquery propq"
+- id: 68
+  intent: "Print a help message and exit."
+  command: "catman"
+  example: "catman -?, --help"
+- id: 69
+  intent: "Print a short usage message and exit."
+  command: "catman"
+  example: "catman --usage"
+- id: 70
+  intent: "Display help message and exit."
+  command: "chage"
+  example: "chage -h, --help"
+- id: 71
+  intent: "Print a brief help message and exits."
+  command: "chartex"
+  example: "chartex --help or -h"
+- id: 72
+  intent: "Display help message and exit."
+  command: "chfn"
+  example: "chfn -u, --help"
+- id: 73
+  intent: "CHecK DVI/tfm/font file and tell information of FONTs"
+  command: "chkdvifont"
+  example: "chkdvifont"
+- id: 74
+  intent: "Display help message and exit."
+  command: "chsh"
+  example: "chsh -h, --help"
+- id: 75
+  intent: "Print a usage message and exit."
+  command: "ckbcomp"
+  example: "ckbcomp -?,-help"
+- id: 76
+  intent: "compute and verify file checksums"
+  command: "cksum"
+  example: "cksum"
+- id: 77
+  intent: "select the digest type to use.  See DIGEST below."
+  command: "cksum"
+  example: "cksum -a, --algorithm=TYPE"
+- id: 78
+  intent: "read checksums from the FILEs and check them"
+  command: "cksum"
+  example: "cksum -c, --check"
+- id: 79
+  intent: "digest length in bits; must not exceed the max  for  the  blake2 algorithm and must be a multiple of 8"
+  command: "cksum"
+  example: "cksum -l, --length=BITS"
+- id: 80
+  intent: "create a reversed style checksum, without digest type"
+  command: "cksum"
+  example: "cksum --untagged"
+- id: 81
+  intent: "output version information and exit DIGEST determines the digest algorithm and default output format: sysv   (equivalent to sum -s) bsd    (equivalent to sum -r) crc    (equivalent to cksum) md5    (equivalent to md5sum) sha1   (equivalent to sha1sum) sha224 (equivalent to sha224sum) sha256 (equivalent to sha256sum) sha384 (equivalent to sha384sum) sha512 (equivalent to sha512sum) blake2b (equivalent to b2sum) sm3    (only available through cksum) When checking, the input should be a former output of this program,  or equivalent standalone program."
+  command: "cksum"
+  example: "cksum --version"
+- id: 82
+  intent: "Enable the \"Blocks\" language feature."
+  command: "clang"
+  example: "clang -fblocks"
+- id: 83
+  intent: "Enable the \"Blocks\" language feature."
+  command: "clang-14"
+  example: "clang-14 -fblocks"
+- id: 84
+  intent: "check  that  the  input  is  correctly sorted, even if all input lines are pairable"
+  command: "comm"
+  example: "comm --check-order"
+- id: 85
+  intent: "do not check that the input is correctly sorted"
+  command: "comm"
+  example: "comm --nocheck-order"
+- id: 86
+  intent: "Display help message and exit."
+  command: "convertgls2bib"
+  example: "convertgls2bib --help or -h"
+- id: 87
+  intent: "all of the other options and arguments."
+  command: "cpan"
+  example: "cpan -h  Print a help message and exit. When you specify \"-h\", it ignores"
+- id: 88
+  intent: "all of the other options and arguments."
+  command: "cpan5.36-x86_64-linux-gnu"
+  example: "cpan5.36-x86_64-linux-gnu -h  Print a help message and exit. When you specify \"-h\", it ignores"
+- id: 89
+  intent: "Print  STRING  when  the  end of a volume of the backup media is reached. Operation modifiers valid only in copy-in mode"
+  command: "cpio"
+  example: "cpio -M, --message=STRING"
+- id: 90
+  intent: "compute CRC-32 checksums for the given files"
+  command: "crc32"
+  example: "crc32"
+- id: 91
+  intent: "print the help message."
+  command: "ctanbib"
+  example: "ctanbib -h,--help"
+- id: 92
+  intent: "Print <count> number of intervals."
+  command: "ctstat"
+  example: "ctstat -c, --count <count>"
+- id: 93
+  intent: "(HTTP) Tells curl to figure out authentication method by itself, and  use  the most secure one the remote site claims to support. This is done by first doing a request and checking the response- headers,  thus  possibly  inducing  an extra network round-trip. This is  used  instead  of  setting  a  specific  authentication method,  which  you  can  do with --basic, --digest, --ntlm, and --negotiate. Using --anyauth is not recommended if you do uploads from stdin, since  it  may require data to be sent twice and then the client must be able to rewind. If the need should arise when  uploading from stdin, the upload operation will fail. Used together with -u, --user. Providing --anyauth multiple times has no extra effect. Example: curl --anyauth --user me:pwd https://example.com See also --proxy-anyauth, --basic and --digest."
+  command: "curl"
+  example: "curl --anyauth"
+- id: 94
+  intent: "(HTTP)  Enables HTTP Digest authentication. This is an authenti- cation scheme that prevents the password from  being  sent  over the  wire in clear text. Use this in combination with the normal -u, --user option to set user name and password. Providing --digest multiple times has no extra effect.   Disable it again with --no-digest. Example: curl -u name:password --digest https://example.com See  also  -u, --user, --proxy-digest and --anyauth. This option is mutually exclusive to --basic and --ntlm and --negotiate."
+  command: "curl"
+  example: "curl --digest"
+- id: 95
+  intent: "method was designed by Microsoft and is used by IIS web servers. It  is a proprietary protocol, reverse-engineered by clever peo- ple and implemented in curl based on their efforts. This kind of behavior  should  not be endorsed, you should encourage everyone who uses NTLM to switch to a public and  documented  authentica- tion method instead, such as Digest. If  you  want to enable NTLM for your proxy authentication, then use --proxy-ntlm. If this option is used several times,  only  the  first  one  is used. Providing --ntlm multiple times has no extra effect. Example: curl --ntlm -u user:password https://example.com See  also  --proxy-ntlm.  --ntlm  requires  that  the underlying libcurl was built to support TLS. This option is mutually exclu- sive to --basic and --negotiate and --digest and --anyauth."
+  command: "curl"
+  example: "curl --ntlm (HTTP)  Enables  NTLM  authentication.  The  NTLM authentication"
+- id: 96
+  intent: "(TLS)  Tells  curl  to  use  the  specified  public key file (or hashes) to verify the peer. This can be a path to a  file  which contains a single public key in PEM or DER format, or any number of base64 encoded sha256 hashes preceded by 'sha256//' and sepa- rated by ';'. When  negotiating  a  TLS  or SSL connection, the server sends a certificate indicating its identity. A public key  is  extracted from  this certificate and if it does not exactly match the pub- lic key provided to this option, curl will abort the  connection before sending or receiving any data. PEM/DER support: 7.39.0: OpenSSL, GnuTLS and GSKit 7.43.0: NSS and wolfSSL 7.47.0: mbedtls sha256 support: 7.44.0: OpenSSL, GnuTLS, NSS and wolfSSL 7.47.0: mbedtls Other SSL backends not supported. If  --pinnedpubkey is provided several times, the last set value will be used. Examples: curl --pinnedpubkey keyfile https://example.com curl --pinnedpubkey 'sha256//ce118b51897f4452dc' https://example.com See also --hostpubsha256. Added in 7.39.0."
+  command: "curl"
+  example: "curl --pinnedpubkey <hashes>"
+- id: 97
+  intent: "Tells  curl to pick a suitable authentication method when commu- nicating with the given HTTP proxy. This might  cause  an  extra request/response round-trip. Providing --proxy-anyauth multiple times has no extra effect. Example: curl --proxy-anyauth --proxy-user user:passwd -x proxy https://example.com See also -x, --proxy, --proxy-basic and --proxy-digest."
+  command: "curl"
+  example: "curl --proxy-anyauth"
+- id: 98
+  intent: "Tells curl to use HTTP Digest authentication when  communicating with the given proxy. Use --digest for enabling HTTP Digest with a remote host. Providing --proxy-digest multiple times has no extra effect. Example: curl --proxy-digest --proxy-user user:passwd -x proxy https://example.com See also -x, --proxy, --proxy-anyauth and --proxy-basic."
+  command: "curl"
+  example: "curl --proxy-digest"
+- id: 99
+  intent: "(Schannel)  This option tells curl to ignore certificate revoca- tion checks when they failed due to missing/offline distribution points for the revocation check lists. Providing  --ssl-revoke-best-effort  multiple times has no extra effect.  Disable it again with --no-ssl-revoke-best-effort. Example: curl --ssl-revoke-best-effort https://example.com See also --crlfile and -k, --insecure. Added in 7.70.0."
+  command: "curl"
+  example: "curl --ssl-revoke-best-effort"
+- id: 100
+  intent: "Display a short help message to the standard output and exit."
+  command: "cvtsudoers"
+  example: "cvtsudoers -h, --help"
+- id: 101
+  intent: "Show a help message and exit."
+  command: "dblatex"
+  example: "dblatex -h, --help"
+- id: 102
+  intent: "Message bus daemon"
+  command: "dbus-daemon"
+  example: "dbus-daemon"
+- id: 103
+  intent: "Force the message bus to fork and become a daemon, even if the configuration file does not specify that it should. In most contexts the configuration file already gets this right, though. This option is not supported on Windows."
+  command: "dbus-daemon"
+  example: "dbus-daemon --fork"
+- id: 104
+  intent: "Force the message bus not to fork and become a daemon, even if the configuration file specifies that it should. On Windows, the dbus-daemon never forks, so this option is allowed but does nothing."
+  command: "dbus-daemon"
+  example: "dbus-daemon --nofork"
+- id: 105
+  intent: "Print the address of the message bus to standard output, or to the given file descriptor. This is used by programs that launch the message bus."
+  command: "dbus-daemon"
+  example: "dbus-daemon --print-address[=DESCRIPTOR]"
+- id: 106
+  intent: "Print the process ID of the message bus to standard output, or to the given file descriptor. This is used by programs that launch the message bus."
+  command: "dbus-daemon"
+  example: "dbus-daemon --print-pid[=DESCRIPTOR]"
+- id: 107
+  intent: "Use the standard configuration file for the per-login-session message bus."
+  command: "dbus-daemon"
+  example: "dbus-daemon --session"
+- id: 108
+  intent: "Use the standard configuration file for the systemwide message bus."
+  command: "dbus-daemon"
+  example: "dbus-daemon --system"
+- id: 109
+  intent: "Force the message bus to use the system log for messages, and not duplicate them to standard error. On Unix, this uses the syslog; on Windows, this uses OutputDebugString()."
+  command: "dbus-daemon"
+  example: "dbus-daemon --syslog-only"
+- id: 110
+  intent: "debug probe to print message bus messages"
+  command: "dbus-monitor"
+  example: "dbus-monitor"
+- id: 111
+  intent: "Monitor the system message bus."
+  command: "dbus-monitor"
+  example: "dbus-monitor --system"
+- id: 112
+  intent: "Monitor the session message bus. (This is the default.)"
+  command: "dbus-monitor"
+  example: "dbus-monitor --session"
+- id: 113
+  intent: "Monitor an arbitrary message bus given at ADDRESS."
+  command: "dbus-monitor"
+  example: "dbus-monitor --address ADDRESS"
+- id: 114
+  intent: "Send a message to a message bus"
+  command: "dbus-send"
+  example: "dbus-send"
+- id: 115
+  intent: "Specify the name of the connection to receive the message."
+  command: "dbus-send"
+  example: "dbus-send --dest=NAME"
+- id: 116
+  intent: "Block for a reply to the message sent, and print any reply received in a human-readable form. It also means the message type (--type=) is method_call."
+  command: "dbus-send"
+  example: "dbus-send --print-reply"
+- id: 117
+  intent: "Send to the system message bus."
+  command: "dbus-send"
+  example: "dbus-send --system"
+- id: 118
+  intent: "Send to the session message bus. (This is the default.)"
+  command: "dbus-send"
+  example: "dbus-send --session"
+- id: 119
+  intent: "Register on a message bus at ADDRESS, typically a dbus-daemon."
+  command: "dbus-send"
+  example: "dbus-send --bus=ADDRESS"
+- id: 120
+  intent: "Send to a non-message-bus D-Bus server at ADDRESS. In this case dbus-send will not call the Hello method."
+  command: "dbus-send"
+  example: "dbus-send --peer=ADDRESS"
+- id: 121
+  intent: "only check the input file format, do not save changes to database"
+  command: "debconf-set-selections"
+  example: "debconf-set-selections --checkonly, -c"
+- id: 122
+  intent: "Check Delaunay property."
+  command: "delaunay"
+  example: "delaunay -c, --check"
+- id: 123
+  intent: "add dependencies required for OpenSSL modules"
+  command: "dh_perl_openssl"
+  example: "dh_perl_openssl"
+- id: 124
+  intent: "dh_perl_openssl [debhelper options]"
+  command: "dh_perl_openssl"
+  example: "dh_perl_openssl"
+- id: 125
+  intent: "This option signs queries using TSIG with the given  authentica- tion  key.   keyname  is  the name of the key, and secret is the base64-encoded shared secret. hmac is the name of the key  algo- rithm;  valid  choices  are  hmac-md5,  hmac-sha1,  hmac-sha224, hmac-sha256, hmac-sha384, or hmac-sha512. If hmac is not  speci- fied,  the default is hmac-md5; if MD5 was disabled, the default is hmac-sha256. Note: Only the -k option should be used, rather than the  -y  option,  be- cause  with -y the shared secret is supplied as a command-line argu- ment in clear text. This may be visible in the output from ps1 or in a history file maintained by the user's shell."
+  command: "dig"
+  example: "dig -y [hmac:]keyname:secret"
+- id: 126
+  intent: "On some platforms dirmngr is able to detect the removal  of  its socket file and shutdown itself.  This option disable this self- test for debugging purposes."
+  command: "dirmngr"
+  example: "dirmngr --disable-check-own-socket"
+- id: 127
+  intent: "Allow Dirmngr to connect to  https://versions.gnupg.org  to  get the  list of current software versions.  On debian-packaged ver- sions, this option does nothing since software updates should be handled by the distribution.  See the option --query-swdb of the command gpgconf for more details.  Note, that regardless of this option  a  version check can always be triggered using this com- mand: gpg-connect-agent --dirmngr 'loadswdb --force' /bye"
+  command: "dirmngr"
+  example: "dirmngr --allow-version-check"
+- id: 128
+  intent: "Print a usage message summarizing the most  useful  command-line options.  Note that you cannot abbreviate this command."
+  command: "dirmngr-client"
+  example: "dirmngr-client --help, -h"
+- id: 129
+  intent: "Add facility, level or timestamp information to each line of a multi-line message."
+  command: "dmesg"
+  example: "dmesg -p, --force-prefix"
+- id: 130
+  intent: "Print the raw message buffer, i.e., do not strip the log-level prefixes, but all unprintable characters are still escaped (see also --noescape). Note that the real raw format depends on the method how dmesg reads kernel messages. The /dev/kmsg device uses a different format than syslog(2). For backward compatibility, dmesg returns data always in the syslog(2) format. It is possible to read the real raw data from /dev/kmsg by, for example, the command 'dd if=/dev/kmsg iflag=nonblock'."
+  command: "dmesg"
+  example: "dmesg -r, --raw"
+- id: 131
+  intent: "Print a usage message and exit."
+  command: "dnsdomainname"
+  example: "dnsdomainname -h, --help"
+- id: 132
+  intent: "capsulated in the dnstap frame, after printing the dnstap data."
+  command: "dnstap-read"
+  example: "dnstap-read -p     This option prints the text form of the DNS message that was en-"
+- id: 133
+  intent: "Print a usage message and exit."
+  command: "domainname"
+  example: "domainname -h, --help"
+- id: 134
+  intent: "Sets the output format for the --verify command (since dpkg 1.17.2). The only currently supported output format is rpm, which consists of a line for every path that failed any check.  These lines have the following format: missing   [c] pathname [(error-message)] ??5?????? [c] pathname The first 9 characters are used to report the checks result, either a literal missing when the file is not present or its metadata cannot be fetched, or one of the following special characters that report the result for each check: '?' Implies the check could not be done (lack of support, file permissions, etc). '.' Implies the check passed. 'A-Za-z0-9' Implies a specific check failed.  The following positions and alphanumeric characters are currently supported: 1 '?' These checks are currently not supported, will always be '?'. 2 'M' The file mode check failed (since dpkg 1.21.0).  Because pathname metadata is currently not tracked, this check can only be partially emulated via a very simple heuristic for pathnames that have a known digest, which implies they should be regular files, where the check will fail if the pathname is not a regular file on the filesystem.  This check will currently never succeed as it does not have enough information available. 3 '5' The digest check failed, which means the file contents have changed. 4-9 '?' These checks are currently not supported, will always be '?'. The line is followed by a space and an attribute character.  The following attribute character is supported: 'c' The pathname is a conffile. Finally followed by another space and the pathname. In case the entry was of the missing type, and the file was not actually present on the filesystem, then the line is followed by a space and the error message enclosed within parenthesis."
+  command: "dpkg"
+  example: "dpkg --verify-format format-name"
+- id: 135
+  intent: "Check build dependencies and conflicts; abort if unsatisfied (long option since dpkg 1.18.8).  This is the default behavior."
+  command: "dpkg-buildpackage"
+  example: "dpkg-buildpackage -D, --check-builddeps"
+- id: 136
+  intent: "Do not check build dependencies and conflicts (long option since dpkg 1.18.8)."
+  command: "dpkg-buildpackage"
+  example: "dpkg-buildpackage -d, --no-check-builddeps"
+- id: 137
+  intent: "Do not check built-in build dependencies and conflicts (since dpkg 1.18.2).  These are the distribution specific implicit build dependencies usually required in a build environment, the so called Build-Essential package set."
+  command: "dpkg-buildpackage"
+  example: "dpkg-buildpackage --ignore-builtin-builddeps"
+- id: 138
+  intent: "Command used to check the .changes file itself and any artifact built referenced in the file (since dpkg 1.17.6).  The command should take the .changes pathname as an argument. This command will usually be lintian."
+  command: "dpkg-buildpackage"
+  example: "dpkg-buildpackage --check-command=check-command"
+- id: 139
+  intent: "Pass option opt to the check-command specified with DEB_CHECK_COMMAND or --check-command (since dpkg 1.17.6).  Can be used multiple times."
+  command: "dpkg-buildpackage"
+  example: "dpkg-buildpackage --check-option=opt"
+- id: 140
+  intent: "Show the usage message and exit."
+  command: "dpkg-buildpackage"
+  example: "dpkg-buildpackage -?, --help"
+- id: 141
+  intent: "check build dependencies and conflicts"
+  command: "dpkg-checkbuilddeps"
+  example: "dpkg-checkbuilddeps"
+- id: 142
+  intent: "Check build dependencies/conflicts assuming that the package described in the control file is to be built for the given host architecture instead of the architecture of the current system (since dpkg 1.16.2)."
+  command: "dpkg-checkbuilddeps"
+  example: "dpkg-checkbuilddeps -a arch"
+- id: 143
+  intent: "Check build dependencies/conflicts assuming that the package described in the control file is to be built for the given build profile(s) (since dpkg 1.17.2).  The argument is a comma-separated list of profile names."
+  command: "dpkg-checkbuilddeps"
+  example: "dpkg-checkbuilddeps -P profile[,...]"
+- id: 144
+  intent: "Show the usage message and exit."
+  command: "dpkg-checkbuilddeps"
+  example: "dpkg-checkbuilddeps -?, --help"
+- id: 145
+  intent: "Show the usage message and exit."
+  command: "dpkg-distaddfile"
+  example: "dpkg-distaddfile -?, --help"
+- id: 146
+  intent: "Show the usage message and exit."
+  command: "dpkg-divert"
+  example: "dpkg-divert -?, --help"
+- id: 147
+  intent: "Show the usage message and exit."
+  command: "dpkg-genbuildinfo"
+  example: "dpkg-genbuildinfo -?, --help"
+- id: 148
+  intent: "Show the usage message and exit."
+  command: "dpkg-genchanges"
+  example: "dpkg-genchanges -?, --help"
+- id: 149
+  intent: "Show the usage message and exit."
+  command: "dpkg-gencontrol"
+  example: "dpkg-gencontrol -?, --help"
+- id: 150
+  intent: "Show the usage message and exit."
+  command: "dpkg-gensymbols"
+  example: "dpkg-gensymbols -?, --help"
+- id: 151
+  intent: "Show the usage message and exit."
+  command: "dpkg-mergechangelogs"
+  example: "dpkg-mergechangelogs --help"
+- id: 152
+  intent: "Show the usage message and exit."
+  command: "dpkg-name"
+  example: "dpkg-name -?, --help"
+- id: 153
+  intent: "Show the usage message and exit."
+  command: "dpkg-parsechangelog"
+  example: "dpkg-parsechangelog -?, --help"
+- id: 154
+  intent: "Show the usage message and exit."
+  command: "dpkg-realpath"
+  example: "dpkg-realpath -?, --help"
+- id: 155
+  intent: "Show the usage message and exit."
+  command: "dpkg-scanpackages"
+  example: "dpkg-scanpackages -?, --help"
+- id: 156
+  intent: "Show the usage message and exit."
+  command: "dpkg-scansources"
+  example: "dpkg-scansources --help"
+- id: 157
+  intent: "Show the usage message and exit."
+  command: "dpkg-shlibdeps"
+  example: "dpkg-shlibdeps -?, --help"
+- id: 158
+  intent: "Do not check signatures and checksums before unpacking (since dpkg 1.14.17)."
+  command: "dpkg-source"
+  example: "dpkg-source --no-check"
+- id: 159
+  intent: "Turns the bad source package version check into a non-fatal warning (since dpkg 1.17.7).  This option should only be necessary when extracting ancient source packages with broken versions, just for backwards compatibility. Generic general options"
+  command: "dpkg-source"
+  example: "dpkg-source --ignore-bad-version"
+- id: 160
+  intent: "When doing automatic queue-or-reassembly dpkg-split usually prints a message if it is given a part that is not a binary package part. This option suppresses this message, to allow programs such as dpkg to cope with both split and unsplit packages without producing spurious messages."
+  command: "dpkg-split"
+  example: "dpkg-split -Q, --npquiet"
+- id: 161
+  intent: "Force an action, even if a sanity check would otherwise prohibit it.  This is necessary to override an existing override.  This option is deprecated (since dpkg 1.19.5), it is replaced by --force-all."
+  command: "dpkg-statoverride"
+  example: "dpkg-statoverride --force"
+- id: 162
+  intent: "Don't check the timestamp for swiftmodule files."
+  command: "dsymutil-14"
+  example: "dsymutil-14 --no-swiftmodule-timestamp"
+- id: 163
+  intent: "Prints the program's version number and a short usage message to the program's standard error output and exits."
+  command: "dumpkeys"
+  example: "dumpkeys -h --help"
+- id: 164
+  intent: "Show this help message and exit."
+  command: "dviasm"
+  example: "dviasm -h, --help"
+- id: 165
+  intent: "Show a help message and exit successfully."
+  command: "dvipdfm"
+  example: "dvipdfm --help"
+- id: 166
+  intent: "Show a help message and exit successfully."
+  command: "dvipdfm"
+  example: "dvipdfm --version"
+- id: 167
+  intent: "Show a help message and exit successfully."
+  command: "dvipdfmx"
+  example: "dvipdfmx --help"
+- id: 168
+  intent: "Show a help message and exit successfully."
+  command: "dvipdfmx"
+  example: "dvipdfmx --version"
+- id: 169
+  intent: "compute positions in a DVI file"
+  command: "dvipos"
+  example: "dvipos"
+- id: 170
+  intent: "This option tells dvisvgm to compute all intersections of clipping paths itself rather than delegating this task to the SVG renderer. The resulting SVG files are more portable because some SVG viewers don't support intersecting clipping paths which are defined by clipPath elements containing a clip-path attribute."
+  command: "dvisvgm"
+  example: "dvisvgm -j, --clipjoin"
+- id: 171
+  intent: "Print this help message"
+  command: "dwp"
+  example: "dwp -h, --help"
+- id: 172
+  intent: "Make status-bar messages disappear after 1 keystroke instead  of after  20.  Note that option -c (--constantshow) overrides this. When option --minibar or --zero is in effect, --quickblank makes a  message  disappear after 0.8 seconds instead of after the de- fault 1.5 seconds."
+  command: "editor"
+  example: "editor -U, --quickblank"
+- id: 173
+  intent: "Prints the program's version."
+  command: "enchant-lsmod-2"
+  example: "enchant-lsmod-2 -version"
+- id: 174
+  intent: "Only check changed files - default: false"
+  command: "eslint"
+  example: "eslint --cache"
+- id: 175
+  intent: "Show a help message listing all the options and their meanings."
+  command: "evolution"
+  example: "evolution -?, --help"
+- id: 176
+  intent: "ables the GUI.  If no GUI support was compiled in, an error message is given and Vim aborts."
+  command: "ex"
+  example: "ex -g          If  Vim has been compiled with GUI support, this option en-"
+- id: 177
+  intent: "Pause with the message \"-- press any key --\" or \"-- press RETURN --\" (depending on your system) before terminating.  This option is used to prevent the command window from closing when run as a Windows drag and drop application."
+  command: "exiftool"
+  example: "exiftool -k (-pause)"
+- id: 178
+  intent: "Display help message and exit."
+  command: "expiry"
+  example: "expiry -h, --help"
+- id: 179
+  intent: "Display help message and exit."
+  command: "faillog"
+  example: "faillog -h, --help"
+- id: 180
+  intent: "Don't  allocate  a  new  communication  channel, but use channel specified by key. (If the specified channel doesn't exist,  it's created)."
+  command: "faked-sysv"
+  example: "faked-sysv --key  key-number"
+- id: 181
+  intent: "Don't  allocate  a  new  communication  channel, but use channel specified by key. (If the specified channel doesn't exist,  it's created)."
+  command: "faked-tcp"
+  example: "faked-tcp --key  key-number"
+- id: 182
+  intent: "[title=title:][program_num=program_num:]st=stream[:st=stream...] (output) Creates a program with the specified title, program_num and adds the specified stream(s) to it."
+  command: "ffmpeg"
+  example: "ffmpeg -program"
+- id: 183
+  intent: "Prints short usage message and exits."
+  command: "fgconsole"
+  example: "fgconsole -h --help"
+- id: 184
+  intent: "toilet [ -hkostvSW ] [ -d fontdirectory ] [ -f fontfile ] [ -F filter ] [ -w outputwidth ] [ -I infocode ] [ -E format ] [ message ]"
+  command: "figlet-toilet"
+  example: "figlet-toilet"
+- id: 185
+  intent: "Display a short help message and exit."
+  command: "figlet-toilet"
+  example: "figlet-toilet -h, --help"
+- id: 186
+  intent: "the error as regular output as POSIX mandates and keep going, is- sue an error message and exit."
+  command: "file"
+  example: "file -E      On filesystem errors (file not found etc), instead of handling"
+- id: 187
+  intent: "count graph components"
+  command: "gc"
+  example: "gc"
+- id: 188
+  intent: "Makes warnings fatal, and causes the program to abort."
+  command: "gdk-pixbuf-csource"
+  example: "gdk-pixbuf-csource --g-fatal-warnings"
+- id: 189
+  intent: "show this help message"
+  command: "gdk-pixbuf-pixdata"
+  example: "gdk-pixbuf-pixdata -h, --help"
+- id: 190
+  intent: "Generate message catalog"
+  command: "gencat"
+  example: "gencat"
+- id: 191
+  intent: "translate message"
+  command: "gettext"
+  example: "gettext"
+- id: 192
+  intent: "[TEXTDOMAIN] MSGID retrieve translated message corresponding to MSGID from  TEXTDO- MAIN Informative output:"
+  command: "gettext"
+  example: "gettext -E     (ignored for compatibility)"
+- id: 193
+  intent: "Use the latest mtime between symlinks and target."
+  command: "gmake"
+  example: "gmake -L, --check-symlink-times"
+- id: 194
+  intent: "Prints the program version and exits."
+  command: "gnome-software"
+  example: "gnome-software --version"
+- id: 195
+  intent: "Check segment addresses for overlaps (default)"
+  command: "gold"
+  example: "gold --check-sections"
+- id: 196
+  intent: "Do not check segment addresses for overlaps"
+  command: "gold"
+  example: "gold --no-check-sections"
+- id: 197
+  intent: "Use timestamps to check files (default)"
+  command: "gold"
+  example: "gold --incremental-unknown"
+- id: 198
+  intent: "Number of threads to use"
+  command: "gold"
+  example: "gold --thread-count COUNT"
+- id: 199
+  intent: "Number of threads to use in initial pass"
+  command: "gold"
+  example: "gold --thread-count-initial COUNT"
+- id: 200
+  intent: "Number of threads to use in final pass"
+  command: "gold"
+  example: "gold --thread-count-final COUNT"
+- id: 201
+  intent: "Display help message and exit."
+  command: "gpasswd"
+  example: "gpasswd -h, --help"
+- id: 202
+  intent: "Use  name as the default key to sign with. If this option is not used, the default key is the  first  key  found  in  the  secret keyring.   Note  that  -u or --local-user overrides this option. This option may be given multiple times.  In this case, the last key for which a secret key is available is used.  If there is no secret key available for any of the specified values, GnuPG will not  emit an error message but continue as if this option wasn't given."
+  command: "gpg"
+  example: "gpg --default-key name"
+- id: 203
+  intent: "Assume that the specified key (which should be given as  finger- print)  is  as  trustworthy as one of your own secret keys. This option is useful if you don't want to keep your secret keys  (or one  of  them) online but still want to be able to check the va- lidity of a given recipient's or signator's key.  If  the  given key is not locally available but an LDAP keyserver is configured the missing key is imported from that server."
+  command: "gpg"
+  example: "gpg --trusted-key long key ID or fingerprint"
+- id: 204
+  intent: "This is an offline mechanism to get a missing key for  signature verification  and for later encryption to this key.  If this op- tion is enabled and a signature includes an embedded  key,  that key  is used to verify the signature and on verification success that key is imported. The default is --no-auto-key-import. On the sender  (signing)  site  the  option  --include-key-block needs  to  be  used to put the public part of the signing key as \"Key Block subpacket\" into the signature."
+  command: "gpg"
+  example: "gpg --no-auto-key-import"
+- id: 205
+  intent: "These options enable or disable the automatic retrieving of keys from a keyserver when verifying signatures made by keys that are not on the local  keyring.   The  default  is  --no-auto-key-re- trieve. The order of methods tried to lookup the key is: 1. If the option --auto-key-import is set and the signatures in- cludes an embedded key, that key is used to verify the signature and on verification success that key is imported. 2.  If  a  preferred keyserver is specified in the signature and the option honor-keyserver-url is active (which is not  the  de- fault),  that  keyserver is tried.  Note that the creator of the signature uses the option  --sig-keyserver-url  to  specify  the preferred keyserver for data signatures. 3.  If  the  signature  has  the  Signer's  UID  set (e.g. using --sender while creating the signature) a Web Key Directory (WKD) lookup  is  done.   This is the default configuration but can be disabled by removing WKD from the auto-key-locate list or by us- ing the option --disable-signer-uid. 4.  If  the  option  honor-pka-record  is active, the legacy PKA method is used. 5. If any keyserver is configured and the Issuer Fingerprint  is part  of the signature (since GnuPG 2.1.16), the configured key- servers are tried. Note that this option makes a \"web bug\" like behavior  possible. Keyserver  or Web Key Directory operators can see which keys you request, so by sending you a message signed by a brand  new  key (which  you  naturally will not have on your local keyring), the operator can tell both your IP address and  the  time  when  you verified the signature."
+  command: "gpg"
+  example: "gpg --no-auto-key-retrieve"
+- id: 206
+  intent: "If  GnuPG  feels that its information about the Web of Trust has to be updated, it automatically runs the --check-trustdb command internally.   This  may  be a time consuming process. --no-auto- check-trustdb disables this option."
+  command: "gpg"
+  example: "gpg --no-auto-check-trustdb"
+- id: 207
+  intent: "Suppress the initial copyright message."
+  command: "gpg"
+  example: "gpg --no-greeting"
+- id: 208
+  intent: "rides --default-key."
+  command: "gpg"
+  example: "gpg -u     Use  name  as  the key to sign with. Note that this option over-"
+- id: 209
+  intent: "Don't  look  at  the key ID as stored in the message but try all secret keys in turn to find the right decryption key.  This  op- tion  forces the behaviour as used by anonymous recipients (cre- ated by using --throw-keyids or  --hidden-recipient)  and  might come  handy  in case where an encrypted message contains a bogus key ID."
+  command: "gpg"
+  example: "gpg --try-all-secrets"
+- id: 210
+  intent: "During decryption skip all anonymous  recipients.   This  option helps  in the case that people use the hidden recipients feature to hide their own encrypt-to key from others.  If one  has  many secret  keys this may lead to a major annoyance because all keys are tried in turn to decrypt something which was not really  in- tended  for  it.  The drawback of this option is that it is cur- rently not possible to decrypt a  message  which  includes  real anonymous recipients. Input and Output"
+  command: "gpg"
+  example: "gpg --no-skip-hidden-recipients"
+- id: 211
+  intent: "This option sets a limit on the number of  bytes  that  will  be generated when processing a file. Since OpenPGP supports various levels of compression, it is possible that the  plaintext  of  a given  message  may  be  significantly  larger than the original OpenPGP message. While GnuPG works properly with such  messages, there  is often a desire to set a maximum file size that will be generated before processing is forced to stop by the OS  limits. Defaults to 0, which means \"no limit\"."
+  command: "gpg"
+  example: "gpg --max-output n"
+- id: 212
+  intent: "Include the keygrip in the key listings.  In --with-colons  mode this is implicitly enable for secret keys."
+  command: "gpg"
+  example: "gpg --with-keygrip"
+- id: 213
+  intent: "These options are obsolete and have no effect since GnuPG 2.2.8. The  MDC  is always used.  But note: If the creation of a legacy non-MDC message is exceptionally required, the option  --rfc2440 allows for this."
+  command: "gpg"
+  example: "gpg --disable-mdc"
+- id: 214
+  intent: "Set  the list of personal digest preferences to string.  Use gpg --version to get a list of available algorithms, and use none to set  no preference at all.  This allows the user to safely over- ride the algorithm chosen by the recipient key  preferences,  as GPG  will only select an algorithm that is usable by all recipi- ents.  The most highly ranked digest algorithm in this  list  is also  used when signing without encryption (e.g. --clear-sign or --sign)."
+  command: "gpg"
+  example: "gpg --personal-digest-preferences string"
+- id: 215
+  intent: "Use  name as the digest algorithm used to mangle the passphrases for symmetric encryption.  The default is SHA-1."
+  command: "gpg"
+  example: "gpg --s2k-digest-algo name"
+- id: 216
+  intent: "Reset all packet, cipher and digest options  to  strict  OpenPGP behavior.  Use  this  option  to reset all previous options like --s2k-*, --cipher-algo,  --digest-algo  and  --compress-algo  to OpenPGP compliant values. All PGP workarounds are disabled."
+  command: "gpg"
+  example: "gpg --openpgp"
+- id: 217
+  intent: "Reset  all  packet, cipher and digest options to strict RFC-4880 behavior.  Note  that  this  is  currently  the  same  thing  as --openpgp."
+  command: "gpg"
+  example: "gpg --rfc4880"
+- id: 218
+  intent: "Reset  all  packet, cipher and digest options to strict RFC-2440 behavior.  Note that by using this option encryption packets are created  in  a legacy mode without MDC protection.  This is dan- gerous and should thus only be used for experiments.   See  also option --ignore-mdc-error."
+  command: "gpg"
+  example: "gpg --rfc2440"
+- id: 219
+  intent: "To check that data has been encrypted according to the rules  of the  current  compliance  mode, a gpg user needs to evaluate the status lines.  This is allows  frontends  to  handle  compliance check in a more flexible way.  However, for scripted use the re- quired evaluation of the status-line requires quite some effort; this  option  can  be  used  instead  to  make sure that the gpg process exits with a failure if the  compliance  rules  are  not fulfilled.   Note  that this option has currently an effect only in \"de-vs\" mode. Doing things one usually doesn't want to do"
+  command: "gpg"
+  example: "gpg --require-compliance"
+- id: 220
+  intent: "Set the `for your eyes only' flag in the  message.  This  causes GnuPG  to  refuse to save the file unless the --output option is given, and PGP to use a \"secure viewer\" with a claimed  Tempest- resistant  font  to  display  the message. This option overrides --set-filename.  --no-for-your-eyes-only disables this option."
+  command: "gpg"
+  example: "gpg --no-for-your-eyes-only"
+- id: 221
+  intent: "Use  name  as  the message digest algorithm. Running the program with the command --version yields  a  list  of  supported  algo- rithms. In general, you do not want to use this option as it al- lows you to violate  the  OpenPGP  standard.  --personal-digest- preferences is the safe way to accomplish the same thing."
+  command: "gpg"
+  example: "gpg --digest-algo name"
+- id: 222
+  intent: "Use  name  as  the  message digest algorithm used when signing a key. Running the program with the  command  --version  yields  a list of supported algorithms. Be aware that if you choose an al- gorithm that GnuPG supports but other OpenPGP implementations do not,  then some users will not be able to use the key signatures you make, or quite possibly your entire key."
+  command: "gpg"
+  example: "gpg --cert-digest-algo name"
+- id: 223
+  intent: "Do not put the recipient key IDs into encrypted  messages.  This helps  to  hide  the  receivers  of the message and is a limited countermeasure against traffic analysis. ([Using a little social engineering  anyone who is able to decrypt the message can check whether one of the other recipients is the  one  he  suspects.]) On  the  receiving side, it may slow down the decryption process because all available secret keys must  be  tried.   --no-throw- keyids disables this option. This option is essentially the same as using --hidden-recipient for all recipients."
+  command: "gpg"
+  example: "gpg --no-throw-keyids"
+- id: 224
+  intent: "Disable the passphrase cache used for symmetrical  en-  and  de- cryption.   This  cache  is  based  on the message specific salt value (cf. --s2k-mode)."
+  command: "gpg"
+  example: "gpg --no-symkey-cache"
+- id: 225
+  intent: "This  option  changes  a MDC integrity protection failure into a warning.  It is required to decrypt old messages which  did  not use  an  MDC.   It  may also be useful if a message is partially garbled, but it is necessary to get as much data as possible out of  that garbled message.  Be aware that a missing or failed MDC can be an indication of an attack.  Use with great caution;  see also option --rfc2440."
+  command: "gpg"
+  example: "gpg --ignore-mdc-error"
+- id: 226
+  intent: "Signatures  made  with known-weak digest algorithms are normally rejected with an ``invalid digest algorithm'' message.  This op- tion  allows  the verification of signatures made with such weak algorithms.  MD5 is the only digest algorithm considered weak by default.   See  also  --weak-digest to reject other digest algo- rithms."
+  command: "gpg"
+  example: "gpg --allow-weak-digest-algos"
+- id: 227
+  intent: "Treat the specified digest algorithm as weak.   Signatures  made over  weak digests algorithms are normally rejected. This option can be supplied multiple times if multiple algorithms should  be considered  weak.  See also --allow-weak-digest-algos to disable rejection of weak digests.  MD5 is always considered  weak,  and does not need to be listed explicitly."
+  command: "gpg"
+  example: "gpg --weak-digest name"
+- id: 228
+  intent: "To  avoid  a  minor risk of collision attacks on third-party key signatures made using SHA-1, those key signatures are considered invalid.  This options allows to override this restriction."
+  command: "gpg"
+  example: "gpg --allow-weak-key-signatures"
+- id: 229
+  intent: "The  signature verification only allows the use of keys suitable in the current compliance mode.  If the compliance mode has been forced  by  a global option, there might be no way to check cer- tain signature.  This option allows to override this and  prints an  extra  warning  in  such  a case.  This option is ignored in --batch mode so that no accidental unattended  verification  may happen."
+  command: "gpg"
+  example: "gpg --override-compliance-check"
+- id: 230
+  intent: "Display the session key used for one  message.  See  --override- session-key for the counterpart of this option. We think that Key Escrow is a Bad Thing; however the user should have the freedom to decide whether to go to prison or to  reveal the  content  of  one  specific message without compromising all messages ever encrypted for one secret key. You can also use this option if you receive an encrypted message which is abusive or offensive, to prove to the administrators of the messaging system that the ciphertext transmitted corresponds to  an  inappropriate  plaintext so they can take action against the offending user."
+  command: "gpg"
+  example: "gpg --show-session-key"
+- id: 231
+  intent: "Don't use the public key but the session key  string  respective the  session  key  taken  from the first line read from file de- scriptor fd.  The format of this string is the same as  the  one printed  by --show-session-key. This option is normally not used but comes handy in case someone forces you to reveal the content of an encrypted message; using this option you can do this with- out handing out the secret key.  Note that using --override-ses- sion-key  may  reveal the session key to all local users via the global process table.  Often it is useful to combine this option with --no-keyring."
+  command: "gpg"
+  example: "gpg --override-session-key-fd fd"
+- id: 232
+  intent: "Secret key management for GnuPG"
+  command: "gpg-agent"
+  example: "gpg-agent"
+- id: 233
+  intent: "Select the digest algorithm used  to  compute  ssh  fingerprints that  are  communicated  to  the user, e.g. in pinentry dialogs. OpenSSH has transitioned from  using  MD5  to  the  more  secure SHA256."
+  command: "gpg-agent"
+  example: "gpg-agent --ssh-fingerprint-digest"
+- id: 234
+  intent: "Server providing the Web Key Service"
+  command: "gpg-wks-server"
+  example: "gpg-wks-server"
+- id: 235
+  intent: "When  used  with the command --check-key print for each user-id, the address, 'i' for installed key or 'n' for not installed key, and the filename."
+  command: "gpg-wks-server"
+  example: "gpg-wks-server --with-file"
+- id: 236
+  intent: "Parse a mail message into an annotated format"
+  command: "gpgparsemail"
+  example: "gpgparsemail"
+- id: 237
+  intent: "By default the CRL checks are enabled and the DirMngr is used to check for revoked certificates.  The disable option is most use- ful  with  an off-line network connection to suppress this check and also to avoid that new certificates introduce a web  bug  by including  a  certificate  specific  CRL DP.  The disable option also disables an issuer certificate lookup via the  authorityIn- foAccess  property  of the certificate; the --enable-issuer-key- retrieve can be used to make use of that property anyway."
+  command: "gpgsm"
+  example: "gpgsm --disable-crl-checks"
+- id: 238
+  intent: "By default the CRL for trusted  root  certificates  are  checked like for any other certificates.  This allows a CA to revoke its own certificates voluntary without the need of putting all  ever issued  certificates into a CRL.  The disable option may be used to switch this extra check off.  Due to the caching done by  the Dirmngr,  there  will  not  be  any noticeable performance gain. Note, that this also disables possible OCSP checks  for  trusted root  certificates.  A more specific way of disabling this check is by adding the ``relax'' keyword to the root CA  line  of  the 'trustlist.txt'"
+  command: "gpgsm"
+  example: "gpgsm --disable-trusted-cert-crl-check"
+- id: 239
+  intent: "Run a CRL check even for certificates which do not have any  CRL distribution  point.   This requires that a suitable LDAP server has been configured in Dirmngr and that the CRL can be found us- ing  the  issuer.   This  option reverts to what GnuPG did up to version 2.2.20.  This option is in general not useful."
+  command: "gpgsm"
+  example: "gpgsm --enable-issuer-based-crl-check"
+- id: 240
+  intent: "If a required certificate is missing while validating the  chain of  certificates,  try to load that certificate from an external location.  This usually means that Dirmngr is employed to search for  the  certificate.   Note that this option makes a \"web bug\" like behavior possible.  LDAP server  operators  can  see  which keys  you request, so by sending you a message signed by a brand new key (which you naturally will not have on  your  local  key- box),  the  operator  can tell both your IP address and the time when you verified the signature."
+  command: "gpgsm"
+  example: "gpgsm --auto-issuer-key-retrieve"
+- id: 241
+  intent: "When doing a key listing, do a full validation  check  for  each key  and print the result.  This is usually a slow operation be- cause it requires a CRL lookup and other operations. When used along with --import, a validation of  the  certificate to  import  is  done  and only imported if it succeeds the test. Note that this does not affect an already available  certificate in  the  DB.  This option is therefore useful to simply verify a certificate."
+  command: "gpgsm"
+  example: "gpgsm --with-validation"
+- id: 242
+  intent: "For standard key listings, also print the MD5 fingerprint of the certificate."
+  command: "gpgsm"
+  example: "gpgsm --with-md5-fingerprint"
+- id: 243
+  intent: "Use name as the message digest algorithm.   Usually  this  algo- rithm  is deduced from the respective signing certificate.  This option forces the use of the given algorithm and may lead to se- vere interoperability problems. Doing things one usually do not want to do"
+  command: "gpgsm"
+  example: "gpgsm --digest-algo name"
+- id: 244
+  intent: "Sometimes  signatures are broken in that they announce a differ- ent digest algorithm than actually used.  gpgsm uses a  one-pass data  processing  model  and thus needs to rely on the announced digest algorithms to properly hash the data.   As  a  workaround this  option may be used to tell gpgsm to also hash the data us- ing the algorithm name; this slows processing down a little  bit but  allows  verification  of  such broken signatures.  If gpgsm prints an error like ``digest algo 8 has not been enabled''  you may want to try this option, with 'SHA256' for name."
+  command: "gpgsm"
+  example: "gpgsm --extra-digest-algo name"
+- id: 245
+  intent: "To check that data has been encrypted according to the rules  of the  current compliance mode, a gpgsm user needs to evaluate the status lines.  This is allows  frontends  to  handle  compliance check in a more flexible way.  However, for scripted use the re- quired evaluation of the status-line requires quite some effort; this  option  can  be  used  instead to make sure that the gpgsm process exits with a failure if the  compliance  rules  are  not fulfilled.   Note  that this option has currently an effect only in \"de-vs\" mode."
+  command: "gpgsm"
+  example: "gpgsm --require-compliance"
+- id: 246
+  intent: "Include ephemeral flagged keys in the output  of  key  listings. Note  that they are included anyway if the key specification for a listing is given as fingerprint or keygrip."
+  command: "gpgsm"
+  example: "gpgsm --with-ephemeral-keys"
+- id: 247
+  intent: "Split an OpenPGP message into packets"
+  command: "gpgsplit"
+  example: "gpgsplit"
+- id: 248
+  intent: "Treat the specified digest algorithm as weak.   Signatures  made over  weak digests algorithms are normally rejected. This option can be supplied multiple times if multiple algorithms should  be considered  weak.   MD5  is always considered weak, and does not need to be listed explicitly."
+  command: "gpgv"
+  example: "gpgv --weak-digest name"
+- id: 249
+  intent: "verify if the hardware and software environment is supported."
+  command: "gprofng"
+  example: "gprofng --check"
+- id: 250
+  intent: "give a short usage message"
+  command: "grub-editenv"
+  example: "grub-editenv --usage"
+- id: 251
+  intent: "give a short usage message"
+  command: "grub-fstest"
+  example: "grub-fstest --usage"
+- id: 252
+  intent: "give a short usage message"
+  command: "grub-glue-efi"
+  example: "grub-glue-efi --usage"
+- id: 253
+  intent: "print this message and exit"
+  command: "grub-kbdcomp"
+  example: "grub-kbdcomp -h, --help"
+- id: 254
+  intent: "give a short usage message"
+  command: "grub-mkfont"
+  example: "grub-mkfont --usage"
+- id: 255
+  intent: "give a short usage message"
+  command: "grub-mkimage"
+  example: "grub-mkimage --usage"
+- id: 256
+  intent: "give a short usage message"
+  command: "grub-mklayout"
+  example: "grub-mklayout --usage"
+- id: 257
+  intent: "give a short usage message"
+  command: "grub-mknetdir"
+  example: "grub-mknetdir --usage"
+- id: 258
+  intent: "give a short usage message"
+  command: "grub-mkpasswd-pbkdf2"
+  example: "grub-mkpasswd-pbkdf2 --usage"
+- id: 259
+  intent: "give a short usage message"
+  command: "grub-mkrelpath"
+  example: "grub-mkrelpath --usage"
+- id: 260
+  intent: "give a short usage message"
+  command: "grub-mkrescue"
+  example: "grub-mkrescue --usage"
+- id: 261
+  intent: "give a short usage message"
+  command: "grub-mkstandalone"
+  example: "grub-mkstandalone --usage"
+- id: 262
+  intent: "give a short usage message"
+  command: "grub-mount"
+  example: "grub-mount --usage"
+- id: 263
+  intent: "give a short usage message"
+  command: "grub-render-label"
+  example: "grub-render-label --usage"
+- id: 264
+  intent: "check grub.cfg for syntax errors"
+  command: "grub-script-check"
+  example: "grub-script-check"
+- id: 265
+  intent: "grub-script-check [OPTION...] [PATH]"
+  command: "grub-script-check"
+  example: "grub-script-check"
+- id: 266
+  intent: "print verbose messages."
+  command: "grub-script-check"
+  example: "grub-script-check -v, --verbose"
+- id: 267
+  intent: "give this help list"
+  command: "grub-script-check"
+  example: "grub-script-check -?, --help"
+- id: 268
+  intent: "give a short usage message"
+  command: "grub-script-check"
+  example: "grub-script-check --usage"
+- id: 269
+  intent: "print program version"
+  command: "grub-script-check"
+  example: "grub-script-check -V, --version"
+- id: 270
+  intent: "give a short usage message"
+  command: "grub-syslinux2cfg"
+  example: "grub-syslinux2cfg --usage"
+- id: 271
+  intent: "Display a brief usage message"
+  command: "gsf-office-thumbnailer"
+  example: "gsf-office-thumbnailer -?, --help"
+- id: 272
+  intent: "Test. Check the compressed file integrity then quit."
+  command: "gunzip"
+  example: "gunzip -t --test"
+- id: 273
+  intent: "Take extra time to verify the syntax of each build_file."
+  command: "gyp"
+  example: "gyp --check"
+- id: 274
+  intent: "Test. Check the compressed file integrity then quit."
+  command: "gzip"
+  example: "gzip -t --test"
+- id: 275
+  intent: "[boolean] handlebars 4.7.7                 December 2021                   HANDLEBARS(1)"
+  command: "handlebars"
+  example: "handlebars --help Outputs                       this                       message"
+- id: 276
+  intent: "Print a usage message and exit."
+  command: "hostname"
+  example: "hostname -h, --help"
+- id: 277
+  intent: "Display help message and exit."
+  command: "img2txt"
+  example: "img2txt -h, --help"
+- id: 278
+  intent: "program used to strip binaries"
+  command: "install"
+  example: "install --strip-program=PROGRAM"
+- id: 279
+  intent: "Create a message queue."
+  command: "ipcmk"
+  example: "ipcmk -Q, --queue"
+- id: 280
+  intent: "Remove the message queue created with msgkey."
+  command: "ipcrm"
+  example: "ipcrm -Q, --queue-key msgkey"
+- id: 281
+  intent: "Remove the message queue identified by msgid."
+  command: "ipcrm"
+  example: "ipcrm -q, --queue-id msgid"
+- id: 282
+  intent: "Write information about active message queues."
+  command: "ipcs"
+  example: "ipcs -q, --queues"
+- id: 283
+  intent: "Shows program help."
+  command: "ipptool"
+  example: "ipptool --help"
+- id: 284
+  intent: "Displays the help message for the command."
+  command: "jconsole"
+  example: "jconsole -help or --help"
+- id: 285
+  intent: "check  that  the  input  is  correctly sorted, even if all input lines are pairable"
+  command: "join"
+  example: "join --check-order"
+- id: 286
+  intent: "do not check that the input is correctly sorted"
+  command: "join"
+  example: "join --nocheck-order"
+- id: 287
+  intent: "Load an OpenSSL configuration file on startup.  Among other uses, this can be used to enable FIPS-compliant crypto if Node.js is built with ./configure --openssl-fips."
+  command: "js"
+  example: "js --openssl-config=file"
+- id: 288
+  intent: "Check the script's syntax without executing it.  Exits with an error code if script is invalid."
+  command: "js"
+  example: "js -c, --check"
+- id: 289
+  intent: "show this help message and exit"
+  command: "js-yaml"
+  example: "js-yaml -h, --help"
+- id: 290
+  intent: "kded5 [--check]"
+  command: "kded5"
+  example: "kded5"
+- id: 291
+  intent: "Check the sycoca database, updating it if necessary, and exit."
+  command: "kded5"
+  example: "kded5 --check"
+- id: 292
+  intent: "Require  an  exact match for very long names.  If a command name is longer than 15 characters, the full name may  be  unavailable (i.e.   it is swapped out).  In this case, killall will kill ev- erything that matches within the first 15 characters.  With  -e, such  entries  are  skipped.   killall prints a message for each skipped entry if -v is specified in addition to -e."
+  command: "killall"
+  example: "killall -e, --exact"
+- id: 293
+  intent: "Show the help message."
+  command: "kmod"
+  example: "kmod -h --help"
+- id: 294
+  intent: "compute octal mode from mode of existing file"
+  command: "kpsestat"
+  example: "kpsestat"
+- id: 295
+  intent: "show a short help message *      all other options are directly handed to kpsewhich"
+  command: "kpsewhere"
+  example: "kpsewhere -h|--help"
+- id: 296
+  intent: "Display a short help message."
+  command: "kwallet-query"
+  example: "kwallet-query -h,--help"
+- id: 297
+  intent: "Check/save PDF files"
+  command: "l3build"
+  example: "l3build --pdf|-p"
+- id: 298
+  intent: "Display help message and exit."
+  command: "lastlog"
+  example: "lastlog -h, --help"
+- id: 299
+  intent: "table. If this parameter is not set then the table is not vertically limited. That means that if you have a very long commit message then the table will probably not fit on the page and you will get a \"Overfull\" error message from TeX. In this case you should specify the width of the column containing the commit messages.  I normally use something like --width=14 for DIN A4 in landscape."
+  command: "latex-git-log"
+  example: "latex-git-log --width Set the width in cm of the commit message field in the LaTeX"
+- id: 300
+  intent: "Print a short usage message"
+  command: "lcf"
+  example: "lcf -h, --help"
+- id: 301
+  intent: "Asks the linker not to check section addresses after they have been assigned to see if there are any overlaps.  Normally the linker will perform this check, and if it finds any overlaps it will produce suitable error messages.  The linker does know about, and does make allowances for sections in overlays.  The default behaviour can be restored by using the command-line switch --check-sections.  Section overlap is not usually checked for relocatable links.  You can force checking in that case by using the --check-sections option."
+  command: "ld"
+  example: "ld --no-check-sections"
+- id: 302
+  intent: "Compute and display statistics about the operation of the linker, such as execution time and memory usage."
+  command: "ld"
+  example: "ld --stats"
+- id: 303
+  intent: "These options control branch relocation checks for invalid ISA mode transitions.  If --ignore-branch-isa is used, then the linker accepts any branch relocations and any ISA mode transition required is lost in relocation calculation, except for some cases of \"BAL\" instructions which meet relaxation conditions and are converted to equivalent \"JALX\" instructions as the associated relocation is calculated.  By default or if --no-ignore-branch-isa is used a check is made causing the loss of an ISA mode transition to produce an error."
+  command: "ld"
+  example: "ld --no-ignore-branch-isa"
+- id: 304
+  intent: "Asks the linker not to check section addresses after they have been assigned to see if there are any overlaps.  Normally the linker will perform this check, and if it finds any overlaps it will produce suitable error messages.  The linker does know about, and does make allowances for sections in overlays.  The default behaviour can be restored by using the command-line switch --check-sections.  Section overlap is not usually checked for relocatable links.  You can force checking in that case by using the --check-sections option."
+  command: "ld.bfd"
+  example: "ld.bfd --no-check-sections"
+- id: 305
+  intent: "Compute and display statistics about the operation of the linker, such as execution time and memory usage."
+  command: "ld.bfd"
+  example: "ld.bfd --stats"
+- id: 306
+  intent: "These options control branch relocation checks for invalid ISA mode transitions.  If --ignore-branch-isa is used, then the linker accepts any branch relocations and any ISA mode transition required is lost in relocation calculation, except for some cases of \"BAL\" instructions which meet relaxation conditions and are converted to equivalent \"JALX\" instructions as the associated relocation is calculated.  By default or if --no-ignore-branch-isa is used a check is made causing the loss of an ISA mode transition to produce an error."
+  command: "ld.bfd"
+  example: "ld.bfd --no-ignore-branch-isa"
+- id: 307
+  intent: "Check segment addresses for overlaps (default)"
+  command: "ld.gold"
+  example: "ld.gold --check-sections"
+- id: 308
+  intent: "Do not check segment addresses for overlaps"
+  command: "ld.gold"
+  example: "ld.gold --no-check-sections"
+- id: 309
+  intent: "Use timestamps to check files (default)"
+  command: "ld.gold"
+  example: "ld.gold --incremental-unknown"
+- id: 310
+  intent: "Number of threads to use"
+  command: "ld.gold"
+  example: "ld.gold --thread-count COUNT"
+- id: 311
+  intent: "Number of threads to use in initial pass"
+  command: "ld.gold"
+  example: "ld.gold --thread-count-initial COUNT"
+- id: 312
+  intent: "Number of threads to use in final pass"
+  command: "ld.gold"
+  example: "ld.gold --thread-count-final COUNT"
+- id: 313
+  intent: "Specifies  how  much of the stack to show, when an error message is to be printed. The default value is 2.  With 0,  no  part  of the stack is shown. With 1, only the top stack frame is printed. With 2, the full stack is printed."
+  command: "lefty"
+  example: "lefty -sd <num>"
+- id: 314
+  intent: "Specifies how much of each function in the stack to  show,  when an error message is to be printed. The default value is 2.  With 0, no part of the function is  shown.  With  1,  only  the  line around  the  error is printed. With 2, the full function body is printed."
+  command: "lefty"
+  example: "lefty -sb <num>"
+- id: 315
+  intent: "Print a help message and exit."
+  command: "lexgrog"
+  example: "lexgrog -?, --help"
+- id: 316
+  intent: "Print a short usage message and exit."
+  command: "lexgrog"
+  example: "lexgrog --usage"
+- id: 317
+  intent: "Disables the check for remote instances using the installation."
+  command: "libreoffice"
+  example: "libreoffice --nolockcheck"
+- id: 318
+  intent: "check whether removal of a kernel is safe"
+  command: "linux-check-removal"
+  example: "linux-check-removal"
+- id: 319
+  intent: "linux-check-removal KERNEL-VER"
+  command: "linux-check-removal"
+  example: "linux-check-removal"
+- id: 320
+  intent: "Only show debug message if the source branch weight is greater than this value."
+  command: "lli-14"
+  example: "lli-14 --fs-profile-debug-bw-threshold=<uint>                                -"
+- id: 321
+  intent: "Only show debug message if the branch probility is greater  than this value (in percentage)."
+  command: "lli-14"
+  example: "lli-14 --fs-profile-debug-prob-diff-threshold=<uint>                         -"
+- id: 322
+  intent: "What  is  the maximal lookup depth when trying to check for via- bility of negation sinking."
+  command: "lli-14"
+  example: "lli-14 --instcombine-negator-max-depth=<uint>                                -"
+- id: 323
+  intent: "Suppress type errors (Wasm)"
+  command: "lli-14"
+  example: "lli-14 --no-type-check                                                       -"
+- id: 324
+  intent: "Check that returns are non-poison (for testing)"
+  command: "lli-14"
+  example: "lli-14 --poison-checking-function-local                                      -"
+- id: 325
+  intent: "Emit a warning if less than N% of records in the  input  profile are matched to the IR."
+  command: "lli-14"
+  example: "lli-14 --sample-profile-check-record-coverage=<N>                            -"
+- id: 326
+  intent: "Emit a warning if less than N% of samples in the  input  profile are matched to the IR."
+  command: "lli-14"
+  example: "lli-14 --sample-profile-check-sample-coverage=<N>                            -"
+- id: 327
+  intent: "The max number of exiting blocks of a loop to allow speculative counter promotion"
+  command: "lli-14"
+  example: "lli-14 --speculative-counter-promotion-max-exiting=<uint>                    -"
+- id: 328
+  intent: "Skip the dependency check for pragma-based transformations"
+  command: "lli-14"
+  example: "lli-14 --polly-pragma-ignore-depcheck                                        -"
+- id: 329
+  intent: "Specify  the clustering algorithm to use. By default DBSCAN will be used.  Naive clustering algorithm is better for doing further work  on  the  -analysis-inconsistencies-output-file= output, it will create one cluster per opcode, and check that  the  cluster is stable (all points are neighbours)."
+  command: "llvm-exegesis-14"
+  example: "llvm-exegesis-14 -analysis-clustering=[dbscan,naive]"
+- id: 330
+  intent: "Do not skip blocks of zeroes when disassembling"
+  command: "llvm-objdump-14"
+  example: "llvm-objdump-14 --disassemble-zeroes"
+- id: 331
+  intent: "Display the program headers."
+  command: "llvm-readelf-14"
+  example: "llvm-readelf-14 --program-headers, --segments, -l"
+- id: 332
+  intent: "Print <count> number of intervals."
+  command: "lnstat"
+  example: "lnstat -c, --count <count>"
+- id: 333
+  intent: "Disables the check for remote instances using the installation."
+  command: "localc"
+  example: "localc --nolockcheck"
+- id: 334
+  intent: "Display a short usage message and exit."
+  command: "locale"
+  example: "locale --usage"
+- id: 335
+  intent: "Disables the check for remote instances using the installation."
+  command: "lodraw"
+  example: "lodraw --nolockcheck"
+- id: 336
+  intent: "Disables the check for remote instances using the installation."
+  command: "loffice"
+  example: "loffice --nolockcheck"
+- id: 337
+  intent: "Disables the check for remote instances using the installation."
+  command: "lofromtemplate"
+  example: "lofromtemplate --nolockcheck"
+- id: 338
+  intent: "logger [options] message"
+  command: "logger"
+  example: "logger"
+- id: 339
+  intent: "Write a systemd journal entry. The entry is read from the given file, when specified, otherwise from standard input. Each line must begin with a field that is accepted by journald; see systemd.journal-fields(7) for details. The use of a MESSAGE_ID field is generally a good idea, as it makes finding entries easy. Examples: logger --journald <<end MESSAGE_ID=67feb6ffbaf24c5cbec13c008dd72309 MESSAGE=The dogs bark, but the caravan goes on. DOGS=bark CARAVAN=goes on end logger --journald=entry.txt Notice that --journald will ignore values of other options, such as priority. If priority is needed it must be within input, and use PRIORITY field. The simple execution of journalctl(1) will display MESSAGE field. Use journalctl --output json-pretty to see rest of the fields. + To include newlines in MESSAGE, specify MESSAGE several times. This is handled as a special case, other fields will be stored as an array in the journal if they appear multiple times."
+  command: "logger"
+  example: "logger --journald[=file]"
+- id: 340
+  intent: "Enter the message into the log with the specified priority. The priority may be specified numerically or as a facility.level pair. For example, -p local3.info logs the message as informational in the local3 facility. The default is user.notice."
+  command: "logger"
+  example: "logger -p, --priority priority"
+- id: 341
+  intent: "Look for a syslog prefix on every line read from standard input. This prefix is a decimal number within angle brackets that encodes both the facility and the level. The number is constructed by multiplying the facility by 8 and then adding the level. For example, local0.info, meaning facility=16 and level=6, becomes <134>. If the prefix contains no facility, the facility defaults to what is specified by the -p option. Similarly, if no prefix is provided, the line is logged using the priority given with -p. This option doesn't affect a command-line message."
+  command: "logger"
+  example: "logger --prio-prefix"
+- id: 342
+  intent: "Output the message to standard error as well as to the system log."
+  command: "logger"
+  example: "logger -s, --stderr"
+- id: 343
+  intent: "Specifies a structured data element ID for an RFC 5424 message header. The option has to be used before --sd-param to introduce a new element. The number of structured data elements is unlimited. The ID (name plus possibly @digits) is case-sensitive and uniquely identifies the type and purpose of the element. The same ID must not exist more than once in a message. The @digits part is required for user-defined non-standardized IDs. logger currently generates the timeQuality standardized element only. RFC 5424 also describes the elements origin (with parameters ip, enterpriseId, software and swVersion) and meta (with parameters sequenceId, sysUpTime and language). These element IDs may be specified without the @digits suffix."
+  command: "logger"
+  example: "logger --sd-id name[@digits]"
+- id: 344
+  intent: "Sets the maximum permitted message size to size. The default is 1KiB characters, which is the limit traditionally used and specified in RFC 3164. With RFC 5424, this limit has become flexible. A good assumption is that RFC 5424 receivers can at least process 4KiB messages. Most receivers accept messages larger than 1KiB over any type of syslog protocol. As such, the --size option affects logger in all cases (not only when --rfc5424 was used). Note: the message-size limit limits the overall message size, including the syslog header. Header sizes vary depending on the selected options and the hostname length. As a rule of thumb, headers are usually not longer than 50 to 80 characters. When selecting a maximum message size, it is important to ensure that the receiver supports the max size as well, otherwise messages may become truncated. Again, as a rule of thumb two to four KiB message size should generally be OK, whereas anything larger should be verified to work."
+  command: "logger"
+  example: "logger -S, --size size"
+- id: 345
+  intent: "End the argument list. This allows the message to start with a hyphen (-)."
+  command: "logger"
+  example: "logger --"
+- id: 346
+  intent: "Disables the check for remote instances using the installation."
+  command: "loimpress"
+  example: "loimpress --nolockcheck"
+- id: 347
+  intent: "Disables the check for remote instances using the installation."
+  command: "lomath"
+  example: "lomath --nolockcheck"
+- id: 348
+  intent: "Disables the check for remote instances using the installation."
+  command: "loweb"
+  example: "loweb --nolockcheck"
+- id: 349
+  intent: "Disables the check for remote instances using the installation."
+  command: "lowriter"
+  example: "lowriter --nolockcheck"
+- id: 350
+  intent: "Show a help message with a list of options and exit."
+  command: "lsb_release"
+  example: "lsb_release -h, --help"
+- id: 351
+  intent: "Write information about active message queues."
+  command: "lsipc"
+  example: "lsipc -q, --queues"
+- id: 352
+  intent: "Show help message and exit."
+  command: "luaotfload-tool"
+  example: "luaotfload-tool --help, -h"
+- id: 353
+  intent: "Run the diagnostic procedure CHECK. Available procedures are: 1. files -> check Luaotfload files for modifications; 2. permissions  ->  check  permissions  of cache directories and files; 3. environment -> print relevant environment and kpse variables; 4. repository -> check the git repository for new releases, 5. index -> check database, display information about it. Procedures can be chained by  concatenating  with  commas,  e.g. --diagnose=files,permissions.    Specify  thorough  to  run  all checks."
+  command: "luaotfload-tool"
+  example: "luaotfload-tool --diagnose=CHECK"
+- id: 354
+  intent: "enable emacs-like key movement."
+  command: "lynx"
+  example: "lynx -emacskeys"
+- id: 355
+  intent: "prevents automatic redirection and prints a message with a  link to the new URL."
+  command: "lynx"
+  example: "lynx -noredir"
+- id: 356
+  intent: "Specify the type of the integrity check.  The  check  is  calcu- lated  from  the  uncompressed  data and stored in the .xz file. This option has an effect only when  compressing  into  the  .xz format;  the .lzma format doesn't support integrity checks.  The integrity check (if any) is verified when the .xz file is decom- pressed. Supported check types: none   Don't  calculate an integrity check at all.  This is usu- ally a bad idea.  This can be useful  when  integrity  of the data is verified by other means anyway. crc32  Calculate  CRC32  using  the  polynomial  from IEEE-802.3 (Ethernet). crc64  Calculate CRC64 using the polynomial from ECMA-182.  This is the default, since it is slightly better than CRC32 at detecting damaged files and the speed difference is  neg- ligible. sha256 Calculate  SHA-256.   This  is somewhat slower than CRC32 and CRC64. Integrity of the .xz headers is always verified with CRC32.   It is not possible to change or disable it."
+  command: "lzcat"
+  example: "lzcat -C check, --check=check"
+- id: 357
+  intent: "Display  a  help  message  describing the most commonly used op- tions, and exit successfully."
+  command: "lzcat"
+  example: "lzcat -h, --help"
+- id: 358
+  intent: "Display a help message describing all features of xz,  and  exit successfully"
+  command: "lzcat"
+  example: "lzcat -H, --long-help"
+- id: 359
+  intent: "Specify the type of the integrity check.  The  check  is  calcu- lated  from  the  uncompressed  data and stored in the .xz file. This option has an effect only when  compressing  into  the  .xz format;  the .lzma format doesn't support integrity checks.  The integrity check (if any) is verified when the .xz file is decom- pressed. Supported check types: none   Don't  calculate an integrity check at all.  This is usu- ally a bad idea.  This can be useful  when  integrity  of the data is verified by other means anyway. crc32  Calculate  CRC32  using  the  polynomial  from IEEE-802.3 (Ethernet). crc64  Calculate CRC64 using the polynomial from ECMA-182.  This is the default, since it is slightly better than CRC32 at detecting damaged files and the speed difference is  neg- ligible. sha256 Calculate  SHA-256.   This  is somewhat slower than CRC32 and CRC64. Integrity of the .xz headers is always verified with CRC32.   It is not possible to change or disable it."
+  command: "lzma"
+  example: "lzma -C check, --check=check"
+- id: 360
+  intent: "Display  a  help  message  describing the most commonly used op- tions, and exit successfully."
+  command: "lzma"
+  example: "lzma -h, --help"
+- id: 361
+  intent: "Display a help message describing all features of xz,  and  exit successfully"
+  command: "lzma"
+  example: "lzma -H, --long-help"
+- id: 362
+  intent: "Use the latest mtime between symlinks and target."
+  command: "make"
+  example: "make -L, --check-symlink-times"
+- id: 363
+  intent: "Prints help message and exits."
+  command: "makeglossaries"
+  example: "makeglossaries --help"
+- id: 364
+  intent: "Prints help message and exits."
+  command: "makeglossaries-lite"
+  example: "makeglossaries-lite --help"
+- id: 365
+  intent: "Do not allow interactive authorization with polkit. If  this  is needed  to complete the operation, the operation will fail. (De- fault: Allow interactive authorization.) check-app-filter OPTIONS Check if a given program, content type or flatpak ref is  permitted  to be used by a user, according to their current app filter. For example: # malcontent-client check-app-filter timmy $(which gnome-calcu- lator) # malcontent-client check-app-filter timmy x-scheme-handler/http # malcontent-client check-app-filter timmy app/com.realm667.WolfenDoom_Blade_of_Agony/x86_64/stable USER   Username  or  ID  of  the user to get the app filter for. If not specified, the current user will be used by default. ARG    Path to a program, content type or flatpak ref to check  against the app filter, to see if it is allowed for the specified user."
+  command: "malcontent-client"
+  example: "malcontent-client -n, --no-interactive"
+- id: 366
+  intent: "Print a help message and exit."
+  command: "man"
+  example: "man -?, --help"
+- id: 367
+  intent: "Print a short usage message and exit."
+  command: "man"
+  example: "man --usage"
+- id: 368
+  intent: "Print a help message and exit."
+  command: "man-recode"
+  example: "man-recode -h, --help"
+- id: 369
+  intent: "Show the usage message, then exit."
+  command: "mandb"
+  example: "mandb -?, --help"
+- id: 370
+  intent: "Print a short usage message and exit."
+  command: "mandb"
+  example: "mandb --usage"
+- id: 371
+  intent: "Print a help message and exit."
+  command: "manpath"
+  example: "manpath -?, --help"
+- id: 372
+  intent: "Print a short usage message and exit."
+  command: "manpath"
+  example: "manpath --usage"
+- id: 373
+  intent: "\"-W usage\")."
+  command: "mawk"
+  example: "mawk -W help        prints  a  usage  message  to  stderr and exits (same as"
+- id: 374
+  intent: "\"-W help\")."
+  command: "mawk"
+  example: "mawk -W usage       prints  a  usage  message  to  stderr and exits (same as"
+- id: 375
+  intent: "Set  UICC  apdu  (allowed  keys: channel, secure-message, class- byte-type, command)"
+  command: "mbimcli"
+  example: "mbimcli --ms-set-uicc-apdu=[\"key=value,...\"]"
+- id: 376
+  intent: "compute and check MD5 message digest"
+  command: "md5sum"
+  example: "md5sum"
+- id: 377
+  intent: "read checksums from the FILEs and check them"
+  command: "md5sum"
+  example: "md5sum -c, --check"
+- id: 378
+  intent: "compute and check MD5 message digest"
+  command: "md5sum.textutils"
+  example: "md5sum.textutils"
+- id: 379
+  intent: "read checksums from the FILEs and check them"
+  command: "md5sum.textutils"
+  example: "md5sum.textutils -c, --check"
+- id: 380
+  intent: "memusage [option]... program [programoption]..."
+  command: "memusage"
+  example: "memusage"
+- id: 381
+  intent: "Print a short usage message and exit."
+  command: "memusage"
+  example: "memusage --usage"
+- id: 382
+  intent: "Print a help message and exit."
+  command: "memusagestat"
+  example: "memusagestat -?, --help"
+- id: 383
+  intent: "Print a short usage message and exit."
+  command: "memusagestat"
+  example: "memusagestat --usage"
+- id: 384
+  intent: "and warnings."
+  command: "mendex"
+  example: "mendex -q        Quiet mode; send no message to stderr, except error  messages"
+- id: 385
+  intent: "Print a help message and exits."
+  command: "mimeopen"
+  example: "mimeopen -u, --usage"
+- id: 386
+  intent: "Print a help message and exits."
+  command: "mimetype"
+  example: "mimetype -u, --usage"
+- id: 387
+  intent: "print version, licence and copyright message."
+  command: "mksquashfs"
+  example: "mksquashfs -version"
+- id: 388
+  intent: "Check if the CA of the given key is already enrolled or  blocked in the key databases."
+  command: "mokutil"
+  example: "mokutil --ca-check"
+- id: 389
+  intent: "Ignore  the  kernel  builtin trusted keys keyring check when en- rolling a key into MokList"
+  command: "mokutil"
+  example: "mokutil --ignore-keyring"
+- id: 390
+  intent: "Do not register with the D-BUS session message bus"
+  command: "mousepad"
+  example: "mousepad --disable-server"
+- id: 391
+  intent: "Make status-bar messages disappear after 1 keystroke instead  of after  20.  Note that option -c (--constantshow) overrides this. When option --minibar or --zero is in effect, --quickblank makes a  message  disappear after 0.8 seconds instead of after the de- fault 1.5 seconds."
+  command: "nano"
+  example: "nano -U, --quickblank"
+- id: 392
+  intent: "Perform a quick set of self-check tests."
+  command: "nautilus"
+  example: "nautilus -c, --check"
+- id: 393
+  intent: "\"-W usage\")."
+  command: "nawk"
+  example: "nawk -W help        prints  a  usage  message  to  stderr and exits (same as"
+- id: 394
+  intent: "\"-W help\")."
+  command: "nawk"
+  example: "nawk -W usage       prints  a  usage  message  to  stderr and exits (same as"
+- id: 395
+  intent: "Enable/Disable the color blocks"
+  command: "neofetch"
+  example: "neofetch --color_blocks on/off"
+- id: 396
+  intent: "Left-padding of color blocks"
+  command: "neofetch"
+  example: "neofetch --col_offset auto/num"
+- id: 397
+  intent: "Range of colors to print as blocks BARS:"
+  command: "neofetch"
+  example: "neofetch --block_range num num"
+- id: 398
+  intent: "translate message and choose plural form"
+  command: "ngettext"
+  example: "ngettext"
+- id: 399
+  intent: "retrieve translated message from TEXTDOMAIN"
+  command: "ngettext"
+  example: "ngettext -d, --domain=TEXTDOMAIN"
+- id: 400
+  intent: "Print a usage message and exit."
+  command: "nisdomainname"
+  example: "nisdomainname -h, --help"
+- id: 401
+  intent: "Load an OpenSSL configuration file on startup.  Among other uses, this can be used to enable FIPS-compliant crypto if Node.js is built with ./configure --openssl-fips."
+  command: "node"
+  example: "node --openssl-config=file"
+- id: 402
+  intent: "Check the script's syntax without executing it.  Exits with an error code if script is invalid."
+  command: "node"
+  example: "node -c, --check"
+- id: 403
+  intent: "Load an OpenSSL configuration file on startup.  Among other uses, this can be used to enable FIPS-compliant crypto if Node.js is built with ./configure --openssl-fips."
+  command: "nodejs"
+  example: "nodejs --openssl-config=file"
+- id: 404
+  intent: "Check the script's syntax without executing it.  Exits with an error code if script is invalid."
+  command: "nodejs"
+  example: "nodejs -c, --check"
+- id: 405
+  intent: "This option sets the literal TSIG authentication key. keyname is the name of the key, and secret is the base64 encoded shared se- cret. hmac is the name of the key algorithm; valid  choices  are hmac-md5,  hmac-sha1,  hmac-sha224, hmac-sha256, hmac-sha384, or hmac-sha512. If hmac is not specified, the default is  hmac-md5, or if MD5 was disabled, hmac-sha256. NOTE: Use of the -y option is discouraged because the shared se- cret is supplied as a command-line argument in clear text.  This may be visible in the output from ps1 or in a history file main- tained by the user's shell."
+  command: "nsupdate"
+  example: "nsupdate -y [hmac:]keyname:secret"
+- id: 406
+  intent: "fix common errors and force Windows to check NTFS"
+  command: "ntfsfix"
+  example: "ntfsfix"
+- id: 407
+  intent: "Show help message and exit."
+  command: "nyancat"
+  example: "nyancat -h, --help"
+- id: 408
+  intent: "check   whether   coverage   is   within   thresholds   provided [boolean] [default: false]"
+  command: "nyc"
+  example: "nyc --check-coverage"
+- id: 409
+  intent: "Enable additional checks for consistency of Dwarf information."
+  command: "objdump"
+  example: "objdump --dwarf-check"
+- id: 410
+  intent: "OpenSSL command line program"
+  command: "openssl"
+  example: "openssl"
+- id: 411
+  intent: "openssl command [ options ... ] [ parameters ... ] openssl no-XXX [ options ]"
+  command: "openssl"
+  example: "openssl"
+- id: 412
+  intent: "filename parameters start with a minus sign: openssl verify [flags...] -- -cert1.pem... Format Options See openssl-format-options(1) for manual page. Pass Phrase Options See the openssl-passphrase-options(1) manual page. Random State Options Prior to OpenSSL 1.1.1, it was common for applications to store information about the state of the random-number generator in a file that was loaded at startup and rewritten upon exit. On modern operating systems, this is generally no longer necessary as OpenSSL will seed itself from a trusted entropy source provided by the operating system. These flags are still supported for special platforms or circumstances that might require them. It is generally an error to use the same seed file more than once and every use of -rand should be paired with -writerand."
+  command: "openssl"
+  example: "openssl --  This terminates the list of options. It is mostly useful if any"
+- id: 413
+  intent: "Load the engine identified by id and use all the methods it implements (algorithms, key storage, etc.), unless specified otherwise in the command-specific documentation or it is configured to do so, as described in \"Engine Configuration\" in config(5). The engine will be used for key ids specified with -key and similar options when an option like -keyform engine is given. A special case is the \"loader_attic\" engine, which is meant just for internal OpenSSL testing purposes and supports loading keys, parameters, certificates, and CRLs from files.  When this engine is used, files with such credentials are read via this engine.  Using the \"file:\" schema is optional; a plain file (path) name will do. Options specifying keys, like -key and similar, can use the generic OpenSSL engine key loading URI scheme \"org.openssl.engine:\" to retrieve private keys and public keys.  The URI syntax is as follows, in simplified form: org.openssl.engine:{engineid}:{keyid} Where \"{engineid}\" is the identity/name of the engine, and \"{keyid}\" is a key identifier that's acceptable by that engine.  For example, when using an engine that interfaces against a PKCS#11 implementation, the generic key URI would be something like this (this happens to be an example for the PKCS#11 engine that's part of OpenSC): -key org.openssl.engine:pkcs11:label_some-private-key As a third possibility, for engines and providers that have implemented their own OSSL_STORE_LOADER(3), \"org.openssl.engine:\" should not be necessary.  For a PKCS#11 implementation that has implemented such a loader, the PKCS#11 URI as defined in RFC 7512 should be possible to use directly: -key pkcs11:object=some-private-key;pin-value=1234 Provider Options"
+  command: "openssl"
+  example: "openssl -engine id"
+- id: 414
+  intent: "Skip COUNT input records."
+  command: "pahole"
+  example: "pahole --skip=COUNT"
+- id: 415
+  intent: "pamexec [\"command\"] [netpbmfile] [-check] Minimum unique abbreviation of option is acceptable. You may use dou- ble hyphens instead of single hyphen to denote options. You may use white space in place of the equals sign to separate an option name from its value."
+  command: "pamexec"
+  example: "pamexec"
+- id: 416
+  intent: "ages if the command has a nonzero exit status."
+  command: "pamexec"
+  example: "pamexec -check This causes pamexec to exit without processing any  further  im-"
+- id: 417
+  intent: "This option makes the summary function addition."
+  command: "pamsumm"
+  example: "pamsumm -sum"
+- id: 418
+  intent: "summarize (sum, average, etc) a Netpbm image by column"
+  command: "pamsummcol"
+  example: "pamsummcol"
+- id: 419
+  intent: "ratio  is a floating point number that specifies the compression ratio.  pamtojpeg2k will adjust quality as necessary  to  ensure that  you  get  this compression ratio.  E.g. 4 means the output will be about one fourth the size in bytes of the input file. The ratio concerns just the raster part of the image,  with  the denominator  being what the raster would take if it were encoded the most naive way possible (e.g. 3 bytes per  pixel  in  8-bit- per-sample  RGB).   It  does,  however, include metadata that is part of the compressed raster.  Because of that, it may  not  be possible  to  give  you  your requested compression ratio at any quality.  If it isn't, pamtojpeg2k fails with a  message  saying so. If you don't specify this option, pamtojpeg2k gives you the best compression it can without losing any quality.  Because  of  the metadata  issue  described above, this may mean, for a small im- age, the image actually expands. Note that though the Jasper library takes a compression  factor, this option specifies a compression ratio.  The compression fac- tor is the multiplicative inverse of (1 divided by) the compres- sion ratio. Before  Netpbm 10.61 (December 2012), the default was a compres- sion ratio of 1, and if pamtojpeg2k could not  make  the  output that  small,  it  just  made  it as small as it could, with zero quality.  You know this is happening when you  see  the  warning message, \"empty layer generated.\""
+  command: "pamtojpeg2k"
+  example: "pamtojpeg2k -compression=ratio"
+- id: 420
+  intent: "the standard error and exit with a non-zero code."
+  command: "paperconf"
+  example: "paperconf -z     If the paper name is unknown, print it but issue  a  message  on"
+- id: 421
+  intent: "Display help message and exit."
+  command: "passwd"
+  example: "passwd -h, --help"
+- id: 422
+  intent: "check whether file names are valid or portable"
+  command: "pathchk"
+  example: "pathchk"
+- id: 423
+  intent: "check for all POSIX systems (equivalent to -p -P)"
+  command: "pathchk"
+  example: "pathchk --portability"
+- id: 424
+  intent: "compute Minkowski integral"
+  command: "pbmminkowski"
+  example: "pbmminkowski"
+- id: 425
+  intent: "With  this  option,  instead of outputting an image of the text, pbmtext just writes to Standard Output a message telling the di- mensions of the image it would have produced. You can specify only one of -dry-run and -text-dump. This option was new in Netpbm 10.75 (June 2016)."
+  command: "pbmtext"
+  example: "pbmtext -dry-run"
+- id: 426
+  intent: "HEX_NOL Nokia Operator Logo as (uploadable) hexcode.  Use option -net to specify network code. HEX_NGG Nokia Group Graphic as (uploadable) hexcode. HEX_NPM Nokia  Picture Message as (uploadable) hexcode.  Use option -txt to specify an optional text message. NOL    Nokia Operator Logo as .nol format.  This  is  editable  by  the Group-Graphic Editor from Kessler Wireless Design ( www.kessler- design.com <http://www.kessler-design.com> ) NGG    Nokia Group Graphic as .ngg format.  This  is  editable  by  the Group-Graphic Editor from Kessler Wireless Design ( www.kessler- design.com <http://www.kessler-design.com> ) NPM    Nokia Picture Message as .npm format. This is  editable  by  the Picture-Message   Editor   from   Kessler   Wireless   Design  ( www.kessler-design.com <http://www.kessler-design.com> ) This option was new in Netpbm 10.36 (October 2006)."
+  command: "pbmtonokia"
+  example: "pbmtonokia -fmt   Specifies the output format (default is HEX_NOL)."
+- id: 427
+  intent: "size text message allowed by the format is 120 characters. Default is no text message."
+  command: "pbmtonokia"
+  example: "pbmtonokia -txt   Specifies  the  text  message for Picture Messages.  The maximum"
+- id: 428
+  intent: "Help program for the LaTeX package attachfile2."
+  command: "pdfatfi"
+  example: "pdfatfi"
+- id: 429
+  intent: "show help message and exit GENERAL"
+  command: "pdfbook2"
+  example: "pdfbook2 -h, --help"
+- id: 430
+  intent: "Do not perform online OCSP certificate revocation  check  (local Certificate Revocation Lists (CRL) are still used)."
+  command: "pdfsig"
+  example: "pdfsig -no-ocsp"
+- id: 431
+  intent: "Use the given digest algorithm for signing (default: SHA256)."
+  command: "pdfsig"
+  example: "pdfsig -digest  algorithm"
+- id: 432
+  intent: "only  compute  (and  output)  bounding box. Will not produce any output file."
+  command: "pdfxup"
+  example: "pdfxup -g, --get-bb"
+- id: 433
+  intent: "do not compute bounding box, preserve current margins."
+  command: "pdfxup"
+  example: "pdfxup -kbb, --keep-bb"
+- id: 434
+  intent: "print help message and exit."
+  command: "pdfxup"
+  example: "pdfxup -h, --help"
+- id: 435
+  intent: "Prints out a brief help message."
+  command: "perlivp"
+  example: "perlivp -h help"
+- id: 436
+  intent: "Specify a program to use instead of latex.  For example, \"--latex=pdflatex\" would typeset the given document using pdflatex instead of ordinary latex."
+  command: "perltex"
+  example: "perltex --latex=program"
+- id: 437
+  intent: "compute Minkowski integral"
+  command: "pgmminkowski"
+  example: "pgmminkowski"
+- id: 438
+  intent: "sign command Set signature hash algorithm. Required arguments:"
+  command: "phar"
+  example: "phar -y key         Private key for OpenSSL signing."
+- id: 439
+  intent: "sign command Set signature hash algorithm. Required arguments:"
+  command: "phar.default"
+  example: "phar.default -y key         Private key for OpenSSL signing."
+- id: 440
+  intent: "sign command Set signature hash algorithm. Required arguments:"
+  command: "phar.phar"
+  example: "phar.phar -y key         Private key for OpenSSL signing."
+- id: 441
+  intent: "sign command Set signature hash algorithm. Required arguments:"
+  command: "phar.phar.default"
+  example: "phar.phar.default -y key         Private key for OpenSSL signing."
+- id: 442
+  intent: "sign command Set signature hash algorithm. Required arguments:"
+  command: "phar.phar8.2"
+  example: "phar.phar8.2 -y key         Private key for OpenSSL signing."
+- id: 443
+  intent: "sign command Set signature hash algorithm. Required arguments:"
+  command: "phar8.2"
+  example: "phar8.2 -y key         Private key for OpenSSL signing."
+- id: 444
+  intent: "sign command Set signature hash algorithm. Required arguments:"
+  command: "phar8.2.phar"
+  example: "phar8.2.phar -y key         Private key for OpenSSL signing."
+- id: 445
+  intent: "Make status-bar messages disappear after 1 keystroke instead  of after  20.  Note that option -c (--constantshow) overrides this. When option --minibar or --zero is in effect, --quickblank makes a  message  disappear after 0.8 seconds instead of after the de- fault 1.5 seconds."
+  command: "pico"
+  example: "pico -U, --quickblank"
+- id: 446
+  intent: "Check the validity of the stream if N = 1.  When N = -1, something interesting happens when it encounters an invalid character."
+  command: "piconv"
+  example: "piconv -C,--check N"
+- id: 447
+  intent: "pidof [-s] [-c] [-n] [-x] [-z] [-o omitpid[,omitpid...]] [-o omit- pid[,omitpid...]...] [-d sep] program [program...]"
+  command: "pidof"
+  example: "pidof"
+- id: 448
+  intent: "Compress blocks independently for damage recovery."
+  command: "pigz"
+  example: "pigz -i --independent"
+- id: 449
+  intent: "options."
+  command: "pinentry"
+  example: "pinentry --help Print a usage message summarizing the most  useful  command-line"
+- id: 450
+  intent: "options."
+  command: "pinentry-curses"
+  example: "pinentry-curses --help Print  a  usage message summarizing the most useful command-line"
+- id: 451
+  intent: "options."
+  command: "pinentry-gnome3"
+  example: "pinentry-gnome3 --help Print a usage message summarizing the most  useful  command-line"
+- id: 452
+  intent: "options."
+  command: "pinentry-x11"
+  example: "pinentry-x11 --help Print a usage message summarizing the most  useful  command-line"
+- id: 453
+  intent: "Check whether a process is authorized"
+  command: "pkcheck"
+  example: "pkcheck"
+- id: 454
+  intent: "Display a help message and exit."
+  command: "pldd"
+  example: "pldd -?, --help"
+- id: 455
+  intent: "Display a short usage message and exit."
+  command: "pldd"
+  example: "pldd --usage"
+- id: 456
+  intent: "Check if plymouthd is running."
+  command: "plymouth"
+  example: "plymouth --ping"
+- id: 457
+  intent: "Check if plymouthd has an active vt."
+  command: "plymouth"
+  example: "plymouth --has-active-vt"
+- id: 458
+  intent: "compute the difference between two images (the PSNR)"
+  command: "pnmpsnr"
+  example: "pnmpsnr"
+- id: 459
+  intent: "pression via the \"Z\" library -- the same as PNG). See the -rle option for information about  compression  in  gen- eral. You must specify -psfilter if you specify -flate. There exist modern versions of pnmtops that cannot do flate com- pression; these versions were built without the  Z  library  and built not to require the Z library.  If you have such a version, it fails with an explanatory  error  message  when  you  specify -flate. This option was new in Netbpm 10.27 (March 2005). Before  Netpbm 10.32 (February 2006), you could not specify -rle and -flate together."
+  command: "pnmtops"
+  example: "pnmtops -flate This  option tells pnmtops to use \"flate\" compression (i.e. com-"
+- id: 460
+  intent: "check the syntax of POD format documentation files"
+  command: "podchecker"
+  example: "podchecker"
+- id: 461
+  intent: "ppd message catalog generator (deprecated)"
+  command: "ppdpo"
+  example: "ppdpo"
+- id: 462
+  intent: "A gingham check pattern.  Can be tiled. If you specify -color, give two  colors:  background  and  fore- ground, in that order."
+  command: "ppmpat"
+  example: "ppmpat -gingham2 -g2"
+- id: 463
+  intent: "compute a relief of a PPM image"
+  command: "ppmrelief"
+  example: "ppmrelief"
+- id: 464
+  intent: "This is the default."
+  command: "ppmtospu"
+  example: "ppmtospu -d2    The program uses a 2x2 ordered dither."
+- id: 465
+  intent: "preprocessor for PMX, easy music typesetting program"
+  command: "prepmx"
+  example: "prepmx"
+- id: 466
+  intent: "a tar-like program written in perl"
+  command: "ptar"
+  example: "ptar"
+- id: 467
+  intent: "ptargrep [options] <pattern> <tar file> ... Options: --basename|-b ignore directory paths from archive --ignore-case|-i do case-insensitive pattern matching --list-only|-l list matching filenames rather than extracting matches --verbose|-v write debugging message to STDERR --help|-? detailed help message"
+  command: "ptargrep"
+  example: "ptargrep"
+- id: 468
+  intent: "show this help message and exit"
+  command: "py3clean"
+  example: "py3clean -h, --help"
+- id: 469
+  intent: "show this help message and exit"
+  command: "py3compile"
+  example: "py3compile -h, --help"
+- id: 470
+  intent: "Print this help message and exit."
+  command: "pygettext3"
+  example: "pygettext3 -h, --help"
+- id: 471
+  intent: "Print this help message and exit."
+  command: "pygettext3.11"
+  example: "pygettext3.11 -h, --help"
+- id: 472
+  intent: ": integrity check (default)"
+  command: "pzstd"
+  example: "pzstd -C, --check"
+- id: 473
+  intent: ": no integrity check"
+  command: "pzstd"
+  example: "pzstd --no-check"
+- id: 474
+  intent: "Ignore ModemManager runtime check"
+  command: "qmi-firmware-update"
+  example: "qmi-firmware-update --ignore-mm-runtime-check"
+- id: 475
+  intent: "Unblock CK"
+  command: "qmicli"
+  example: "qmicli --dms-uim-unblock-ck=[(pn|pu|pp|pc|pf),(key)]"
+- id: 476
+  intent: "Run version info check when opening device"
+  command: "qmicli"
+  example: "qmicli --device-open-version-info"
+- id: 477
+  intent: "Log message to standard output."
+  command: "rake"
+  example: "rake -v, --verbose"
+- id: 478
+  intent: "Display a help message."
+  command: "rake"
+  example: "rake -h, -H, --help"
+- id: 479
+  intent: "Don't  check the Debian bug tracking system to see if this prob- lem has already been reported; useful  for  offline  use  or  if you're really sure it's a bug."
+  command: "reportbug"
+  example: "reportbug -b, --no-query-bts"
+- id: 480
+  intent: "Check  the Debian bug tracking system to see if this problem has already been reported (default)."
+  command: "reportbug"
+  example: "reportbug --query-bts"
+- id: 481
+  intent: "Check for newer releases of the package  at  packages.debian.org (default).   In  advanced and expert mode, check http://ftp-mas- ter.debian.org/new.html too."
+  command: "reportbug"
+  example: "reportbug --check-available"
+- id: 482
+  intent: "Do not check for newer releases of the package  at  packages.de- bian.org."
+  command: "reportbug"
+  example: "reportbug --no-check-available"
+- id: 483
+  intent: "Do not check whether the package is installed  before  filing  a report.  This is generally only useful when filing a report on a package you know is not installed on your system."
+  command: "reportbug"
+  example: "reportbug -I, --no-check-installed"
+- id: 484
+  intent: "Check if the specified package is installed when filing reports. (This is the default behavior of reportbug.)"
+  command: "reportbug"
+  example: "reportbug --check-installed"
+- id: 485
+  intent: "Disable all external queries.  Currently has the same effect  as --no-check-available --no-query-bts."
+  command: "reportbug"
+  example: "reportbug -O, --offline"
+- id: 486
+  intent: "Show  the  contents  of the message before it is sent, including all headers.  Automatically disabled if in template mode."
+  command: "reportbug"
+  example: "reportbug --paranoid"
+- id: 487
+  intent: "Don't show the full contents of the message before  it  is  sent (default)."
+  command: "reportbug"
+  example: "reportbug --no-paranoid"
+- id: 488
+  intent: "Print <count> number of intervals."
+  command: "rtstat"
+  example: "rtstat -c, --count <count>"
+- id: 489
+  intent: "the beginning.  It sets the $VERBOSE variable to true."
+  command: "ruby"
+  example: "ruby -w             Enables verbose mode without printing version message at"
+- id: 490
+  intent: "Prints the specified target.  target can be one of; version version description same as --version usage   brief usage message same as -h help    Show long help message same as --help syntax  check of syntax same as -c --yydebug yydebug compiler debug mode, same as --yydebug Only specify this switch if you are going to debug the Ruby interpreter. parsetree parsetree_with_comment AST nodes tree Only specify this switch if you are going to debug the Ruby interpreter. insns   disassembled instructions Only specify this switch if you are going to debug the Ruby interpreter."
+  command: "ruby"
+  example: "ruby --dump=target  Dump some information."
+- id: 491
+  intent: "the beginning.  It sets the $VERBOSE variable to true.  If this switch is given, and no script arguments (script file or -e options) are present, Ruby quits immediately."
+  command: "ruby"
+  example: "ruby --verbose      Enables verbose mode without printing version message at"
+- id: 492
+  intent: "the beginning.  It sets the $VERBOSE variable to true."
+  command: "ruby3.1"
+  example: "ruby3.1 -w             Enables verbose mode without printing version message at"
+- id: 493
+  intent: "Prints the specified target.  target can be one of; version version description same as --version usage   brief usage message same as -h help    Show long help message same as --help syntax  check of syntax same as -c --yydebug yydebug compiler debug mode, same as --yydebug Only specify this switch if you are going to debug the Ruby interpreter. parsetree parsetree_with_comment AST nodes tree Only specify this switch if you are going to debug the Ruby interpreter. insns   disassembled instructions Only specify this switch if you are going to debug the Ruby interpreter."
+  command: "ruby3.1"
+  example: "ruby3.1 --dump=target  Dump some information."
+- id: 494
+  intent: "the beginning.  It sets the $VERBOSE variable to true.  If this switch is given, and no script arguments (script file or -e options) are present, Ruby quits immediately."
+  command: "ruby3.1"
+  example: "ruby3.1 --verbose      Enables verbose mode without printing version message at"
+- id: 495
+  intent: "compute process transition context before modifying"
+  command: "runcon"
+  example: "runcon -c, --compute"
+- id: 496
+  intent: "ables the GUI.  If no GUI support was compiled in, an error message is given and Vim aborts."
+  command: "rview"
+  example: "rview -g          If  Vim has been compiled with GUI support, this option en-"
+- id: 497
+  intent: "ables the GUI.  If no GUI support was compiled in, an error message is given and Vim aborts."
+  command: "rvim"
+  example: "rvim -g          If  Vim has been compiled with GUI support, this option en-"
+- id: 498
+  intent: "Comma-separated list of DOMAIN:LEVEL pairs, allowing to set the log level individually for each domain, where DOMAIN is eiher \"*\", \"rygel\" or the name of a plugin. Allowed log levels are 1=critical, 2=error, 3=warning, 4=message/info, 5=debug."
+  command: "rygel"
+  example: "rygel -g, --log-level=LEVEL"
+- id: 499
+  intent: "Prints a short usage message."
+  command: "sane-find-scanner"
+  example: "sane-find-scanner -?, -h, --help"
+- id: 500
+  intent: "print this usage message."
+  command: "setmetamode"
+  example: "setmetamode -h, --help"
+- id: 501
+  intent: "compute and check SHA1 message digest"
+  command: "sha1sum"
+  example: "sha1sum"
+- id: 502
+  intent: "read checksums from the FILEs and check them"
+  command: "sha1sum"
+  example: "sha1sum -c, --check"
+- id: 503
+  intent: "compute and check SHA224 message digest"
+  command: "sha224sum"
+  example: "sha224sum"
+- id: 504
+  intent: "read checksums from the FILEs and check them"
+  command: "sha224sum"
+  example: "sha224sum -c, --check"
+- id: 505
+  intent: "compute and check SHA256 message digest"
+  command: "sha256sum"
+  example: "sha256sum"
+- id: 506
+  intent: "read checksums from the FILEs and check them"
+  command: "sha256sum"
+  example: "sha256sum -c, --check"
+- id: 507
+  intent: "compute and check SHA384 message digest"
+  command: "sha384sum"
+  example: "sha384sum"
+- id: 508
+  intent: "read checksums from the FILEs and check them"
+  command: "sha384sum"
+  example: "sha384sum -c, --check"
+- id: 509
+  intent: "compute and check SHA512 message digest"
+  command: "sha512sum"
+  example: "sha512sum"
+- id: 510
+  intent: "read checksums from the FILEs and check them"
+  command: "sha512sum"
+  example: "sha512sum -c, --check"
+- id: 511
+  intent: "Print or Check SHA Checksums"
+  command: "shasum"
+  example: "shasum"
+- id: 512
+  intent: "showkey prints to the standard error output its version  number, a compile option and a short usage message, then exits."
+  command: "showkey"
+  example: "showkey -h --help"
+- id: 513
+  intent: "A comma-separated list of MAC (message authentication code) algo- rithms, specified in order of preference.  See the MACs keyword in ssh_config(5) for more information."
+  command: "slogin"
+  example: "slogin -m mac_spec"
+- id: 514
+  intent: "Queries for the algorithms supported by one of the following fea- tures: cipher (supported symmetric ciphers), cipher-auth (sup- ported symmetric ciphers that support authenticated encryption), help (supported query terms for use with the -Q flag), mac (sup- ported message integrity codes), kex (key exchange algorithms), kex-gss (GSSAPI key exchange algorithms), key (key types), key-cert (certificate key types), key-plain (non-certificate key types), key-sig (all key types and signature algorithms), protocol-version (supported SSH protocol versions), and sig (sup- ported signature algorithms).  Alternatively, any keyword from ssh_config(5) or sshd_config(5) that takes an algorithm list may be used as an alias for the corresponding query_option."
+  command: "slogin"
+  example: "slogin -Q query_option"
+- id: 515
+  intent: "Prints the program version and exits."
+  command: "smproxy"
+  example: "smproxy -version"
+- id: 516
+  intent: "check for sorted input; do not sort"
+  command: "sort"
+  example: "sort -c, --check, --check=diagnose-first"
+- id: 517
+  intent: "like -c, but do not report first bad line"
+  command: "sort"
+  example: "sort -C, --check=quiet, --check=silent"
+- id: 518
+  intent: "with -c, check for strict ordering; without -c, output only  the first of an equal run"
+  command: "sort"
+  example: "sort -u, --unique"
+- id: 519
+  intent: "Give a short usage message"
+  command: "sotruss"
+  example: "sotruss --usage"
+- id: 520
+  intent: "show this help message and exit"
+  command: "spd-conf"
+  example: "spd-conf -h, --help"
+- id: 521
+  intent: "Speak the key"
+  command: "spd-say"
+  example: "spd-say -k, --key"
+- id: 522
+  intent: "Spell the message"
+  command: "spd-say"
+  example: "spd-say -s, --spelling"
+- id: 523
+  intent: "Set priority of the message (important, message, text, notifica- tion, progress;default: text)"
+  command: "spd-say"
+  example: "spd-say -P, --priority"
+- id: 524
+  intent: "Wait till the message is spoken or discarded"
+  command: "spd-say"
+  example: "spd-say -w, --wait"
+- id: 525
+  intent: "Stop speaking the message being spoken"
+  command: "spd-say"
+  example: "spd-say -S, --stop"
+- id: 526
+  intent: "Display a short usage message and exit."
+  command: "sprof"
+  example: "sprof --usage"
+- id: 527
+  intent: "print version, licence and copyright message."
+  command: "sqfstar"
+  example: "sqfstar -version"
+- id: 528
+  intent: "A comma-separated list of MAC (message authentication code) algo- rithms, specified in order of preference.  See the MACs keyword in ssh_config(5) for more information."
+  command: "ssh"
+  example: "ssh -m mac_spec"
+- id: 529
+  intent: "Queries for the algorithms supported by one of the following fea- tures: cipher (supported symmetric ciphers), cipher-auth (sup- ported symmetric ciphers that support authenticated encryption), help (supported query terms for use with the -Q flag), mac (sup- ported message integrity codes), kex (key exchange algorithms), kex-gss (GSSAPI key exchange algorithms), key (key types), key-cert (certificate key types), key-plain (non-certificate key types), key-sig (all key types and signature algorithms), protocol-version (supported SSH protocol versions), and sig (sup- ported signature algorithms).  Alternatively, any keyword from ssh_config(5) or sshd_config(5) that takes an algorithm list may be used as an alias for the corresponding query_option."
+  command: "ssh"
+  example: "ssh -Q query_option"
+- id: 530
+  intent: "server.  This means that it does not need the private key.  Of course, this can result in more than one copy of the key being installed on the remote system."
+  command: "ssh-copy-id"
+  example: "ssh-copy-id -f      Forced mode: doesn't check if the keys are present on the remote"
+- id: 531
+  intent: "file."
+  command: "ssh-keygen"
+  example: "ssh-keygen -B      Show the bubblebabble digest of specified private or public key"
+- id: 532
+  intent: "Specify a key format for key generation, the -i (import), -e (ex- port) conversion options, and the -p change passphrase operation. The latter may be used to convert between OpenSSH private key and PEM private key formats.  The supported key formats are: \"RFC4716\" (RFC 4716/SSH2 public or private key), \"PKCS8\" (PKCS8 public or private key) or \"PEM\" (PEM public key).  By default OpenSSH will write newly-generated private keys in its own for- mat, but when converting public keys for export the default for- mat is \"RFC4716\".  Setting a format of \"PEM\" when generating or updating a supported private key type will cause the key to be stored in the legacy PEM private key format."
+  command: "ssh-keygen"
+  example: "ssh-keygen -m key_format"
+- id: 533
+  intent: "Certify (sign) a public key using the specified CA key.  See the CERTIFICATES section for details. When generating a KRL, -s specifies a path to a CA public key file used to revoke certificates directly by key ID or serial number.  See the KEY REVOCATION LISTS section for details."
+  command: "ssh-keygen"
+  example: "ssh-keygen -s ca_key"
+- id: 534
+  intent: "Checks that a signature generated using ssh-keygen -Y sign has a valid structure.  This does not validate if a signature comes from an authorized signer.  When testing a signature, ssh-keygen accepts a message on standard input and a signature namespace us- ing -n.  A file containing the corresponding signature must also be supplied using the -s flag.  Successful testing of the signa- ture is signalled by ssh-keygen returning a zero exit status."
+  command: "ssh-keygen"
+  example: "ssh-keygen -Y check-novalidate"
+- id: 535
+  intent: "don't check for existence of 'dir' on server"
+  command: "sshfs"
+  example: "sshfs -o no_check_root"
+- id: 536
+  intent: "Display a short help message to the standard output and exit."
+  command: "sudo"
+  example: "sudo -h, --help"
+- id: 537
+  intent: "Display a short help message to the standard output and exit."
+  command: "sudoedit"
+  example: "sudoedit -h, --help"
+- id: 538
+  intent: "Display a short help message to the standard output and exit."
+  command: "sudoreplay"
+  example: "sudoreplay -h, --help"
+- id: 539
+  intent: "checksum and count the blocks in a file"
+  command: "sum"
+  example: "sum"
+- id: 540
+  intent: "use System V sum algorithm, use 512 bytes blocks"
+  command: "sum"
+  example: "sum -s, --sysv"
+- id: 541
+  intent: "Display a short usage message."
+  command: "system-config-printer"
+  example: "system-config-printer --help"
+- id: 542
+  intent: "Display a short usage message."
+  command: "system-config-printer-applet"
+  example: "system-config-printer-applet --help"
+- id: 543
+  intent: "Shortcut for --check-inhibitors=no."
+  command: "systemctl"
+  example: "systemctl -i"
+- id: 544
+  intent: "Do not send wall message before halt, power-off and reboot."
+  command: "systemctl"
+  example: "systemctl --no-wall"
+- id: 545
+  intent: "When used with halt, poweroff or reboot, set a short message explaining the reason for the operation. The message will be logged together with the default shutdown message."
+  command: "systemctl"
+  example: "systemctl --message="
+- id: 546
+  intent: "Takes a boolean argument, defaults to on. Controls whether to run a file system check immediately before the mount operation. In the automount case (see --automount= below) the check will be run the moment the first access to the device is made, which might slightly delay the access."
+  command: "systemd-mount"
+  example: "systemd-mount --fsck="
+- id: 547
+  intent: "Returns 0 if the system was booted up with systemd, non-zero otherwise. If this option is passed, no message is sent. This option is hence unrelated to the other options. For details about the semantics of this option, see sd_booted(3). An alternate way to check for this state is to call systemctl(1) with the is-system-running command. It will return \"offline\" if the system was not booted with systemd."
+  command: "systemd-notify"
+  example: "systemd-notify --booted"
+- id: 548
+  intent: "Suppresses additional informational output while running. This is particularly useful in combination with --pty when it will suppress the initial message explaining how to terminate the TTY connection."
+  command: "systemd-run"
+  example: "systemd-run --quiet, -q"
+- id: 549
+  intent: "Takes a boolean argument, defaults to on. Controls whether to run a file system check immediately before the mount operation. In the automount case (see --automount= below) the check will be run the moment the first access to the device is made, which might slightly delay the access."
+  command: "systemd-umount"
+  example: "systemd-umount --fsck="
+- id: 550
+  intent: "switch off the --check-coverage flag"
+  command: "tap"
+  example: "tap --no-check-coverage"
+- id: 551
+  intent: "Check  device  numbers  when  creating incremental archives (de- fault)."
+  command: "tar"
+  example: "tar --check-device"
+- id: 552
+  intent: "Do not check device numbers when creating incremental archives."
+  command: "tar"
+  example: "tar --no-check-device"
+- id: 553
+  intent: "Ignore  zeroed  blocks  in  archive.   Normally  two consecutive 512-blocks filled with zeroes mean EOF and tar stops reading af- ter encountering them.  This option instructs it to read further and is useful when reading archives created with the -A option."
+  command: "tar"
+  example: "tar -i, --ignore-zeros"
+- id: 554
+  intent: "Print a message if not all links are dumped."
+  command: "tar"
+  example: "tar -l, --check-links"
+- id: 555
+  intent: "Show block number within archive with each message."
+  command: "tar"
+  example: "tar -R, --block-number"
+- id: 556
+  intent: "check file types and compare values"
+  command: "test"
+  example: "test"
+- id: 557
+  intent: "GUI for easier access of TeX package and program documenta- tions"
+  command: "texdoctk"
+  example: "texdoctk"
+- id: 558
+  intent: "Print a help message."
+  command: "tikztosvg"
+  example: "tikztosvg -h, --help"
+- id: 559
+  intent: "toilet [ -hkostvSW ] [ -d fontdirectory ] [ -f fontfile ] [ -F filter ] [ -w outputwidth ] [ -I infocode ] [ -E format ] [ message ]"
+  command: "toilet"
+  example: "toilet"
+- id: 560
+  intent: "Display a short help message and exit."
+  command: "toilet"
+  example: "toilet -h, --help"
+- id: 561
+  intent: "Output  a longer help message then quit.  (Any discrepancies be- tween this man page and the output of totem --help should be re- ported as a documentation bug.)"
+  command: "totem"
+  example: "totem -?, --help"
+- id: 562
+  intent: "This option displays a help message and exits."
+  command: "transset"
+  example: "transset -h, --help"
+- id: 563
+  intent: "This  option  prints  some additional debug info as the program operates."
+  command: "transset"
+  example: "transset -v, --verbose"
+- id: 564
+  intent: "This option prints the program version number and exits."
+  command: "transset"
+  example: "transset -V, --version"
+- id: 565
+  intent: "backtrace  should  help  track down the cause of the error.  The line numbers given in the backtrace may not always  be  correct, for  troff's  idea of line numbers gets confused by as or am re- quests."
+  command: "troff"
+  example: "troff -b     Print a backtrace with each  warning  or  error  message.   This"
+- id: 566
+  intent: "treat SIZE as number of IO blocks instead of bytes"
+  command: "truncate"
+  example: "truncate -o, --io-blocks"
+- id: 567
+  intent: "Print a short usage message"
+  command: "ucf"
+  example: "ucf -h, --help"
+- id: 568
+  intent: "Print a short usage message"
+  command: "ucfr"
+  example: "ucfr -h, --help"
+- id: 569
+  intent: "Send a ping message to systemd-udevd and wait for the reply. This may be useful to check that systemd-udevd daemon is running."
+  command: "udevadm"
+  example: "udevadm --ping"
+- id: 570
+  intent: "ulimit [-f] [blocks]"
+  command: "ulimit"
+  example: "ulimit"
+- id: 571
+  intent: "Test. Check the compressed file integrity then quit."
+  command: "uncompress"
+  example: "uncompress -t --test"
+- id: 572
+  intent: "Specify the type of the integrity check.  The  check  is  calcu- lated  from  the  uncompressed  data and stored in the .xz file. This option has an effect only when  compressing  into  the  .xz format;  the .lzma format doesn't support integrity checks.  The integrity check (if any) is verified when the .xz file is decom- pressed. Supported check types: none   Don't  calculate an integrity check at all.  This is usu- ally a bad idea.  This can be useful  when  integrity  of the data is verified by other means anyway. crc32  Calculate  CRC32  using  the  polynomial  from IEEE-802.3 (Ethernet). crc64  Calculate CRC64 using the polynomial from ECMA-182.  This is the default, since it is slightly better than CRC32 at detecting damaged files and the speed difference is  neg- ligible. sha256 Calculate  SHA-256.   This  is somewhat slower than CRC32 and CRC64. Integrity of the .xz headers is always verified with CRC32.   It is not possible to change or disable it."
+  command: "unlzma"
+  example: "unlzma -C check, --check=check"
+- id: 573
+  intent: "Display  a  help  message  describing the most commonly used op- tions, and exit successfully."
+  command: "unlzma"
+  example: "unlzma -h, --help"
+- id: 574
+  intent: "Display a help message describing all features of xz,  and  exit successfully"
+  command: "unlzma"
+  example: "unlzma -H, --long-help"
+- id: 575
+  intent: "Compress blocks independently for damage recovery."
+  command: "unpigz"
+  example: "unpigz -i --independent"
+- id: 576
+  intent: "Show short program usage message."
+  command: "unrar"
+  example: "unrar --usage"
+- id: 577
+  intent: "Show short program usage message."
+  command: "unrar-free"
+  example: "unrar-free --usage"
+- id: 578
+  intent: "Specify the type of the integrity check.  The  check  is  calcu- lated  from  the  uncompressed  data and stored in the .xz file. This option has an effect only when  compressing  into  the  .xz format;  the .lzma format doesn't support integrity checks.  The integrity check (if any) is verified when the .xz file is decom- pressed. Supported check types: none   Don't  calculate an integrity check at all.  This is usu- ally a bad idea.  This can be useful  when  integrity  of the data is verified by other means anyway. crc32  Calculate  CRC32  using  the  polynomial  from IEEE-802.3 (Ethernet). crc64  Calculate CRC64 using the polynomial from ECMA-182.  This is the default, since it is slightly better than CRC32 at detecting damaged files and the speed difference is  neg- ligible. sha256 Calculate  SHA-256.   This  is somewhat slower than CRC32 and CRC64. Integrity of the .xz headers is always verified with CRC32.   It is not possible to change or disable it."
+  command: "unxz"
+  example: "unxz -C check, --check=check"
+- id: 579
+  intent: "Display  a  help  message  describing the most commonly used op- tions, and exit successfully."
+  command: "unxz"
+  example: "unxz -h, --help"
+- id: 580
+  intent: "Display a help message describing all features of xz,  and  exit successfully"
+  command: "unxz"
+  example: "unxz -H, --long-help"
+- id: 581
+  intent: "Output a help message and exit."
+  command: "usbhid-dump"
+  example: "usbhid-dump -h, --help"
+- id: 582
+  intent: "ables the GUI.  If no GUI support was compiled in, an error message is given and Vim aborts."
+  command: "vi"
+  example: "vi -g          If  Vim has been compiled with GUI support, this option en-"
+- id: 583
+  intent: "ables the GUI.  If no GUI support was compiled in, an error message is given and Vim aborts."
+  command: "view"
+  example: "view -g          If  Vim has been compiled with GUI support, this option en-"
+- id: 584
+  intent: "ables the GUI.  If no GUI support was compiled in, an error message is given and Vim aborts."
+  command: "vim"
+  example: "vim -g          If  Vim has been compiled with GUI support, this option en-"
+- id: 585
+  intent: "write a message to all users"
+  command: "wall"
+  example: "wall"
+- id: 586
+  intent: "wall [-n] [-t timeout] [-g group] [message | file]"
+  command: "wall"
+  example: "wall"
+- id: 587
+  intent: "Print a help message describing all of Wget's command-line options."
+  command: "wget"
+  example: "wget --help"
+- id: 588
+  intent: "When invoked with this option, Wget will behave as a Web spider, which means that it will not download the pages, just check that they are there.  For example, you can use Wget to check your bookmarks: wget --spider --force-html -i bookmarks.html This feature needs much more work for Wget to get close to the functionality of real web spiders."
+  command: "wget"
+  example: "wget --spider"
+- id: 589
+  intent: "Don't check the server certificate against the available certificate authorities.  Also don't require the URL host name to match the common name presented by the certificate. As of Wget 1.10, the default is to verify the server's certificate against the recognized certificate authorities, breaking the SSL handshake and aborting the download if the verification fails. Although this provides more secure downloads, it does break interoperability with some sites that worked with previous Wget versions, particularly those using self-signed, expired, or otherwise invalid certificates.  This option forces an \"insecure\" mode of operation that turns the certificate verification errors into warnings and allows you to proceed. If you encounter \"certificate verification\" errors or ones saying that \"common name doesn't match requested host name\", you can use this option to bypass the verification and proceed with the download.  Only use this option if you are otherwise convinced of the site's authenticity, or if you really don't care about the validity of its certificate.  It is almost always a bad idea not to check the certificates when transmitting confidential or important data.  For self-signed/internal certificates, you should download the certificate and verify against that instead of forcing this insecure mode.  If you are really sure of not desiring any certificate verification, you can specify --check-certificate=quiet to tell wget to not print any warning about invalid certificates, albeit in most cases this is the wrong thing to do."
+  command: "wget"
+  example: "wget --no-check-certificate"
+- id: 590
+  intent: "Print a help message and exit."
+  command: "whatis"
+  example: "whatis -?, --help"
+- id: 591
+  intent: "Print a short usage message and exit."
+  command: "whatis"
+  example: "whatis --usage"
+- id: 592
+  intent: "Print a help message and exit."
+  command: "whiptail"
+  example: "whiptail -h, --help"
+- id: 593
+  intent: "A message box is very similar to a yes/no box.  The only differ- ence between a message box and a yes/no box is  that  a  message box  has only a single OK button. You can use this dialog box to display any message you like.  After reading  the  message,  the user  can press the ENTER key so that whiptail will exit and the calling shell script can continue its operation."
+  command: "whiptail"
+  example: "whiptail --msgbox text height width"
+- id: 594
+  intent: "An info box is basically a message box.  However, in this  case, whiptail  will  exit immediately after displaying the message to the user. The screen is not cleared when whiptail exits, so that the  message  will  remain on the screen until the calling shell script clears it later. This is useful when you want  to  inform the  user  that some operations are carrying on that may require some time to finish."
+  command: "whiptail"
+  example: "whiptail --infobox text height width"
+- id: 595
+  intent: "add user's message status as +, - or ?"
+  command: "who"
+  example: "who -T, -w, --mesg"
+- id: 596
+  intent: "same as -T"
+  command: "who"
+  example: "who --message"
+- id: 597
+  intent: "specify a Client SSL Certificate's key (--connect only)"
+  command: "wscat"
+  example: "wscat --key <key>"
+- id: 598
+  intent: "do not check for unauthorized certificates"
+  command: "wscat"
+  example: "wscat -n, --no-check"
+- id: 599
+  intent: "enable emacs-like key movement."
+  command: "www-browser"
+  example: "www-browser -emacskeys"
+- id: 600
+  intent: "prevents automatic redirection and prints a message with a  link to the new URL."
+  command: "www-browser"
+  example: "www-browser -noredir"
+- id: 601
+  intent: "X11 server performance comparison program"
+  command: "x11perfcomp"
+  example: "x11perfcomp"
+- id: 602
+  intent: "Issue an error or warning for invalid ELF .size directive."
+  command: "x86_64-linux-gnu-as"
+  example: "x86_64-linux-gnu-as --size-check=warning"
+- id: 603
+  intent: "This option specifies the target processor.  The optional sirevision is not used in assembler.  It's here such that GCC can easily pass down its \"-mcpu=\" option.  The assembler will issue an error message if an attempt is made to assemble an instruction which will not execute on the target processor.  The following processor names are recognized: \"bf504\", \"bf506\", \"bf512\", \"bf514\", \"bf516\", \"bf518\", \"bf522\", \"bf523\", \"bf524\", \"bf525\", \"bf526\", \"bf527\", \"bf531\", \"bf532\", \"bf533\", \"bf534\", \"bf535\" (not implemented yet), \"bf536\", \"bf537\", \"bf538\", \"bf539\", \"bf542\", \"bf542m\", \"bf544\", \"bf544m\", \"bf547\", \"bf547m\", \"bf548\", \"bf548m\", \"bf549\", \"bf549m\", \"bf561\", and \"bf592\"."
+  command: "x86_64-linux-gnu-as"
+  example: "x86_64-linux-gnu-as -mcpu=processor[-sirevision]"
+- id: 604
+  intent: "These options control if the assembler should check SSE instructions.  -msse-check=none will make the assembler not to check SSE instructions,  which is the default.  -msse-check=warning will make the assembler issue a warning for any SSE instruction. -msse-check=error will make the assembler issue an error for any SSE instruction."
+  command: "x86_64-linux-gnu-as"
+  example: "x86_64-linux-gnu-as -msse-check=error"
+- id: 605
+  intent: "Generate code for the MIPS cyclic redundancy check (CRC) Application Specific Extension.  This tells the assembler to accept CRC instructions.  -mno-crc turns off this option."
+  command: "x86_64-linux-gnu-as"
+  example: "x86_64-linux-gnu-as -mno-crc"
+- id: 606
+  intent: "Select the privileged spec version.  We can decide whether the CSR is valid or not according to the chosen spec.  If this option and the privilege attributes aren't set, then assembler will check the default configure setting --with-priv-spec=PRIVspec."
+  command: "x86_64-linux-gnu-as"
+  example: "x86_64-linux-gnu-as -mpriv-spec=PRIVspec"
+- id: 607
+  intent: "Enable the CSR checking for the ISA-dependent CRS and the read-only CSR.  The ISA-dependent CSR are only valid when the specific ISA is set.  The read-only CSR can not be written by the CSR instructions."
+  command: "x86_64-linux-gnu-as"
+  example: "x86_64-linux-gnu-as -mcsr-check"
+- id: 608
+  intent: "Don't do CSR checking."
+  command: "x86_64-linux-gnu-as"
+  example: "x86_64-linux-gnu-as -mno-csr-check"
+- id: 609
+  intent: "This option specifies the target architecture.  If an attempt is made to assemble an instruction that will not execute on the target architecture, the assembler will issue an error message. The following names are recognized: \"mcm24\" \"mcm\" \"gr5\" \"gr6\" The following options are available when as is configured for an Xtensa processor."
+  command: "x86_64-linux-gnu-as"
+  example: "x86_64-linux-gnu-as -mtune=arch"
+- id: 610
+  intent: "Print this help message"
+  command: "x86_64-linux-gnu-dwp"
+  example: "x86_64-linux-gnu-dwp -h, --help"
+- id: 611
+  intent: "Check segment addresses for overlaps (default)"
+  command: "x86_64-linux-gnu-gold"
+  example: "x86_64-linux-gnu-gold --check-sections"
+- id: 612
+  intent: "Do not check segment addresses for overlaps"
+  command: "x86_64-linux-gnu-gold"
+  example: "x86_64-linux-gnu-gold --no-check-sections"
+- id: 613
+  intent: "Use timestamps to check files (default)"
+  command: "x86_64-linux-gnu-gold"
+  example: "x86_64-linux-gnu-gold --incremental-unknown"
+- id: 614
+  intent: "verify if the hardware and software environment is supported."
+  command: "x86_64-linux-gnu-gprofng"
+  example: "x86_64-linux-gnu-gprofng --check"
+- id: 615
+  intent: "Asks the linker not to check section addresses after they have been assigned to see if there are any overlaps.  Normally the linker will perform this check, and if it finds any overlaps it will produce suitable error messages.  The linker does know about, and does make allowances for sections in overlays.  The default behaviour can be restored by using the command-line switch --check-sections.  Section overlap is not usually checked for relocatable links.  You can force checking in that case by using the --check-sections option."
+  command: "x86_64-linux-gnu-ld"
+  example: "x86_64-linux-gnu-ld --no-check-sections"
+- id: 616
+  intent: "Compute and display statistics about the operation of the linker, such as execution time and memory usage."
+  command: "x86_64-linux-gnu-ld"
+  example: "x86_64-linux-gnu-ld --stats"
+- id: 617
+  intent: "These options control branch relocation checks for invalid ISA mode transitions.  If --ignore-branch-isa is used, then the linker accepts any branch relocations and any ISA mode transition required is lost in relocation calculation, except for some cases of \"BAL\" instructions which meet relaxation conditions and are converted to equivalent \"JALX\" instructions as the associated relocation is calculated.  By default or if --no-ignore-branch-isa is used a check is made causing the loss of an ISA mode transition to produce an error."
+  command: "x86_64-linux-gnu-ld"
+  example: "x86_64-linux-gnu-ld --no-ignore-branch-isa"
+- id: 618
+  intent: "Asks the linker not to check section addresses after they have been assigned to see if there are any overlaps.  Normally the linker will perform this check, and if it finds any overlaps it will produce suitable error messages.  The linker does know about, and does make allowances for sections in overlays.  The default behaviour can be restored by using the command-line switch --check-sections.  Section overlap is not usually checked for relocatable links.  You can force checking in that case by using the --check-sections option."
+  command: "x86_64-linux-gnu-ld.bfd"
+  example: "x86_64-linux-gnu-ld.bfd --no-check-sections"
+- id: 619
+  intent: "Compute and display statistics about the operation of the linker, such as execution time and memory usage."
+  command: "x86_64-linux-gnu-ld.bfd"
+  example: "x86_64-linux-gnu-ld.bfd --stats"
+- id: 620
+  intent: "These options control branch relocation checks for invalid ISA mode transitions.  If --ignore-branch-isa is used, then the linker accepts any branch relocations and any ISA mode transition required is lost in relocation calculation, except for some cases of \"BAL\" instructions which meet relaxation conditions and are converted to equivalent \"JALX\" instructions as the associated relocation is calculated.  By default or if --no-ignore-branch-isa is used a check is made causing the loss of an ISA mode transition to produce an error."
+  command: "x86_64-linux-gnu-ld.bfd"
+  example: "x86_64-linux-gnu-ld.bfd --no-ignore-branch-isa"
+- id: 621
+  intent: "Check segment addresses for overlaps (default)"
+  command: "x86_64-linux-gnu-ld.gold"
+  example: "x86_64-linux-gnu-ld.gold --check-sections"
+- id: 622
+  intent: "Do not check segment addresses for overlaps"
+  command: "x86_64-linux-gnu-ld.gold"
+  example: "x86_64-linux-gnu-ld.gold --no-check-sections"
+- id: 623
+  intent: "Use timestamps to check files (default)"
+  command: "x86_64-linux-gnu-ld.gold"
+  example: "x86_64-linux-gnu-ld.gold --incremental-unknown"
+- id: 624
+  intent: "Enable additional checks for consistency of Dwarf information."
+  command: "x86_64-linux-gnu-objdump"
+  example: "x86_64-linux-gnu-objdump --dwarf-check"
+- id: 625
+  intent: "This option prints the program version and exits."
+  command: "xcmsdb"
+  example: "xcmsdb -version"
+- id: 626
+  intent: "When set, this option directs xconsole to display  an  informa- tive message in the first line of the text buffer."
+  command: "xconsole"
+  example: "xconsole -verbose"
+- id: 627
+  intent: "When set, xconsole only preserves count lines of  message  his- tory  instead of growing the text buffer without bound (a count of zero - the default - is treated as placing no limit  on  the history)."
+  command: "xconsole"
+  example: "xconsole -saveLines count"
+- id: 628
+  intent: "Display the usage message and exit."
+  command: "xcursorgen"
+  example: "xcursorgen -?, --help"
+- id: 629
+  intent: "Show a help message and exit successfully."
+  command: "xdvipdfmx"
+  example: "xdvipdfmx --help"
+- id: 630
+  intent: "Show a help message and exit successfully."
+  command: "xdvipdfmx"
+  example: "xdvipdfmx --version"
+- id: 631
+  intent: "This option prints the program version and exits."
+  command: "xev"
+  example: "xev -version"
+- id: 632
+  intent: "Check the given text with a spellchecker."
+  command: "xfce4-dict"
+  example: "xfce4-dict -s, --spell"
+- id: 633
+  intent: "Do not wait for a window manager on startup"
+  command: "xfce4-panel"
+  example: "xfce4-panel -d, --disable-wm-check"
+- id: 634
+  intent: "Disable  binding to TCP ports in the ICE layer. This is not pos- sible on every platform. If you use this option  on  a  platform that  does  not  support  it, xfce4-session will print a warning message and ignore the setting."
+  command: "xfce4-session"
+  example: "xfce4-session --disable-tcp"
+- id: 635
+  intent: "Do not register with the D-BUS session message bus"
+  command: "xfce4-terminal"
+  example: "xfce4-terminal --disable-server"
+- id: 636
+  intent: "Do not wait for a window manager on startup"
+  command: "xfdesktop"
+  example: "xfdesktop -D, --disable-wm-check"
+- id: 637
+  intent: "Print msg before printing first error message."
+  command: "xkbcomp"
+  example: "xkbcomp -em1 msg"
+- id: 638
+  intent: "Print msg at the start of each message line."
+  command: "xkbcomp"
+  example: "xkbcomp -emp msg"
+- id: 639
+  intent: "thing in this man page."
+  command: "xkbevd"
+  example: "xkbevd -help   Prints  a  usage  message that is far more up-to-date than any-"
+- id: 640
+  intent: "Prints the program version and exits."
+  command: "xkbevd"
+  example: "xkbevd -version"
+- id: 641
+  intent: "Prints a usage message."
+  command: "xkbprint"
+  example: "xkbprint -?, -help"
+- id: 642
+  intent: "such as keys."
+  command: "xkbprint"
+  example: "xkbprint -dflts  Attempt  to  compute  default names for any missing components,"
+- id: 643
+  intent: "This option specifies the name of an atom to list.  If the atom does not exist, a message will be printed on the  standard  er- ror."
+  command: "xlsatoms"
+  example: "xlsatoms -name string"
+- id: 644
+  intent: "display a message or query in a window (X-based /bin/echo)"
+  command: "xmessage"
+  example: "xmessage"
+- id: 645
+  intent: "xmessage [ -buttons label1[:value1],label2[:value2], ... ] [ options ] -file filename xmessage [ -buttons label1[:value1],label2[:value2], ... ] [ options ] message ..."
+  command: "xmessage"
+  example: "xmessage"
+- id: 646
+  intent: "Display a short usage message. It will describe xmlto's options, and the available output formats."
+  command: "xmlto"
+  example: "xmlto --help"
+- id: 647
+  intent: "This option indicates that a help message  describing  the  ex- pression  grammar  used in files and with -e expressions should be printed on the standard error."
+  command: "xmodmap"
+  example: "xmodmap -grammar"
+- id: 648
+  intent: "This  also  sets  the  value  reported as physical size of the X screen as a whole (union of all configured monitors). In config- urations  with  multiple monitors with different DPIs, the value has no physical meaning, but it  may  be  used  by  some  legacy clients which do not support RandR version 1.2 to compute a ref- erence font scaling. This option uses either the  specified  DPI value, or the DPI of the given output, to compute an appropriate physical size using whatever pixel size  will  be  set.  Typical values  are the default (96 DPI), the DPI of the only monitor in single-monitor configurations, or the DPI of the primary monitor in multi-monitor configurations."
+  command: "xrandr"
+  example: "xrandr --dpi from-output"
+- id: 649
+  intent: "New  modelines  can  be  added to the server and then associated with outputs.  This option does the former. The mode  is  speci- fied using the ModeLine syntax for xorg.conf: clock hdisp hsync- start hsyncend htotal vdisp vsyncstart  vsyncend  vtotal  flags. flags can be zero or more of +HSync, -HSync, +VSync, -VSync, In- terlace, DoubleScan, CSync, +CSync, -CSync. Several tools permit to  compute the usual modeline from a height, width, and refresh rate, for instance you can use cvt."
+  command: "xrandr"
+  example: "xrandr --newmode name mode"
+- id: 650
+  intent: "Print a version message and exit."
+  command: "xsetroot"
+  example: "xsetroot -version"
+- id: 651
+  intent: "Specify the type of the integrity check.  The  check  is  calcu- lated  from  the  uncompressed  data and stored in the .xz file. This option has an effect only when  compressing  into  the  .xz format;  the .lzma format doesn't support integrity checks.  The integrity check (if any) is verified when the .xz file is decom- pressed. Supported check types: none   Don't  calculate an integrity check at all.  This is usu- ally a bad idea.  This can be useful  when  integrity  of the data is verified by other means anyway. crc32  Calculate  CRC32  using  the  polynomial  from IEEE-802.3 (Ethernet). crc64  Calculate CRC64 using the polynomial from ECMA-182.  This is the default, since it is slightly better than CRC32 at detecting damaged files and the speed difference is  neg- ligible. sha256 Calculate  SHA-256.   This  is somewhat slower than CRC32 and CRC64. Integrity of the .xz headers is always verified with CRC32.   It is not possible to change or disable it."
+  command: "xz"
+  example: "xz -C check, --check=check"
+- id: 652
+  intent: "Display  a  help  message  describing the most commonly used op- tions, and exit successfully."
+  command: "xz"
+  example: "xz -h, --help"
+- id: 653
+  intent: "Display a help message describing all features of xz,  and  exit successfully"
+  command: "xz"
+  example: "xz -H, --long-help"
+- id: 654
+  intent: "Specify the type of the integrity check.  The  check  is  calcu- lated  from  the  uncompressed  data and stored in the .xz file. This option has an effect only when  compressing  into  the  .xz format;  the .lzma format doesn't support integrity checks.  The integrity check (if any) is verified when the .xz file is decom- pressed. Supported check types: none   Don't  calculate an integrity check at all.  This is usu- ally a bad idea.  This can be useful  when  integrity  of the data is verified by other means anyway. crc32  Calculate  CRC32  using  the  polynomial  from IEEE-802.3 (Ethernet). crc64  Calculate CRC64 using the polynomial from ECMA-182.  This is the default, since it is slightly better than CRC32 at detecting damaged files and the speed difference is  neg- ligible. sha256 Calculate  SHA-256.   This  is somewhat slower than CRC32 and CRC64. Integrity of the .xz headers is always verified with CRC32.   It is not possible to change or disable it."
+  command: "xzcat"
+  example: "xzcat -C check, --check=check"
+- id: 655
+  intent: "Display  a  help  message  describing the most commonly used op- tions, and exit successfully."
+  command: "xzcat"
+  example: "xzcat -h, --help"
+- id: 656
+  intent: "Display a help message describing all features of xz,  and  exit successfully"
+  command: "xzcat"
+  example: "xzcat -H, --long-help"
+- id: 657
+  intent: "Print a usage message and exit."
+  command: "ypdomainname"
+  example: "ypdomainname -h, --help"
+- id: 658
+  intent: "Test. Check the compressed file integrity then quit."
+  command: "zcat"
+  example: "zcat -t --test"
+- id: 659
+  intent: "Use check boxes for first column"
+  command: "zenity"
+  example: "zenity --checklist"
+- id: 660
+  intent: "Listen  for  commands  on  stdin.  Commands  include  'message', 'tooltip', 'icon', and 'visible' separated by a colon. For exam- ple,   'message:  Hello  world',  'visible:  false',  or  'icon: /path/to/icon'. The icon command also  accepts  the  four  stock icon: 'error', 'info', 'question', and 'warning' Progress options"
+  command: "zenity"
+  example: "zenity --listen"

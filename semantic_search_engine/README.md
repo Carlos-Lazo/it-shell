@@ -31,10 +31,12 @@ El motor se organiza en componentes modulares con bajo acoplamiento:
 
 ### Requisitos previos
 * Python 3.10 o superior.
-* Dependencias principales (`requirements.txt`):
+* Instalación editable desde la raíz del repositorio:
   ```bash
-  pip install -r semantic_search_engine/requirements.txt
+  pip install -e .
   ```
+* La configuración local apunta a los artefactos del checkout. Una instalación
+  normal usa `/usr/share/it-shell/` o un archivo pasado con `--config`.
 
 ### Configuración (`config/default.yaml`)
 El comportamiento del motor se parametriza mediante `semantic_search_engine/config/default.yaml`:
@@ -56,37 +58,46 @@ selection:
 
 ## 3. Ejecución desde la CLI
 
-El punto de entrada es `semantic_search_engine/cli.py`.
+El comando instalado es `it-shell`; también se puede ejecutar como módulo desde
+un checkout.
 
 ### Ejecución en línea
 ```bash
-PYTHONPATH=. python semantic_search_engine/cli.py "list files in a directory"
+it-shell "list files in a directory"
 ```
 
 ### Ejecución fuera de línea (Offline)
 Para asegurar reproducibilidad y evitar llamadas a la red durante la inferencia:
 ```bash
-HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. \
-python semantic_search_engine/cli.py "list files in a directory"
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+it-shell "list files in a directory"
 ```
 
 ### Formatos de salida soportados
 * **CLI (texto para terminal)**:
   ```bash
-  python semantic_search_engine/cli.py "list files" --format cli
+  it-shell "list files" --format cli
   ```
 * **Markdown**:
   ```bash
-  python semantic_search_engine/cli.py "list files" --format markdown
+  it-shell "list files" --format markdown
   ```
 * **JSON (estructurado con metadatos y análisis)**:
   ```bash
-  python semantic_search_engine/cli.py "list files" --format json
+  it-shell "list files" --format json
   ```
 
 ### Consultas multietapa explícitas
 ```bash
-python semantic_search_engine/cli.py "find files and then compress them"
+it-shell "find files and then compress them"
+```
+
+### Servidor MCP
+
+Instala el paquete con la dependencia MCP incluida y ejecuta:
+
+```bash
+it-shell-mcp --config ruta/al/config.yaml
 ```
 
 ---
