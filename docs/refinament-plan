@@ -1,0 +1,59 @@
+## Resumen y Estado General
+
+**Actualizado:** 2026-11-06  
+**Rama activa:** `feat/precision-refinement-plan`  
+**Estado:** Pasos 1, 2 y 3 completados con evidencia empírica; Paso 4 en curso; Paso 5 planificado.
+
+- El proyecto cuenta con un pipeline de reglas determinista como línea base estable.
+- Se implementó un asistente SLM local desacoplado (`semantic_search_engine/llm/ollama_assistant.py`) con esquemas JSON estrictos y fallback automático.
+- En retrieval, se descubrió que el filtrado rígido por categoría (*Hard Filtering*) causaba un 17.2% de falsas exclusiones debido a comandos transversales (ej. `grep` ubicado en `textprocessing` y `filesystem`). Se implementó **Category Boosting (Soft Filtering)** en `FaissRetriever`, aumentando Hit@1 en desarrollo de 38.4% a **43.0%** y MRR a **0.4661**.
+- Se realizaron pruebas en vivo con Ollama en CPU: **`qwen2.5:1.5b`** redujo la latencia más del 50% frente a `3b` (~21s vs ~48s) con idéntica exactitud funcional y explicaciones nativas en español.
+- **Detalle técnico completo, benchmarks y tablas de latencia:** ver [`docs/slm_y_boosting.md`](slm_y_boosting.md).
+
+---
+
+## Plan de Refinamiento y Estado por Etapas
+
+### 1. Definir los casos de evaluación [COMPLETADO]
+- **Implementación:** Se modelaron capacidades atómicas y criterios de aceptación en `evaluation/capacity/plain_source.yaml`.
+- **Alcance:** 2 categorías representativas (`filesystem` y `networking`), registrando aliases válidos, restricciones, argumentos y criterios de aclaración/abstención.
+- **Resultado:** Archivo formal `evaluation/capacity/plain_source.yaml` con partición estricta entre desarrollo (86 consultas) y prueba/holdout (36 consultas).
+
+### 2. Ampliar consultas con revisión humana [COMPLETADO]
+- **Implementación:** 122 consultas bilingües (español e inglés), cubriendo formulaciones directas, coloquiales, solicitudes con rutas explícitas y pedidos anidados.
+- **Revisión:** Todas las consultas marcadas con estado `reviewed` sin solapamiento de capacidades entre desarrollo y test.
+- **Resultado:** Conjunto de prueba limpio sin etiquetas inventadas.
+
+### 3. Probar clasificación de categoría y estrategia de retrieval [COMPLETADO]
+- **Implementación:** `evaluation/evaluate_slm_pipeline.py` y tests unitarios en `tests/test_retriever_boosting.py`.
+- **Hallazgo clave:**
+  - *Hard Filtering (Exclusivo):* Redujo Hit@1 a 29.5% por descarte de herramientas universales en categorías adyacentes (17.2% de falsas exclusiones).
+  - *Soft Boosting (+0.10):* Incrementó Hit@1 global a **38.5%** (y **43.0%** en desarrollo) y el MRR a **0.4661**, sin descartar opciones válidas.
+- **Resultado:** Evidencia empírica concluyente a favor del Soft Filtering para guiar la búsqueda sin riesgo de exclusión irreversible.
+
+### 4. Integrar el análisis de Ollama como opción experimental [EN CURSO]
+- **Completado:**
+  - Módulo `semantic_search_engine/llm/ollama_assistant.py` con schemas JSON estrictos para análisis de query y selección de candidatos.
+  - Soporte de fallback determinista inmediato ante error o timeout.
+  - Validación en vivo con `qwen2.5:1.5b` y `qwen2.5:3b`.
+- **Pendiente inmediato:**
+  - Conectar el asistente como opción configurable en `semantic_search_engine/shared/config.py`, `bootstrap.py` y `cli.py` (ej. `--assistant ollama` o flag de configuración).
+  - Mantener el modo determinista como default para asegurar retrocompatibilidad.
+
+### 5. Evaluar la funcionalidad final y cierre del proyecto [PRÓXIMO PASO]
+- Ejecutar las propuestas generadas en entornos aislados/descartables (sandbox) para verificar que el comando ensamblado produce el efecto esperado en el sistema (ej. creación de directorios padre, inspección de sockets).
+- Evaluar exactitud de argumentos y preservación de directivas de seguridad (`executable=false` garantizado por `validator.py`).
+- Consolidar el informe final para la presentación/tesis de grado.
+
+---
+
+## Próximos Pasos Inmediatos
+
+1. **Cableado del Asistente en el Engine (CLI y Bootstrap):**
+   - Incorporar parámetro `--assistant [rules|ollama]` en `cli.py`.
+   - Extender `bootstrap.py` para instanciar `OllamaAssistant` de forma optativa.
+   - Enlazar la propuesta asistida al `validator.py` antes de presentarla.
+2. **Evaluación Funcional en Sandbox (Paso 5):**
+   - Diseñar script de verificación funcional que compruebe los efectos reales en el sistema de archivos de prueba.
+3. **Consolidación Final:**
+   - Cierre de la rama `feat/precision-refinement-plan` con suite de tests íntegra en verde (138 tests actuales).

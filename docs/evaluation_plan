@@ -1,0 +1,107 @@
+Haber acotado el benchmark a **dos categorías representativas (`filesystem` y `networking`)** en `evaluation/capacity/plain_source.yaml` es una decisión metodológica excelente para cerrar un proyecto de grado o tesis.
+
+Propuesta técnica concreta para **evaluarlo**, **integrar el modelo de 2–3B (ej. Qwen 2.5 3B vía Ollama)** y **diseñar la estrategia de clasificación y selección**.
+
+---
+
+### 1. El Marco de Evaluación Técnica (¿Cómo medirlo para el informe/tesis?)
+
+Para evaluar el sistema de forma rigurosa y publicable, conviene estructurar la evaluación en **3 niveles complementarios**:
+
+```
+[Nivel 1: Clasificación & Retrieval] ──> [Nivel 2: Selección & Argumentos] ──> [Nivel 3: Eficiencia & Factibilidad]
+  - Accuracy / F1 de categoría            - Command Selection Accuracy (Top-1 final)   - Latencia por etapa (ms)
+  - Hit@1, Hit@3, Hit@5, MRR              - Argument Slot-Filling (Rutas/Flags)        - RAM / VRAM consumida
+  - Tasa de Exclusión Errónea             - Safety & Abstención                        - Modo offline / CPU
+```
+
+#### A. Nivel 1: Clasificación y Retrieval
+1. **Evaluación del Clasificador de Categoría:**
+   * **Precisión / Recall / F1** en predecir `filesystem` vs `networking` (o `ambiguo/global`).
+   * **Tasa de Exclusión Errónea (*False Exclusion Rate*):** El % crítico de veces donde el clasificador predijo una categoría equivocada y dejó afuera el comando real.
+2. **Impacto del Filtrado en Retrieval:**
+   * Comparar:
+     * *Global (sin filtro):* Hit@1, Hit@5, MRR sobre todo el corpus.
+     * *Filtrado por clasificador:* Hit@1, Hit@5, MRR limitando el espacio de búsqueda.
+     * *Oracle (filtro perfecto):* La cota máxima teórica.
+   * Esto demuestra matemáticamente por qué filtrar la categoría catapulta el Hit@1 (por ejemplo de ~35% al ~80%).
+
+#### B. Nivel 2: Evaluación End-to-End (Selección y Ensamblado)
+Tener el comando en el Top-5 del retrieval no resuelve la tarea si el sistema no elige el correcto:
+* **Command Selection Accuracy:** De los $k$ candidatos devueltos por FAISS/BM25, ¿el modelo o regla eligió el alias correcto?
+* **Argument Filling Accuracy:** ¿Completó los argumentos solicitados (ej. nombres de archivos, opciones `-p`, `-r`) sin alucinar?
+* **Safety / Abstención:** ¿Preservó las advertencias de seguridad y la abstención cuando la consulta era ambigua o destructiva?
+
+#### C. Nivel 3: Eficiencia y Factibilidad (Ingeniería de Sistemas)
+* Latencia desglosada: tiempo de inferencia del LLM vs tiempo de retrieval FAISS.
+* Factibilidad en entornos locales sin GPU dedicada (cuantización Q4_K_M en CPU con Ollama).
+
+---
+
+### 2. Arquitectura de Integración del Modelo Pequeño (2–3B)
+
+Un modelo de 2B o 3B (como `qwen2.5:3b` o `llama3.2:3b`) funciona muy bien si **no se le pide que invente comandos de memoria**, sino que actúe en dos roles restringidos con salidas estructuradas (`JSON schema`):
+
+```mermaid
+flowchart TD
+    UserQuery["Consulta de usuario (ES/EN)"] --> Stage1["SLM Paso 1: Query Analysis & Classification"]
+    Stage1 --> Extracted["JSON: subconsultas, argumentos, categoría predicha, confianza"]
+    Extracted --> FilterRule{"¿Confianza > Umbral?"}
+    FilterRule -- Sí --> FilteredRet["Retrieval restringido (ej. filesystem)"]
+    FilterRule -- No / Ambiguo --> GlobalRet["Retrieval amplio (Fallback global)"]
+    FilteredRet --> TopK["Top-5 Candidatos (alias, command, intent)"]
+    GlobalRet --> TopK
+    TopK --> Stage2["SLM Paso 2: Command Selection & Synthesis"]
+    Stage2 --> Proposal["Propuesta estructurada + Explicación humana"]
+    Proposal --> DeterministicCheck["Validador determinista (validator.py)"]
+    DeterministicCheck --> Output["Salida final segura (executable=false)"]
+```
+
+#### Paso 1: Análisis y Clasificación (Query Preprocessing)
+El modelo recibe la consulta en lenguaje natural (inglés o español) y produce:
+```json
+{
+  "category": "filesystem",
+  "confidence": "high",
+  "steps": [
+    {
+      "task": "crear directorios padres e hijos",
+      "search_phrase": "mkdir create parent directories recursively",
+      "arguments": ["directorio/anidado"]
+    }
+  ]
+}
+```
+* **Ventaja:** Traduce consultas coloquiales o en español a frases de búsqueda optimizadas para los embeddings en inglés, y asigna la categoría con la que acotar el espacio de búsqueda.
+
+#### Paso 2: Selección y Explicación (Grounding / Reranking)
+En vez de pedirle al modelo que redacte un comando desde cero, le pasas **solo los Top-3 o Top-5 candidatos recuperados** por FAISS:
+> *"Dado este objetivo y estos 3 candidatos documentados del corpus Debian:*  
+> *1. `mkdir -p` (crea directorios y padres faltantes)*  
+> *2. `rmdir` (elimina directorios vacíos)*  
+> *3. `touch` (cambia fechas o crea archivo vacío)*  
+> *Selecciona el número del candidato adecuado, vincula los argumentos del usuario y redacta una breve explicación en español."*
+
+* **Resultado:** Cero alucinaciones de comandos inexistentes, exactitud altísima en la elección y una explicación en lenguaje natural coherente.
+
+#### Paso 3: Validación Determinista Inquebrantable
+La propuesta generada por el LLM pasa obligatoriamente por [`validator.py`](file:///home/carlos/Documentos/facultad/semantic_search/code/semantic_search_engine/pipeline_builder_service/validator.py). El modelo **nunca** tiene la última palabra sobre seguridad ni sobre `executable=false`.
+
+---
+
+### 3. Plan de Acción Inmediato para Implementarlo
+
+Para dejar esto listo y obtener los datos para el cierre del proyecto:
+
+1. **Diseñar el componente de análisis con Ollama (`semantic_search_engine/llm/` o `ollama_assistant.py`):**
+   * Configurar llamadas con `response_format={"type": "json_object"}` para:
+     a) Clasificar categoría (`filesystem`, `networking`, `other/unknown`) y extraer tareas.
+     b) Rerankear/seleccionar entre los Top-K candidatos devueltos por el retriever.
+2. **Integrar el filtro dinámico de categoría en el Pipeline:**
+   * Si la confianza es alta $\rightarrow$ `category_filter=[pred_cat]`.
+   * Si es baja o ambigua $\rightarrow$ `category_filter=None` (búsqueda global).
+3. **Ejecutar la evaluación comparativa sobre `plain_source.yaml`:**
+   * **Modo A (Baseline actual):** Pipeline de reglas deterministas puro.
+   * **Modo B (Híbrido asistido por SLM 2-3B):** Clasificación + retrieval acotado + selección asistida.
+4. **Generar el reporte comparativo final:**
+   * Tabla con Hit@1, Hit@5, precisión de selección del comando final, latencia media y casos de éxito/fallo.

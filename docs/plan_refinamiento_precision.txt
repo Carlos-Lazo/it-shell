@@ -1,0 +1,299 @@
+IT SHELL — PLAN DE REFINAMIENTO DE PRECISIÓN BASADO EN PRUEBAS
+Versión: 1.0
+Fecha: 2026-10-30
+Estado: Plan propuesto; todavía no se implementan cambios del sistema
+Rama base: feat/phase-7-packaging
+
+======================================================================
+1. OBJETIVO Y ALCANCE
+======================================================================
+
+Mejorar la precisión y confiabilidad de las propuestas de it-shell mediante
+evaluación reproducible, análisis de errores y cambios guiados por evidencia.
+No se considera suficiente medir solamente si el comando correcto aparece entre
+los resultados recuperados: también deben evaluarse su selección, la estructura
+del plan, los argumentos, la abstención, las advertencias y la explicación.
+
+El corpus y los índices actuales se mantienen sin cambios durante este plan.
+Las comparaciones deben usar snapshots identificados y no mezclar métricas de
+ejecuciones incompatibles.
+
+La arquitectura determinista actual constituye la línea base. Un LLM con RAG
+es una alternativa posible que se investigará y probará de forma controlada;
+no se asume de antemano que aumente la precisión ni que deba reemplazar al
+planner, al retriever o al validador.
+
+Fuera de alcance:
+- Ejecutar comandos propuestos, incluso en modo automático o sandbox.
+- Cambiar o ampliar el corpus durante los experimentos iniciales.
+- Seleccionar un proveedor LLM antes de establecer tareas, datos y criterios.
+- Cerrar la Fase 7 o publicar paquetes como resultado de este plan.
+
+======================================================================
+2. PRINCIPIOS Y GARANTÍAS
+======================================================================
+
+1. Ningún comando se ejecuta. Toda salida conserva `executable=false`.
+2. La validación de seguridad continúa siendo determinista y obligatoria.
+   Un LLM no puede eliminar advertencias, marcar una propuesta como segura ni
+   anular una abstención del motor.
+3. Si faltan datos críticos o la confianza no alcanza el umbral acordado, el
+   sistema pide aclaración o se abstiene; no rellena silenciosamente los datos.
+4. Cada cambio se compara con la misma línea base, el mismo conjunto de pruebas
+   y los mismos artefactos, con sus hashes registrados.
+5. Se mantienen separados los conjuntos de desarrollo y prueba final. Los casos
+   del holdout no se usan para ajustar reglas, prompts ni hiperparámetros.
+6. La asistencia generativa es opcional: errores, ausencia de red o proveedor
+   deshabilitado deben conservar una respuesta local determinista.
+
+======================================================================
+3. ETAPA 0 — CONGELAR LA LÍNEA BASE [COMPLETADA]
+======================================================================
+
+Objetivo:
+Establecer una referencia reproducible antes de cambiar el comportamiento.
+
+Cómo:
+- Registrar commit, configuración, snapshot, hashes del corpus e índices, modelo
+  de embeddings, `retrieval_top_k`, sistema operativo, Python y hardware.
+- Ejecutar la suite completa existente y guardar el resultado.
+- Ejecutar el benchmark de retrieval v2 como referencia de recuperación, sin
+  interpretarlo como evaluación end-to-end.
+- Ejecutar un conjunto piloto end-to-end con entradas y salidas estructuradas.
+- Medir latencia en frío y cálida, RAM máxima y comportamiento offline.
+
+Entregables:
+- Manifiesto de ejecución con hashes y configuración.
+- Resultados de la línea base determinista.
+- Lista de limitaciones o fallos de reproducibilidad detectados.
+
+Estado: captura inicial en `evaluation/precision_baseline_v1.md`,
+`evaluation/precision_pilot_baseline.json` y
+`evaluation/precision_pilot_queries.json`. El script repetible es
+`evaluation/capture_precision_pilot.py`. La calidad del benchmark de retrieval
+se reprodujo; una prueba temporal sensible a contención pasó al repetirla aislada.
+El piloto end-to-end es exploratorio y todavía no se puntúa.
+
+Objetivo de aceptación:
+Otra ejecución con los mismos artefactos y configuración produce resultados
+comparables; toda diferencia de entorno queda documentada.
+
+======================================================================
+4. ETAPA 1 — DISEÑAR EL BENCHMARK END-TO-END [BORRADOR PREPARADO]
+======================================================================
+
+Objetivo:
+Medir si el sistema resuelve la tarea del usuario, no solamente si recupera una
+etiqueta de comando relevante.
+
+Cómo:
+- Conservar `evaluation/evaluation_v2_queries.json` como benchmark de retrieval.
+- Crear un conjunto independiente de tareas end-to-end con ejemplos revisados
+  por una persona. Separar desarrollo/validación y holdout final.
+- Cubrir, como mínimo:
+  a. consultas de un solo comando y selección entre alternativas similares;
+  b. operaciones multietapa y dependencias;
+  c. argumentos explícitos: rutas, nombres, extensiones, tamaños y fechas;
+  d. información faltante y ambigüedad que requiere aclaración;
+  e. consultas fuera de dominio, imposibles o contradictorias;
+  f. tareas sensibles o peligrosas que requieren advertencia o abstención;
+  g. formulaciones en inglés y español, registrando idioma y dificultad.
+- Cada caso define objetivo, salida esperada, pasos, dependencias, argumentos
+  requeridos, riesgos y política esperada (proponer, preguntar o abstenerse).
+- Revisar duplicados y solapamientos con las 160 consultas existentes para
+  reducir fuga entre evaluación de retrieval y pruebas de producto.
+- Hacer doble revisión de casos ambiguos y resolver desacuerdos antes de medir.
+
+Métricas:
+- Éxito de tarea end-to-end según rúbrica humana o evaluación estructurada.
+- Exactitud de pasos, orden y dependencias.
+- Exactitud de argumentos y placeholders.
+- Tasa de aclaración correcta en casos incompletos/ambiguos.
+- Precisión y recall de abstención para casos no resolubles.
+- Tasa de advertencias esperadas y falsos negativos de riesgo crítico.
+- Recuperación: Hit@k, MRR y nDCG, reportados por separado.
+- Latencia p50/p95 y RAM; si hay LLM remoto, también disponibilidad, tokens/costo
+  por tarea y número de llamadas.
+
+Entregables:
+- Dataset de evaluación versionado con esquema, rúbrica y casos holdout.
+- Evaluador repetible que guarde salidas crudas, métricas agregadas y errores.
+- Criterios numéricos de aceptación acordados antes de probar variantes.
+
+Estado: borrador v1 con 22 casos (13 development, 3 validation, 6 holdout),
+captura estructurada de la línea base y evaluador implementado. Las 22 gold
+annotations están pendientes de revisión humana; el evaluador no calcula
+métricas mientras no se adjudiquen. Los objetivos provisionales (seguridad
+crítica y `executable=false` al 100%, éxito >=80% en development/validation y
+5/6 en el holdout actual) fueron aceptados por la usuaria el 2026-10-30. El
+holdout actual es pequeño y debe ampliarse antes de tratar sus resultados como
+estimación estable; el p95 de latencia y límite de memoria quedan por acordar.
+En la revisión de rúbrica se añadieron checks para valores/filtros en la
+plantilla final, no solo para su extracción por el planner; también se corrigió
+la expectativa del conector natural y se hizo explícita la abstención en el caso
+de inyección que propone `rm -rf /`. Las etiquetas siguen pendientes y la
+captura de baseline debe regenerarse para las consultas ajustadas.
+
+======================================================================
+5. ETAPA 2 — ANÁLISIS DE ERRORES Y PRIORIZACIÓN
+======================================================================
+
+Objetivo:
+Identificar qué componente origina cada fallo, sin atribuirlo automáticamente
+al modelo de embeddings.
+
+Cómo:
+Etiquetar cada error con una causa primaria y, si hace falta, causas secundarias:
+- recuperación: el comando correcto no aparece en los candidatos;
+- planner: segmentación incorrecta, pasos omitidos o dependencias erróneas;
+- selección: candidato incorrecto aunque el correcto estaba disponible;
+- argumentos: valor perdido, mal asignado o inventado;
+- abstención/aclaración: responde sin base o pregunta innecesariamente;
+- seguridad: falta una advertencia, hay falsa alarma o se minimiza un riesgo;
+- formato/explicación: contradice la propuesta o es incomprensible.
+
+Para cada clase de error:
+- contar frecuencia y severidad;
+- seleccionar ejemplos representativos y difíciles;
+- proponer una hipótesis comprobable y el cambio mínimo;
+- añadir primero una prueba de regresión que falle con el comportamiento actual.
+
+Prioridad recomendada:
+1. Falsos negativos de seguridad y comandos inventados.
+2. Errores que hacen que una tarea falle o cambian argumentos/rutas.
+3. Errores de orden y dependencia en planes multietapa.
+4. Selección/retrieval de alternativas.
+5. Calidad estilística de explicaciones.
+
+Entregables:
+- Informe de errores agrupado por causa, severidad y frecuencia.
+- Backlog priorizado de hipótesis con métrica afectada y prueba de regresión.
+
+======================================================================
+6. ETAPA 3 — MEJORAR LA LÍNEA BASE DETERMINISTA
+======================================================================
+
+Objetivo:
+Exprimir el sistema actual con cambios pequeños y medibles antes de introducir
+una capa probabilística.
+
+Cómo:
+- Corregir errores reproducibles en planner, resolución de candidatos,
+  argumentos, umbrales o flujo de abstención.
+- Añadir tests unitarios por fallo y casos de regresión para evitar recurrencias.
+- Separar mejora de retrieval de mejora de planificación; medir ambos niveles.
+- Ajustar parámetros únicamente con el conjunto de desarrollo.
+- Repetir holdout al final, una sola vez por versión candidata.
+
+Criterio:
+Aceptar un cambio solo si mejora la métrica objetivo sin regresión relevante en
+otras métricas ni incumplir garantías de seguridad. Los umbrales numéricos se
+acuerdan en la Etapa 1; no se deducen después de ver resultados.
+
+Entregables:
+- Línea base determinista refinada.
+- Informe comparativo paired por consulta, incluyendo regresiones.
+- Suite automatizada de regresión end-to-end.
+
+======================================================================
+7. ETAPA 4 — EXPERIMENTAR CON LLM Y RAG COMO OPCIONES
+======================================================================
+
+Objetivo:
+Determinar si un modelo generativo, con recuperación de contexto (RAG), aporta
+una mejora medible frente a la línea base determinista.
+
+Separar las hipótesis para poder atribuir el efecto:
+A. RAG sin generación: mejorar el contexto recuperado o la evidencia mostrada.
+B. LLM para interpretar/descomponer la intención; el planner determinista valida
+   el esquema y el retriever existente aporta los comandos candidatos.
+C. LLM + RAG: el LLM recibe únicamente la consulta, candidatos recuperados,
+   documentos del corpus y metadatos necesarios para proponer una salida
+   estructurada.
+D. LLM solo para explicar una propuesta determinista ya validada: no cambia
+   comandos, argumentos, orden, advertencias ni estado executable.
+
+Diseño de prueba:
+- Comparar A/B/C/D por separado contra la línea base en el mismo benchmark y
+  snapshot; no cambiar a la vez corpus, retrieval y prompt.
+- El contexto RAG debe proceder de documentos realmente recuperados. Registrar
+  IDs/aliases y fragmentos usados para poder inspeccionar grounding.
+- Exigir salida estructurada validable. Rechazar respuesta mal formada, alias
+  inexistente, comando no sustentado por candidatos o campos requeridos ausentes.
+- Aplicar `ProposalValidator` después de la generación; el validador no depende
+  del LLM.
+- Mantener abstención y aclaración como resultados válidos.
+- Probar inyección de instrucciones dentro de consultas y documentos recuperados.
+- Evaluar modos local y remoto, latencia, memoria, caídas, costo y privacidad de
+  datos antes de recomendar un proveedor.
+- Si el proveedor falla, usar fallback determinista explícito; no ocultar el
+  error ni devolver una salida generada incompleta como éxito.
+
+No asumir:
+- Que RAG garantiza veracidad o mejora la precisión por sí solo.
+- Que una explicación fluida significa que el comando es correcto.
+- Que un LLM puede reemplazar el validador de seguridad.
+- Que un modelo local o API externa es la opción adecuada sin medir restricciones
+  de hardware, privacidad, disponibilidad y costo.
+
+Criterio de selección:
+Incorporar una opción generativa solo si el holdout muestra una mejora en las
+métricas end-to-end acordadas, sin regresiones de seguridad y dentro de límites
+aceptables de latencia, memoria, privacidad y costo. Si no supera la referencia,
+mantenerla experimental o descartarla.
+
+Entregables:
+- Prototipo opcional detrás de configuración/feature flag, si la hipótesis lo
+justifica.
+- Resultados comparables para cada variante y ejemplos de fallos.
+- Decisión documentada: integrar, seguir experimentando o no adoptar.
+
+======================================================================
+8. ETAPA 5 — VALIDACIÓN FINAL Y VERSIÓN CANDIDATA
+======================================================================
+
+Objetivo:
+Confirmar que la variante elegida mejora el sistema en pruebas no usadas para
+su ajuste y conserva las propiedades de seguridad y degradación controlada.
+
+Cómo:
+- Ejecutar la suite completa y pruebas de contrato CLI/MCP.
+- Ejecutar benchmark retrieval y end-to-end con snapshot congelado.
+- Ejecutar pruebas de regresión, abstención, entradas adversariales y seguridad.
+- Comparar por categoría, idioma y dificultad; reportar tamaño de muestra.
+- Medir p50/p95, RSS fría/cálida y fallback sin red/proveedor.
+- Guardar commit, configuración, modelos, hashes y resultados juntos.
+
+Criterios obligatorios:
+- Cero falsos negativos en los casos críticos definidos en la matriz de
+  seguridad; toda respuesta sigue con `executable=false`.
+- Satisfacer los umbrales end-to-end acordados en la Etapa 1.
+- No presentar la explicación de un LLM como evidencia de corrección.
+- Regresiones conocidas y límites documentados.
+
+Entregables:
+- Informe final de precisión/seguridad/rendimiento.
+- Versión candidata identificada y reproducible.
+- Recomendación explícita de próximos cambios; no implica publicación.
+
+======================================================================
+9. ORDEN, DECISIONES Y CONTROL DE CAMBIOS
+======================================================================
+
+Orden de trabajo:
+0. Congelar la línea base.
+1. Diseñar y revisar el benchmark end-to-end; acordar métricas y umbrales.
+2. Clasificar errores del sistema actual.
+3. Corregir primero la línea base determinista.
+4. Probar RAG y variantes LLM en experimentos aislados.
+5. Validar en holdout y documentar la versión candidata.
+
+Cada experimento debe registrar:
+- hipótesis, componente cambiado y métrica primaria;
+- commit, configuración, datos y hashes;
+- ejecución, errores, latencias, RAM y resultado por consulta;
+- regresiones, limitaciones y decisión.
+
+No se modifica el corpus en este plan. Si las pruebas apuntan a cobertura o
+calidad del dato como causa, se documenta como hallazgo y se propone una decisión
+separada antes de tocar los datos.
