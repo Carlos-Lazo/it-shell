@@ -1,0 +1,4518 @@
+{
+  "schema_version": 1,
+  "kind": "capacity_retrieval_baseline",
+  "retriever": "FAISS cosine similarity with all-mpnet-base-v2",
+  "relevance_unit": "command: every indexed corpus alias whose command matches a capacity source alias is relevant",
+  "candidate_top_k": 15,
+  "metrics": {
+    "queries": 122,
+    "command_hit@1": 0.3607,
+    "ndcg@1": 0.3607,
+    "command_hit@3": 0.4754,
+    "ndcg@3": 0.2635,
+    "command_hit@5": 0.5984,
+    "ndcg@5": 0.2409,
+    "command_hit@10": 0.6475,
+    "ndcg@10": 0.2104,
+    "mrr": 0.447
+  },
+  "partition_metrics": {
+    "development": {
+      "queries": 86,
+      "command_hit@1": 0.3837,
+      "ndcg@1": 0.3837,
+      "command_hit@3": 0.4884,
+      "ndcg@3": 0.2726,
+      "command_hit@5": 0.6163,
+      "ndcg@5": 0.2487,
+      "command_hit@10": 0.6628,
+      "ndcg@10": 0.2098,
+      "mrr": 0.4664
+    },
+    "test": {
+      "queries": 36,
+      "command_hit@1": 0.3056,
+      "ndcg@1": 0.3056,
+      "command_hit@3": 0.4444,
+      "ndcg@3": 0.2415,
+      "command_hit@5": 0.5556,
+      "ndcg@5": 0.2221,
+      "command_hit@10": 0.6111,
+      "ndcg@10": 0.2119,
+      "mrr": 0.4005
+    }
+  },
+  "category_partition_metrics": {
+    "filesystem": {
+      "development": {
+        "queries": 44,
+        "command_hit@1": 0.4773,
+        "ndcg@1": 0.4773,
+        "command_hit@3": 0.5909,
+        "ndcg@3": 0.3005,
+        "command_hit@5": 0.6136,
+        "ndcg@5": 0.2447,
+        "command_hit@10": 0.6364,
+        "ndcg@10": 0.2033,
+        "mrr": 0.5385
+      },
+      "test": {
+        "queries": 18,
+        "command_hit@1": 0.3333,
+        "ndcg@1": 0.3333,
+        "command_hit@3": 0.4444,
+        "ndcg@3": 0.2382,
+        "command_hit@5": 0.6111,
+        "ndcg@5": 0.2137,
+        "command_hit@10": 0.6111,
+        "ndcg@10": 0.1826,
+        "mrr": 0.425
+      }
+    },
+    "networking": {
+      "development": {
+        "queries": 42,
+        "command_hit@1": 0.2857,
+        "ndcg@1": 0.2857,
+        "command_hit@3": 0.381,
+        "ndcg@3": 0.2434,
+        "command_hit@5": 0.619,
+        "ndcg@5": 0.2529,
+        "command_hit@10": 0.6905,
+        "ndcg@10": 0.2166,
+        "mrr": 0.3909
+      },
+      "test": {
+        "queries": 18,
+        "command_hit@1": 0.2778,
+        "ndcg@1": 0.2778,
+        "command_hit@3": 0.4444,
+        "ndcg@3": 0.2449,
+        "command_hit@5": 0.5,
+        "ndcg@5": 0.2305,
+        "command_hit@10": 0.6111,
+        "ndcg@10": 0.2413,
+        "mrr": 0.3761
+      }
+    }
+  },
+  "latency_ms": {
+    "retrieval_per_query": 123.87
+  },
+  "provenance": {
+    "capacities_sha256": "0d117aa1fd45c7467e9842876ec990c36abdc16247d702d6b9bde8251bed3a3b",
+    "faiss_index_sha256": "fa2cf360f5d4b0b8e7313455c222b6faddcaaf42c25d384deb75107c0afe7567",
+    "aliases_sha256": "bfbf9faad2464416bb9a475ca3c8e36dfaf5bf25b3ed9249c28aa171f74b74dc",
+    "corpus_sha256": {
+      "dataset_builder/corpus/c programming.yaml": "ab830a7494a27ededb5af86780f98b4741ca1786e44594ddf71b53439fff64eb",
+      "dataset_builder/corpus/cryptography.yaml": "f7466a674abe308ceeb27481b38c9cd65a9e76b9df5d7e883053118369fdfd9c",
+      "dataset_builder/corpus/docker.yaml": "18f781ac507d273d45a3cd0b4a4535d251f9109449a6d20b64e4593ad74b7cba",
+      "dataset_builder/corpus/filesystem.yaml": "5bf85b27cfa15ab2bac4fee48606a5e9e45f64fd4d60f4a824a609de4b4ebe65",
+      "dataset_builder/corpus/git.yaml": "cfaca497a9d1b52b11c3fc337f219447b37676140d1a6383f2c55b743cf05d40",
+      "dataset_builder/corpus/hardwaremanagement.yaml": "e11f6c1cf83b1c2bfac7bdad5a43e2453903d04fd01d6b547422de806adbf5a7",
+      "dataset_builder/corpus/keyboard.yaml": "6f623947596eebad4fd208649808d40929e1f8a25bab95a8096551d695c079ea",
+      "dataset_builder/corpus/misc.yaml": "0f13a9f3aea6e390d8e4471105f74dd5bdf01ae0fa7186950bc97c9717525df9",
+      "dataset_builder/corpus/networking.yaml": "41a63019669ab2ecd1127b7f8056dd12d6e90b5adda4d21686bf3f216ed1eab4",
+      "dataset_builder/corpus/processmanagement.yaml": "a48470248f357a10ab08153ec842747a415ee1e6b3152ee5f3c7bb2403400498",
+      "dataset_builder/corpus/security.yaml": "0e3b25aceb30449049a1e2341f664ca00c5e6db6c810388417375b1e18943e79",
+      "dataset_builder/corpus/shellprogramming.yaml": "ced8f0e57979c50f32778c1b3709d325c61806abb5f35a48fb571354fbc400df",
+      "dataset_builder/corpus/textprocessing.yaml": "b2e0302c45767016fb218cae24bf4fad5122236d5872733e473b06f94a6162fc",
+      "dataset_builder/corpus/usergroup.yaml": "8cac903183c5442cc7e0208fe5872b8daee93fee967be1921ef022177f963e09"
+    },
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2"
+  },
+  "queries": [
+    {
+      "id": "filesystem.mkdir_create_missing_parents::1",
+      "query": "crear una estructura de carpetas aunque todavía no existan las carpetas superiores",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.mkdir_create_missing_parents",
+      "relevant_commands": [
+        "mkdir"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "docker:238",
+        "docker:202",
+        "docker:199",
+        "docker:163"
+      ],
+      "top_5_scores": [
+        0.432,
+        0.4015,
+        0.4015,
+        0.4015,
+        0.4015
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.mkdir_create_missing_parents::2",
+      "query": "make the parent folders when creating a nested directory",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.mkdir_create_missing_parents",
+      "relevant_commands": [
+        "mkdir"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:1868",
+        "filesystem:1869",
+        "filesystem:1928",
+        "filesystem:1280",
+        "filesystem:424"
+      ],
+      "top_5_scores": [
+        0.6727,
+        0.6315,
+        0.6214,
+        0.5851,
+        0.5833
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5531464700081437,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.41253177989255346,
+      "mrr": 1.0
+    },
+    {
+      "id": "grep.read_patterns_from_file::1",
+      "query": "buscar en un archivo las líneas que coincidan con los patrones guardados en otro archivo",
+      "language": "es",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "grep.read_patterns_from_file",
+      "relevant_commands": [
+        "grep"
+      ],
+      "relevant_aliases": 48,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:1561",
+        "textprocessing:1581",
+        "textprocessing:1568",
+        "textprocessing:1555",
+        "textprocessing:339"
+      ],
+      "top_5_scores": [
+        0.3569,
+        0.3509,
+        0.3509,
+        0.3509,
+        0.3509
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "grep.read_patterns_from_file::2",
+      "query": "find matching lines in a log using a list of patterns from a file",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "grep.read_patterns_from_file",
+      "relevant_commands": [
+        "grep"
+      ],
+      "relevant_aliases": 48,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "textprocessing:2327",
+        "textprocessing:909",
+        "textprocessing:739",
+        "textprocessing:619",
+        "git:19"
+      ],
+      "top_5_scores": [
+        0.7426,
+        0.7426,
+        0.7426,
+        0.7426,
+        0.73
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2082936658103318,
+      "mrr": 0.5
+    },
+    {
+      "id": "grep.read_patterns_from_file::3",
+      "query": "search with several expressions listed one per line in a pattern file",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "grep.read_patterns_from_file",
+      "relevant_commands": [
+        "grep"
+      ],
+      "relevant_aliases": 48,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "textprocessing:2327",
+        "textprocessing:909",
+        "textprocessing:739",
+        "textprocessing:619",
+        "git:19"
+      ],
+      "top_5_scores": [
+        0.6459,
+        0.6459,
+        0.6459,
+        0.6459,
+        0.639
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.21222636597291458,
+      "mrr": 0.5
+    },
+    {
+      "id": "filesystem.egrep_extended_pattern_matching::1",
+      "query": "buscar líneas que coincidan con un patrón extendido en un archivo",
+      "language": "es",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.egrep_extended_pattern_matching",
+      "relevant_commands": [
+        "egrep"
+      ],
+      "relevant_aliases": 47,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:1561",
+        "docker:1",
+        "docker:238",
+        "docker:202",
+        "docker:199"
+      ],
+      "top_5_scores": [
+        0.3736,
+        0.3521,
+        0.3511,
+        0.3511,
+        0.3511
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.egrep_extended_pattern_matching::2",
+      "query": "find lines in a file that match an extended regular expression",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.egrep_extended_pattern_matching",
+      "relevant_commands": [
+        "egrep"
+      ],
+      "relevant_aliases": 47,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "git:19",
+        "textprocessing:2327",
+        "textprocessing:909",
+        "textprocessing:739",
+        "textprocessing:619"
+      ],
+      "top_5_scores": [
+        0.6789,
+        0.6737,
+        0.6737,
+        0.6737,
+        0.6737
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.08514311764162098,
+      "mrr": 0.2
+    },
+    {
+      "id": "filesystem.egrep_extended_pattern_matching::3",
+      "query": "search for complex patterns in text files using egrep",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.egrep_extended_pattern_matching",
+      "relevant_commands": [
+        "egrep"
+      ],
+      "relevant_aliases": 47,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "textprocessing:3226",
+        "textprocessing:2327",
+        "textprocessing:909",
+        "textprocessing:739",
+        "textprocessing:619"
+      ],
+      "top_5_scores": [
+        0.6125,
+        0.6056,
+        0.6056,
+        0.6056,
+        0.6056
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.15139734109601002,
+      "mrr": 0.2
+    },
+    {
+      "id": "filesystem.tree_directory_structure::1",
+      "query": "ver la estructura de carpetas y archivos en forma de árbol",
+      "language": "es",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.tree_directory_structure",
+      "relevant_commands": [
+        "tree"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": null,
+      "top_5": [
+        "misc:2846",
+        "networking:1084",
+        "networking:1083",
+        "docker:1",
+        "textprocessing:2191"
+      ],
+      "top_5_scores": [
+        0.3666,
+        0.3506,
+        0.3401,
+        0.3172,
+        0.3097
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.tree_directory_structure::2",
+      "query": "display the directory hierarchy in a tree format",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.tree_directory_structure",
+      "relevant_commands": [
+        "tree"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "hardwaremanagement:1577",
+        "git:95",
+        "usergroup:1675",
+        "filesystem:2315",
+        "filesystem:2308"
+      ],
+      "top_5_scores": [
+        0.8691,
+        0.6785,
+        0.6446,
+        0.6221,
+        0.6221
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.6131471927654584,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6131471927654584,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.6131471927654584,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.tree_directory_structure::3",
+      "query": "list files and directories in a nested structure",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.tree_directory_structure",
+      "relevant_commands": [
+        "tree"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "hardwaremanagement:1577",
+        "filesystem:3072",
+        "filesystem:1678",
+        "filesystem:562",
+        "hardwaremanagement:1646"
+      ],
+      "top_5_scores": [
+        0.784,
+        0.7255,
+        0.7255,
+        0.7255,
+        0.7186
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.6131471927654584,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6131471927654584,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.6131471927654584,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.touch_create_or_update::1",
+      "query": "crear un archivo vacío o actualizar su fecha de modificación",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.touch_create_or_update",
+      "relevant_commands": [
+        "touch"
+      ],
+      "relevant_aliases": 9,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "docker:238",
+        "docker:202",
+        "docker:199",
+        "docker:163"
+      ],
+      "top_5_scores": [
+        0.5179,
+        0.426,
+        0.426,
+        0.426,
+        0.426
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.touch_create_or_update::2",
+      "query": "create a new file or update the timestamp of an existing file",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.touch_create_or_update",
+      "relevant_commands": [
+        "touch"
+      ],
+      "relevant_aliases": 9,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2934",
+        "filesystem:425",
+        "filesystem:2857",
+        "security:1907",
+        "security:1813"
+      ],
+      "top_5_scores": [
+        0.6832,
+        0.6567,
+        0.6275,
+        0.6088,
+        0.5922
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.31339406588598046,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.touch_create_or_update::3",
+      "query": "touch a file to create it or change its modification time",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.touch_create_or_update",
+      "relevant_commands": [
+        "touch"
+      ],
+      "relevant_aliases": 9,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "filesystem:425",
+        "filesystem:2934",
+        "security:1813",
+        "security:35",
+        "security:287"
+      ],
+      "top_5_scores": [
+        0.6887,
+        0.5925,
+        0.5667,
+        0.5667,
+        0.5561
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.29996554548763327,
+      "mrr": 0.5
+    },
+    {
+      "id": "filesystem.rm_remove_files_or_directories::1",
+      "query": "eliminar un archivo o carpeta",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.rm_remove_files_or_directories",
+      "relevant_commands": [
+        "rm"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "filesystem:1561",
+        "docker:238",
+        "docker:202",
+        "docker:199"
+      ],
+      "top_5_scores": [
+        0.4538,
+        0.3708,
+        0.3445,
+        0.3445,
+        0.3445
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.rm_remove_files_or_directories::2",
+      "query": "remove a file or directory from the filesystem",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.rm_remove_files_or_directories",
+      "relevant_commands": [
+        "rm"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2575",
+        "filesystem:2587",
+        "networking:689",
+        "filesystem:2990",
+        "filesystem:2576"
+      ],
+      "top_5_scores": [
+        0.822,
+        0.6289,
+        0.5851,
+        0.5737,
+        0.5612
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.4703652827859579,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.4422195942380129,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.rm_remove_files_or_directories::3",
+      "query": "delete specified files or directories",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.rm_remove_files_or_directories",
+      "relevant_commands": [
+        "rm"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2575",
+        "filesystem:2581",
+        "filesystem:2587",
+        "filesystem:2589",
+        "git:35"
+      ],
+      "top_5_scores": [
+        0.8524,
+        0.7008,
+        0.6167,
+        0.6099,
+        0.5917
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5531464700081437,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5621931439243354,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.ls_list_directory_contents::1",
+      "query": "ver los archivos y carpetas dentro de un directorio",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.ls_list_directory_contents",
+      "relevant_commands": [
+        "ls"
+      ],
+      "relevant_aliases": 46,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "filesystem:1561",
+        "docker:238",
+        "docker:202",
+        "docker:199"
+      ],
+      "top_5_scores": [
+        0.406,
+        0.3251,
+        0.3041,
+        0.3041,
+        0.3041
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.ls_list_directory_contents::2",
+      "query": "list the contents of a folder",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.ls_list_directory_contents",
+      "relevant_commands": [
+        "ls"
+      ],
+      "relevant_aliases": 46,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "filesystem:3069",
+        "filesystem:1673",
+        "filesystem:559",
+        "filesystem:3072",
+        "filesystem:1678"
+      ],
+      "top_5_scores": [
+        0.9034,
+        0.9034,
+        0.9034,
+        0.7942,
+        0.7942
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.34519134224686937,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22400556151517553,
+      "mrr": 0.5
+    },
+    {
+      "id": "filesystem.ls_list_directory_contents::3",
+      "query": "display files and directories in a specified path",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.ls_list_directory_contents",
+      "relevant_commands": [
+        "ls"
+      ],
+      "relevant_aliases": 46,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "filesystem:3072",
+        "filesystem:1678",
+        "filesystem:562",
+        "filesystem:3069",
+        "filesystem:1673"
+      ],
+      "top_5_scores": [
+        0.672,
+        0.672,
+        0.672,
+        0.6271,
+        0.6271
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.34519134224686937,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22400556151517553,
+      "mrr": 0.5
+    },
+    {
+      "id": "filesystem.ln_create_hard_or_symbolic_link::1",
+      "query": "crear un enlace simbólico a un archivo",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.ln_create_hard_or_symbolic_link",
+      "relevant_commands": [
+        "ln"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "docker:238",
+        "docker:202",
+        "docker:199",
+        "docker:163"
+      ],
+      "top_5_scores": [
+        0.4244,
+        0.4056,
+        0.4056,
+        0.4056,
+        0.4056
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.ln_create_hard_or_symbolic_link::2",
+      "query": "create a hard or symbolic link to a file or directory",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.ln_create_hard_or_symbolic_link",
+      "relevant_commands": [
+        "ln"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:1592",
+        "filesystem:1594",
+        "filesystem:1212",
+        "filesystem:388",
+        "filesystem:1596"
+      ],
+      "top_5_scores": [
+        0.7714,
+        0.7399,
+        0.6922,
+        0.6909,
+        0.6524
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6843515475204855,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.513528549750033,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.ln_create_hard_or_symbolic_link::3",
+      "query": "link a file or directory to another location",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.ln_create_hard_or_symbolic_link",
+      "relevant_commands": [
+        "ln"
+      ],
+      "relevant_aliases": 17,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "usergroup:343",
+        "filesystem:1584",
+        "filesystem:1596",
+        "git:26",
+        "filesystem:1212"
+      ],
+      "top_5_scores": [
+        0.7072,
+        0.6993,
+        0.6911,
+        0.6678,
+        0.6598
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.5307212739772434,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.38356636737133565,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.31516255047698366,
+      "mrr": 0.5
+    },
+    {
+      "id": "filesystem.cp_copy_files_or_directories::1",
+      "query": "copiar un archivo o carpeta a otra ubicación",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.cp_copy_files_or_directories",
+      "relevant_commands": [
+        "cp"
+      ],
+      "relevant_aliases": 30,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "networking:1083",
+        "filesystem:1561",
+        "networking:1084",
+        "docker:238"
+      ],
+      "top_5_scores": [
+        0.377,
+        0.3157,
+        0.2975,
+        0.2903,
+        0.288
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.cp_copy_files_or_directories::2",
+      "query": "copy files or directories from one place to another",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.cp_copy_files_or_directories",
+      "relevant_commands": [
+        "cp"
+      ],
+      "relevant_aliases": 30,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:370",
+        "filesystem:977",
+        "filesystem:383",
+        "filesystem:411",
+        "filesystem:1962"
+      ],
+      "top_5_scores": [
+        0.8814,
+        0.672,
+        0.6475,
+        0.6466,
+        0.5908
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5087403079104241,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3963918729015093,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.cp_copy_files_or_directories::3",
+      "query": "duplicate a file or directory to a specified destination",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.cp_copy_files_or_directories",
+      "relevant_commands": [
+        "cp"
+      ],
+      "relevant_aliases": 30,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "filesystem:1964",
+        "filesystem:1586",
+        "filesystem:1278",
+        "filesystem:374",
+        "filesystem:977"
+      ],
+      "top_5_scores": [
+        0.6802,
+        0.6802,
+        0.6802,
+        0.6802,
+        0.6451
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.14606834984270645,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.23944085680261515,
+      "mrr": 0.25
+    },
+    {
+      "id": "filesystem.head_display_first_lines_of_file::1",
+      "query": "ver las primeras líneas de un archivo",
+      "language": "es",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.head_display_first_lines_of_file",
+      "relevant_commands": [
+        "head"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": null,
+      "top_5": [
+        "textprocessing:1581",
+        "textprocessing:1568",
+        "textprocessing:1555",
+        "textprocessing:339",
+        "textprocessing:319"
+      ],
+      "top_5_scores": [
+        0.4346,
+        0.4346,
+        0.4346,
+        0.4346,
+        0.4346
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.head_display_first_lines_of_file::2",
+      "query": "display the beginning of a text file",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.head_display_first_lines_of_file",
+      "relevant_commands": [
+        "head"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "textprocessing:1003",
+        "security:927",
+        "textprocessing:1336",
+        "security:700",
+        "networking:2126"
+      ],
+      "top_5_scores": [
+        0.6909,
+        0.6373,
+        0.6121,
+        0.5757,
+        0.5755
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2529427027676571,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.head_display_first_lines_of_file::3",
+      "query": "show the first few lines of a file",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.head_display_first_lines_of_file",
+      "relevant_commands": [
+        "head"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "textprocessing:1003",
+        "textprocessing:1005",
+        "textprocessing:1336",
+        "textprocessing:2600",
+        "textprocessing:1732"
+      ],
+      "top_5_scores": [
+        0.6825,
+        0.6113,
+        0.6022,
+        0.6008,
+        0.5755
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5531464700081437,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.41253177989255346,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.sort_sort_lines_in_file::1",
+      "query": "ordenar las líneas de un archivo alfabéticamente",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.sort_sort_lines_in_file",
+      "relevant_commands": [
+        "sort"
+      ],
+      "relevant_aliases": 34,
+      "first_relevant_rank": null,
+      "top_5": [
+        "textprocessing:1581",
+        "textprocessing:1568",
+        "textprocessing:1555",
+        "textprocessing:339",
+        "textprocessing:319"
+      ],
+      "top_5_scores": [
+        0.4012,
+        0.4012,
+        0.4012,
+        0.4012,
+        0.4012
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.sort_sort_lines_in_file::2",
+      "query": "sort the lines in a text file",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.sort_sort_lines_in_file",
+      "relevant_commands": [
+        "sort"
+      ],
+      "relevant_aliases": 34,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "textprocessing:2483",
+        "textprocessing:260",
+        "textprocessing:423",
+        "textprocessing:1390",
+        "cryptography:285"
+      ],
+      "top_5_scores": [
+        0.9076,
+        0.6384,
+        0.5326,
+        0.531,
+        0.5238
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22009176629808017,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.sort_sort_lines_in_file::3",
+      "query": "arrange the contents of a file in a specific order",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.sort_sort_lines_in_file",
+      "relevant_commands": [
+        "sort"
+      ],
+      "relevant_aliases": 34,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "textprocessing:2483",
+        "textprocessing:1547",
+        "security:2093",
+        "security:2061",
+        "security:879"
+      ],
+      "top_5_scores": [
+        0.6857,
+        0.6545,
+        0.5656,
+        0.5656,
+        0.5656
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2934556883974402,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.tail_display_last_lines_of_file::1",
+      "query": "ver las últimas líneas de un archivo",
+      "language": "es",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.tail_display_last_lines_of_file",
+      "relevant_commands": [
+        "tail"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:1561",
+        "docker:1",
+        "docker:238",
+        "docker:202",
+        "docker:199"
+      ],
+      "top_5_scores": [
+        0.4244,
+        0.3987,
+        0.3878,
+        0.3878,
+        0.3878
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.tail_display_last_lines_of_file::2",
+      "query": "display the end of a text file",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.tail_display_last_lines_of_file",
+      "relevant_commands": [
+        "tail"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "textprocessing:2597",
+        "textprocessing:1804",
+        "textprocessing:1246",
+        "security:927",
+        "textprocessing:1003"
+      ],
+      "top_5_scores": [
+        0.6956,
+        0.6162,
+        0.6162,
+        0.5967,
+        0.5921
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22009176629808017,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.tail_display_last_lines_of_file::3",
+      "query": "show the last few lines of a file",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.tail_display_last_lines_of_file",
+      "relevant_commands": [
+        "tail"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "textprocessing:2597",
+        "textprocessing:2600",
+        "textprocessing:1005",
+        "docker:2002",
+        "docker:752"
+      ],
+      "top_5_scores": [
+        0.7382,
+        0.6469,
+        0.6361,
+        0.6329,
+        0.6329
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5531464700081437,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.42257499837058643,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.find_search_for_files_or_directories::1",
+      "query": "buscar archivos o carpetas que cumplan ciertos criterios",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.find_search_for_files_or_directories",
+      "relevant_commands": [
+        "find"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "networking:1083",
+        "networking:1084",
+        "filesystem:1561",
+        "usergroup:384"
+      ],
+      "top_5_scores": [
+        0.3476,
+        0.3352,
+        0.3103,
+        0.2863,
+        0.2822
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.find_search_for_files_or_directories::2",
+      "query": "find files or directories based on specific conditions",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.find_search_for_files_or_directories",
+      "relevant_commands": [
+        "find"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:877",
+        "networking:2014",
+        "networking:1810",
+        "hardwaremanagement:770",
+        "hardwaremanagement:573"
+      ],
+      "top_5_scores": [
+        0.6809,
+        0.6368,
+        0.6368,
+        0.6368,
+        0.6368
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2529427027676571,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.find_search_for_files_or_directories::3",
+      "query": "search for files or folders matching given parameters",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.find_search_for_files_or_directories",
+      "relevant_commands": [
+        "find"
+      ],
+      "relevant_aliases": 8,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:877",
+        "networking:2014",
+        "networking:1810",
+        "hardwaremanagement:770",
+        "hardwaremanagement:573"
+      ],
+      "top_5_scores": [
+        0.704,
+        0.6806,
+        0.6806,
+        0.6806,
+        0.6806
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2529427027676571,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.du_estimate_file_space_usage::1",
+      "query": "ver cuánto espacio en disco ocupa un archivo o carpeta",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.du_estimate_file_space_usage",
+      "relevant_commands": [
+        "du"
+      ],
+      "relevant_aliases": 27,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "docker:238",
+        "docker:202",
+        "docker:199",
+        "docker:163"
+      ],
+      "top_5_scores": [
+        0.5105,
+        0.4006,
+        0.4006,
+        0.4006,
+        0.4006
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.du_estimate_file_space_usage::2",
+      "query": "estimate the disk space used by a file or directory",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.du_estimate_file_space_usage",
+      "relevant_commands": [
+        "du"
+      ],
+      "relevant_aliases": 27,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:666",
+        "filesystem:529",
+        "docker:1579",
+        "docker:763",
+        "docker:745"
+      ],
+      "top_5_scores": [
+        0.8705,
+        0.7206,
+        0.6239,
+        0.6239,
+        0.6239
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22009176629808017,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.du_estimate_file_space_usage::3",
+      "query": "check the size of files or directories on disk",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.du_estimate_file_space_usage",
+      "relevant_commands": [
+        "du"
+      ],
+      "relevant_aliases": 27,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:666",
+        "filesystem:529",
+        "docker:1579",
+        "docker:763",
+        "docker:745"
+      ],
+      "top_5_scores": [
+        0.7163,
+        0.6959,
+        0.6369,
+        0.6369,
+        0.6369
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22009176629808017,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.stat_display_file_or_filesystem_status::1",
+      "query": "ver información detallada sobre un archivo o carpeta",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.stat_display_file_or_filesystem_status",
+      "relevant_commands": [
+        "stat"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "docker:238",
+        "docker:202",
+        "docker:199",
+        "docker:163"
+      ],
+      "top_5_scores": [
+        0.412,
+        0.3151,
+        0.3151,
+        0.3151,
+        0.3151
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.stat_display_file_or_filesystem_status::2",
+      "query": "display the status of a file or filesystem",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.stat_display_file_or_filesystem_status",
+      "relevant_commands": [
+        "stat"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "security:1740",
+        "security:1742",
+        "hardwaremanagement:1623",
+        "security:638",
+        "processmanagement:3126"
+      ],
+      "top_5_scores": [
+        0.9373,
+        0.8147,
+        0.7068,
+        0.6203,
+        0.5925
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5531464700081437,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3589542101716347,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.stat_display_file_or_filesystem_status::3",
+      "query": "show metadata and attributes of a file or directory",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.stat_display_file_or_filesystem_status",
+      "relevant_commands": [
+        "stat"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:2466",
+        "security:1200",
+        "security:944",
+        "filesystem:3335",
+        "filesystem:2501"
+      ],
+      "top_5_scores": [
+        0.664,
+        0.636,
+        0.6266,
+        0.6005,
+        0.6005
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.chmod_change_file_permissions::1",
+      "query": "cambiar los permisos de un archivo o carpeta",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.chmod_change_file_permissions",
+      "relevant_commands": [
+        "chmod"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "filesystem:260",
+        "docker:929",
+        "docker:915",
+        "networking:1083"
+      ],
+      "top_5_scores": [
+        0.3648,
+        0.3184,
+        0.3122,
+        0.3122,
+        0.2997
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.chmod_change_file_permissions::2",
+      "query": "modify the access permissions of a file or directory",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.chmod_change_file_permissions",
+      "relevant_commands": [
+        "chmod"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:258",
+        "security:1677",
+        "filesystem:291",
+        "security:227",
+        "filesystem:260"
+      ],
+      "top_5_scores": [
+        0.8478,
+        0.6699,
+        0.6276,
+        0.6015,
+        0.585
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.chmod_change_file_permissions::3",
+      "query": "set new permissions for a file or folder",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.chmod_change_file_permissions",
+      "relevant_commands": [
+        "chmod"
+      ],
+      "relevant_aliases": 10,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:258",
+        "filesystem:291",
+        "filesystem:654",
+        "security:1677",
+        "misc:1004"
+      ],
+      "top_5_scores": [
+        0.732,
+        0.6446,
+        0.6373,
+        0.6227,
+        0.6051
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.chown_change_file_owner::1",
+      "query": "cambiar el propietario de un archivo o carpeta",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.chown_change_file_owner",
+      "relevant_commands": [
+        "chown"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "networking:1083",
+        "networking:1084",
+        "filesystem:1561",
+        "docker:929"
+      ],
+      "top_5_scores": [
+        0.4112,
+        0.363,
+        0.3393,
+        0.3226,
+        0.2971
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.chown_change_file_owner::2",
+      "query": "change the owner and group of a file or directory",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.chown_change_file_owner",
+      "relevant_commands": [
+        "chown"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:291",
+        "usergroup:160",
+        "filesystem:654",
+        "usergroup:162",
+        "usergroup:641"
+      ],
+      "top_5_scores": [
+        0.9376,
+        0.7855,
+        0.6649,
+        0.6436,
+        0.6354
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.48522855511632257,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.37850091886658266,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.chown_change_file_owner::3",
+      "query": "assign a new owner or group to a file or folder",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.chown_change_file_owner",
+      "relevant_commands": [
+        "chown"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:291",
+        "usergroup:160",
+        "filesystem:258",
+        "filesystem:654",
+        "usergroup:642"
+      ],
+      "top_5_scores": [
+        0.7998,
+        0.6949,
+        0.5971,
+        0.5879,
+        0.5819
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2934556883974402,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.chattr_change_file_attributes::1",
+      "query": "cambiar los atributos extendidos de un archivo o carpeta",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.chattr_change_file_attributes",
+      "relevant_commands": [
+        "chattr"
+      ],
+      "relevant_aliases": 4,
+      "first_relevant_rank": null,
+      "top_5": [
+        "networking:1083",
+        "keyboard:1203",
+        "keyboard:43",
+        "networking:1084",
+        "docker:1"
+      ],
+      "top_5_scores": [
+        0.3674,
+        0.3534,
+        0.3534,
+        0.3518,
+        0.316
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.chattr_change_file_attributes::2",
+      "query": "modify the extended attributes of a file or directory",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.chattr_change_file_attributes",
+      "relevant_commands": [
+        "chattr"
+      ],
+      "relevant_aliases": 4,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:268",
+        "filesystem:1276",
+        "usergroup:162",
+        "security:1717",
+        "filesystem:2466"
+      ],
+      "top_5_scores": [
+        0.712,
+        0.5734,
+        0.5515,
+        0.55,
+        0.5441
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3903800499921017,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3903800499921017,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.chattr_change_file_attributes::3",
+      "query": "set new attributes for a file or folder",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.chattr_change_file_attributes",
+      "relevant_commands": [
+        "chattr"
+      ],
+      "relevant_aliases": 4,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:268",
+        "filesystem:1276",
+        "filesystem:2466",
+        "filesystem:373",
+        "usergroup:162"
+      ],
+      "top_5_scores": [
+        0.692,
+        0.6144,
+        0.5293,
+        0.5257,
+        0.52
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3903800499921017,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3903800499921017,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.logger_log_messages::1",
+      "query": "registrar un mensaje en el syslog",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.logger_log_messages",
+      "relevant_commands": [
+        "logger"
+      ],
+      "relevant_aliases": 28,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "textprocessing:2919",
+        "textprocessing:1469",
+        "misc:1365",
+        "cryptography:338",
+        "shellprogramming:2023"
+      ],
+      "top_5_scores": [
+        0.6181,
+        0.6181,
+        0.5979,
+        0.533,
+        0.5223
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3156484524795145,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2742654694553681,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "filesystem.logger_log_messages::2",
+      "query": "log a message to the system logger",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.logger_log_messages",
+      "relevant_commands": [
+        "logger"
+      ],
+      "relevant_aliases": 28,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "misc:1365",
+        "processmanagement:1457",
+        "keyboard:1284",
+        "misc:479",
+        "misc:476"
+      ],
+      "top_5_scores": [
+        0.8311,
+        0.7515,
+        0.7398,
+        0.7199,
+        0.7199
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5531464700081437,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.43735247915031,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.logger_log_messages::3",
+      "query": "send a log entry with a specific severity level",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.logger_log_messages",
+      "relevant_commands": [
+        "logger"
+      ],
+      "relevant_aliases": 28,
+      "first_relevant_rank": 9,
+      "top_5": [
+        "shellprogramming:7",
+        "shellprogramming:4",
+        "shellprogramming:1",
+        "docker:964",
+        "shellprogramming:2184"
+      ],
+      "top_5_scores": [
+        0.6372,
+        0.6372,
+        0.6372,
+        0.6179,
+        0.6108
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.06625422345438903,
+      "mrr": 0.1111111111111111
+    },
+    {
+      "id": "filesystem.ntfsls_list_ntfs_directory_contents::1",
+      "query": "ver los archivos y carpetas dentro de un directorio NTFS",
+      "language": "es",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.ntfsls_list_ntfs_directory_contents",
+      "relevant_commands": [
+        "ntfsls"
+      ],
+      "relevant_aliases": 15,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2059",
+        "networking:963",
+        "misc:1720",
+        "misc:1722",
+        "textprocessing:1720"
+      ],
+      "top_5_scores": [
+        0.5139,
+        0.5055,
+        0.4972,
+        0.4907,
+        0.4875
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.48522855511632257,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.44793214080335986,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.ntfsls_list_ntfs_directory_contents::2",
+      "query": "list the contents of an NTFS folder",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.ntfsls_list_ntfs_directory_contents",
+      "relevant_commands": [
+        "ntfsls"
+      ],
+      "relevant_aliases": 15,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2059",
+        "filesystem:3069",
+        "filesystem:1673",
+        "filesystem:559",
+        "textprocessing:1717"
+      ],
+      "top_5_scores": [
+        0.9257,
+        0.7484,
+        0.7484,
+        0.7484,
+        0.6327
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2863459897524692,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.ntfsls_list_ntfs_directory_contents::3",
+      "query": "display files and directories in an NTFS filesystem",
+      "language": "en",
+      "partition": "development",
+      "category": "filesystem",
+      "capability_id": "filesystem.ntfsls_list_ntfs_directory_contents",
+      "relevant_commands": [
+        "ntfsls"
+      ],
+      "relevant_aliases": 15,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2059",
+        "textprocessing:1716",
+        "shellprogramming:1559",
+        "shellprogramming:1552",
+        "textprocessing:1717"
+      ],
+      "top_5_scores": [
+        0.8528,
+        0.6013,
+        0.5832,
+        0.5724,
+        0.5654
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22009176629808017,
+      "mrr": 1.0
+    },
+    {
+      "id": "filesystem.import_capture_screen_image::1",
+      "query": "capturar una ventana o una región de la pantalla y guardarla como imagen",
+      "language": "es",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.import_capture_screen_image",
+      "relevant_commands": [
+        "import"
+      ],
+      "relevant_aliases": 11,
+      "first_relevant_rank": null,
+      "top_5": [
+        "hardwaremanagement:1162",
+        "hardwaremanagement:1161",
+        "security:1350",
+        "textprocessing:2684",
+        "shellprogramming:1744"
+      ],
+      "top_5_scores": [
+        0.4009,
+        0.3827,
+        0.3702,
+        0.3656,
+        0.3646
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "filesystem.import_capture_screen_image::2",
+      "query": "capture a visible X window and save it as an image",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.import_capture_screen_image",
+      "relevant_commands": [
+        "import"
+      ],
+      "relevant_aliases": 11,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "security:2256",
+        "filesystem:1262",
+        "filesystem:1259",
+        "filesystem:1256",
+        "usergroup:1887"
+      ],
+      "top_5_scores": [
+        0.8247,
+        0.7794,
+        0.7794,
+        0.7794,
+        0.7024
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.14606834984270645,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.09478836436955078,
+      "mrr": 0.25
+    },
+    {
+      "id": "filesystem.import_capture_screen_image::3",
+      "query": "take a screenshot of the full screen or a selected region",
+      "language": "en",
+      "partition": "test",
+      "category": "filesystem",
+      "capability_id": "filesystem.import_capture_screen_image",
+      "relevant_commands": [
+        "import"
+      ],
+      "relevant_aliases": 11,
+      "first_relevant_rank": null,
+      "top_5": [
+        "keyboard:1332",
+        "keyboard:1333",
+        "usergroup:1887",
+        "usergroup:479",
+        "keyboard:262"
+      ],
+      "top_5_scores": [
+        0.8471,
+        0.7365,
+        0.6753,
+        0.663,
+        0.6615
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.ping::1",
+      "query": "verificar si un host está activo en la red",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.ping",
+      "relevant_commands": [
+        "ping"
+      ],
+      "relevant_aliases": 39,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:241",
+        "docker:238",
+        "docker:202",
+        "docker:199",
+        "docker:163"
+      ],
+      "top_5_scores": [
+        0.4625,
+        0.4625,
+        0.4625,
+        0.4625,
+        0.4625
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.ping::2",
+      "query": "ping a server to check connectivity",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.ping",
+      "relevant_commands": [
+        "ping"
+      ],
+      "relevant_aliases": 39,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "networking:919",
+        "processmanagement:2268",
+        "processmanagement:2258",
+        "processmanagement:2249",
+        "networking:1113"
+      ],
+      "top_5_scores": [
+        0.6037,
+        0.5521,
+        0.5521,
+        0.5521,
+        0.5367
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.27727342735504823,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.17993148201117176,
+      "mrr": 0.25
+    },
+    {
+      "id": "networking.ping::3",
+      "query": "send ICMP packets to a host to measure response time",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.ping",
+      "relevant_commands": [
+        "ping"
+      ],
+      "relevant_aliases": 39,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "networking:1145",
+        "networking:1130",
+        "networking:1108",
+        "networking:1536",
+        "networking:1523"
+      ],
+      "top_5_scores": [
+        0.6466,
+        0.6466,
+        0.6466,
+        0.6251,
+        0.6251
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.16958010263680806,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.11004588314904008,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "networking.traceroute::1",
+      "query": "ver la ruta que siguen los paquetes hasta un servidor",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.traceroute",
+      "relevant_commands": [
+        "traceroute"
+      ],
+      "relevant_aliases": 33,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:1561",
+        "docker:1",
+        "docker:238",
+        "docker:202",
+        "docker:199"
+      ],
+      "top_5_scores": [
+        0.4319,
+        0.4114,
+        0.3863,
+        0.3863,
+        0.3863
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.traceroute::2",
+      "query": "trace the path to a destination host",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.traceroute",
+      "relevant_commands": [
+        "traceroute"
+      ],
+      "relevant_aliases": 33,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "networking:1534",
+        "networking:1521",
+        "networking:1505",
+        "networking:1489",
+        "networking:1473"
+      ],
+      "top_5_scores": [
+        0.6935,
+        0.6935,
+        0.6935,
+        0.6935,
+        0.6935
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.08514311764162098,
+      "mrr": 0.2
+    },
+    {
+      "id": "networking.traceroute::3",
+      "query": "show each hop between the source and destination",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.traceroute",
+      "relevant_commands": [
+        "traceroute"
+      ],
+      "relevant_aliases": 33,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "networking:1534",
+        "networking:1521",
+        "networking:1505",
+        "networking:1489",
+        "networking:1473"
+      ],
+      "top_5_scores": [
+        0.5601,
+        0.5601,
+        0.5601,
+        0.5601,
+        0.5601
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.08514311764162098,
+      "mrr": 0.2
+    },
+    {
+      "id": "networking.nslookup::1",
+      "query": "obtener la dirección IP de un dominio",
+      "language": "es",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.nslookup",
+      "relevant_commands": [
+        "nslookup"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": null,
+      "top_5": [
+        "textprocessing:1079",
+        "networking:544",
+        "networking:553",
+        "textprocessing:1078",
+        "networking:2306"
+      ],
+      "top_5_scores": [
+        0.4778,
+        0.476,
+        0.4587,
+        0.4581,
+        0.4476
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.nslookup::2",
+      "query": "look up DNS records for a domain",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.nslookup",
+      "relevant_commands": [
+        "nslookup"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": 9,
+      "top_5": [
+        "networking:292",
+        "networking:510",
+        "networking:253",
+        "networking:240",
+        "docker:1234"
+      ],
+      "top_5_scores": [
+        0.7315,
+        0.73,
+        0.73,
+        0.6543,
+        0.6136
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.18457569677956817,
+      "mrr": 0.1111111111111111
+    },
+    {
+      "id": "networking.nslookup::3",
+      "query": "resolve a hostname to an IP address",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.nslookup",
+      "relevant_commands": [
+        "nslookup"
+      ],
+      "relevant_aliases": 2,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1333",
+        "networking:121",
+        "networking:115",
+        "networking:109",
+        "misc:956"
+      ],
+      "top_5_scores": [
+        0.6707,
+        0.663,
+        0.663,
+        0.663,
+        0.6426
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.who::1",
+      "query": "mostrar los usuarios que tienen una sesión iniciada en el sistema",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.who",
+      "relevant_commands": [
+        "who"
+      ],
+      "relevant_aliases": 19,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:241",
+        "docker:238",
+        "docker:202",
+        "docker:199",
+        "docker:163"
+      ],
+      "top_5_scores": [
+        0.5144,
+        0.5144,
+        0.5144,
+        0.5144,
+        0.5144
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.who::2",
+      "query": "list users currently logged in to the system",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.who",
+      "relevant_commands": [
+        "who"
+      ],
+      "relevant_aliases": 19,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "usergroup:1769",
+        "usergroup:1767",
+        "usergroup:1766",
+        "usergroup:678",
+        "usergroup:676"
+      ],
+      "top_5_scores": [
+        0.9175,
+        0.7943,
+        0.7691,
+        0.7478,
+        0.7478
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.7227265726449519,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5326208815196265,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.who::3",
+      "query": "show logged-in users and their terminal or host information",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.who",
+      "relevant_commands": [
+        "who"
+      ],
+      "relevant_aliases": 19,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "usergroup:875",
+        "usergroup:1746",
+        "usergroup:1766",
+        "usergroup:1769",
+        "usergroup:1767"
+      ],
+      "top_5_scores": [
+        0.7583,
+        0.7317,
+        0.7308,
+        0.7285,
+        0.7115
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.4468535299918563,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.28997736516021183,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "networking.curl::1",
+      "query": "descargar un archivo desde un servidor web",
+      "language": "es",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.curl",
+      "relevant_commands": [
+        "curl"
+      ],
+      "relevant_aliases": 253,
+      "first_relevant_rank": null,
+      "top_5": [
+        "textprocessing:2880",
+        "textprocessing:2698",
+        "usergroup:1779",
+        "usergroup:906",
+        "docker:1"
+      ],
+      "top_5_scores": [
+        0.4505,
+        0.4505,
+        0.3903,
+        0.3903,
+        0.3855
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.curl::2",
+      "query": "send HTTP requests and receive responses using curl",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.curl",
+      "relevant_commands": [
+        "curl"
+      ],
+      "relevant_aliases": 253,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "misc:400",
+        "shellprogramming:354",
+        "misc:403",
+        "filesystem:476",
+        "processmanagement:421"
+      ],
+      "top_5_scores": [
+        0.5853,
+        0.5845,
+        0.572,
+        0.572,
+        0.5608
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.curl::3",
+      "query": "transfer data to or from a server with various protocols",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.curl",
+      "relevant_commands": [
+        "curl"
+      ],
+      "relevant_aliases": 253,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:2509",
+        "docker:489",
+        "hardwaremanagement:482",
+        "hardwaremanagement:455",
+        "hardwaremanagement:426"
+      ],
+      "top_5_scores": [
+        0.6096,
+        0.6028,
+        0.5846,
+        0.5846,
+        0.5846
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.wget::1",
+      "query": "descargar un archivo desde un sitio web",
+      "language": "es",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.wget",
+      "relevant_commands": [
+        "wget"
+      ],
+      "relevant_aliases": 152,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "docker:238",
+        "docker:202",
+        "docker:199",
+        "docker:163"
+      ],
+      "top_5_scores": [
+        0.4972,
+        0.3955,
+        0.3955,
+        0.3955,
+        0.3955
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.wget::2",
+      "query": "retrieve files from the internet using wget",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.wget",
+      "relevant_commands": [
+        "wget"
+      ],
+      "relevant_aliases": 152,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "hardwaremanagement:1676",
+        "textprocessing:1450",
+        "filesystem:3123",
+        "keyboard:1180",
+        "shellprogramming:2474"
+      ],
+      "top_5_scores": [
+        0.6592,
+        0.6491,
+        0.6424,
+        0.6373,
+        0.6215
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.7860137352654724,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.8611375561264454,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.wget::3",
+      "query": "download files over HTTP, HTTPS, or FTP",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.wget",
+      "relevant_commands": [
+        "wget"
+      ],
+      "relevant_aliases": 152,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "git:136",
+        "filesystem:1741",
+        "processmanagement:392",
+        "textprocessing:1450",
+        "filesystem:3095"
+      ],
+      "top_5_scores": [
+        0.6303,
+        0.5744,
+        0.5603,
+        0.5603,
+        0.5508
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2941924851321473,
+      "mrr": 0.2
+    },
+    {
+      "id": "networking.scp::1",
+      "query": "copiar un archivo a otro servidor de manera segura",
+      "language": "es",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.scp",
+      "relevant_commands": [
+        "scp"
+      ],
+      "relevant_aliases": 23,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "filesystem:1561",
+        "hardwaremanagement:291",
+        "docker:238",
+        "docker:202"
+      ],
+      "top_5_scores": [
+        0.3229,
+        0.3166,
+        0.303,
+        0.2963,
+        0.2963
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.scp::2",
+      "query": "securely transfer files between hosts using scp",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.scp",
+      "relevant_commands": [
+        "scp"
+      ],
+      "relevant_aliases": 23,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2618",
+        "security:1686",
+        "usergroup:1420",
+        "filesystem:2619",
+        "processmanagement:356"
+      ],
+      "top_5_scores": [
+        0.7769,
+        0.6407,
+        0.6331,
+        0.6154,
+        0.5185
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6548086577531307,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.7026305163854645,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.scp::3",
+      "query": "copy files over SSH to a remote server",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.scp",
+      "relevant_commands": [
+        "scp"
+      ],
+      "relevant_aliases": 23,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2618",
+        "filesystem:2732",
+        "filesystem:2619",
+        "shellprogramming:344",
+        "filesystem:2731"
+      ],
+      "top_5_scores": [
+        0.7084,
+        0.6177,
+        0.5923,
+        0.5755,
+        0.5663
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5087403079104241,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.33013764944712026,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.ssh::1",
+      "query": "conectarse a un servidor remoto de manera segura",
+      "language": "es",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.ssh",
+      "relevant_commands": [
+        "ssh"
+      ],
+      "relevant_aliases": 39,
+      "first_relevant_rank": null,
+      "top_5": [
+        "filesystem:1561",
+        "docker:241",
+        "docker:238",
+        "docker:202",
+        "docker:199"
+      ],
+      "top_5_scores": [
+        0.3657,
+        0.3492,
+        0.3492,
+        0.3492,
+        0.3492
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.ssh::2",
+      "query": "establish a secure shell connection to a remote host",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.ssh",
+      "relevant_commands": [
+        "ssh"
+      ],
+      "relevant_aliases": 39,
+      "first_relevant_rank": 8,
+      "top_5": [
+        "docker:12",
+        "usergroup:334",
+        "usergroup:329",
+        "misc:2434",
+        "misc:2403"
+      ],
+      "top_5_scores": [
+        0.602,
+        0.5273,
+        0.5273,
+        0.5259,
+        0.5255
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.06943122193677727,
+      "mrr": 0.125
+    },
+    {
+      "id": "networking.ssh::3",
+      "query": "log in to a remote server using SSH",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.ssh",
+      "relevant_commands": [
+        "ssh"
+      ],
+      "relevant_aliases": 39,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "hardwaremanagement:1480",
+        "hardwaremanagement:1453",
+        "shellprogramming:344",
+        "misc:1369",
+        "networking:1383"
+      ],
+      "top_5_scores": [
+        0.7595,
+        0.7595,
+        0.5494,
+        0.5126,
+        0.4977
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3647442587311445,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.telnet::1",
+      "query": "conectarse a un servidor remoto usando telnet",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.telnet",
+      "relevant_commands": [
+        "telnet"
+      ],
+      "relevant_aliases": 18,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "usergroup:1642",
+        "usergroup:634",
+        "networking:1424",
+        "networking:537",
+        "misc:2664"
+      ],
+      "top_5_scores": [
+        0.5243,
+        0.5243,
+        0.4744,
+        0.4744,
+        0.4416
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.639945385422766,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.48153499054313026,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.telnet::2",
+      "query": "establish a telnet connection to a remote host",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.telnet",
+      "relevant_commands": [
+        "telnet"
+      ],
+      "relevant_aliases": 18,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "networking:1424",
+        "networking:537",
+        "usergroup:1642",
+        "usergroup:634",
+        "hardwaremanagement:1125"
+      ],
+      "top_5_scores": [
+        0.7908,
+        0.7908,
+        0.7143,
+        0.7143,
+        0.6689
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5087403079104241,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.467122359745432,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.telnet::3",
+      "query": "log in to a remote server using the telnet protocol",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.telnet",
+      "relevant_commands": [
+        "telnet"
+      ],
+      "relevant_aliases": 18,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "usergroup:1642",
+        "usergroup:634",
+        "networking:1424",
+        "networking:537",
+        "networking:1429"
+      ],
+      "top_5_scores": [
+        0.739,
+        0.739,
+        0.666,
+        0.666,
+        0.6216
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.639945385422766,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.48153499054313026,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.netcat::1",
+      "query": "enviar datos a un servidor usando netcat",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.netcat",
+      "relevant_commands": [
+        "netcat"
+      ],
+      "relevant_aliases": 7,
+      "first_relevant_rank": null,
+      "top_5": [
+        "hardwaremanagement:1312",
+        "networking:1370",
+        "docker:241",
+        "docker:238",
+        "docker:202"
+      ],
+      "top_5_scores": [
+        0.3999,
+        0.3929,
+        0.3871,
+        0.3871,
+        0.3871
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.netcat::2",
+      "query": "read and write data over network connections with netcat",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.netcat",
+      "relevant_commands": [
+        "netcat"
+      ],
+      "relevant_aliases": 7,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "keyboard:1177",
+        "misc:2482",
+        "processmanagement:2562",
+        "networking:1385",
+        "misc:1657"
+      ],
+      "top_5_scores": [
+        0.5397,
+        0.4741,
+        0.4703,
+        0.4543,
+        0.4534
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.10633668103022985,
+      "mrr": 0.2
+    },
+    {
+      "id": "networking.netcat::3",
+      "query": "establish TCP or UDP connections for data transfer",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.netcat",
+      "relevant_commands": [
+        "netcat"
+      ],
+      "relevant_aliases": 7,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "docker:489",
+        "docker:2509",
+        "misc:2482",
+        "networking:902",
+        "networking:890"
+      ],
+      "top_5_scores": [
+        0.8012,
+        0.7305,
+        0.5541,
+        0.5502,
+        0.5502
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.14606834984270645,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.11838279295536291,
+      "mrr": 0.25
+    },
+    {
+      "id": "networking.dig::1",
+      "query": "consultar registros DNS de un dominio",
+      "language": "es",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.dig",
+      "relevant_commands": [
+        "dig"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 3,
+      "top_5": [
+        "networking:292",
+        "networking:510",
+        "networking:253",
+        "networking:240",
+        "networking:952"
+      ],
+      "top_5_scores": [
+        0.5855,
+        0.5837,
+        0.5837,
+        0.5741,
+        0.5296
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.23463936301137822,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.16958010263680806,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.11004588314904008,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "id": "networking.dig::2",
+      "query": "retrieve detailed DNS information for a domain using dig",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.dig",
+      "relevant_commands": [
+        "dig"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "networking:510",
+        "networking:253",
+        "docker:1234",
+        "networking:857",
+        "networking:254"
+      ],
+      "top_5_scores": [
+        0.6413,
+        0.6413,
+        0.6078,
+        0.5846,
+        0.5839
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.34519134224686937,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.28762634971412726,
+      "mrr": 0.5
+    },
+    {
+      "id": "networking.dig::3",
+      "query": "look up specific DNS records for a hostname",
+      "language": "en",
+      "partition": "test",
+      "category": "networking",
+      "capability_id": "networking.dig",
+      "relevant_commands": [
+        "dig"
+      ],
+      "relevant_aliases": 13,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "networking:510",
+        "networking:253",
+        "networking:292",
+        "networking:240",
+        "docker:1619"
+      ],
+      "top_5_scores": [
+        0.7084,
+        0.7084,
+        0.6757,
+        0.6361,
+        0.6104
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.2960819109658652,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.21398626473452756,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.13886244387355454,
+      "mrr": 0.5
+    },
+    {
+      "id": "networking.ss::1",
+      "query": "ver las conexiones de red activas en el sistema",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.ss",
+      "relevant_commands": [
+        "ss"
+      ],
+      "relevant_aliases": 19,
+      "first_relevant_rank": null,
+      "top_5": [
+        "misc:2117",
+        "docker:241",
+        "docker:238",
+        "docker:202",
+        "docker:199"
+      ],
+      "top_5_scores": [
+        0.4546,
+        0.3913,
+        0.3913,
+        0.3913,
+        0.3913
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.ss::2",
+      "query": "display socket statistics and active connections using ss",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.ss",
+      "relevant_commands": [
+        "ss"
+      ],
+      "relevant_aliases": 19,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "networking:1372",
+        "processmanagement:1533",
+        "usergroup:1471",
+        "networking:1260",
+        "processmanagement:57"
+      ],
+      "top_5_scores": [
+        0.6864,
+        0.6109,
+        0.6075,
+        0.5622,
+        0.5581
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5087403079104241,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.6812060741152737,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.ss::3",
+      "query": "analyze network sockets and their states",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.ss",
+      "relevant_commands": [
+        "ss"
+      ],
+      "relevant_aliases": 19,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "networking:1368",
+        "networking:1372",
+        "processmanagement:1533",
+        "security:1726",
+        "networking:1260"
+      ],
+      "top_5_scores": [
+        0.7494,
+        0.6587,
+        0.6444,
+        0.6412,
+        0.6292
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6992148198508501,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5271064966405455,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.nmcli::1",
+      "query": "administrar conexiones de red usando nmcli",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.nmcli",
+      "relevant_commands": [
+        "nmcli"
+      ],
+      "relevant_aliases": 16,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "shellprogramming:1520",
+        "networking:923",
+        "usergroup:1001",
+        "networking:924",
+        "networking:925"
+      ],
+      "top_5_scores": [
+        0.4377,
+        0.4113,
+        0.3917,
+        0.3898,
+        0.3828
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 1.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 1.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.9305687780632227,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.nmcli::2",
+      "query": "manage network connections and settings with NetworkManager's nmcli",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.nmcli",
+      "relevant_commands": [
+        "nmcli"
+      ],
+      "relevant_aliases": 16,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "textprocessing:1703",
+        "networking:921",
+        "networking:924",
+        "textprocessing:1704",
+        "shellprogramming:1520"
+      ],
+      "top_5_scores": [
+        0.7551,
+        0.7129,
+        0.6775,
+        0.66,
+        0.6178
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.5307212739772434,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.5147714448836774,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.3340514446642156,
+      "mrr": 0.5
+    },
+    {
+      "id": "networking.nmcli::3",
+      "query": "configure network interfaces and connections",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.nmcli",
+      "relevant_commands": [
+        "nmcli"
+      ],
+      "relevant_aliases": 16,
+      "first_relevant_rank": null,
+      "top_5": [
+        "networking:1264",
+        "networking:845",
+        "filesystem:2006",
+        "networking:543",
+        "textprocessing:1703"
+      ],
+      "top_5_scores": [
+        0.6656,
+        0.6656,
+        0.5746,
+        0.5547,
+        0.5531
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.hostname::1",
+      "query": "ver el nombre del host del sistema",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.hostname",
+      "relevant_commands": [
+        "hostname"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": null,
+      "top_5": [
+        "networking:522",
+        "security:2128",
+        "networking:363",
+        "docker:1634",
+        "docker:673"
+      ],
+      "top_5_scores": [
+        0.4527,
+        0.4503,
+        0.4332,
+        0.4105,
+        0.4105
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.hostname::2",
+      "query": "display or set the system's hostname",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.hostname",
+      "relevant_commands": [
+        "hostname"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "misc:956",
+        "misc:3344",
+        "misc:1664",
+        "misc:954",
+        "misc:485"
+      ],
+      "top_5_scores": [
+        0.8408,
+        0.7459,
+        0.7459,
+        0.7459,
+        0.7459
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.14606834984270645,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.1610425878239398,
+      "mrr": 0.25
+    },
+    {
+      "id": "networking.hostname::3",
+      "query": "check or change the hostname of the machine",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.hostname",
+      "relevant_commands": [
+        "hostname"
+      ],
+      "relevant_aliases": 14,
+      "first_relevant_rank": 4,
+      "top_5": [
+        "misc:956",
+        "misc:3344",
+        "misc:1664",
+        "misc:954",
+        "misc:485"
+      ],
+      "top_5_scores": [
+        0.6638,
+        0.5705,
+        0.5705,
+        0.5705,
+        0.5705
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.14606834984270645,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.1610425878239398,
+      "mrr": 0.25
+    },
+    {
+      "id": "networking.gold::1",
+      "query": "enlazar archivos objeto y bibliotecas para generar un ejecutable",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.gold",
+      "relevant_commands": [
+        "gold"
+      ],
+      "relevant_aliases": 254,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "networking:1419",
+        "shellprogramming:2667",
+        "shellprogramming:2576",
+        "shellprogramming:1157",
+        "shellprogramming:807"
+      ],
+      "top_5_scores": [
+        0.4681,
+        0.4591,
+        0.4591,
+        0.4591,
+        0.4591
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.08514311764162098,
+      "mrr": 0.2
+    },
+    {
+      "id": "networking.gold::2",
+      "query": "link object files and libraries with the GNU gold linker",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.gold",
+      "relevant_commands": [
+        "gold"
+      ],
+      "relevant_aliases": 254,
+      "first_relevant_rank": 6,
+      "top_5": [
+        "shellprogramming:1113",
+        "shellprogramming:1085",
+        "networking:1925",
+        "networking:1885",
+        "shellprogramming:1141"
+      ],
+      "top_5_scores": [
+        0.6549,
+        0.6549,
+        0.6549,
+        0.6549,
+        0.6363
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.07839826897867533,
+      "mrr": 0.16666666666666666
+    },
+    {
+      "id": "networking.gold::3",
+      "query": "set linker options and produce an output binary",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.gold",
+      "relevant_commands": [
+        "gold"
+      ],
+      "relevant_aliases": 254,
+      "first_relevant_rank": null,
+      "top_5": [
+        "shellprogramming:2640",
+        "shellprogramming:2609",
+        "shellprogramming:1130",
+        "shellprogramming:1102",
+        "processmanagement:2488"
+      ],
+      "top_5_scores": [
+        0.6478,
+        0.6478,
+        0.6478,
+        0.6478,
+        0.6457
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.prtstat::1",
+      "query": "ver las estadísticas de un proceso",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.prtstat",
+      "relevant_commands": [
+        "prtstat"
+      ],
+      "relevant_aliases": 3,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:241",
+        "docker:238",
+        "docker:202",
+        "docker:199",
+        "docker:163"
+      ],
+      "top_5_scores": [
+        0.4392,
+        0.4392,
+        0.4392,
+        0.4392,
+        0.4392
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.prtstat::2",
+      "query": "display statistics for a process using prtstat",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.prtstat",
+      "relevant_commands": [
+        "prtstat"
+      ],
+      "relevant_aliases": 3,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "networking:1189",
+        "networking:1190",
+        "processmanagement:1123",
+        "networking:2040",
+        "networking:1836"
+      ],
+      "top_5_scores": [
+        0.7747,
+        0.6925,
+        0.6167,
+        0.5468,
+        0.5468
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7653606369886217,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.7653606369886217,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.7653606369886217,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.prtstat::3",
+      "query": "inspect process statistics by process identifier",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.prtstat",
+      "relevant_commands": [
+        "prtstat"
+      ],
+      "relevant_aliases": 3,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "networking:1189",
+        "processmanagement:1123",
+        "c programming:126",
+        "processmanagement:1049",
+        "processmanagement:1513"
+      ],
+      "top_5_scores": [
+        0.7704,
+        0.7318,
+        0.7109,
+        0.6383,
+        0.6141
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.46927872602275644,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.46927872602275644,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.pw-cat::1",
+      "query": "reproducir un archivo de audio o grabar audio en un archivo con pw-cat",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.pw-cat",
+      "relevant_commands": [
+        "pw-cat"
+      ],
+      "relevant_aliases": 22,
+      "first_relevant_rank": 11,
+      "top_5": [
+        "networking:1058",
+        "networking:1052",
+        "networking:1046",
+        "networking:1032",
+        "networking:996"
+      ],
+      "top_5_scores": [
+        0.5129,
+        0.5129,
+        0.5129,
+        0.5129,
+        0.5129
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.09090909090909091
+    },
+    {
+      "id": "networking.pw-cat::2",
+      "query": "play an audio file or record audio with pw-cat",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.pw-cat",
+      "relevant_commands": [
+        "pw-cat"
+      ],
+      "relevant_aliases": 22,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "security:1589",
+        "security:1586",
+        "security:1583",
+        "security:1580",
+        "filesystem:2435"
+      ],
+      "top_5_scores": [
+        0.7285,
+        0.7285,
+        0.7285,
+        0.7285,
+        0.7285
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.1487639058405727,
+      "mrr": 0.2
+    },
+    {
+      "id": "networking.pw-cat::3",
+      "query": "use pw-cat to read or write an audio stream",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.pw-cat",
+      "relevant_commands": [
+        "pw-cat"
+      ],
+      "relevant_aliases": 22,
+      "first_relevant_rank": 5,
+      "top_5": [
+        "security:1589",
+        "security:1586",
+        "security:1583",
+        "security:1580",
+        "filesystem:2435"
+      ],
+      "top_5_scores": [
+        0.6483,
+        0.6483,
+        0.6483,
+        0.6483,
+        0.6483
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.13120507751234178,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.08514311764162098,
+      "mrr": 0.2
+    },
+    {
+      "id": "networking.systemctl::1",
+      "query": "administrar servicios de red usando systemctl",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.systemctl",
+      "relevant_commands": [
+        "systemctl"
+      ],
+      "relevant_aliases": 58,
+      "first_relevant_rank": 2,
+      "top_5": [
+        "misc:2560",
+        "shellprogramming:2237",
+        "misc:2558",
+        "docker:1953",
+        "misc:2292"
+      ],
+      "top_5_scores": [
+        0.5179,
+        0.4776,
+        0.4641,
+        0.4476,
+        0.4167
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.5307212739772434,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.38356636737133565,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.2489083270225946,
+      "mrr": 0.5
+    },
+    {
+      "id": "networking.systemctl::2",
+      "query": "manage system services and units with systemctl",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.systemctl",
+      "relevant_commands": [
+        "systemctl"
+      ],
+      "relevant_aliases": 58,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "shellprogramming:2237",
+        "misc:2560",
+        "misc:2558",
+        "filesystem:2783",
+        "processmanagement:434"
+      ],
+      "top_5_scores": [
+        0.7866,
+        0.7764,
+        0.7431,
+        0.6798,
+        0.6722
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6548086577531307,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5548010254700116,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.systemctl::3",
+      "query": "start, stop, or check the status of network services",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.systemctl",
+      "relevant_commands": [
+        "systemctl"
+      ],
+      "relevant_aliases": 58,
+      "first_relevant_rank": null,
+      "top_5": [
+        "networking:1262",
+        "networking:919",
+        "shellprogramming:1519",
+        "networking:1259",
+        "misc:2254"
+      ],
+      "top_5_scores": [
+        0.6167,
+        0.6163,
+        0.6108,
+        0.6045,
+        0.5995
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.strip::1",
+      "query": "eliminar símbolos de depuración de un archivo binario",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.strip",
+      "relevant_commands": [
+        "strip"
+      ],
+      "relevant_aliases": 29,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "misc:1618",
+        "misc:1609",
+        "misc:1604",
+        "misc:1595"
+      ],
+      "top_5_scores": [
+        0.3254,
+        0.3104,
+        0.3104,
+        0.3104,
+        0.3104
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.strip::2",
+      "query": "strip debugging information from a binary file",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.strip",
+      "relevant_commands": [
+        "strip"
+      ],
+      "relevant_aliases": 29,
+      "first_relevant_rank": 8,
+      "top_5": [
+        "networking:2035",
+        "networking:1831",
+        "hardwaremanagement:776",
+        "hardwaremanagement:579",
+        "filesystem:3319"
+      ],
+      "top_5_scores": [
+        0.7995,
+        0.7995,
+        0.7995,
+        0.7995,
+        0.7693
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.06943122193677727,
+      "mrr": 0.125
+    },
+    {
+      "id": "networking.strip::3",
+      "query": "remove symbols and debug info from executables",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.strip",
+      "relevant_commands": [
+        "strip"
+      ],
+      "relevant_aliases": 29,
+      "first_relevant_rank": 6,
+      "top_5": [
+        "security:2077",
+        "security:2069",
+        "security:856",
+        "security:847",
+        "networking:2135"
+      ],
+      "top_5_scores": [
+        0.7404,
+        0.7404,
+        0.7404,
+        0.7404,
+        0.732
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.07839826897867533,
+      "mrr": 0.16666666666666666
+    },
+    {
+      "id": "networking.tar::1",
+      "query": "crear un archivo tar de varios archivos",
+      "language": "es",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.tar",
+      "relevant_commands": [
+        "tar"
+      ],
+      "relevant_aliases": 138,
+      "first_relevant_rank": null,
+      "top_5": [
+        "docker:1",
+        "filesystem:1561",
+        "docker:238",
+        "docker:202",
+        "docker:199"
+      ],
+      "top_5_scores": [
+        0.4697,
+        0.4592,
+        0.3943,
+        0.3943,
+        0.3943
+      ],
+      "command_hit@1": 0.0,
+      "ndcg@1": 0.0,
+      "command_hit@3": 0.0,
+      "ndcg@3": 0.0,
+      "command_hit@5": 0.0,
+      "ndcg@5": 0.0,
+      "command_hit@10": 0.0,
+      "ndcg@10": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "id": "networking.tar::2",
+      "query": "extract files from a tar archive",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.tar",
+      "relevant_commands": [
+        "tar"
+      ],
+      "relevant_aliases": 138,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "filesystem:2854",
+        "textprocessing:2248",
+        "textprocessing:2744",
+        "filesystem:3004",
+        "docker:1105"
+      ],
+      "top_5_scores": [
+        0.7416,
+        0.7386,
+        0.7202,
+        0.7202,
+        0.7121
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.46927872602275644,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.3391602052736161,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.22009176629808017,
+      "mrr": 1.0
+    },
+    {
+      "id": "networking.tar::3",
+      "query": "manipulate tar files for backup or distribution",
+      "language": "en",
+      "partition": "development",
+      "category": "networking",
+      "capability_id": "networking.tar",
+      "relevant_commands": [
+        "tar"
+      ],
+      "relevant_aliases": 138,
+      "first_relevant_rank": 1,
+      "top_5": [
+        "security:1784",
+        "shellprogramming:841",
+        "filesystem:2854",
+        "networking:1421",
+        "textprocessing:3197"
+      ],
+      "top_5_scores": [
+        0.683,
+        0.6771,
+        0.6344,
+        0.6107,
+        0.6071
+      ],
+      "command_hit@1": 1.0,
+      "ndcg@1": 1.0,
+      "command_hit@3": 1.0,
+      "ndcg@3": 0.7039180890341347,
+      "command_hit@5": 1.0,
+      "ndcg@5": 0.6548086577531307,
+      "command_hit@10": 1.0,
+      "ndcg@10": 0.5606114592078373,
+      "mrr": 1.0
+    }
+  ]
+}

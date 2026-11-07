@@ -1,0 +1,61 @@
+{
+  "filesystem:1": [
+    "where should I save my files",
+    "what is the default save location",
+    "where do I find the output folder",
+    "where can I set the output directory"
+  ],
+  "filesystem:2": [
+    "change character set for list files",
+    "set charset for file list",
+    "charset settings for list files"
+  ],
+  "filesystem:3": [
+    "what are the different path generation modes for 7-Zip when extracting archives",
+    "how does 7-Zip handle the output directory path for archive extraction",
+    "7-Zip path generation mode for archive extraction output directory",
+    "7-Zip options for customizing output directory path when extracting archives"
+  ],
+  "filesystem:4": [
+    "exclude certain types in archive",
+    "archive without specific file types",
+    "exclude archive types",
+    "archive files excluding certain types"
+  ],
+  "filesystem:5": [
+    "assign work directory no path",
+    "temporary work directory assignment",
+    "use empty path for work directory",
+    "assign directory for work purposes without specifying path"
+  ],
+  "filesystem:6": [
+    "where should I save my files",
+    "what is the default output folder",
+    "where do I save my output",
+    "set the output directory location"
+  ],
+  "filesystem:7": [
+    "change character set for list files",
+    "set charset for list in files",
+    "charset settings for file list",
+    "file list charset configuration"
+  ],
+  "filesystem:8": [
+    "generate path mode for archive extraction output directory",
+    "7zip path generation for archive extraction output directory",
+    "linux posix mac os path mode for archive extraction",
+    "7zip archive path mode"
+  ],
+  "filesystem:9": [
+    "exclude certain types in archive",
+    "archive without specific file types",
+    "exclude archive types",
+    "archive files excluding certain types"
+  ],
+  "filesystem:10": [
+    "assign work directory no path",
+    "temporary work directory assignment",
+    "use empty path for work directory",
+    "assign directory for work purposes without specifying path"
+  ]
+}

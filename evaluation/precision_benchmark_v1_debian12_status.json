@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "benchmark": "precision_benchmark_v1.json",
+  "benchmark_sha256": "fb14ab34a9e39a301a2c2f066ea14042d34c348322bedf9259539ca289fb905d",
+  "run_output_sha256": "f50df3a669991b33b87f5f4f934ac0f90ba7aa5fb92c6b414a331e044a9d5200",
+  "split_results": {
+    "development": {
+      "status": "not_scored",
+      "reason": "No adjudicated cases in 'development'",
+      "pending_cases": 13
+    },
+    "validation": {
+      "status": "not_scored",
+      "reason": "No adjudicated cases in 'validation'",
+      "pending_cases": 3
+    },
+    "holdout": {
+      "status": "not_scored",
+      "reason": "No adjudicated cases in 'holdout'",
+      "pending_cases": 6
+    }
+  },
+  "scoring_note": "Only human-adjudicated cases are scored. Retrieval metrics are separate."
+}

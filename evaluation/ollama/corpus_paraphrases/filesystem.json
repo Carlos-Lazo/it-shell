@@ -1,0 +1,1073 @@
+{
+  "filesystem:1": [
+    "where should I save my files",
+    "what is the default save location",
+    "where do I find the output folder",
+    "where can I set the output directory"
+  ],
+  "filesystem:2": [
+    "change character encoding for list files",
+    "set charset for list in files",
+    "adjust file list character set"
+  ],
+  "filesystem:3": [
+    "generate path mode for archive extraction output directory",
+    "7zip path generation for archive extraction output directory",
+    "linux posix output directory path generation for archive extraction",
+    "7zip archive extraction output directory path generation"
+  ],
+  "filesystem:4": [
+    "exclude certain archive types",
+    "archive types to exclude",
+    "filter out specific archive types",
+    "exclude certain file archive types"
+  ],
+  "filesystem:5": [
+    "assign work directory no path",
+    "temporary work directory assignment",
+    "use empty path for work directory",
+    "assign work directory to default"
+  ],
+  "filesystem:6": [
+    "where should I save my files",
+    "what is the default output folder",
+    "where do I save my output",
+    "set the output directory location"
+  ],
+  "filesystem:7": [
+    "change character set for list files",
+    "set charset for list of files",
+    "charset settings for file lists"
+  ],
+  "filesystem:8": [
+    "what are the different path generation modes for archive extraction output directories",
+    "how does the -o{dir_path} switch affect the output directory path for archive extraction",
+    "7-zip path generation mode for archive extraction output directories",
+    "7-zip output directory path generation with asterisk replacement"
+  ],
+  "filesystem:9": [
+    "exclude certain archive types",
+    "archive types to exclude",
+    "filter out specific archive types",
+    "exclude certain file archive types"
+  ],
+  "filesystem:10": [
+    "assign work directory no path",
+    "temporary work directory assignment",
+    "use empty path for work directory",
+    "assign work directory to default"
+  ],
+  "filesystem:11": [
+    "where should I save my files",
+    "what is the default output folder",
+    "where do I save my output",
+    "where can I set the output directory"
+  ],
+  "filesystem:12": [
+    "change character set for list files",
+    "set charset for file list",
+    "charset settings for list files"
+  ],
+  "filesystem:13": [
+    "what are the different path generation modes for archive extraction output directories",
+    "how does the -o{dir_path} switch affect the output directory path for archive extraction",
+    "what does the asterisk (*) character represent in the output directory path for archive extraction",
+    "how does 7-Zip concatenate or replace the asterisk (*) in the output directory path for archive extraction"
+  ],
+  "filesystem:14": [
+    "exclude certain archive types",
+    "archive types to exclude",
+    "filter out specific archive types",
+    "exclude certain file archive types"
+  ],
+  "filesystem:15": [
+    "assign work directory no path",
+    "temporary work directory assignment",
+    "use empty path for work directory",
+    "assign work directory without specifying path"
+  ],
+  "filesystem:16": [
+    "Check file defaults to stdin",
+    "File check defaults to stdin",
+    "Check file, defaults to stdin",
+    "File check with stdin default"
+  ],
+  "filesystem:17": [
+    "check if input is empty",
+    "validate empty input",
+    "allow empty input",
+    "input validation for null values"
+  ],
+  "filesystem:18": [
+    "enable vidmode extension for remote connections",
+    "xorg.conf option for non-local xvidtune client",
+    "allow xvidtune client connections from remote hosts",
+    "configure vidmode extension for remote access"
+  ],
+  "filesystem:19": [
+    "what is the command to read server configuration from a file",
+    "how to read server configuration from a file using file path",
+    "command to read server config from file",
+    "how to access server configuration from a specified file path"
+  ],
+  "filesystem:20": [
+    "what are the steps to read server configuration files from a directory",
+    "how to access server configuration files located in a specific directory",
+    "how to read server config files from a given directory path",
+    "instructions for reading server config files from a specified directory"
+  ],
+  "filesystem:21": [],
+  "filesystem:22": [
+    "default module path compiled into server",
+    "server compilation default module path",
+    "path compiled into server by default",
+    "server default module path"
+  ],
+  "filesystem:23": [
+    "where should I install libraries",
+    "path for installing libraries",
+    "installation directory for libraries",
+    "where do I put libraries"
+  ],
+  "filesystem:24": [
+    "disable touch emulation for wayland compositor",
+    "stop wayland from emulating touch for x11 clients",
+    "disable wayland touch emulation for x11",
+    "turn off wayland touch emulation"
+  ],
+  "filesystem:25": [
+    "does file exist and is block special",
+    "is file a block special file",
+    "file exists and is of block special type",
+    "file exists and is a block special device"
+  ],
+  "filesystem:26": [
+    "does file exist and is character special device",
+    "file is character special device and exists",
+    "file exists and is a character special device",
+    "character special file also exists"
+  ],
+  "filesystem:27": [
+    "directory exists",
+    "file is a directory",
+    "file type is directory",
+    "directory file"
+  ],
+  "filesystem:28": [],
+  "filesystem:29": [
+    "is a symbolic link",
+    "file is a symlink",
+    "file is a symbolic link",
+    "file exists and is a symlink"
+  ],
+  "filesystem:30": [
+    "is a symbolic link",
+    "file is a symlink",
+    "file exists and is a symlink",
+    "file is a symbolic link"
+  ],
+  "filesystem:31": [
+    "user has read access to file",
+    "file exists and I can read it",
+    "check if I have read access to this file",
+    "user can read this file"
+  ],
+  "filesystem:32": [
+    "file size greater than zero",
+    "file exists and is not empty",
+    "file size greater than zero bytes",
+    "file has size greater than zero"
+  ],
+  "filesystem:33": [
+    "does file exist and is socket",
+    "is file a socket",
+    "socket file exists",
+    "file is socket type"
+  ],
+  "filesystem:34": [
+    "user has write access to file",
+    "check if file exists and user has write permission",
+    "user write access to file confirmation",
+    "verify file exists and user has write permission"
+  ],
+  "filesystem:35": [],
+  "filesystem:36": [],
+  "filesystem:37": [],
+  "filesystem:38": [],
+  "filesystem:39": [
+    "DocBook document type: article, manpage, or book",
+    "Default DocBook document type is article, except for manpage",
+    "Choosing between DocBook document types: article, manpage, or book",
+    "DocBook document types: article, manpage, and book"
+  ],
+  "filesystem:40": [
+    "what is the name of the installed backend plugin for a2x",
+    "where does a2x-backend.py live in the BACKEND plugin directory",
+    "how does a2x use a2x-backend.py to convert files to BACKEND format",
+    "what is the global function to_BACKEND used for in a2x-backend.py"
+  ],
+  "filesystem:41": [],
+  "filesystem:42": [],
+  "filesystem:43": [
+    "CSS stylesheet filenames for DocBook XSL Stylesheets output",
+    "List of CSS files used with DocBook XSL for HTML styles",
+    "DocBook XSL stylesheets HTML file names",
+    "CSS files for DocBook XSL output styles"
+  ],
+  "filesystem:44": [
+    "What is the usage guide for this?",
+    "Can you provide a brief usage guide?",
+    "Where can I find the usage guide?",
+    "What does the usage guide cover?"
+  ],
+  "filesystem:45": [
+    "What is the usage guide for this?",
+    "Can you provide a brief usage guide?",
+    "Where can I find the usage guide?",
+    "Usage guide overview"
+  ],
+  "filesystem:46": [
+    "make acyclic directed graph",
+    "convert directed graph to acyclic",
+    "remove cycles from directed graph",
+    "make graph directed and acyclic"
+  ],
+  "filesystem:47": [],
+  "filesystem:48": [],
+  "filesystem:49": [
+    "Specify non-default stretch and shrink values for afm2tfm",
+    "Set non-default values for extra space in afm2tfm",
+    "Adjust stretch and shrink parameters for afm2tfm",
+    "Specify non-default stretch and shrink values for afm2tfm"
+  ],
+  "filesystem:50": [],
+  "filesystem:51": [
+    "look up input files in directory first then search normal path",
+    "change output directory to current directory instead of default",
+    "look for input files in directory before searching elsewhere",
+    "output files to specified directory instead of default"
+  ],
+  "filesystem:52": [
+    "enable filename recording with .ofl extension",
+    "turn on file ofl recorder",
+    "activate ofl file recorder option",
+    "filename recorder .ofl option"
+  ],
+  "filesystem:53": [
+    "frame size in bytes",
+    "buffer length in bytes",
+    "frame size specification",
+    "buffer capacity in bytes"
+  ],
+  "filesystem:54": [
+    "period length in frames",
+    "frame interval size",
+    "number of frames in period",
+    "frames per period"
+  ],
+  "filesystem:55": [
+    "increase verbosity level",
+    "verbose mode multiple times",
+    "increase verbosity setting",
+    "very verbose mode"
+  ],
+  "filesystem:56": [
+    "user connect to midi port",
+    "find midi input/output options",
+    "how to use midi device",
+    "midi device parameters"
+  ],
+  "filesystem:57": [
+    "what is the command to send midi file to a port",
+    "how do I send a .syx file to a midi port",
+    "how to play raw midi commands on a specific port",
+    "command to send midi data to specified port"
+  ],
+  "filesystem:58": [
+    "convert image to pnm format",
+    "convert image to pnm",
+    "convert image to pbm, pmm, or ppm",
+    "change image format to pnm"
+  ],
+  "filesystem:59": [
+    "file format wav voc au raw",
+    "supported audio file types",
+    "what are acceptable file formats",
+    "what audio file types are supported"
+  ],
+  "filesystem:60": [],
+  "filesystem:61": [
+    "close and reopen output file when it reaches 2 GiB",
+    "stop recording and start new file when 2 GiB of sound is accumulated",
+    "close current file and open new one when 2 GiB of sound data is collected",
+    "automatically switch to new file when 2 GiB of sound has been recorded"
+  ],
+  "filesystem:62": [
+    "interpret %-codes in file name using strftime in ffmpeg",
+    "create automatic directories for ffmpeg output files",
+    "ffmpeg strftime usage for file naming",
+    "ffmpeg create directories for file with %-codes"
+  ],
+  "filesystem:63": [
+    "alternate colon-delimited manual page hierarchies for apropos",
+    "set an alternative manpath for manual page search",
+    "specify custom manpath for apropos",
+    "use custom manpath with apropos"
+  ],
+  "filesystem:64": [
+    "make apt-cache recursedepends recursive",
+    "make apt-cache recursedeps recursive",
+    "make apt-cache recurse-depends recursive",
+    "make apt-cache recurse-redepends recursive"
+  ],
+  "filesystem:65": [
+    "Add multiple *.deb, *.dsc, *.changes, Sources and Packages files as metadata sources",
+    "Store multiple source files in a single directory with a custom prefix",
+    "List all metadata sources configured in APT::Sources::With"
+  ],
+  "filesystem:66": [
+    "specify configuration file for apt",
+    "set apt configuration file",
+    "use a custom apt configuration file",
+    "apt configuration file path"
+  ],
+  "filesystem:67": [],
+  "filesystem:68": [
+    "rename disc label",
+    "change disc label",
+    "override disc label",
+    "update disc's label"
+  ],
+  "filesystem:69": [
+    "scan packages debian 1.1/1.2 cd thoroughly",
+    "where are package files located on debian 1.1/1.2 cd",
+    "scan old debian 1.1/1.2 cd for package files",
+    "long package scan for old debian 1.1/1.2 discs"
+  ],
+  "filesystem:70": [
+    "sources.list(5) file no changes",
+    "do not write index files sources.list(5)",
+    "do not modify sources.list(5) file",
+    "keep sources.list(5) unchanged"
+  ],
+  "filesystem:71": [
+    "specify configuration file for apt",
+    "use a custom configuration file with apt",
+    "set apt configuration file",
+    "apt configuration file path"
+  ],
+  "filesystem:72": [
+    "options with empty values",
+    "exclude options with empty values",
+    "remove options with no value",
+    "--no-empty options"
+  ],
+  "filesystem:73": [
+    "Specify configuration file for program",
+    "Use a custom configuration file with program",
+    "APT_CONFIG environment variable for custom config",
+    "apt.conf(5) for configuration syntax"
+  ],
+  "filesystem:74": [
+    "apt extracttemplates filename temporary-directory",
+    "how to use apt extracttemplates with options",
+    "what does apt extracttemplates do with temporary directory",
+    "apt extracttemplates filename -t option"
+  ],
+  "filesystem:75": [
+    "apt extract templates temp directory",
+    "where does apt save extracted debconf templates",
+    "apt configuration for temp directory in extracting templates"
+  ],
+  "filesystem:76": [
+    "Specify configuration file for program",
+    "Use a custom configuration file with program",
+    "APT_CONFIG environment variable for custom config",
+    "apt.conf(5) for configuration syntax"
+  ],
+  "filesystem:77": [],
+  "filesystem:78": [
+    "Enable contents generation for package indexes",
+    "Store file listings in DB for Contents files",
+    "Generate Contents files with package indexes",
+    "Configure APT::FTPArchive::Contents"
+  ],
+  "filesystem:79": [
+    "make apt cache read only",
+    "configure apt to use read only databases",
+    "set apt cache to read only",
+    "disable caching in apt configuration"
+  ],
+  "filesystem:80": [],
+  "filesystem:81": [
+    "specify configuration file for apt",
+    "use a custom apt configuration file",
+    "set apt configuration with custom file",
+    "define apt configuration file"
+  ],
+  "filesystem:82": [],
+  "filesystem:83": [
+    "configure file for program",
+    "specify configuration file for apt",
+    "use custom apt configuration file",
+    "set apt configuration with file"
+  ],
+  "filesystem:84": [
+    "specify keyring file for gpg command",
+    "which keyring file should gpg use",
+    "gpg command keyring preference",
+    "gpg command applies to which keyring"
+  ],
+  "filesystem:85": [
+    "mail changelog to address",
+    "send changelog to specified email",
+    "mail changelog entries to address",
+    "changelog data email address"
+  ],
+  "filesystem:86": [
+    "List seen database with package names and their latest versions",
+    "Display seen database entries as source package names and versions",
+    "Show seen database content as package names and versions",
+    "List seen database entries in format of package name and version"
+  ],
+  "filesystem:87": [],
+  "filesystem:88": [],
+  "filesystem:89": [],
+  "filesystem:90": [
+    "specify configuration file for apt",
+    "use a custom configuration file with apt",
+    "set apt configuration file",
+    "apt configuration file path"
+  ],
+  "filesystem:91": [
+    "specify configuration file for apt",
+    "set apt configuration file",
+    "use custom apt configuration file",
+    "configure apt with custom file"
+  ],
+  "filesystem:92": [],
+  "filesystem:93": [
+    "what is the --output option for tar command",
+    "how to specify extraction directory with tar command",
+    "tar command --output option explanation",
+    "include --output option for directory extraction with tar"
+  ],
+  "filesystem:94": [],
+  "filesystem:95": [
+    "change working directory for execution",
+    "set directory for program execution",
+    "change directory for entire script",
+    "set execution directory"
+  ],
+  "filesystem:96": [
+    "file format for audio files",
+    "audio file type voc wav au",
+    "what format is used for audio files"
+  ],
+  "filesystem:97": [],
+  "filesystem:98": [
+    "close and reopen output file when it reaches 2 GiB",
+    "stop recording and start new file when 2 GiB of sound is accumulated",
+    "close current file and open new one when 2 GiB of sound is recorded",
+    "automatically switch to new file when 2 GiB of sound has been accumulated in the output file"
+  ],
+  "filesystem:99": [
+    "interpret %-codes in file name using strftime in ffmpeg",
+    "create intermediate directories for ffmpeg output files",
+    "ffmpeg strftime options for file naming",
+    "ffmpeg file number specification and creation of intermediate directories"
+  ],
+  "filesystem:100": [
+    "combine multiple LaTeX files into a single document",
+    "archive ancillary LaTeX files into one master file",
+    "merge several LaTeX files into a single .tex document",
+    "archive ancillary LaTeX files into a single .tex file"
+  ],
+  "filesystem:101": [],
+  "filesystem:102": [],
+  "filesystem:103": [
+    "record debugging info for files in old directory and move to new directory",
+    "log file details from old dir to new dir",
+    "debug info for files in old dir, copy to new dir",
+    "log files from old directory to new directory"
+  ],
+  "filesystem:104": [
+    "GNU extensions for assembler debugging information",
+    "Stabs debugging information with GNU extensions",
+    "Debugging assembler with GNU stabs extensions",
+    "Assembler debugging info with GNU extensions"
+  ],
+  "filesystem:105": [
+    "search for directory dir in .include directives",
+    "add dir to search list for .include",
+    "include .include directives in search for dir",
+    "add dir to search for .include files"
+  ],
+  "filesystem:106": [
+    "What is the as version?",
+    "Could you provide the as version?",
+    "What's the version of as?",
+    "As version information please."
+  ],
+  "filesystem:107": [
+    "what is the difference between aligned and unaligned vector move in assembler",
+    "how does encoding aligned vector move as unaligned affect performance",
+    "what is the impact of changing vector move alignment in assembler",
+    "how does assembler handle vector move alignment issues"
+  ],
+  "filesystem:108": [
+    "effects of -mshared option on ELF shared libraries",
+    "how -mshared affects branch instructions in ELF",
+    "what -mshared does to ELF shared libraries",
+    "impact of -mshared on ELF branch instructions"
+  ],
+  "filesystem:109": [],
+  "filesystem:110": [],
+  "filesystem:111": [],
+  "filesystem:112": [
+    "define symbolic names for registers",
+    "register symbolic names",
+    "use symbolic names in registers",
+    "assign names to register symbols"
+  ],
+  "filesystem:113": [],
+  "filesystem:114": [
+    "allow or disallow symbolic names for registers",
+    "enable/disable symbolic register names",
+    "register symbolic name management",
+    "symbolic register naming rules"
+  ],
+  "filesystem:115": [
+    "rename oldname to newname",
+    "change oldname to newname",
+    "update oldname to newname",
+    "rename section oldname to newname"
+  ],
+  "filesystem:116": [],
+  "filesystem:117": [
+    "docbook document type",
+    "docbook book document type",
+    "docbook article document type",
+    "default document type for docbook"
+  ],
+  "filesystem:118": [],
+  "filesystem:119": [],
+  "filesystem:120": [],
+  "filesystem:121": [
+    "find files verified but don't print OK",
+    "list verified files without confirmation messages",
+    "display verified files without OK output",
+    "show verified files without OK confirmation"
+  ],
+  "filesystem:122": [],
+  "filesystem:123": [
+    "extensions used to compile a directory",
+    "list of file extensions for compilation",
+    "file types needed for directory compilation",
+    "extensions required for directory processing"
+  ],
+  "filesystem:124": [
+    "keep file extensions when copying files",
+    "preserve file format in file copy",
+    "maintain file extension during file transfer",
+    "keep file type when moving files"
+  ],
+  "filesystem:125": [
+    "combine multiple input files into one",
+    "merge all input files into single output",
+    "concatenate input files into single file",
+    "assemble all input files into one output file"
+  ],
+  "filesystem:126": [
+    "compile modules from input to output directory",
+    "convert input directory of modules to output directory",
+    "assemble modules from input to output",
+    "compile input modules into output directory"
+  ],
+  "filesystem:127": [],
+  "filesystem:128": [],
+  "filesystem:129": [],
+  "filesystem:130": [],
+  "filesystem:131": [
+    "remove out directory before compilation",
+    "delete out folder prior to compiling",
+    "prior to compilation, ensure out directory is cleared"
+  ],
+  "filesystem:132": [
+    "files with specific extension",
+    "output files in certain format",
+    "use certain file extension for output",
+    "output files with designated extension"
+  ],
+  "filesystem:133": [],
+  "filesystem:134": [
+    "extensions used to compile a directory",
+    "list of file extensions for compilation",
+    "file types used in directory compilation",
+    "supported file extensions for directory compilation"
+  ],
+  "filesystem:135": [
+    "keep file extensions when copying files",
+    "preserve file extensions during file transfer",
+    "maintain file extension settings",
+    "keep original file extensions while copying"
+  ],
+  "filesystem:136": [
+    "combine all input files into one",
+    "merge all input files into a single file",
+    "concatenate all input files into one file",
+    "assemble all input files into a single document"
+  ],
+  "filesystem:137": [
+    "compile modules from input to output directory",
+    "convert input modules to output directory",
+    "compile input module files into output directory"
+  ],
+  "filesystem:138": [],
+  "filesystem:139": [],
+  "filesystem:140": [
+    "include dotfiles during file copying and compiling",
+    "don't exclude dotfiles during compilation and copying",
+    "include dotfiles in copying and compiling process",
+    "don't forget to include dotfiles when compiling and copying"
+  ],
+  "filesystem:141": [],
+  "filesystem:142": [
+    "remove out directory before compilation",
+    "delete out folder prior to compiling",
+    "clear out directory before compiling",
+    "remove out directory before building"
+  ],
+  "filesystem:143": [
+    "files with specific extension",
+    "output files in certain format",
+    "use certain file extension for output",
+    "output files with designated format"
+  ],
+  "filesystem:144": [
+    "config file for babel",
+    "babel configuration file path",
+    "where to find babel config",
+    "path to babel config file"
+  ],
+  "filesystem:145": [
+    "babel config file path to use",
+    "where is babel configuration file located",
+    "how to specify babel config file",
+    "path to babel config"
+  ],
+  "filesystem:146": [
+    "GNOME disk usage analyzer",
+    "graphical disk usage tool GNOME",
+    "GNOME disk usage analyzer app",
+    "GNOME graphical disk usage"
+  ],
+  "filesystem:147": [
+    "baobab options and usage",
+    "how to use baobab command",
+    "baobab directory parameters",
+    "baobab command syntax and options"
+  ],
+  "filesystem:148": [],
+  "filesystem:149": [
+    "ignore non-alphabet characters during decoding",
+    "decode ignoring non-alphabet characters",
+    "ignore characters that are not letters during decoding",
+    "decode while ignoring non-letter characters"
+  ],
+  "filesystem:150": [
+    "ignore non-alphabet characters during decoding",
+    "ignore non-alphabetic characters in decoding",
+    "decode ignoring non-alphabet characters",
+    "ignore non-alphabetic characters during the decoding process"
+  ],
+  "filesystem:151": [
+    "remove folder path and file extension from filenames",
+    "extract filename without directory or extension",
+    "strip directory and file type from file names"
+  ],
+  "filesystem:152": [],
+  "filesystem:153": [],
+  "filesystem:154": [
+    "ignore non-alphabet characters during decoding",
+    "decode ignoring non-alphabet characters",
+    "ignore characters that are not letters during decoding",
+    "decode while ignoring non-letter characters"
+  ],
+  "filesystem:155": [
+    "exclude /etc/profile and personal initialization files from bash startup",
+    "dont read profile files in bash",
+    "bash initialization files to ignore",
+    "exclude profile files from bash startup"
+  ],
+  "filesystem:156": [
+    "find how to report a bug in bash",
+    "how to report a bug in bash",
+    "where can I report a bug in bash",
+    "how to file a bug in bash"
+  ],
+  "filesystem:157": [],
+  "filesystem:158": [],
+  "filesystem:159": [
+    "convert thebibliography to bib file",
+    "export bibliography environment to bib",
+    "convert bibliography environment to bib file"
+  ],
+  "filesystem:160": [
+    "Usage and exit information",
+    "Show usage and exit",
+    "Usage and how to exit"
+  ],
+  "filesystem:161": [],
+  "filesystem:162": [],
+  "filesystem:163": [
+    "compact bogofilter directory with wordlist",
+    "bogofilter directory compact wordlist",
+    "bogofilter directory compact wordlist name",
+    "compact bogofilter directory wordlist"
+  ],
+  "filesystem:164": [],
+  "filesystem:165": [
+    "compact bogofilter directory with wordlist",
+    "bogofilter directory compact wordlist",
+    "bogofilter directory compact wordlist name",
+    "compact bogofilter directory wordlist"
+  ],
+  "filesystem:166": [],
+  "filesystem:167": [
+    "copy directory with options using source and destination",
+    "copy source to destination with option",
+    "copy directory using source and destination options"
+  ],
+  "filesystem:168": [],
+  "filesystem:169": [
+    "copy directory with options using source and destination",
+    "copy source to destination with option",
+    "copy directory with specified source and destination",
+    "use copy command for directory with options"
+  ],
+  "filesystem:170": [],
+  "filesystem:171": [
+    "files in bogofilter directory",
+    "tar -r bogofilter_directory",
+    "bogofilter directory tarball",
+    "tar -R bogofilter directory"
+  ],
+  "filesystem:172": [],
+  "filesystem:173": [
+    "files in bogofilter directory",
+    "tar -r bogofilter_directory",
+    "bogofilter directory tarball",
+    "tar -R bogofilter directory"
+  ],
+  "filesystem:174": [
+    "what are relative file paths",
+    "files relative to current directory",
+    "file paths relative to working directory",
+    "file location relative to current directory"
+  ],
+  "filesystem:175": [
+    "what does the tilde character mean in text",
+    "definition of the ~ character",
+    "interpretation of tilde (~) in text",
+    "what does \\nobreakspace do"
+  ],
+  "filesystem:176": [
+    "~ and \\nobreakspace as non-breaking space",
+    "Interpret ~ and \\nobreakspace as space",
+    "What does ~ and \\nobreakspace mean in text",
+    "How to use ~ and \\nobreakspace as space"
+  ],
+  "filesystem:177": [
+    "Check .bib file for non-bib internal fields",
+    "Warn about internal fields in .bib file",
+    "Monitor .bib file for non-bib fields",
+    "Alert on presence of non-bib fields in .bib"
+  ],
+  "filesystem:178": [
+    "ignore internal fields in .bib file",
+    "don't warn about internal fields in bib file",
+    "suppress warning for internal bib fields",
+    "ignore unexpected fields in bib file"
+  ],
+  "filesystem:179": [],
+  "filesystem:180": [
+    "create bibliography for latex",
+    "write bibliography for latex document",
+    "generate latex bibliography",
+    "make bibliography in latex"
+  ],
+  "filesystem:181": [
+    "create bibliography for latex",
+    "write bibliography for latex document",
+    "generate bibliography for latex",
+    "make latex bibliography"
+  ],
+  "filesystem:182": [
+    "debugging information by type",
+    "all debugging information",
+    "show csf debugging details",
+    "display io debugging information"
+  ],
+  "filesystem:183": [
+    "trace execution process",
+    "show tracing for execution",
+    "execution tracing report",
+    "display execution tracing"
+  ],
+  "filesystem:184": [
+    "BibTeX version information",
+    "what is the version of BibTeX",
+    "BibTeX version details",
+    "how to find BibTeX version"
+  ],
+  "filesystem:185": [
+    "what are the different types of debugging information",
+    "list all debugging information types available",
+    "show different categories for debugging information",
+    "different debugging information types supported"
+  ],
+  "filesystem:186": [
+    "trace execution steps",
+    "view tracing information",
+    "show execution logs",
+    "execution tracing details"
+  ],
+  "filesystem:187": [
+    "what is the BibTeX version?",
+    "how do I check my BibTeX version?",
+    "BibTeX version information",
+    "how can I find my current BibTeX version?"
+  ],
+  "filesystem:188": [
+    "convert biorad confocal image to pnm format",
+    "convert biorad file to pnm image",
+    "how to convert biorad confocal file to pnm",
+    "biorad confocal to pnm image conversion"
+  ],
+  "filesystem:189": [
+    "address of the device to send file to",
+    "device address for file send",
+    "where to send the file to",
+    "device address for file transmission"
+  ],
+  "filesystem:190": [],
+  "filesystem:191": [
+    "convert bmp to pnm format",
+    "change bmp to pnm image",
+    "bmp to pnm conversion",
+    "bmp to pnm format conversion"
+  ],
+  "filesystem:192": [],
+  "filesystem:193": [],
+  "filesystem:194": [],
+  "filesystem:195": [
+    "help bogoutil",
+    "version bogoutil",
+    "bogoutil options",
+    "bogoutil database options"
+  ],
+  "filesystem:196": [
+    "bogoutil show version",
+    "bogoutil help",
+    "bogoutil --db-list-logfiles directory help",
+    "bogoutil --db-remove-environment directory help"
+  ],
+  "filesystem:197": [
+    "Resource monitor usage stats",
+    "System resource usage monitor",
+    "Monitor system resource usage and stats",
+    "Usage and stats of system resources"
+  ],
+  "filesystem:198": [
+    "convert doodle brush file to pnm format",
+    "convert .pbm file from doodle brush drawing",
+    "change doodle brush file to pnm",
+    "translate doodle brush image to pnm"
+  ],
+  "filesystem:199": [
+    "path to command to execute",
+    "define command execution path",
+    "command path to use",
+    "define command execution location"
+  ],
+  "filesystem:200": [],
+  "filesystem:201": [],
+  "filesystem:202": [
+    "docbundle --version",
+    "docbundle --help",
+    "docbundle --verbose",
+    "docbundle --texfile=file.tex"
+  ],
+  "filesystem:203": [
+    "snapshot dependency file doesn't include main LaTeX file. How to make bundledoc find it with correct filename",
+    "bundledoc assumes main LaTeX file name matches snapshot dependency file name. How to specify a different filename",
+    "main LaTeX file not listed in snapshot dependency file. How to configure bundledoc to find it",
+    "bundledoc doesn't recognize main LaTeX file. Need to specify filename"
+  ],
+  "filesystem:204": [
+    "change directory name for bundledoc archive",
+    "bundledoc archive dependency directory name",
+    "bundledoc archive directory option",
+    "bundledoc archive dependency directory"
+  ],
+  "filesystem:205": [
+    "bundledoc exclude files not in tex directory",
+    "files bundledoc skips when using --localonly",
+    "bundledoc behavior with --localonly option",
+    "files not archived by bundledoc with --localonly"
+  ],
+  "filesystem:206": [
+    "files excluded by --exclude in archive",
+    "files to be omitted with --exclude",
+    "files not included in archive with --exclude"
+  ],
+  "filesystem:207": [
+    "change the filename of bundledoc manifest file",
+    "exclude bundledoc manifest file",
+    "bundledoc manifest file alternative name",
+    "bundledoc manifest file option"
+  ],
+  "filesystem:208": [
+    "what-is-the-difference-between-keepdirs-and-directory-option-in-bundledoc",
+    "how-does-the--keepdirs-option-affect-the-structure-of-the-archive-file-produced-by-bundledoc",
+    "examples-of-how-dependency-files-are-stored-with-original-pathnames-in-bundledoc--keepdirs-option",
+    "what-information-is-contained-in-the-manifest-file-produced-by-bundledoc"
+  ],
+  "filesystem:209": [
+    "what is the configuration file format for bundledoc",
+    "how to specify the configuration file for bundledoc",
+    "where do I find the configuration files for bundledoc",
+    "how to write custom configuration files for bundledoc"
+  ],
+  "filesystem:210": [],
+  "filesystem:211": [
+    "start a file operation with a dash",
+    "handle files that start with a dash",
+    "use a dash prefix for bzip2 files"
+  ],
+  "filesystem:212": [
+    "what is the version",
+    "print version number",
+    "what version"
+  ],
+  "filesystem:213": [
+    "cd DIR",
+    "change to DIR",
+    "go to DIR",
+    "navigate to DIR"
+  ],
+  "filesystem:214": [
+    "take lock on DEST while sandbox is running",
+    "lock multiple files DEST while sandbox is active",
+    "use option to lock DEST during sandbox execution",
+    "take multiple locks on DEST while sandbox runs"
+  ],
+  "filesystem:215": [
+    "what are the permissions for a tmpfs with octal 0700",
+    "how do I set tmpfs permissions to 0700",
+    "tmpfs permissions set to octal 0700",
+    "tmpfs mounted with permissions 0700"
+  ],
+  "filesystem:216": [
+    "set size for next tmpfs",
+    "use --size with --tmpfs",
+    "apply size limit for tmpfs",
+    "combine size and permissions for tmpfs"
+  ],
+  "filesystem:217": [],
+  "filesystem:218": [
+    "create directory at dest without changing permissions",
+    "ignore existing directory permissions when creating",
+    "use --chmod to change directory permissions",
+    "directory mode is 0755 if newly created"
+  ],
+  "filesystem:219": [],
+  "filesystem:220": [],
+  "filesystem:221": [],
+  "filesystem:222": [
+    "change path permissions to octal",
+    "set octal permissions for PATH",
+    "lockdown: set PATH permissions to octal"
+  ],
+  "filesystem:223": [],
+  "filesystem:224": [
+    "start a file operation with a dash",
+    "handle files starting with a dash",
+    "use a dash prefix for file processing",
+    "operate on files that begin with a dash"
+  ],
+  "filesystem:225": [],
+  "filesystem:226": [
+    "start file processing with a dash",
+    "handle files starting with -",
+    "use a dash prefix for file processing",
+    "file operations with filenames starting in -"
+  ],
+  "filesystem:227": [],
+  "filesystem:228": [
+    "start a file operation with a dash",
+    "handle files that start with a dash",
+    "use a dash prefix for file processing",
+    "operate on files beginning with -"
+  ],
+  "filesystem:229": [],
+  "filesystem:230": [],
+  "filesystem:231": [],
+  "filesystem:232": [],
+  "filesystem:233": [
+    "cameratopam input_file_name --identify_only --quick_interpolate --half_size --four_color_rgb --document_mode --balance_auto --balance_camera --red_scale=float --blue_scale=float --brightness=fraction --no_clip_color --rgb --secondary --linear --verbose",
+    "cameratopam input_file_name -i -q -h -f -d -b -a -c -r=float -b=float -b:auto -b:camera -r:0.5 -no:clip -rgb -s -lin -v",
+    "cameratopam input_file_name -i -q -h -f -d -b -a -c -r -b -no -rgb -s -v",
+    "cameratopam input_file_name -i -q -h -f -d -b -a -c -r -b -no -rgb -s"
+  ],
+  "filesystem:234": [
+    "details of processing to stderr",
+    "stderr details of processing",
+    "log processing to standard error",
+    "stderr output of processing details"
+  ],
+  "filesystem:235": [
+    "reduce image resolution by half without interpolation",
+    "downscale image using 2x2 block reduction",
+    "reduce 2x2 pixel blocks to single pixel",
+    "half-size image without interpolation"
+  ],
+  "filesystem:236": [
+    "output concatenated files to stdout",
+    "print combined files to console",
+    "display merged files on screen",
+    "output concatenated files to standard output"
+  ],
+  "filesystem:237": [],
+  "filesystem:238": [],
+  "filesystem:239": [],
+  "filesystem:240": [
+    "change directory",
+    "navigate to folder",
+    "cd to directory"
+  ],
+  "filesystem:241": [],
+  "filesystem:242": [],
+  "filesystem:243": [
+    "CSV file for named color values",
+    "Color CSV file format",
+    "CSV file with color specifications",
+    "Named color CSV file data"
+  ],
+  "filesystem:244": [],
+  "filesystem:245": [
+    "Set profile copyright notice",
+    "Copyright settings for profile",
+    "Profile rights statement",
+    "Profile copyright configuration"
+  ],
+  "filesystem:246": [
+    "set profile model",
+    "configure profile model",
+    "select model for profile",
+    "profile model settings"
+  ],
+  "filesystem:247": [],
+  "filesystem:248": []
+}

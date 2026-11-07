@@ -1,0 +1,47 @@
+{
+  "filesystem:1": [
+    "set output directory",
+    "specify output path",
+    "choose output folder",
+    "direct output to here"
+  ],
+  "filesystem:2": [],
+  "filesystem:3": [
+    "7z -spo*",
+    "7z -spoc",
+    "7z -spor",
+    "*"
+  ],
+  "filesystem:4": [
+    "exclude archive type",
+    "7z -stx{Type}",
+    "7z -t{Type}exclude",
+    "7z -x{Type}"
+  ],
+  "filesystem:5": [],
+  "filesystem:6": [
+    "set Output directory here",
+    "use this folder for output",
+    "{Directory} as output path",
+    "{Directory} for output location"
+  ],
+  "filesystem:7": [
+    "7za -scsUTF-8",
+    "7za -scsUTF-16LE",
+    "7za -scsUTF-16BE",
+    "7za -scsDOS"
+  ],
+  "filesystem:8": [
+    "7za -spo*",
+    "7za -spoc",
+    "7za -spor",
+    "7za -spo*"
+  ],
+  "filesystem:9": [
+    "exclude archive type",
+    "7za -stx Type",
+    "7za -sType",
+    "exclude Type in archive"
+  ],
+  "filesystem:10": []
+}

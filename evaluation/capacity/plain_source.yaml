@@ -1,0 +1,1065 @@
+schema_version: 1
+metadata:
+  status: draft
+  query_generation_provenance: not_recorded
+  query_review_status: reviewed
+  partition_policy: Hold out related capability families together; keep test queries reserved from prompt and retrieval tuning.
+categories:
+- category: filesystem
+  capacities:
+  - capability_id: filesystem.mkdir_create_missing_parents
+    source_aliases:
+    - filesystem:1871
+    expected_function: Crear los directorios solicitados y los directorios padre que todavía no existan.
+    required_inputs:
+    - ruta del directorio
+    acceptance_criteria:
+    - Si la ruta solicitada contiene directorios padre inexistentes, estos se crean junto con el directorio final.
+    - Al finalizar correctamente, el directorio solicitado existe y los directorios padre que ya existían conservan su contenido.
+    - Si la ruta no puede crearse, el fallo se informa y no se presenta la operación como exitosa.
+    must_not_assume:
+    - una ruta concreta que la persona no haya dado
+    clarification_required_when:
+    - no se puede determinar qué ruta crear
+    partition: development
+    queries:
+    - text: crear una estructura de carpetas aunque todavía no existan las carpetas superiores
+      language: es
+      status: reviewed
+    - text: make the parent folders when creating a nested directory
+      language: en
+      status: reviewed
+  - capability_id: grep.read_patterns_from_file
+    source_aliases:
+    - filesystem:1085
+    expected_function: Leer patrones, uno por línea, desde un archivo y buscar coincidencias con ellos.
+    required_inputs:
+    - archivo que contiene los patrones
+    - archivo o entrada donde buscar
+    acceptance_criteria:
+    - Encuentra líneas que coinciden con cualquiera de los patrones.
+    - Puede combinar patrones del archivo con patrones indicados explícitamente.
+    - Un archivo de patrones vacío no produce coincidencias.
+    must_not_assume: []
+    clarification_required_when: []
+    partition: test
+    queries:
+    - text: buscar en un archivo las líneas que coincidan con los patrones guardados en otro archivo
+      language: es
+      status: reviewed
+    - text: find matching lines in a log using a list of patterns from a file
+      language: en
+      status: reviewed
+    - text: search with several expressions listed one per line in a pattern file
+      language: en
+      status: reviewed
+    functional_area: text_search
+  - capability_id: filesystem.egrep_extended_pattern_matching
+    source_aliases:
+    - filesystem:735
+    expected_function: Buscar coincidencias de patrones extendidos en archivos de texto.
+    required_inputs:
+    - patrón extendido
+    - archivo o entrada donde buscar
+    acceptance_criteria:
+    - La búsqueda interpreta el patrón con la sintaxis de expresiones regulares extendidas, no como texto literal.
+    - Se muestran las líneas de la entrada que coinciden con el patrón y no se incluyen líneas que no coinciden.
+    - Si no hay coincidencias, el resultado indica que no se encontraron líneas sin presentar un error de ejecución.
+    must_not_assume:
+    - que el patrón es simple o literal
+    clarification_required_when:
+    - no se puede determinar el patrón a buscar
+    partition: test
+    queries:
+    - text: buscar líneas que coincidan con un patrón extendido en un archivo
+      language: es
+      status: reviewed
+    - text: find lines in a file that match an extended regular expression
+      language: en
+      status: reviewed
+    - text: search for complex patterns in text files using egrep
+      language: en
+      status: reviewed
+  - capability_id: filesystem.tree_directory_structure
+    source_aliases:
+    - filesystem:2947
+    expected_function: Mostrar la estructura de directorios y archivos en forma de árbol.
+    required_inputs:
+    - ruta del directorio
+    acceptance_criteria:
+    - La salida representa los archivos y subdirectorios bajo la ruta indicada con su relación jerárquica.
+    - La profundidad y los filtros de la salida respetan las opciones solicitadas; no se omiten niveles por un límite inventado.
+    - La consulta no modifica el contenido del directorio.
+    must_not_assume:
+    - que el directorio tiene un número limitado de niveles
+    clarification_required_when:
+    - no se puede determinar la ruta del directorio
+    partition: test
+    queries:
+    - text: ver la estructura de carpetas y archivos en forma de árbol
+      language: es
+      status: reviewed
+    - text: display the directory hierarchy in a tree format
+      language: en
+      status: reviewed
+    - text: list files and directories in a nested structure
+      language: en
+      status: reviewed
+  - capability_id: filesystem.touch_create_or_update
+    source_aliases:
+    - filesystem:2934
+    expected_function: Crear un archivo vacío o actualizar la fecha de modificación de un archivo existente.
+    required_inputs:
+    - ruta del archivo
+    acceptance_criteria:
+    - Si el archivo no existe y se solicita crearlo, se crea vacío en la ruta indicada.
+    - Si el archivo ya existe y se solicita actualizar su fecha, cambia la marca temporal solicitada y se conserva su contenido.
+    - Si la ruta no es válida o no se puede escribir, el fallo se informa sin afirmar que el archivo fue creado o actualizado.
+    must_not_assume:
+    - que el archivo ya existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo
+    partition: development
+    queries:
+    - text: crear un archivo vacío o actualizar su fecha de modificación
+      language: es
+      status: reviewed
+    - text: create a new file or update the timestamp of an existing file
+      language: en
+      status: reviewed
+    - text: touch a file to create it or change its modification time
+      language: en
+      status: reviewed
+  - capability_id: filesystem.rm_remove_files_or_directories
+    source_aliases:
+    - filesystem:2575
+    expected_function: Eliminar archivos o directorios especificados.
+    required_inputs:
+    - ruta del archivo o directorio
+    acceptance_criteria:
+    - Tras una eliminación exitosa, el objetivo especificado deja de existir en la ruta indicada.
+    - La operación se limita a los objetivos solicitados y no añade recursividad ni amplía la ruta objetivo sin indicación explícita.
+    - Si el objetivo no existe o no puede eliminarse, se informa el fallo y no se afirma que fue eliminado.
+    must_not_assume:
+    - que el archivo o directorio existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo o directorio
+    partition: development
+    queries:
+    - text: eliminar un archivo o carpeta
+      language: es
+      status: reviewed
+    - text: remove a file or directory from the filesystem
+      language: en
+      status: reviewed
+    - text: delete specified files or directories
+      language: en
+      status: reviewed
+  - capability_id: filesystem.ls_list_directory_contents
+    source_aliases:
+    - filesystem:1673
+    expected_function: Listar el contenido de un directorio.
+    required_inputs:
+    - ruta del directorio
+    acceptance_criteria:
+    - La salida lista las entradas visibles del directorio indicado según las opciones solicitadas.
+    - Los nombres mostrados corresponden a ese directorio y no se presentan como modificados por la consulta.
+    - Si la ruta no existe o no es accesible, el fallo se informa en lugar de devolver una lista inventada.
+    must_not_assume:
+    - que el directorio existe
+    clarification_required_when:
+    - no se puede determinar la ruta del directorio
+    partition: development
+    queries:
+    - text: ver los archivos y carpetas dentro de un directorio
+      language: es
+      status: reviewed
+    - text: list the contents of a folder
+      language: en
+      status: reviewed
+    - text: display files and directories in a specified path
+      language: en
+      status: reviewed
+  - capability_id: filesystem.ln_create_hard_or_symbolic_link
+    source_aliases:
+    - filesystem:1584
+    expected_function: Crear un enlace duro o simbólico a un archivo o directorio.
+    required_inputs:
+    - ruta del archivo o directorio de origen
+    - ruta del enlace
+    acceptance_criteria:
+    - El enlace se crea en la ruta de destino indicada y apunta al origen solicitado.
+    - Se usa el tipo de enlace solicitado (simbólico o duro); no se sustituye uno por otro silenciosamente.
+    - Si origen, destino o tipo de enlace no son válidos o no están disponibles, se informa el fallo y no se afirma que el enlace existe.
+    must_not_assume:
+    - que el archivo o directorio de origen existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo o directorio de origen
+    partition: development
+    queries:
+    - text: crear un enlace simbólico a un archivo
+      language: es
+      status: reviewed
+    - text: create a hard or symbolic link to a file or directory
+      language: en
+      status: reviewed
+    - text: link a file or directory to another location
+      language: en
+      status: reviewed
+  - capability_id: filesystem.cp_copy_files_or_directories
+    source_aliases:
+    - filesystem:370
+    expected_function: Copiar archivos o directorios de una ubicación a otra.
+    required_inputs:
+    - ruta del archivo o directorio de origen
+    - ruta del destino
+    acceptance_criteria:
+    - El destino contiene una copia del archivo o directorio de origen indicado, preservando el contenido de los elementos copiados.
+    - El alcance de la copia corresponde al origen y destino solicitados; no se añaden rutas ni se elige un destino distinto.
+    - Si el origen no existe o la copia falla, se informa el fallo y no se presenta la copia como completada.
+    must_not_assume:
+    - que el archivo o directorio de origen existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo o directorio de origen
+    partition: development
+    queries:
+    - text: copiar un archivo o carpeta a otra ubicación
+      language: es
+      status: reviewed
+    - text: copy files or directories from one place to another
+      language: en
+      status: reviewed
+    - text: duplicate a file or directory to a specified destination
+      language: en
+      status: reviewed
+  - capability_id: filesystem.head_display_first_lines_of_file
+    source_aliases:
+    - filesystem:1225
+    expected_function: Mostrar las primeras líneas de un archivo de texto.
+    required_inputs:
+    - ruta del archivo
+    - número de líneas a mostrar
+    acceptance_criteria:
+    - La salida contiene el comienzo del archivo indicado y respeta la cantidad de líneas solicitada.
+    - Si no se especifica una cantidad, se aplica el comportamiento predeterminado de la herramienta y no se inventa una cantidad.
+    - El archivo de origen no se modifica.
+    must_not_assume:
+    - que el archivo existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo
+    partition: test
+    queries:
+    - text: ver las primeras líneas de un archivo
+      language: es
+      status: reviewed
+    - text: display the beginning of a text file
+      language: en
+      status: reviewed
+    - text: show the first few lines of a file
+      language: en
+      status: reviewed
+  - capability_id: filesystem.sort_sort_lines_in_file
+    source_aliases:
+    - filesystem:2691
+    expected_function: Ordenar las líneas de un archivo de texto alfabéticamente o numéricamente.
+    required_inputs:
+    - ruta del archivo
+    - opciones de ordenamiento
+    acceptance_criteria:
+    - La salida contiene las líneas de entrada en el orden solicitado, alfabético por defecto o numérico cuando se pide.
+    - Las líneas se conservan; no se agregan ni eliminan registros como efecto del ordenamiento.
+    - El archivo de origen no se modifica salvo que la persona solicite explícitamente una escritura sobre él.
+    must_not_assume:
+    - que el archivo existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo
+    partition: development
+    queries:
+    - text: ordenar las líneas de un archivo alfabéticamente
+      language: es
+      status: reviewed
+    - text: sort the lines in a text file
+      language: en
+      status: reviewed
+    - text: arrange the contents of a file in a specific order
+      language: en
+      status: reviewed
+  - capability_id: filesystem.tail_display_last_lines_of_file
+    source_aliases:
+    - filesystem:2830
+    expected_function: Mostrar las últimas líneas de un archivo de texto.
+    required_inputs:
+    - ruta del archivo
+    - número de líneas a mostrar
+    acceptance_criteria:
+    - La salida contiene el final del archivo indicado y respeta la cantidad de líneas solicitada.
+    - Si no se especifica una cantidad, se aplica el comportamiento predeterminado de la herramienta y no se inventa una cantidad.
+    - El archivo de origen no se modifica.
+    must_not_assume:
+    - que el archivo existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo
+    partition: test
+    queries:
+    - text: ver las últimas líneas de un archivo
+      language: es
+      status: reviewed
+    - text: display the end of a text file
+      language: en
+      status: reviewed
+    - text: show the last few lines of a file
+      language: en
+      status: reviewed
+  - capability_id: filesystem.find_search_for_files_or_directories
+    source_aliases:
+    - filesystem:877
+    expected_function: Buscar archivos o directorios que coincidan con ciertos criterios.
+    required_inputs:
+    - ruta de inicio
+    - criterios de búsqueda
+    acceptance_criteria:
+    - La búsqueda empieza en la ruta indicada y devuelve únicamente entradas que cumplen los criterios solicitados.
+    - Cada resultado identifica la ruta encontrada y no se incluyen coincidencias fuera del árbol de búsqueda.
+    - Si falta la ruta de inicio o un criterio indispensable, se solicita aclaración en vez de inventarlos.
+    must_not_assume:
+    - que el directorio de inicio existe
+    clarification_required_when:
+    - no se puede determinar la ruta de inicio
+    partition: development
+    queries:
+    - text: buscar archivos o carpetas que cumplan ciertos criterios
+      language: es
+      status: reviewed
+    - text: find files or directories based on specific conditions
+      language: en
+      status: reviewed
+    - text: search for files or folders matching given parameters
+      language: en
+      status: reviewed
+  - capability_id: filesystem.du_estimate_file_space_usage
+    source_aliases:
+    - filesystem:666
+    expected_function: Estimar el uso de espacio en disco de archivos o directorios.
+    required_inputs:
+    - ruta del archivo o directorio
+    acceptance_criteria:
+    - Para una ruta existente, la propuesta usa la ruta indicada y consulta su uso de espacio en disco con du.
+    - Al ejecutarse sobre un archivo o directorio de prueba, du termina correctamente y muestra una medida de uso asociada a esa ruta.
+    - La medida reportada es no negativa; no se exige un valor exacto porque el uso depende del sistema de archivos.
+    - Si la ruta no existe o no es accesible, el resultado no se presenta como una medición exitosa.
+    must_not_assume:
+    - que el archivo o directorio existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo o directorio
+    partition: development
+    queries:
+    - text: ver cuánto espacio en disco ocupa un archivo o carpeta
+      language: es
+      status: reviewed
+    - text: estimate the disk space used by a file or directory
+      language: en
+      status: reviewed
+    - text: check the size of files or directories on disk
+      language: en
+      status: reviewed
+  - capability_id: filesystem.stat_display_file_or_filesystem_status
+    source_aliases:
+    - filesystem:2763
+    expected_function: Mostrar el estado de un archivo o del sistema de archivos.
+    required_inputs:
+    - ruta del archivo o directorio
+    acceptance_criteria:
+    - La salida informa atributos o estado del archivo o sistema de archivos correspondiente a la ruta indicada.
+    - La consulta no modifica el archivo ni el sistema de archivos.
+    - Si la ruta no existe o no se puede consultar, el fallo se informa sin inventar metadatos.
+    must_not_assume:
+    - que el archivo o directorio existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo o directorio
+    partition: development
+    queries:
+    - text: ver información detallada sobre un archivo o carpeta
+      language: es
+      status: reviewed
+    - text: display the status of a file or filesystem
+      language: en
+      status: reviewed
+    - text: show metadata and attributes of a file or directory
+      language: en
+      status: reviewed
+  - capability_id: filesystem.chmod_change_file_permissions
+    source_aliases:
+    - filesystem:284
+    expected_function: Cambiar los permisos de un archivo o directorio.
+    required_inputs:
+    - ruta del archivo o directorio
+    - nuevos permisos
+    acceptance_criteria:
+    - El modo aplicado coincide con los permisos solicitados y afecta solo a la ruta indicada.
+    - No se amplía la operación recursivamente ni se inventa un modo de permisos.
+    - Si faltan los permisos deseados o la operación falla, se solicita aclaración o se informa el fallo, respectivamente.
+    must_not_assume:
+    - que el archivo o directorio existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo o directorio
+    partition: development
+    queries:
+    - text: cambiar los permisos de un archivo o carpeta
+      language: es
+      status: reviewed
+    - text: modify the access permissions of a file or directory
+      language: en
+      status: reviewed
+    - text: set new permissions for a file or folder
+      language: en
+      status: reviewed
+  - capability_id: filesystem.chown_change_file_owner
+    source_aliases:
+    - filesystem:291
+    expected_function: Cambiar el propietario y/o grupo de un archivo o directorio.
+    required_inputs:
+    - ruta del archivo o directorio
+    - nuevo propietario
+    - nuevo grupo
+    acceptance_criteria:
+    - El propietario y/o grupo resultante coincide con los valores especificados por la persona.
+    - La operación se limita a la ruta indicada y no se vuelve recursiva salvo solicitud explícita.
+    - No se inventan propietario ni grupo; los valores omitidos no se cambian sin una instrucción que lo justifique.
+    must_not_assume:
+    - que el archivo o directorio existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo o directorio
+    partition: development
+    queries:
+    - text: cambiar el propietario de un archivo o carpeta
+      language: es
+      status: reviewed
+    - text: change the owner and group of a file or directory
+      language: en
+      status: reviewed
+    - text: assign a new owner or group to a file or folder
+      language: en
+      status: reviewed
+  - capability_id: filesystem.chattr_change_file_attributes
+    source_aliases:
+    - filesystem:268
+    expected_function: Cambiar los atributos extendidos de un archivo o directorio.
+    required_inputs:
+    - ruta del archivo o directorio
+    - nuevos atributos
+    acceptance_criteria:
+    - Los atributos del archivo o directorio indicado cambian según la operación solicitada.
+    - No se modifican atributos no solicitados ni se amplía el alcance a otros archivos.
+    - Si el sistema de archivos o los permisos no permiten el cambio, se informa el fallo sin afirmar que se aplicó.
+    must_not_assume:
+    - que el archivo o directorio existe
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo o directorio
+    partition: development
+    queries:
+    - text: cambiar los atributos extendidos de un archivo o carpeta
+      language: es
+      status: reviewed
+    - text: modify the extended attributes of a file or directory
+      language: en
+      status: reviewed
+    - text: set new attributes for a file or folder
+      language: en
+      status: reviewed
+  - capability_id: filesystem.logger_log_messages
+    source_aliases:
+    - filesystem:1634
+    expected_function: Registrar mensajes en el sistema de registro (syslog).
+    required_inputs:
+    - mensaje a registrar
+    - nivel de severidad
+    acceptance_criteria:
+    - El mensaje especificado se envía al sistema de registro con el nivel de severidad solicitado.
+    - El resultado distingue entre el envío del mensaje y la disponibilidad o persistencia del servicio de registro.
+    - Si la severidad es indispensable y no está indicada, se solicita aclaración en lugar de inventarla.
+    must_not_assume:
+    - que el sistema de registro está disponible
+    clarification_required_when:
+    - no se puede determinar el nivel de severidad
+    partition: development
+    queries:
+    - text: registrar un mensaje en el syslog
+      language: es
+      status: reviewed
+    - text: log a message to the system logger
+      language: en
+      status: reviewed
+    - text: send a log entry with a specific severity level
+      language: en
+      status: reviewed
+  - capability_id: filesystem.ntfsls_list_ntfs_directory_contents
+    source_aliases:
+    - filesystem:2059
+    expected_function: Listar el contenido de un directorio en un sistema de archivos NTFS.
+    required_inputs:
+    - ruta del directorio NTFS
+    acceptance_criteria:
+    - La salida lista las entradas del directorio NTFS indicado sin modificar el sistema de archivos.
+    - Los resultados corresponden a la ruta solicitada y no a otro volumen o directorio.
+    - Si la ruta no pertenece a un volumen NTFS accesible o no se puede leer, se informa el fallo.
+    must_not_assume:
+    - que el directorio NTFS existe
+    clarification_required_when:
+    - no se puede determinar la ruta del directorio NTFS
+    partition: development
+    queries:
+    - text: ver los archivos y carpetas dentro de un directorio NTFS
+      language: es
+      status: reviewed
+    - text: list the contents of an NTFS folder
+      language: en
+      status: reviewed
+    - text: display files and directories in an NTFS filesystem
+      language: en
+      status: reviewed
+  - capability_id: filesystem.import_capture_screen_image
+    source_aliases:
+    - filesystem:1256
+    expected_function: Capturar una ventana visible del servidor X, toda la pantalla o una región rectangular y guardarla como imagen.
+    required_inputs:
+    - objetivo de captura (ventana, pantalla completa o región)
+    - ruta del archivo de imagen de salida
+    acceptance_criteria:
+    - "La captura corresponde al objetivo indicado: ventana, pantalla completa o región rectangular."
+    - La imagen se guarda en la ruta de salida solicitada y en el formato solicitado, si se especificó.
+    - Si no hay una sesión X o el objetivo o destino no es válido, se informa el fallo y no se afirma que se creó la imagen.
+    must_not_assume:
+    - que hay una sesión X disponible
+    clarification_required_when:
+    - no se puede determinar qué capturar o dónde guardar la imagen
+    partition: test
+    queries:
+    - text: capturar una ventana o una región de la pantalla y guardarla como imagen
+      language: es
+      status: reviewed
+    - text: capture a visible X window and save it as an image
+      language: en
+      status: reviewed
+    - text: take a screenshot of the full screen or a selected region
+      language: en
+      status: reviewed
+- category: networking
+  capacities:
+  - capability_id: networking.ping
+    source_aliases:
+    - networking:1108
+    expected_function: Enviar paquetes ICMP a un host para verificar su disponibilidad y medir el tiempo
+      de respuesta.
+    required_inputs:
+    - dirección IP o nombre de host
+    acceptance_criteria:
+    - La solicitud envía ICMP Echo Request al host indicado y reporta las respuestas recibidas y sus tiempos cuando existan.
+    - La falta de respuesta se reporta como resultado de conectividad, no como prueba concluyente de que el host esté apagado.
+    - El destino usado coincide con la dirección IP o el nombre proporcionado.
+    must_not_assume:
+    - que el host siempre estará disponible
+    clarification_required_when:
+    - no se puede determinar la dirección del host
+    partition: development
+    queries:
+    - text: verificar si un host está activo en la red
+      language: es
+      status: reviewed
+    - text: ping a server to check connectivity
+      language: en
+      status: reviewed
+    - text: send ICMP packets to a host to measure response time
+      language: en
+      status: reviewed
+  - capability_id: networking.traceroute
+    source_aliases:
+    - networking:1473
+    expected_function: Rastrear la ruta que toman los paquetes hasta un host destino, mostrando cada salto
+      intermedio.
+    required_inputs:
+    - dirección IP o nombre de host
+    acceptance_criteria:
+    - La salida muestra los saltos observados hacia el destino indicado, en el orden en que se recorren.
+    - Los saltos sin respuesta se representan como no respondidos, sin inventar direcciones o tiempos.
+    - La operación termina o informa sus límites sin afirmar que alcanzó el destino cuando no lo hizo.
+    must_not_assume:
+    - que todos los saltos responderán
+    clarification_required_when:
+    - no se puede determinar la ruta completa
+    partition: development
+    queries:
+    - text: ver la ruta que siguen los paquetes hasta un servidor
+      language: es
+      status: reviewed
+    - text: trace the path to a destination host
+      language: en
+      status: reviewed
+    - text: show each hop between the source and destination
+      language: en
+      status: reviewed
+  - capability_id: networking.nslookup
+    source_aliases:
+    - networking:952
+    expected_function: Consultar servidores DNS para obtener información sobre nombres de dominio y direcciones
+      IP.
+    required_inputs:
+    - nombre de dominio o dirección IP
+    acceptance_criteria:
+    - La consulta DNS se realiza para el nombre o dirección indicados y muestra las respuestas obtenidas.
+    - Si la consulta falla o no hay registros, se informa ese resultado sin inventar una dirección o registro.
+    - No se presenta la ausencia de respuesta como evidencia de que el dominio no existe.
+    must_not_assume:
+    - que el servidor DNS siempre responderá
+    clarification_required_when:
+    - no se puede resolver el nombre de dominio
+    partition: test
+    queries:
+    - text: obtener la dirección IP de un dominio
+      language: es
+      status: reviewed
+    - text: look up DNS records for a domain
+      language: en
+      status: reviewed
+    - text: resolve a hostname to an IP address
+      language: en
+      status: reviewed
+  - capability_id: networking.who
+    source_aliases:
+    - networking:1598
+    expected_function: Mostrar información sobre las sesiones de usuarios actualmente registrados en el sistema, incluyendo direcciones cuando se solicite.
+    required_inputs:
+    - opciones de visualización (opcional)
+    acceptance_criteria:
+    - La salida muestra las sesiones de usuario registradas en la fuente de datos del sistema y los campos solicitados.
+    - Las opciones para mostrar direcciones o resolver nombres se aplican solo cuando se solicitan.
+    - Si no hay sesiones registradas o no se puede leer la fuente, se informa el resultado sin inventar usuarios.
+    must_not_assume:
+    - que hay usuarios actualmente registrados
+    clarification_required_when:
+    - no se puede determinar qué información de las sesiones se desea mostrar
+    partition: development
+    queries:
+    - text: mostrar los usuarios que tienen una sesión iniciada en el sistema
+      language: es
+      status: reviewed
+    - text: list users currently logged in to the system
+      language: en
+      status: reviewed
+    - text: show logged-in users and their terminal or host information
+      language: en
+      status: reviewed
+  - capability_id: networking.curl
+    source_aliases:
+    - networking:208
+    expected_function: Transferir datos desde o hacia un servidor utilizando diversos protocolos.
+    required_inputs:
+    - URL del recurso
+    - opciones de transferencia
+    acceptance_criteria:
+    - La transferencia usa la URL indicada y el método, protocolo y opciones expresamente solicitados.
+    - La respuesta o el estado de la transferencia se informa; un error remoto o de red no se presenta como descarga exitosa.
+    - No se inventan URL, credenciales ni datos de entrada que la persona no haya proporcionado.
+    must_not_assume:
+    - que el servidor siempre estará disponible
+    clarification_required_when:
+    - no se puede determinar la URL del recurso
+    partition: test
+    queries:
+    - text: descargar un archivo desde un servidor web
+      language: es
+      status: reviewed
+    - text: send HTTP requests and receive responses using curl
+      language: en
+      status: reviewed
+    - text: transfer data to or from a server with various protocols
+      language: en
+      status: reviewed
+  - capability_id: networking.wget
+    source_aliases:
+    - networking:1588
+    expected_function: Descargar archivos desde la web utilizando HTTP, HTTPS o FTP.
+    required_inputs:
+    - URL del archivo
+    - opciones de descarga
+    acceptance_criteria:
+    - El archivo se descarga desde la URL indicada y se guarda en la ubicación solicitada o en el destino predeterminado de la herramienta.
+    - Una descarga fallida o incompleta se informa como tal y no como éxito.
+    - No se inventan URL ni opciones que cambien el destino o el alcance de la descarga.
+    must_not_assume:
+    - que el archivo siempre estará disponible
+    clarification_required_when:
+    - no se puede determinar la URL del archivo
+    partition: test
+    queries:
+    - text: descargar un archivo desde un sitio web
+      language: es
+      status: reviewed
+    - text: retrieve files from the internet using wget
+      language: en
+      status: reviewed
+    - text: download files over HTTP, HTTPS, or FTP
+      language: en
+      status: reviewed
+  - capability_id: networking.scp
+    source_aliases:
+    - networking:1328
+    expected_function: Copiar archivos entre hosts en una red de manera segura utilizando SSH.
+    required_inputs:
+    - ruta del archivo de origen
+    - usuario@host:destino
+    acceptance_criteria:
+    - El archivo indicado se copia entre las rutas local y remota especificadas mediante SSH.
+    - El origen, destino y usuario remoto coinciden con los proporcionados; no se amplía la transferencia a otros archivos.
+    - Si el host, autenticación o transferencia falla, se informa el error sin afirmar que la copia terminó.
+    must_not_assume:
+    - que el host remoto siempre estará disponible
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo de origen o el host remoto
+    partition: test
+    queries:
+    - text: copiar un archivo a otro servidor de manera segura
+      language: es
+      status: reviewed
+    - text: securely transfer files between hosts using scp
+      language: en
+      status: reviewed
+    - text: copy files over SSH to a remote server
+      language: en
+      status: reviewed
+  - capability_id: networking.ssh
+    source_aliases:
+    - networking:1374
+    expected_function: Establecer una conexión segura a un host remoto utilizando el protocolo SSH.
+    required_inputs:
+    - usuario@host
+    - opciones de conexión
+    acceptance_criteria:
+    - La conexión se dirige al usuario y host solicitados mediante SSH y aplica las opciones especificadas.
+    - Si no puede establecerse la conexión, el resultado informa el fallo y no simula una sesión remota.
+    - No se sustituyen el usuario, el host ni las opciones de seguridad por valores inventados.
+    must_not_assume:
+    - que el host remoto siempre estará disponible
+    clarification_required_when:
+    - no se puede determinar el usuario o el host remoto
+    partition: test
+    queries:
+    - text: conectarse a un servidor remoto de manera segura
+      language: es
+      status: reviewed
+    - text: establish a secure shell connection to a remote host
+      language: en
+      status: reviewed
+    - text: log in to a remote server using SSH
+      language: en
+      status: reviewed
+  - capability_id: networking.telnet
+    source_aliases:
+    - networking:1424
+    expected_function: Establecer una conexión a un host remoto utilizando el protocolo Telnet.
+    required_inputs:
+    - nombre de host o dirección IP
+    - puerto (opcional)
+    - opciones de conexión (opcional)
+    acceptance_criteria:
+    - La conexión se dirige al host y puerto solicitados usando Telnet.
+    - El destino y puerto coinciden con los indicados; si no se especifica puerto, se aplica el valor predeterminado de la herramienta.
+    - Un fallo de conexión se informa y no se presenta como una sesión establecida.
+    must_not_assume:
+    - que el host remoto siempre estará disponible
+    clarification_required_when:
+    - no se puede determinar el host remoto
+    partition: development
+    queries:
+    - text: conectarse a un servidor remoto usando telnet
+      language: es
+      status: reviewed
+    - text: establish a telnet connection to a remote host
+      language: en
+      status: reviewed
+    - text: log in to a remote server using the telnet protocol
+      language: en
+      status: reviewed
+  - capability_id: networking.netcat
+    source_aliases:
+    - networking:902
+    expected_function: Leer y escribir datos a través de conexiones de red utilizando TCP o UDP.
+    required_inputs:
+    - host
+    - puerto
+    - opciones de conexión
+    acceptance_criteria:
+    - La operación usa el host, puerto y protocolo solicitados para leer o escribir datos.
+    - Los datos enviados o recibidos corresponden al contenido indicado; no se transmiten datos inventados.
+    - Si el host o puerto no responde, se informa el fallo sin afirmar que se estableció la conexión.
+    must_not_assume:
+    - que el host siempre estará disponible
+    clarification_required_when:
+    - no se puede determinar el host o el puerto
+    partition: development
+    queries:
+    - text: enviar datos a un servidor usando netcat
+      language: es
+      status: reviewed
+    - text: read and write data over network connections with netcat
+      language: en
+      status: reviewed
+    - text: establish TCP or UDP connections for data transfer
+      language: en
+      status: reviewed
+  - capability_id: networking.dig
+    source_aliases:
+    - networking:253
+    expected_function: Consultar servidores DNS para obtener información detallada sobre nombres de dominio
+      y registros DNS.
+    required_inputs:
+    - nombre de dominio
+    - tipo de registro
+    acceptance_criteria:
+    - La consulta solicita al DNS indicado el registro del nombre y tipo especificados.
+    - La respuesta muestra los registros obtenidos o informa que no hubo respuesta o coincidencias.
+    - No se inventan registros cuando falla la resolución.
+    must_not_assume:
+    - que el servidor DNS siempre responderá
+    clarification_required_when:
+    - no se puede determinar el nombre de dominio o tipo de registro
+    partition: test
+    queries:
+    - text: consultar registros DNS de un dominio
+      language: es
+      status: reviewed
+    - text: retrieve detailed DNS information for a domain using dig
+      language: en
+      status: reviewed
+    - text: look up specific DNS records for a hostname
+      language: en
+      status: reviewed
+  - capability_id: networking.ss
+    source_aliases:
+    - networking:1368
+    expected_function: Mostrar información sobre sockets de red y conexiones activas.
+    required_inputs:
+    - opciones de visualización
+    acceptance_criteria:
+    - La salida muestra sockets y estados observados por el sistema, de acuerdo con los filtros y opciones solicitados.
+    - Si no hay sockets que coincidan, se informa una salida vacía sin inventar conexiones.
+    - La consulta no modifica las conexiones ni el estado de red.
+    must_not_assume:
+    - que siempre habrá conexiones activas
+    clarification_required_when:
+    - no se puede determinar qué información mostrar sobre los sockets
+    partition: development
+    queries:
+    - text: ver las conexiones de red activas en el sistema
+      language: es
+      status: reviewed
+    - text: display socket statistics and active connections using ss
+      language: en
+      status: reviewed
+    - text: analyze network sockets and their states
+      language: en
+      status: reviewed
+  - capability_id: networking.nmcli
+    source_aliases:
+    - networking:921
+    expected_function: Administrar conexiones de red y configuraciones utilizando NetworkManager.
+    required_inputs:
+    - comando o acción a realizar
+    acceptance_criteria:
+    - La acción solicitada se aplica o consulta mediante NetworkManager y se limita a la conexión o dispositivo indicado.
+    - Las operaciones de solo consulta no alteran la configuración; las operaciones de cambio reflejan los valores explícitamente solicitados.
+    - Si la acción, conexión o dispositivo es ambiguo o no está disponible, se solicita aclaración o se informa el fallo.
+    must_not_assume:
+    - que siempre habrá una conexión de red disponible
+    clarification_required_when:
+    - no se puede determinar qué acción realizar con nmcli
+    partition: development
+    queries:
+    - text: administrar conexiones de red usando nmcli
+      language: es
+      status: reviewed
+    - text: manage network connections and settings with NetworkManager's nmcli
+      language: en
+      status: reviewed
+    - text: configure network interfaces and connections
+      language: en
+      status: reviewed
+  - capability_id: networking.hostname
+    source_aliases:
+    - networking:523
+    expected_function: Mostrar o establecer el nombre del host del sistema.
+    required_inputs:
+    - nuevo nombre de host (opcional)
+    acceptance_criteria:
+    - Si se solicita consultar el nombre, la salida muestra el hostname vigente del sistema.
+    - Si se solicita cambiarlo, se aplica únicamente el nuevo nombre indicado y se informa si se requieren permisos o la operación falla.
+    - Si no queda claro si se desea consultar o cambiar el nombre, se solicita aclaración.
+    must_not_assume:
+    - que siempre se puede cambiar el nombre del host
+    clarification_required_when:
+    - no se puede determinar si se desea mostrar o cambiar el nombre del host
+    partition: development
+    queries:
+    - text: ver el nombre del host del sistema
+      language: es
+      status: reviewed
+    - text: display or set the system's hostname
+      language: en
+      status: reviewed
+    - text: check or change the hostname of the machine
+      language: en
+      status: reviewed
+  - capability_id: networking.gold
+    source_aliases:
+    - networking:449
+    expected_function: Enlazar archivos objeto y bibliotecas para generar un archivo de salida, aplicando las opciones de enlace solicitadas.
+    required_inputs:
+    - archivos objeto o bibliotecas de entrada
+    - opciones de enlace y ruta de salida, cuando correspondan
+    acceptance_criteria:
+    - El enlazador procesa los archivos objeto y bibliotecas indicados y genera el resultado solicitado cuando las entradas son válidas.
+    - Las opciones de formato, búsqueda de bibliotecas y salida coinciden con lo pedido; no se agregan certificados ni acciones de red.
+    - Si faltan entradas indispensables o el enlace falla, se solicita la información necesaria o se informa el error.
+    must_not_assume:
+    - que las entradas, bibliotecas o rutas de salida existen
+    clarification_required_when:
+    - no se pueden determinar los archivos de entrada o el resultado de enlace requerido
+    partition: development
+    queries:
+    - text: enlazar archivos objeto y bibliotecas para generar un ejecutable
+      language: es
+      status: reviewed
+    - text: link object files and libraries with the GNU gold linker
+      language: en
+      status: reviewed
+    - text: set linker options and produce an output binary
+      language: en
+      status: reviewed
+  - capability_id: networking.prtstat
+    source_aliases:
+    - networking:1189
+    expected_function: Mostrar estadísticas del proceso indicado.
+    required_inputs:
+    - identificador del proceso
+    acceptance_criteria:
+    - La salida corresponde al proceso indicado y muestra las estadísticas que proporciona prtstat.
+    - No se confunden estadísticas de procesos con trabajos o colas de impresión.
+    - Si el proceso no existe o no se puede consultar, se informa el fallo sin inventar estadísticas.
+    must_not_assume:
+    - que el proceso indicado existe o sigue activo
+    clarification_required_when:
+    - no se puede determinar qué proceso consultar
+    partition: development
+    queries:
+    - text: ver las estadísticas de un proceso
+      language: es
+      status: reviewed
+    - text: display statistics for a process using prtstat
+      language: en
+      status: reviewed
+    - text: inspect process statistics by process identifier
+      language: en
+      status: reviewed
+  - capability_id: networking.pw-cat
+    source_aliases:
+    - networking:1192
+    - filesystem:2435
+    expected_function: Reproducir audio desde un archivo o entrada, o grabar audio hacia un archivo, según el modo solicitado.
+    required_inputs:
+    - modo de reproducción o grabación
+    - archivo de entrada o salida, según el modo (o entrada/salida estándar si se solicita)
+    acceptance_criteria:
+    - En modo de reproducción, la herramienta lee la fuente de audio indicada y la envía al dispositivo o flujo solicitado.
+    - En modo de grabación, captura audio y lo escribe en el destino indicado, sin sustituir el modo por reproducción.
+    - Si faltan el modo o una fuente/destino necesario, o PipeWire no está disponible, se solicita aclaración o se informa el fallo.
+    must_not_assume:
+    - que hay un servidor PipeWire o un dispositivo de audio disponible
+    clarification_required_when:
+    - no se puede determinar si se desea reproducir o grabar
+    partition: development
+    queries:
+    - text: reproducir un archivo de audio o grabar audio en un archivo con pw-cat
+      language: es
+      status: reviewed
+    - text: play an audio file or record audio with pw-cat
+      language: en
+      status: reviewed
+    - text: use pw-cat to read or write an audio stream
+      language: en
+      status: reviewed
+  - capability_id: networking.systemctl
+    source_aliases:
+    - networking:1397
+    expected_function: Administrar servicios y unidades del sistema, incluyendo servicios de red.
+    required_inputs:
+    - acción a realizar
+    - nombre del servicio o unidad
+    acceptance_criteria:
+    - La acción se aplica al servicio o unidad indicada y el estado resultante corresponde a la acción solicitada.
+    - Las consultas de estado no cambian la unidad; las acciones de cambio no afectan unidades adicionales.
+    - Si la unidad no existe, la acción es ambigua o faltan permisos, se informa el motivo sin afirmar éxito.
+    must_not_assume:
+    - que siempre se puede administrar cualquier servicio
+    clarification_required_when:
+    - no se puede determinar qué acción realizar con systemctl
+    partition: development
+    queries:
+    - text: administrar servicios de red usando systemctl
+      language: es
+      status: reviewed
+    - text: manage system services and units with systemctl
+      language: en
+      status: reviewed
+    - text: start, stop, or check the status of network services
+      language: en
+      status: reviewed
+  - capability_id: networking.strip
+    source_aliases:
+    - networking:1395
+    expected_function: Eliminar información de depuración y símbolos de archivos binarios.
+    required_inputs:
+    - ruta del archivo binario
+    acceptance_criteria:
+    - En una copia de prueba del binario, se eliminan los símbolos o datos de depuración solicitados.
+    - El archivo procesado sigue siendo un binario válido para el formato y arquitectura de origen.
+    - La operación se limita al archivo indicado; fallos de formato o permisos se informan sin afirmar que se modificó.
+    must_not_assume:
+    - que siempre se puede modificar cualquier archivo binario
+    clarification_required_when:
+    - no se puede determinar la ruta del archivo binario
+    partition: development
+    queries:
+    - text: eliminar símbolos de depuración de un archivo binario
+      language: es
+      status: reviewed
+    - text: strip debugging information from a binary file
+      language: en
+      status: reviewed
+    - text: remove symbols and debug info from executables
+      language: en
+      status: reviewed
+  - capability_id: networking.tar
+    source_aliases:
+    - networking:1419
+    expected_function: Crear, extraer o manipular archivos tar.
+    required_inputs:
+    - acción a realizar
+    - ruta del archivo tar
+    acceptance_criteria:
+    - La acción seleccionada (crear, listar o extraer) se aplica al archivo tar y a los miembros indicados.
+    - Al crear un archivo, su listado contiene los miembros solicitados; al extraer, los archivos resultantes corresponden a esos miembros y al destino indicado.
+    - No se extraen miembros fuera del alcance o destino solicitado; errores de formato, ruta o permisos se informan.
+    must_not_assume:
+    - que siempre se puede acceder a cualquier archivo tar
+    clarification_required_when:
+    - no se puede determinar la acción a realizar con tar
+    partition: development
+    queries:
+    - text: crear un archivo tar de varios archivos
+      language: es
+      status: reviewed
+    - text: extract files from a tar archive
+      language: en
+      status: reviewed
+    - text: manipulate tar files for backup or distribution
+      language: en
+      status: reviewed
