@@ -1,0 +1,4442 @@
+{
+  "schema_version": 1,
+  "kind": "debian12_bm25_paraphrase_comparison",
+  "environment": {
+    "python": "3.11.2",
+    "platform": "Linux-6.12.95+deb12-amd64-x86_64-with-glibc2.36",
+    "pyserini": "0.22.0",
+    "java": "openjdk version \"17.0.21\" 2026-10-20"
+  },
+  "query_count": 32,
+  "query_counts_by_category": {
+    "filesystem": 16,
+    "networking": 16
+  },
+  "document_count_per_index": {
+    "base": 27413,
+    "paraphrases": 27413
+  },
+  "categories": [
+    "c programming",
+    "cryptography",
+    "filesystem",
+    "hardwaremanagement",
+    "keyboard",
+    "misc",
+    "networking",
+    "processmanagement",
+    "security",
+    "shellprogramming",
+    "textprocessing",
+    "usergroup"
+  ],
+  "hybrid_alpha_dense_weight": 0.5,
+  "metrics": {
+    "bm25": {
+      "base": {
+        "overall": {
+          "queries": 32,
+          "hit@1": 0.2812,
+          "hit@3": 0.4062,
+          "hit@5": 0.4375,
+          "hit@10": 0.5625,
+          "ndcg@5": 0.2414,
+          "ndcg@10": 0.2263,
+          "mrr": 0.3673
+        },
+        "by_category": {
+          "filesystem": {
+            "queries": 16,
+            "hit@1": 0.25,
+            "hit@3": 0.3125,
+            "hit@5": 0.3125,
+            "hit@10": 0.5,
+            "ndcg@5": 0.2299,
+            "ndcg@10": 0.229,
+            "mrr": 0.31
+          },
+          "networking": {
+            "queries": 16,
+            "hit@1": 0.3125,
+            "hit@3": 0.5,
+            "hit@5": 0.5625,
+            "hit@10": 0.625,
+            "ndcg@5": 0.2529,
+            "ndcg@10": 0.2235,
+            "mrr": 0.4245
+          }
+        },
+        "mean_latency_ms": 6.68
+      },
+      "paraphrases": {
+        "overall": {
+          "queries": 32,
+          "hit@1": 0.375,
+          "hit@3": 0.5312,
+          "hit@5": 0.5625,
+          "hit@10": 0.6875,
+          "ndcg@5": 0.2416,
+          "ndcg@10": 0.2142,
+          "mrr": 0.472
+        },
+        "by_category": {
+          "filesystem": {
+            "queries": 16,
+            "hit@1": 0.4375,
+            "hit@3": 0.5,
+            "hit@5": 0.5,
+            "hit@10": 0.625,
+            "ndcg@5": 0.2457,
+            "ndcg@10": 0.2094,
+            "mrr": 0.4846
+          },
+          "networking": {
+            "queries": 16,
+            "hit@1": 0.3125,
+            "hit@3": 0.5625,
+            "hit@5": 0.625,
+            "hit@10": 0.75,
+            "ndcg@5": 0.2375,
+            "ndcg@10": 0.219,
+            "mrr": 0.4594
+          }
+        },
+        "mean_latency_ms": 3.39
+      },
+      "delta_paraphrases_minus_base": {
+        "overall": {
+          "hit@1": 0.0938,
+          "hit@3": 0.125,
+          "hit@5": 0.125,
+          "hit@10": 0.125,
+          "ndcg@5": 0.0002,
+          "ndcg@10": -0.0121,
+          "mrr": 0.1047
+        },
+        "by_category": {
+          "filesystem": {
+            "hit@1": 0.1875,
+            "hit@3": 0.1875,
+            "hit@5": 0.1875,
+            "hit@10": 0.125,
+            "ndcg@5": 0.0158,
+            "ndcg@10": -0.0196,
+            "mrr": 0.1746
+          },
+          "networking": {
+            "hit@1": 0.0,
+            "hit@3": 0.0625,
+            "hit@5": 0.0625,
+            "hit@10": 0.125,
+            "ndcg@5": -0.0154,
+            "ndcg@10": -0.0045,
+            "mrr": 0.0349
+          }
+        }
+      }
+    },
+    "hybrid": {
+      "base": {
+        "overall": {
+          "queries": 32,
+          "hit@1": 0.4062,
+          "hit@3": 0.5625,
+          "hit@5": 0.6875,
+          "hit@10": 0.7812,
+          "ndcg@5": 0.3018,
+          "ndcg@10": 0.2778,
+          "mrr": 0.5229
+        },
+        "by_category": {
+          "filesystem": {
+            "queries": 16,
+            "hit@1": 0.4375,
+            "hit@3": 0.5,
+            "hit@5": 0.75,
+            "hit@10": 0.75,
+            "ndcg@5": 0.3084,
+            "ndcg@10": 0.2751,
+            "mrr": 0.5307
+          },
+          "networking": {
+            "queries": 16,
+            "hit@1": 0.375,
+            "hit@3": 0.625,
+            "hit@5": 0.625,
+            "hit@10": 0.8125,
+            "ndcg@5": 0.2952,
+            "ndcg@10": 0.2805,
+            "mrr": 0.5152
+          }
+        },
+        "mean_latency_ms": 563.81
+      },
+      "paraphrases": {
+        "overall": {
+          "queries": 32,
+          "hit@1": 0.4688,
+          "hit@3": 0.625,
+          "hit@5": 0.6562,
+          "hit@10": 0.8125,
+          "ndcg@5": 0.2952,
+          "ndcg@10": 0.2698,
+          "mrr": 0.5673
+        },
+        "by_category": {
+          "filesystem": {
+            "queries": 16,
+            "hit@1": 0.4375,
+            "hit@3": 0.5625,
+            "hit@5": 0.625,
+            "hit@10": 0.8125,
+            "ndcg@5": 0.2683,
+            "ndcg@10": 0.2482,
+            "mrr": 0.5362
+          },
+          "networking": {
+            "queries": 16,
+            "hit@1": 0.5,
+            "hit@3": 0.6875,
+            "hit@5": 0.6875,
+            "hit@10": 0.8125,
+            "ndcg@5": 0.3221,
+            "ndcg@10": 0.2914,
+            "mrr": 0.5985
+          }
+        },
+        "mean_latency_ms": 551.26
+      },
+      "delta_paraphrases_minus_base": {
+        "overall": {
+          "hit@1": 0.0626,
+          "hit@3": 0.0625,
+          "hit@5": -0.0313,
+          "hit@10": 0.0313,
+          "ndcg@5": -0.0066,
+          "ndcg@10": -0.008,
+          "mrr": 0.0444
+        },
+        "by_category": {
+          "filesystem": {
+            "hit@1": 0.0,
+            "hit@3": 0.0625,
+            "hit@5": -0.125,
+            "hit@10": 0.0625,
+            "ndcg@5": -0.0401,
+            "ndcg@10": -0.0269,
+            "mrr": 0.0055
+          },
+          "networking": {
+            "hit@1": 0.125,
+            "hit@3": 0.0625,
+            "hit@5": 0.0625,
+            "hit@10": 0.0,
+            "ndcg@5": 0.0269,
+            "ndcg@10": 0.0109,
+            "mrr": 0.0833
+          }
+        }
+      }
+    }
+  },
+  "inputs": {
+    "queries": {
+      "path": "/home/carlos/Documentos/facultad/semantic_search/code/evaluation/evaluation_v2_queries.json",
+      "sha256": "af89d5efa1b713fba05f945141eb34ce5e42edda58dbafae7af54a255df0336a"
+    },
+    "corpus_dir": "/tmp/it-shell-corpus-debian12-benchmark",
+    "corpus_files_sha256": {
+      "c programming.yaml": "ab830a7494a27ededb5af86780f98b4741ca1786e44594ddf71b53439fff64eb",
+      "cryptography.yaml": "f7466a674abe308ceeb27481b38c9cd65a9e76b9df5d7e883053118369fdfd9c",
+      "filesystem.yaml": "5bf85b27cfa15ab2bac4fee48606a5e9e45f64fd4d60f4a824a609de4b4ebe65",
+      "hardwaremanagement.yaml": "e11f6c1cf83b1c2bfac7bdad5a43e2453903d04fd01d6b547422de806adbf5a7",
+      "keyboard.yaml": "6f623947596eebad4fd208649808d40929e1f8a25bab95a8096551d695c079ea",
+      "misc.yaml": "0f13a9f3aea6e390d8e4471105f74dd5bdf01ae0fa7186950bc97c9717525df9",
+      "networking.yaml": "41a63019669ab2ecd1127b7f8056dd12d6e90b5adda4d21686bf3f216ed1eab4",
+      "processmanagement.yaml": "a48470248f357a10ab08153ec842747a415ee1e6b3152ee5f3c7bb2403400498",
+      "security.yaml": "0e3b25aceb30449049a1e2341f664ca00c5e6db6c810388417375b1e18943e79",
+      "shellprogramming.yaml": "ced8f0e57979c50f32778c1b3709d325c61806abb5f35a48fb571354fbc400df",
+      "textprocessing.yaml": "b2e0302c45767016fb218cae24bf4fad5122236d5872733e473b06f94a6162fc",
+      "usergroup.yaml": "8cac903183c5442cc7e0208fe5872b8daee93fee967be1921ef022177f963e09"
+    },
+    "faiss_index_sha256": "fa2cf360f5d4b0b8e7313455c222b6faddcaaf42c25d384deb75107c0afe7567",
+    "aliases_sha256": "bfbf9faad2464416bb9a475ca3c8e36dfaf5bf25b3ed9249c28aa171f74b74dc",
+    "bm25_index_sha256": {
+      "base": {
+        "_0.fdm": "07746e84a6609f55884290332a4b5f1905460eee04e8f7c428a063bd0e735450",
+        "_0.fdt": "3731ffd492cbd1714ea5874ae2e78b1eeae206a953b94caf36fceda5b1c4072d",
+        "_0.fdx": "1709f0cb8d825a0402b257e8f2374fa213cdc5954f3f2c7e47bb669344ac5ce8",
+        "_0.fnm": "71cb62ef6a3473f474811770ce1aa573c62d5cc614ffcbcfdaa4d06bb0345e2d",
+        "_0.nvd": "3c6c42d88cd8765d67fa65a5ed6846460b299dab322fca05273c2e3a231ce523",
+        "_0.nvm": "23ffebeda6fb6ba2f6b854c8b8cd4d4e86a0dc33bed2adcd3222165e1914cf25",
+        "_0.si": "6730b4d8acc4b72eb4a5c60f53aed50186f2042a630416e9a461fdaeb86ff098",
+        "_0.tvd": "b944ef662e13ceaea6662a51c2c1a82df7009474fc1953fef90cc370f848de9a",
+        "_0.tvm": "957c06e7b1c9cdf6e1011099866e7112e345a1ce14e234c2f828aec7afcbd1db",
+        "_0.tvx": "535e64f278268df773f6b921fd7537f6513df365035ac6a264069179372f5079",
+        "_0_Lucene90_0.doc": "55f980e657fecf760adc6ed7a0b755170e3b0dceba118797620cfa781aa3308c",
+        "_0_Lucene90_0.dvd": "9f43dbeac0b04c3951e45f99754f9d963f2738390e4845e120c28824b0436c63",
+        "_0_Lucene90_0.dvm": "6288f2c85272481ca31820fd780ad2a65d74b0999bb87684f064c5380c142fd4",
+        "_0_Lucene90_0.tim": "adf06465387085e06b976bb939679050a4da6e3c4dc79de408cc29b908844efa",
+        "_0_Lucene90_0.tip": "f4c502eb01db5c5d5b3ea1df11ef28d4af05ce482392db8af33b1b52739e47ac",
+        "_0_Lucene90_0.tmd": "79c08901bbc9d47662416a4e4acb8616b730cb4a5f8c91b89f24d238c4415710",
+        "segments_1": "e26eaa9d42e9cb2db415efc08836f766eb10b2f8132e02a4c37e0fa14d2632e5"
+      },
+      "paraphrases": {
+        "_0.fdm": "ae0b44c3e5a9c0dbd0a2303bb6c129da2b5496faa46d49412465270a9885303f",
+        "_0.fdt": "512ee3b660a69f01c058e615e4f4d19ee84ae33d80da94f6a76d6f3e970d0de5",
+        "_0.fdx": "65911398bc72b2ff9a1f864a739e60d09788cbd551f0126ea5b978d7776d690c",
+        "_0.fnm": "60a1d33f4dee7a3d982e6211a454b0cb21c9019d4f4faa6921095f198dd23f18",
+        "_0.nvd": "7390189c8fd6b78a16d2860c5950d7ba77fa6550c2b7df3f785c3886805d2e10",
+        "_0.nvm": "50550d2e054eb83fd5480c47a732cbdb66cf5012dbc281dbebfe7940c3baa864",
+        "_0.si": "f2fde2940038c78bd6c0544a88c6c998ace26ba6eed1c5665c79971f3aed88e9",
+        "_0.tvd": "8d65e7386cf9773706d5b0cbc8832ad8d6ca8498b144ef41ff7295e333b83997",
+        "_0.tvm": "43850cee1100507b29b39e858d413be6651a4a46c17146cdf0235c2e5d4b566a",
+        "_0.tvx": "8e1db0a42751d59d2fce842a06452d815789d02681680f85bd31c8f91d78b869",
+        "_0_Lucene90_0.doc": "7d8f5ea052bea1a6e0f83960a5e2b8c94f653c864fb460d70cec19e0cd368e4b",
+        "_0_Lucene90_0.dvd": "a5e40a40e7911397787118ade69252fb48ca063d2aed66db8829d179afa4e846",
+        "_0_Lucene90_0.dvm": "3ab88ef2eef2458e157c61fd12e3ab0f6b1645ed16a8eb93d431ce83bbd1679c",
+        "_0_Lucene90_0.tim": "e601ed1b1c635a14e267c57414115f0d7f1b6be26183081890ac34c9e4e62662",
+        "_0_Lucene90_0.tip": "7cf58fe591133536b37193b3e1f6f911564d3e5a6412e2a46135340ffe9223c5",
+        "_0_Lucene90_0.tmd": "cba071373ba67c170f3307426fbe9ae3998c5970e1faab4cae3840247e01dc62",
+        "segments_1": "f15780eeb9121f5d97e9df1a08372e9d8b01e5ab6034e0722772abeb21ea342b"
+      }
+    }
+  },
+  "queries": {
+    "fs_find_by_name": {
+      "id": "fs_find_by_name",
+      "category": "filesystem",
+      "query": "search recursively for files matching a specific pattern or filename",
+      "relevant_commands": [
+        "find"
+      ],
+      "relevant_alias_count": 8,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "cryptography:2",
+            "filesystem:1093",
+            "filesystem:2563",
+            "filesystem:743",
+            "filesystem:850",
+            "processmanagement:507",
+            "textprocessing:3210",
+            "filesystem:1085",
+            "filesystem:2555",
+            "filesystem:735"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "filesystem:1093",
+            "filesystem:2563",
+            "filesystem:743",
+            "filesystem:850",
+            "textprocessing:3210",
+            "filesystem:1088",
+            "filesystem:2558",
+            "filesystem:738",
+            "filesystem:845",
+            "processmanagement:507"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "cryptography:2",
+            "filesystem:1093",
+            "filesystem:2563",
+            "filesystem:743",
+            "filesystem:850",
+            "filesystem:419",
+            "filesystem:2555",
+            "filesystem:842",
+            "filesystem:1085",
+            "filesystem:735"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "filesystem:1093",
+            "filesystem:2563",
+            "filesystem:743",
+            "filesystem:850",
+            "textprocessing:3210",
+            "filesystem:419",
+            "filesystem:547",
+            "filesystem:681",
+            "filesystem:270",
+            "filesystem:1088"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "fs_find_large_files": {
+      "id": "fs_find_large_files",
+      "category": "filesystem",
+      "query": "find all files under root directory larger than 500 megabytes",
+      "relevant_commands": [
+        "find"
+      ],
+      "relevant_alias_count": 8,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "filesystem:1924",
+            "filesystem:1186",
+            "filesystem:1198",
+            "filesystem:2987",
+            "filesystem:3437",
+            "filesystem:1091",
+            "filesystem:2561",
+            "filesystem:741",
+            "filesystem:848",
+            "filesystem:1921"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "filesystem:877",
+            "filesystem:1186",
+            "filesystem:1198",
+            "filesystem:2987",
+            "filesystem:3437",
+            "filesystem:1091",
+            "filesystem:2561",
+            "filesystem:741",
+            "filesystem:848",
+            "filesystem:1096"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.2529427027676571,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:2458",
+            "filesystem:1461",
+            "filesystem:3013",
+            "filesystem:1020",
+            "filesystem:3196",
+            "filesystem:3290",
+            "networking:969",
+            "filesystem:741",
+            "filesystem:270",
+            "filesystem:1091"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "filesystem:877",
+            "filesystem:270",
+            "networking:969",
+            "filesystem:741",
+            "filesystem:1091",
+            "filesystem:848",
+            "filesystem:3013",
+            "filesystem:32",
+            "filesystem:1877",
+            "filesystem:1096"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.2529427027676571,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "fs_find_modified_days": {
+      "id": "fs_find_modified_days",
+      "category": "filesystem",
+      "query": "search for files modified within the last seven days",
+      "relevant_commands": [
+        "find"
+      ],
+      "relevant_alias_count": 8,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "processmanagement:3672",
+            "security:35",
+            "security:1813",
+            "usergroup:574",
+            "c programming:107",
+            "c programming:73",
+            "misc:3393",
+            "misc:3394",
+            "filesystem:498",
+            "usergroup:149"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "security:35",
+            "security:1813",
+            "misc:3393",
+            "misc:3394",
+            "processmanagement:1212",
+            "processmanagement:3672",
+            "filesystem:1367",
+            "usergroup:574",
+            "misc:878",
+            "textprocessing:2343"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:2784",
+            "processmanagement:3672",
+            "usergroup:574",
+            "security:35",
+            "security:1813",
+            "filesystem:2934",
+            "filesystem:2375",
+            "filesystem:1009",
+            "c programming:107",
+            "c programming:73"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "filesystem:2934",
+            "filesystem:1367",
+            "security:35",
+            "misc:3393",
+            "security:1813",
+            "misc:3394",
+            "processmanagement:1212",
+            "filesystem:1009",
+            "processmanagement:3672",
+            "filesystem:3185"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "fs_list_detailed_hidden": {
+      "id": "fs_list_detailed_hidden",
+      "category": "filesystem",
+      "query": "list all files including hidden ones with permissions and sizes in human units",
+      "relevant_commands": [
+        "ls"
+      ],
+      "relevant_alias_count": 46,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "hardwaremanagement:1501",
+            "hardwaremanagement:1498",
+            "filesystem:3476",
+            "textprocessing:1076",
+            "textprocessing:1381",
+            "textprocessing:1391",
+            "textprocessing:1404",
+            "textprocessing:1409",
+            "textprocessing:1908",
+            "textprocessing:767"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "hardwaremanagement:1501",
+            "textprocessing:1076",
+            "textprocessing:1381",
+            "textprocessing:1391",
+            "textprocessing:1404",
+            "textprocessing:1409",
+            "textprocessing:1908",
+            "textprocessing:767",
+            "textprocessing:773",
+            "textprocessing:3204"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:711",
+            "filesystem:3476",
+            "hardwaremanagement:1498",
+            "hardwaremanagement:1501",
+            "textprocessing:1076",
+            "textprocessing:1381",
+            "textprocessing:1391",
+            "textprocessing:1404",
+            "textprocessing:1409",
+            "textprocessing:1908"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "networking:711",
+            "hardwaremanagement:1501",
+            "textprocessing:1076",
+            "textprocessing:1381",
+            "textprocessing:1391",
+            "textprocessing:1404",
+            "textprocessing:1409",
+            "textprocessing:1908",
+            "textprocessing:767",
+            "textprocessing:773"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "fs_mkdir_nested": {
+      "id": "fs_mkdir_nested",
+      "category": "filesystem",
+      "query": "create parent directories and nested subdirectory path in a single step",
+      "relevant_commands": [
+        "mkdir"
+      ],
+      "relevant_alias_count": 8,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "filesystem:2948",
+            "filesystem:991",
+            "misc:1345",
+            "filesystem:208",
+            "textprocessing:258",
+            "hardwaremanagement:1587",
+            "keyboard:1140",
+            "filesystem:1871",
+            "usergroup:1873",
+            "filesystem:3008"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.07979453856244817,
+            "mrr": 0.125
+          },
+          "hybrid_top_10": [
+            "textprocessing:258",
+            "filesystem:1871",
+            "filesystem:1280",
+            "keyboard:1140",
+            "filesystem:3008",
+            "filesystem:991",
+            "filesystem:1928",
+            "filesystem:208",
+            "filesystem:1795",
+            "filesystem:987"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.21398626473452756,
+            "hit@10": 1.0,
+            "ndcg@10": 0.15958907712489634,
+            "mrr": 0.5
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:1280",
+            "filesystem:2589",
+            "networking:481",
+            "networking:969",
+            "filesystem:2900",
+            "filesystem:1795",
+            "filesystem:987",
+            "filesystem:678",
+            "filesystem:3405",
+            "filesystem:20"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "filesystem:1280",
+            "filesystem:2589",
+            "filesystem:383",
+            "networking:481",
+            "networking:969",
+            "filesystem:3405",
+            "filesystem:1868",
+            "filesystem:1795",
+            "filesystem:1928",
+            "filesystem:270"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.0843142342558857,
+            "mrr": 0.14285714285714285
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": -1.0,
+        "ndcg@10": -0.0798,
+        "mrr": -0.125
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": -1.0,
+        "ndcg@3": -0.2961,
+        "hit@5": -1.0,
+        "ndcg@5": -0.214,
+        "hit@10": 0.0,
+        "ndcg@10": -0.0753,
+        "mrr": -0.3571
+      }
+    },
+    "fs_remove_recursive_force": {
+      "id": "fs_remove_recursive_force",
+      "category": "filesystem",
+      "query": "recursively delete a directory and all its contents without asking confirmation",
+      "relevant_commands": [
+        "rm"
+      ],
+      "relevant_alias_count": 13,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "shellprogramming:1763",
+            "shellprogramming:1765",
+            "processmanagement:507",
+            "networking:969",
+            "filesystem:874",
+            "filesystem:2581",
+            "shellprogramming:2313",
+            "filesystem:3106",
+            "filesystem:2869",
+            "filesystem:1478"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.07839826897867533,
+            "mrr": 0.16666666666666666
+          },
+          "hybrid_top_10": [
+            "filesystem:2581",
+            "filesystem:2851",
+            "networking:969",
+            "processmanagement:507",
+            "filesystem:3106",
+            "processmanagement:2240",
+            "processmanagement:3113",
+            "filesystem:874",
+            "filesystem:2646",
+            "filesystem:2670"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.22009176629808017,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:2581",
+            "filesystem:3106",
+            "networking:969",
+            "networking:599",
+            "processmanagement:507",
+            "filesystem:949",
+            "shellprogramming:1763",
+            "shellprogramming:1765",
+            "filesystem:2875",
+            "filesystem:874"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.22009176629808017,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "filesystem:2581",
+            "filesystem:2589",
+            "filesystem:270",
+            "filesystem:3106",
+            "filesystem:2851",
+            "filesystem:949",
+            "networking:969",
+            "filesystem:2875",
+            "filesystem:290",
+            "processmanagement:2240"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.22009176629808017,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "ndcg@3": 0.4693,
+        "hit@5": 1.0,
+        "ndcg@5": 0.3392,
+        "hit@10": 0.0,
+        "ndcg@10": 0.1417,
+        "mrr": 0.8333
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "fs_copy_recursive_preserve": {
+      "id": "fs_copy_recursive_preserve",
+      "category": "filesystem",
+      "query": "copy directory recursively while preserving file attributes permissions and timestamps",
+      "relevant_commands": [
+        "cp"
+      ],
+      "relevant_alias_count": 30,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "filesystem:3125",
+            "filesystem:2859",
+            "filesystem:383",
+            "hardwaremanagement:211",
+            "filesystem:373",
+            "filesystem:375",
+            "hardwaremanagement:212",
+            "misc:2544",
+            "misc:2547",
+            "filesystem:2622"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.23463936301137822,
+            "hit@5": 1.0,
+            "ndcg@5": 0.4468535299918563,
+            "hit@10": 1.0,
+            "ndcg@10": 0.44173955623824723,
+            "mrr": 0.3333333333333333
+          },
+          "hybrid_top_10": [
+            "filesystem:383",
+            "filesystem:375",
+            "filesystem:3125",
+            "filesystem:1276",
+            "filesystem:373",
+            "filesystem:370",
+            "filesystem:2859",
+            "filesystem:290",
+            "filesystem:1282",
+            "filesystem:949"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7653606369886217,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6843515475204855,
+            "hit@10": 1.0,
+            "ndcg@10": 0.5224955967919311,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:290",
+            "filesystem:383",
+            "filesystem:1282",
+            "filesystem:124",
+            "filesystem:135",
+            "filesystem:3125",
+            "filesystem:3307",
+            "filesystem:375",
+            "filesystem:1276",
+            "filesystem:792"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.21398626473452756,
+            "hit@10": 1.0,
+            "ndcg@10": 0.2082936658103318,
+            "mrr": 0.5
+          },
+          "hybrid_top_10": [
+            "filesystem:383",
+            "filesystem:375",
+            "filesystem:1276",
+            "filesystem:290",
+            "filesystem:1282",
+            "filesystem:373",
+            "filesystem:370",
+            "filesystem:3125",
+            "filesystem:124",
+            "filesystem:949"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7653606369886217,
+            "hit@5": 1.0,
+            "ndcg@5": 0.5531464700081437,
+            "hit@10": 1.0,
+            "ndcg@10": 0.5107164012496701,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0614,
+        "hit@5": 0.0,
+        "ndcg@5": -0.2329,
+        "hit@10": 0.0,
+        "ndcg@10": -0.2334,
+        "mrr": 0.1667
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": -0.1312,
+        "hit@10": 0.0,
+        "ndcg@10": -0.0118,
+        "mrr": 0.0
+      }
+    },
+    "fs_create_symlink": {
+      "id": "fs_create_symlink",
+      "category": "filesystem",
+      "query": "create a symbolic link pointing to a target file",
+      "relevant_commands": [
+        "ln"
+      ],
+      "relevant_alias_count": 17,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "filesystem:879",
+            "filesystem:1402",
+            "filesystem:1436",
+            "filesystem:2196",
+            "filesystem:3238",
+            "filesystem:3268",
+            "filesystem:3126",
+            "filesystem:423",
+            "filesystem:1709",
+            "filesystem:1905"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "misc:287",
+            "filesystem:1500",
+            "filesystem:423",
+            "filesystem:2196",
+            "filesystem:1596",
+            "filesystem:1905",
+            "filesystem:879",
+            "filesystem:1590",
+            "filesystem:388",
+            "filesystem:3126"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.13120507751234178,
+            "hit@10": 1.0,
+            "ndcg@10": 0.15457433957839825,
+            "mrr": 0.2
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:1590",
+            "filesystem:1361",
+            "filesystem:1680",
+            "filesystem:566",
+            "filesystem:879",
+            "filesystem:388",
+            "filesystem:2196",
+            "filesystem:1402",
+            "filesystem:1436",
+            "filesystem:3238"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.22009176629808017,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "filesystem:1361",
+            "filesystem:1590",
+            "filesystem:388",
+            "filesystem:1680",
+            "filesystem:566",
+            "filesystem:1594",
+            "filesystem:1596",
+            "misc:287",
+            "filesystem:277",
+            "filesystem:1500"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.21398626473452756,
+            "hit@10": 1.0,
+            "ndcg@10": 0.2906246349515899,
+            "mrr": 0.5
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "ndcg@3": 0.4693,
+        "hit@5": 1.0,
+        "ndcg@5": 0.3392,
+        "hit@10": 1.0,
+        "ndcg@10": 0.2201,
+        "mrr": 1.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 1.0,
+        "ndcg@3": 0.2961,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0828,
+        "hit@10": 0.0,
+        "ndcg@10": 0.1361,
+        "mrr": 0.3
+      }
+    },
+    "fs_tar_create_gzip": {
+      "id": "fs_tar_create_gzip",
+      "category": "filesystem",
+      "query": "compress folder into a tarball archive using gzip compression",
+      "relevant_commands": [
+        "tar"
+      ],
+      "relevant_alias_count": 138,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "textprocessing:501",
+            "filesystem:3111",
+            "processmanagement:1010",
+            "filesystem:1200",
+            "filesystem:1195",
+            "processmanagement:663",
+            "textprocessing:979",
+            "shellprogramming:2772",
+            "textprocessing:977",
+            "textprocessing:2889"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.09090909090909091
+          },
+          "hybrid_top_10": [
+            "textprocessing:501",
+            "filesystem:3111",
+            "processmanagement:1010",
+            "misc:2648",
+            "filesystem:1198",
+            "textprocessing:977",
+            "filesystem:1195",
+            "misc:2649",
+            "textprocessing:2629",
+            "textprocessing:3197"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.14606834984270645,
+            "hit@10": 1.0,
+            "ndcg@10": 0.23047380976071707,
+            "mrr": 0.25
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "textprocessing:501",
+            "filesystem:1200",
+            "networking:1557",
+            "networking:1107",
+            "filesystem:3111",
+            "processmanagement:1010",
+            "filesystem:1195",
+            "processmanagement:663",
+            "filesystem:1199",
+            "filesystem:3476"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "textprocessing:501",
+            "networking:1557",
+            "networking:1107",
+            "filesystem:1199",
+            "filesystem:3111",
+            "filesystem:1200",
+            "processmanagement:1010",
+            "filesystem:1198",
+            "misc:2648",
+            "filesystem:1194"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.06625422345438903,
+            "mrr": 0.1111111111111111
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": -0.0909
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": -1.0,
+        "ndcg@5": -0.1461,
+        "hit@10": 0.0,
+        "ndcg@10": -0.1642,
+        "mrr": -0.1389
+      }
+    },
+    "fs_tar_extract": {
+      "id": "fs_tar_extract",
+      "category": "filesystem",
+      "query": "unpack and extract files from a compressed tar archive",
+      "relevant_commands": [
+        "tar"
+      ],
+      "relevant_alias_count": 138,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "misc:2641",
+            "filesystem:2856",
+            "misc:2647",
+            "filesystem:13",
+            "filesystem:3",
+            "filesystem:8",
+            "filesystem:2860",
+            "misc:2648",
+            "textprocessing:2629",
+            "misc:2649"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 1.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.7227265726449519,
+            "hit@10": 1.0,
+            "ndcg@10": 0.741670249010153,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "misc:2641",
+            "filesystem:3035",
+            "filesystem:2860",
+            "keyboard:290",
+            "keyboard:1138",
+            "filesystem:2856",
+            "security:1784",
+            "textprocessing:2744",
+            "keyboard:1141",
+            "filesystem:2854"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7039180890341347,
+            "hit@5": 1.0,
+            "ndcg@5": 0.5087403079104241,
+            "hit@10": 1.0,
+            "ndcg@10": 0.5455206287241073,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "misc:2641",
+            "filesystem:2860",
+            "filesystem:8",
+            "filesystem:3035",
+            "misc:2647",
+            "filesystem:2856",
+            "networking:1562",
+            "filesystem:13",
+            "networking:1367",
+            "filesystem:3"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7653606369886217,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6843515475204855,
+            "hit@10": 1.0,
+            "ndcg@10": 0.5224955967919311,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "filesystem:3035",
+            "misc:2641",
+            "filesystem:2860",
+            "filesystem:3004",
+            "filesystem:2431",
+            "networking:1367",
+            "filesystem:3007",
+            "keyboard:290",
+            "security:1784",
+            "filesystem:2856"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.5307212739772434,
+            "hit@5": 1.0,
+            "ndcg@5": 0.38356636737133565,
+            "hit@10": 1.0,
+            "ndcg@10": 0.3787833386759354,
+            "mrr": 0.5
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": -0.2346,
+        "hit@5": 0.0,
+        "ndcg@5": -0.0384,
+        "hit@10": 0.0,
+        "ndcg@10": -0.2192,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": -1.0,
+        "ndcg@1": -1.0,
+        "hit@3": 0.0,
+        "ndcg@3": -0.1732,
+        "hit@5": 0.0,
+        "ndcg@5": -0.1252,
+        "hit@10": 0.0,
+        "ndcg@10": -0.1667,
+        "mrr": -0.5
+      }
+    },
+    "fs_zip_compress": {
+      "id": "fs_zip_compress",
+      "category": "filesystem",
+      "query": "package and compress directory into a zip file",
+      "relevant_commands": [
+        "zip"
+      ],
+      "relevant_alias_count": 92,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "textprocessing:3197",
+            "filesystem:3460",
+            "filesystem:3459",
+            "misc:3397",
+            "filesystem:3462",
+            "textprocessing:1432",
+            "filesystem:3463",
+            "hardwaremanagement:1902",
+            "filesystem:3456",
+            "filesystem:3473"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 1.0,
+            "hit@5": 1.0,
+            "ndcg@5": 1.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.9216017310213247,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "textprocessing:3197",
+            "textprocessing:1432",
+            "filesystem:3460",
+            "filesystem:3459",
+            "misc:3397",
+            "filesystem:3462",
+            "filesystem:3463",
+            "shellprogramming:1796",
+            "shellprogramming:2425",
+            "filesystem:3456"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7039180890341347,
+            "hit@5": 1.0,
+            "ndcg@5": 0.7860137352654724,
+            "hit@10": 1.0,
+            "ndcg@10": 0.725452110735279,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "textprocessing:3197",
+            "filesystem:3459",
+            "filesystem:3475",
+            "filesystem:3460",
+            "filesystem:3482",
+            "misc:3397",
+            "filesystem:3035",
+            "filesystem:3462",
+            "filesystem:3463",
+            "filesystem:3447"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7653606369886217,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6992148198508501,
+            "hit@10": 1.0,
+            "ndcg@10": 0.7314470771099789,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "textprocessing:3197",
+            "textprocessing:1432",
+            "filesystem:3460",
+            "filesystem:3459",
+            "filesystem:3475",
+            "misc:3397",
+            "filesystem:3035",
+            "filesystem:3463",
+            "filesystem:3462",
+            "filesystem:3456"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7039180890341347,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6548086577531307,
+            "hit@10": 1.0,
+            "ndcg@10": 0.7026305163854645,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": -0.2346,
+        "hit@5": 0.0,
+        "ndcg@5": -0.3008,
+        "hit@10": 0.0,
+        "ndcg@10": -0.1902,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": -0.1312,
+        "hit@10": 0.0,
+        "ndcg@10": -0.0228,
+        "mrr": 0.0
+      }
+    },
+    "fs_unzip_extract": {
+      "id": "fs_unzip_extract",
+      "category": "filesystem",
+      "query": "extract files from a zip archive into a destination directory",
+      "relevant_commands": [
+        "unzip"
+      ],
+      "relevant_alias_count": 12,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "filesystem:3459",
+            "keyboard:235",
+            "filesystem:2431",
+            "processmanagement:3664",
+            "textprocessing:806",
+            "keyboard:234",
+            "filesystem:3450",
+            "filesystem:3003",
+            "filesystem:3005",
+            "filesystem:3466"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.07692307692307693
+          },
+          "hybrid_top_10": [
+            "filesystem:2431",
+            "keyboard:235",
+            "textprocessing:806",
+            "filesystem:3035",
+            "filesystem:3459",
+            "keyboard:234",
+            "keyboard:1138",
+            "processmanagement:3664",
+            "keyboard:1141",
+            "filesystem:3462"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.14606834984270645,
+            "hit@10": 1.0,
+            "ndcg@10": 0.09478836436955078,
+            "mrr": 0.25
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:3035",
+            "filesystem:3",
+            "filesystem:13",
+            "filesystem:2431",
+            "filesystem:3456",
+            "filesystem:3459",
+            "filesystem:3454",
+            "filesystem:8",
+            "filesystem:3447",
+            "keyboard:235"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.22009176629808017,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "filesystem:3035",
+            "filesystem:2431",
+            "filesystem:3",
+            "filesystem:13",
+            "keyboard:235",
+            "textprocessing:806",
+            "filesystem:3459",
+            "filesystem:3456",
+            "filesystem:3447",
+            "filesystem:3004"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.22009176629808017,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "ndcg@3": 0.4693,
+        "hit@5": 1.0,
+        "ndcg@5": 0.3392,
+        "hit@10": 1.0,
+        "ndcg@10": 0.2201,
+        "mrr": 0.9231
+      },
+      "hybrid_delta": {
+        "hit@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "ndcg@3": 0.4693,
+        "hit@5": 0.0,
+        "ndcg@5": 0.1931,
+        "hit@10": 0.0,
+        "ndcg@10": 0.1253,
+        "mrr": 0.75
+      }
+    },
+    "fs_compress_xz": {
+      "id": "fs_compress_xz",
+      "category": "filesystem",
+      "query": "compress a large file with high ratio using xz format",
+      "relevant_commands": [
+        "xz"
+      ],
+      "relevant_alias_count": 41,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "security:1",
+            "security:4",
+            "security:7",
+            "security:1240",
+            "hardwaremanagement:1418",
+            "filesystem:3415",
+            "cryptography:419",
+            "filesystem:3414",
+            "cryptography:651",
+            "filesystem:1763"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.21408371436984167,
+            "mrr": 0.16666666666666666
+          },
+          "hybrid_top_10": [
+            "security:1",
+            "security:4",
+            "security:7",
+            "security:1240",
+            "filesystem:3415",
+            "hardwaremanagement:1418",
+            "textprocessing:3149",
+            "filesystem:3411",
+            "filesystem:3418",
+            "processmanagement:2759"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.13120507751234178,
+            "hit@10": 1.0,
+            "ndcg@10": 0.2941924851321473,
+            "mrr": 0.2
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:1774",
+            "security:1",
+            "security:4",
+            "security:7",
+            "filesystem:1763",
+            "security:1240",
+            "hardwaremanagement:1418",
+            "filesystem:3426",
+            "filesystem:3415",
+            "filesystem:2984"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.06625422345438903,
+            "mrr": 0.1111111111111111
+          },
+          "hybrid_top_10": [
+            "security:1",
+            "security:4",
+            "security:7",
+            "filesystem:1774",
+            "filesystem:1763",
+            "filesystem:3426",
+            "security:1240",
+            "filesystem:3415",
+            "filesystem:3025",
+            "hardwaremanagement:1418"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.06943122193677727,
+            "mrr": 0.125
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": -0.1478,
+        "mrr": -0.0556
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": -1.0,
+        "ndcg@5": -0.1312,
+        "hit@10": 0.0,
+        "ndcg@10": -0.2248,
+        "mrr": -0.075
+      }
+    },
+    "fs_decompress_gzip": {
+      "id": "fs_decompress_gzip",
+      "category": "filesystem",
+      "query": "decompress a gzip compressed file",
+      "relevant_commands": [
+        "gunzip",
+        "gzip"
+      ],
+      "relevant_alias_count": 40,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "security:747",
+            "filesystem:1198",
+            "filesystem:1194",
+            "filesystem:1196",
+            "filesystem:3111",
+            "filesystem:1186",
+            "filesystem:2987",
+            "filesystem:3437",
+            "filesystem:1199",
+            "filesystem:1195"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 1.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.8687949224876582,
+            "hit@10": 1.0,
+            "ndcg@10": 0.7720617383222417,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "filesystem:1194",
+            "filesystem:1198",
+            "filesystem:1196",
+            "security:747",
+            "filesystem:1199",
+            "filesystem:1186",
+            "filesystem:2987",
+            "filesystem:3437",
+            "filesystem:1182",
+            "filesystem:2983"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 1.0,
+            "hit@5": 1.0,
+            "ndcg@5": 1.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.793584067764911,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:1194",
+            "filesystem:1196",
+            "filesystem:3433",
+            "security:747",
+            "filesystem:1199",
+            "filesystem:1198",
+            "filesystem:1182",
+            "filesystem:2983",
+            "filesystem:3435",
+            "filesystem:2985"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7653606369886217,
+            "hit@5": 1.0,
+            "ndcg@5": 0.830419897363192,
+            "hit@10": 1.0,
+            "ndcg@10": 0.6906478832608419,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "filesystem:1194",
+            "filesystem:1196",
+            "filesystem:3433",
+            "filesystem:1199",
+            "filesystem:1182",
+            "filesystem:2983",
+            "filesystem:1198",
+            "filesystem:3435",
+            "filesystem:2985",
+            "filesystem:1184"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7653606369886217,
+            "hit@5": 1.0,
+            "ndcg@5": 0.830419897363192,
+            "hit@10": 1.0,
+            "ndcg@10": 0.6758704024811183,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": -0.2346,
+        "hit@5": 0.0,
+        "ndcg@5": -0.0384,
+        "hit@10": 0.0,
+        "ndcg@10": -0.0814,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": -0.2346,
+        "hit@5": 0.0,
+        "ndcg@5": -0.1696,
+        "hit@10": 0.0,
+        "ndcg@10": -0.1177,
+        "mrr": 0.0
+      }
+    },
+    "fs_touch_timestamp": {
+      "id": "fs_touch_timestamp",
+      "category": "filesystem",
+      "query": "update access and modification timestamps of file or create empty file",
+      "relevant_commands": [
+        "touch"
+      ],
+      "relevant_alias_count": 9,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "filesystem:1282",
+            "filesystem:425",
+            "filesystem:2093",
+            "filesystem:2621",
+            "filesystem:2768",
+            "processmanagement:12",
+            "processmanagement:20",
+            "processmanagement:7",
+            "filesystem:2656",
+            "filesystem:1185"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "filesystem:1282",
+            "filesystem:2768",
+            "filesystem:425",
+            "filesystem:3345",
+            "filesystem:2093",
+            "filesystem:3307",
+            "processmanagement:12",
+            "processmanagement:20",
+            "processmanagement:7",
+            "processmanagement:1570"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.09090909090909091
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:2093",
+            "filesystem:2768",
+            "filesystem:3345",
+            "filesystem:1282",
+            "filesystem:3307",
+            "filesystem:425",
+            "filesystem:2934",
+            "filesystem:545",
+            "filesystem:2857",
+            "filesystem:3466"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.07834851647149511,
+            "mrr": 0.14285714285714285
+          },
+          "hybrid_top_10": [
+            "filesystem:2768",
+            "filesystem:3345",
+            "filesystem:2093",
+            "filesystem:425",
+            "filesystem:2934",
+            "filesystem:1282",
+            "filesystem:3307",
+            "filesystem:2857",
+            "filesystem:545",
+            "processmanagement:12"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.13120507751234178,
+            "hit@10": 1.0,
+            "ndcg@10": 0.09092803061897883,
+            "mrr": 0.2
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 1.0,
+        "ndcg@10": 0.0783,
+        "mrr": 0.1429
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 1.0,
+        "ndcg@5": 0.1312,
+        "hit@10": 1.0,
+        "ndcg@10": 0.0909,
+        "mrr": 0.1091
+      }
+    },
+    "fs_paginate_file": {
+      "id": "fs_paginate_file",
+      "category": "filesystem",
+      "query": "view text file contents with backward and forward keyboard scrolling navigation",
+      "relevant_commands": [
+        "less",
+        "more"
+      ],
+      "relevant_alias_count": 83,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "textprocessing:1229",
+            "textprocessing:1788",
+            "textprocessing:1244",
+            "textprocessing:1802",
+            "textprocessing:1249",
+            "textprocessing:1806",
+            "textprocessing:2895",
+            "security:1206",
+            "misc:1869",
+            "misc:635"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7039180890341347,
+            "hit@5": 1.0,
+            "ndcg@5": 0.639945385422766,
+            "hit@10": 1.0,
+            "ndcg@10": 0.41528076708874123,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "textprocessing:1229",
+            "textprocessing:1788",
+            "textprocessing:1249",
+            "textprocessing:1806",
+            "textprocessing:2895",
+            "textprocessing:1244",
+            "textprocessing:1802",
+            "textprocessing:1651",
+            "textprocessing:2067",
+            "textprocessing:600"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7039180890341347,
+            "hit@5": 1.0,
+            "ndcg@5": 0.5087403079104241,
+            "hit@10": 1.0,
+            "ndcg@10": 0.40853591842579556,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "textprocessing:1229",
+            "textprocessing:1788",
+            "filesystem:2181",
+            "textprocessing:1244",
+            "textprocessing:1802",
+            "textprocessing:1249",
+            "textprocessing:1806",
+            "textprocessing:2895",
+            "security:1206",
+            "filesystem:1331"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.48522855511632257,
+            "hit@10": 1.0,
+            "ndcg@10": 0.3932783996463063,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "textprocessing:1229",
+            "textprocessing:1788",
+            "textprocessing:1249",
+            "textprocessing:1806",
+            "textprocessing:2895",
+            "textprocessing:1244",
+            "textprocessing:1802",
+            "textprocessing:1651",
+            "textprocessing:2067",
+            "textprocessing:600"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7039180890341347,
+            "hit@5": 1.0,
+            "ndcg@5": 0.5087403079104241,
+            "hit@10": 1.0,
+            "ndcg@10": 0.40853591842579556,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": -0.2346,
+        "hit@5": 0.0,
+        "ndcg@5": -0.1547,
+        "hit@10": 0.0,
+        "ndcg@10": -0.022,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "net_download_file_url": {
+      "id": "net_download_file_url",
+      "category": "networking",
+      "query": "download a remote file from a web server URL",
+      "relevant_commands": [
+        "curl",
+        "wget"
+      ],
+      "relevant_alias_count": 405,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "textprocessing:1450",
+            "security:1963",
+            "filesystem:481",
+            "security:1961",
+            "filesystem:3115",
+            "textprocessing:2887",
+            "processmanagement:2744",
+            "filesystem:1741",
+            "misc:2859",
+            "processmanagement:3219"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.5307212739772434,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6608397947263839,
+            "hit@10": 1.0,
+            "ndcg@10": 0.6371130896657825,
+            "mrr": 0.5
+          },
+          "hybrid_top_10": [
+            "textprocessing:1450",
+            "security:1963",
+            "filesystem:1741",
+            "filesystem:481",
+            "security:1961",
+            "misc:2859",
+            "filesystem:3115",
+            "textprocessing:2887",
+            "processmanagement:3219",
+            "textprocessing:2881"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.4912596920895758,
+            "hit@10": 1.0,
+            "ndcg@10": 0.6698623505528798,
+            "mrr": 0.5
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:3115",
+            "networking:1605",
+            "filesystem:1741",
+            "textprocessing:1450",
+            "filesystem:481",
+            "security:1963",
+            "security:1961",
+            "networking:788",
+            "textprocessing:2887",
+            "processmanagement:2744"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.4703652827859579,
+            "hit@10": 1.0,
+            "ndcg@10": 0.5232512984721256,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "filesystem:1741",
+            "textprocessing:1450",
+            "filesystem:3115",
+            "security:1963",
+            "filesystem:481",
+            "security:1961",
+            "misc:2859",
+            "networking:1605",
+            "textprocessing:2887",
+            "filesystem:3095"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.23463936301137822,
+            "hit@5": 1.0,
+            "ndcg@5": 0.4468535299918563,
+            "hit@10": 1.0,
+            "ndcg@10": 0.5716145678915879,
+            "mrr": 0.3333333333333333
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 0.0,
+        "ndcg@3": -0.0614,
+        "hit@5": 0.0,
+        "ndcg@5": -0.1905,
+        "hit@10": 0.0,
+        "ndcg@10": -0.1139,
+        "mrr": 0.5
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": -0.0614,
+        "hit@5": 0.0,
+        "ndcg@5": -0.0444,
+        "hit@10": 0.0,
+        "ndcg@10": -0.0982,
+        "mrr": -0.1667
+      }
+    },
+    "net_http_post_json": {
+      "id": "net_http_post_json",
+      "category": "networking",
+      "query": "send an HTTP POST request with JSON payload and custom headers",
+      "relevant_commands": [
+        "curl"
+      ],
+      "relevant_alias_count": 253,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "textprocessing:398",
+            "networking:11",
+            "security:1969",
+            "networking:785",
+            "networking:2",
+            "networking:4",
+            "filesystem:460",
+            "security:274",
+            "processmanagement:20",
+            "networking:12"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.36288691033421744,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "textprocessing:398",
+            "networking:11",
+            "misc:2845",
+            "security:1969",
+            "security:274",
+            "textprocessing:2885",
+            "filesystem:1345",
+            "filesystem:2019",
+            "filesystem:2035",
+            "networking:212"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.4703652827859579,
+            "hit@10": 1.0,
+            "ndcg@10": 0.36885567213865283,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "textprocessing:398",
+            "networking:11",
+            "networking:785",
+            "networking:2",
+            "networking:4",
+            "security:1969",
+            "filesystem:460",
+            "security:274",
+            "processmanagement:20",
+            "networking:12"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.36288691033421744,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "textprocessing:398",
+            "networking:11",
+            "misc:2845",
+            "security:1969",
+            "networking:785",
+            "networking:2",
+            "networking:4",
+            "security:274",
+            "textprocessing:2885",
+            "networking:210"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.3531437764338092,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": -0.1312,
+        "hit@10": 0.0,
+        "ndcg@10": -0.0157,
+        "mrr": 0.0
+      }
+    },
+    "net_test_latency_ping": {
+      "id": "net_test_latency_ping",
+      "category": "networking",
+      "query": "test network connectivity and packet round trip time to a remote server",
+      "relevant_commands": [
+        "ping"
+      ],
+      "relevant_alias_count": 39,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "processmanagement:82",
+            "networking:1112",
+            "networking:1132",
+            "networking:1147",
+            "networking:1127",
+            "networking:1142",
+            "networking:1157",
+            "cryptography:93",
+            "filesystem:3114",
+            "shellprogramming:357"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.34519134224686937,
+            "hit@10": 1.0,
+            "ndcg@10": 0.22400556151517553,
+            "mrr": 0.5
+          },
+          "hybrid_top_10": [
+            "processmanagement:82",
+            "networking:1127",
+            "networking:1142",
+            "networking:1157",
+            "networking:1112",
+            "networking:1132",
+            "networking:1147",
+            "shellprogramming:2175",
+            "networking:1447",
+            "networking:1460"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.34519134224686937,
+            "hit@10": 1.0,
+            "ndcg@10": 0.22400556151517553,
+            "mrr": 0.5
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:1147",
+            "networking:1112",
+            "networking:1132",
+            "networking:1127",
+            "processmanagement:82",
+            "cryptography:93",
+            "networking:1142",
+            "networking:1157",
+            "networking:1259",
+            "filesystem:2620"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.36005461457723403,
+            "hit@10": 1.0,
+            "ndcg@10": 0.23365080824310533,
+            "mrr": 0.5
+          },
+          "hybrid_top_10": [
+            "networking:1127",
+            "processmanagement:82",
+            "networking:1147",
+            "networking:1112",
+            "networking:1132",
+            "networking:1142",
+            "networking:1157",
+            "networking:1447",
+            "networking:1460",
+            "networking:1473"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.48522855511632257,
+            "hit@10": 1.0,
+            "ndcg@10": 0.31488013066763093,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0149,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0096,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.1732,
+        "hit@5": 0.0,
+        "ndcg@5": 0.14,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0909,
+        "mrr": 0.5
+      }
+    },
+    "net_secure_shell_login": {
+      "id": "net_secure_shell_login",
+      "category": "networking",
+      "query": "connect securely to remote host using SSH key authentication",
+      "relevant_commands": [
+        "ssh"
+      ],
+      "relevant_alias_count": 39,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "filesystem:2726",
+            "processmanagement:2727",
+            "networking:1376",
+            "processmanagement:2737",
+            "processmanagement:2750",
+            "filesystem:2686",
+            "networking:1383",
+            "usergroup:1420",
+            "processmanagement:2732",
+            "filesystem:2742"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 1.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.7227265726449519,
+            "hit@10": 1.0,
+            "ndcg@10": 0.5352543167750639,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "filesystem:2726",
+            "filesystem:2686",
+            "networking:1378",
+            "networking:1383",
+            "networking:1379",
+            "filesystem:2731",
+            "usergroup:1472",
+            "usergroup:1420",
+            "filesystem:2728",
+            "processmanagement:357"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.35970991185182927,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:1399",
+            "networking:1376",
+            "filesystem:2731",
+            "networking:528",
+            "networking:1383",
+            "networking:1443",
+            "networking:154",
+            "networking:734",
+            "networking:738",
+            "networking:1400"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.21398626473452756,
+            "hit@10": 1.0,
+            "ndcg@10": 0.13886244387355454,
+            "mrr": 0.5
+          },
+          "hybrid_top_10": [
+            "filesystem:2731",
+            "filesystem:2726",
+            "networking:1383",
+            "filesystem:2686",
+            "networking:1379",
+            "networking:1378",
+            "filesystem:2730",
+            "networking:1399",
+            "networking:1382",
+            "networking:528"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.21398626473452756,
+            "hit@10": 1.0,
+            "ndcg@10": 0.13886244387355454,
+            "mrr": 0.5
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": -1.0,
+        "ndcg@1": -1.0,
+        "hit@3": 0.0,
+        "ndcg@3": -0.7039,
+        "hit@5": 0.0,
+        "ndcg@5": -0.5087,
+        "hit@10": 0.0,
+        "ndcg@10": -0.3964,
+        "mrr": -0.5
+      },
+      "hybrid_delta": {
+        "hit@1": -1.0,
+        "ndcg@1": -1.0,
+        "hit@3": 0.0,
+        "ndcg@3": -0.1732,
+        "hit@5": 0.0,
+        "ndcg@5": -0.1252,
+        "hit@10": 0.0,
+        "ndcg@10": -0.2208,
+        "mrr": -0.5
+      }
+    },
+    "net_copy_file_remote_scp": {
+      "id": "net_copy_file_remote_scp",
+      "category": "networking",
+      "query": "copy a file securely over encrypted network to remote server destination",
+      "relevant_commands": [
+        "scp"
+      ],
+      "relevant_alias_count": 23,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "networking:1385",
+            "security:1625",
+            "cryptography:530",
+            "processmanagement:2744",
+            "filesystem:128",
+            "filesystem:392",
+            "usergroup:288",
+            "filesystem:139",
+            "usergroup:1420",
+            "cryptography:93"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.06625422345438903,
+            "mrr": 0.1111111111111111
+          },
+          "hybrid_top_10": [
+            "filesystem:2618",
+            "networking:1385",
+            "cryptography:530",
+            "usergroup:1420",
+            "processmanagement:2744",
+            "filesystem:392",
+            "usergroup:1938",
+            "usergroup:288",
+            "filesystem:2731",
+            "security:1625"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.48522855511632257,
+            "hit@10": 1.0,
+            "ndcg@10": 0.31488013066763093,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:1385",
+            "filesystem:392",
+            "security:1625",
+            "filesystem:2618",
+            "cryptography:530",
+            "processmanagement:2744",
+            "networking:481",
+            "networking:219",
+            "filesystem:1282",
+            "filesystem:1278"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.14606834984270645,
+            "hit@10": 1.0,
+            "ndcg@10": 0.09478836436955078,
+            "mrr": 0.25
+          },
+          "hybrid_top_10": [
+            "filesystem:2618",
+            "networking:1385",
+            "filesystem:392",
+            "usergroup:1420",
+            "filesystem:2731",
+            "cryptography:530",
+            "filesystem:2619",
+            "processmanagement:2744",
+            "networking:219",
+            "usergroup:1938"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.48522855511632257,
+            "hit@10": 1.0,
+            "ndcg@10": 0.388244052766991,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 1.0,
+        "ndcg@5": 0.1461,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0285,
+        "mrr": 0.1389
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0734,
+        "mrr": 0.0
+      }
+    },
+    "net_show_ip_interfaces": {
+      "id": "net_show_ip_interfaces",
+      "category": "networking",
+      "query": "display network interfaces IP addresses and link status",
+      "relevant_commands": [
+        "ip"
+      ],
+      "relevant_alias_count": 22,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "networking:2306",
+            "networking:278",
+            "networking:314",
+            "networking:527",
+            "networking:911",
+            "networking:255",
+            "networking:2305",
+            "networking:277",
+            "networking:313",
+            "networking:526"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.07142857142857142
+          },
+          "hybrid_top_10": [
+            "networking:2306",
+            "networking:278",
+            "networking:314",
+            "networking:527",
+            "networking:911",
+            "networking:543",
+            "networking:903",
+            "networking:2305",
+            "networking:277",
+            "networking:313"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.07839826897867533,
+            "mrr": 0.16666666666666666
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:2306",
+            "networking:278",
+            "networking:527",
+            "networking:911",
+            "networking:314",
+            "networking:255",
+            "networking:526",
+            "networking:910",
+            "networking:313",
+            "networking:543"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.06362078819895171,
+            "mrr": 0.1
+          },
+          "hybrid_top_10": [
+            "networking:2306",
+            "networking:278",
+            "networking:527",
+            "networking:911",
+            "networking:314",
+            "networking:903",
+            "networking:543",
+            "networking:526",
+            "networking:910",
+            "networking:313"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.07336392209936005,
+            "mrr": 0.14285714285714285
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 1.0,
+        "ndcg@10": 0.0636,
+        "mrr": 0.0286
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": -0.005,
+        "mrr": -0.0238
+      }
+    },
+    "net_show_listening_ports": {
+      "id": "net_show_listening_ports",
+      "category": "networking",
+      "query": "show all listening TCP sockets and the processes bound to them",
+      "relevant_commands": [
+        "ss"
+      ],
+      "relevant_alias_count": 19,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "networking:1372",
+            "keyboard:1177",
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "processmanagement:2684",
+            "processmanagement:2725",
+            "shellprogramming:2270",
+            "usergroup:1471"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.28371255449703187,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "networking:1372",
+            "keyboard:1177",
+            "usergroup:1471",
+            "processmanagement:2723",
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "security:1726",
+            "processmanagement:755"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7039180890341347,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6548086577531307,
+            "hit@10": 1.0,
+            "ndcg@10": 0.49118023727106,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:1372",
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "keyboard:1177",
+            "processmanagement:2684",
+            "processmanagement:2725",
+            "shellprogramming:2270",
+            "usergroup:1471"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.28371255449703187,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "networking:1372",
+            "keyboard:1177",
+            "usergroup:1471",
+            "processmanagement:2723",
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "security:1726",
+            "processmanagement:755"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7039180890341347,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6548086577531307,
+            "hit@10": 1.0,
+            "ndcg@10": 0.49118023727106,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "net_test_port_connectivity": {
+      "id": "net_test_port_connectivity",
+      "category": "networking",
+      "query": "check if a specific remote TCP port is open and accepting connections",
+      "relevant_commands": [
+        "nc",
+        "telnet"
+      ],
+      "relevant_alias_count": 25,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "misc:1467",
+            "misc:2905",
+            "keyboard:1177",
+            "shellprogramming:1295",
+            "shellprogramming:1296",
+            "networking:1339"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "keyboard:1177",
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "networking:1383",
+            "networking:1339",
+            "misc:190",
+            "shellprogramming:1295",
+            "networking:1354"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:1383",
+            "networking:1339",
+            "filesystem:2620",
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "networking:1354",
+            "networking:1399",
+            "networking:1443"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "networking:1383",
+            "networking:1339",
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "keyboard:1177",
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "filesystem:2620",
+            "networking:1354",
+            "networking:1376"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "net_query_dns_records": {
+      "id": "net_query_dns_records",
+      "category": "networking",
+      "query": "perform DNS lookup to find MX and A records for domain",
+      "relevant_commands": [
+        "dig",
+        "host"
+      ],
+      "relevant_alias_count": 34,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "networking:2304",
+            "networking:276",
+            "networking:312",
+            "networking:525",
+            "networking:909",
+            "processmanagement:422",
+            "networking:1591",
+            "networking:2303",
+            "networking:275",
+            "networking:311"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "networking:2304",
+            "networking:276",
+            "networking:312",
+            "networking:525",
+            "networking:909",
+            "networking:292",
+            "networking:253",
+            "networking:510",
+            "networking:2303",
+            "networking:275"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.14279514403613733,
+            "mrr": 0.14285714285714285
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:240",
+            "networking:253",
+            "networking:510",
+            "networking:292",
+            "networking:247",
+            "networking:909",
+            "networking:312",
+            "networking:525",
+            "networking:2304",
+            "processmanagement:422"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.5307212739772434,
+            "hit@5": 1.0,
+            "ndcg@5": 0.38356636737133565,
+            "hit@10": 1.0,
+            "ndcg@10": 0.2489083270225946,
+            "mrr": 0.5
+          },
+          "hybrid_top_10": [
+            "networking:253",
+            "networking:510",
+            "networking:240",
+            "networking:292",
+            "networking:857",
+            "networking:2303",
+            "networking:311",
+            "networking:908",
+            "networking:909",
+            "networking:524"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7653606369886217,
+            "hit@5": 1.0,
+            "ndcg@5": 0.5531464700081437,
+            "hit@10": 1.0,
+            "ndcg@10": 0.3589542101716347,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 1.0,
+        "ndcg@3": 0.5307,
+        "hit@5": 1.0,
+        "ndcg@5": 0.3836,
+        "hit@10": 1.0,
+        "ndcg@10": 0.2489,
+        "mrr": 0.5
+      },
+      "hybrid_delta": {
+        "hit@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "ndcg@3": 0.7654,
+        "hit@5": 1.0,
+        "ndcg@5": 0.5531,
+        "hit@10": 0.0,
+        "ndcg@10": 0.2162,
+        "mrr": 0.8571
+      }
+    },
+    "net_trace_route_hops": {
+      "id": "net_trace_route_hops",
+      "category": "networking",
+      "query": "trace the network gateway hops and packet latency towards destination IP",
+      "relevant_commands": [
+        "traceroute"
+      ],
+      "relevant_alias_count": 33,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "networking:1451",
+            "networking:1464",
+            "networking:1479",
+            "networking:1511",
+            "networking:1525",
+            "networking:642",
+            "networking:655",
+            "networking:1495",
+            "networking:1538",
+            "networking:1447"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.23463936301137822,
+            "hit@5": 1.0,
+            "ndcg@5": 0.16958010263680806,
+            "hit@10": 1.0,
+            "ndcg@10": 0.11004588314904008,
+            "mrr": 0.3333333333333333
+          },
+          "hybrid_top_10": [
+            "networking:1451",
+            "networking:1464",
+            "networking:1479",
+            "networking:1511",
+            "networking:1525",
+            "networking:642",
+            "networking:655",
+            "networking:1495",
+            "networking:1538",
+            "networking:1447"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.23463936301137822,
+            "hit@5": 1.0,
+            "ndcg@5": 0.16958010263680806,
+            "hit@10": 1.0,
+            "ndcg@10": 0.11004588314904008,
+            "mrr": 0.3333333333333333
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:1525",
+            "networking:1538",
+            "networking:1473",
+            "networking:1505",
+            "networking:1521",
+            "networking:638",
+            "networking:651",
+            "networking:1451",
+            "networking:1479",
+            "networking:1495"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.23463936301137822,
+            "hit@5": 1.0,
+            "ndcg@5": 0.16958010263680806,
+            "hit@10": 1.0,
+            "ndcg@10": 0.17630010660342912,
+            "mrr": 0.3333333333333333
+          },
+          "hybrid_top_10": [
+            "networking:1473",
+            "networking:1505",
+            "networking:1521",
+            "networking:638",
+            "networking:651",
+            "networking:1525",
+            "networking:1538",
+            "networking:1451",
+            "networking:1479",
+            "networking:1495"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.46927872602275644,
+            "hit@5": 1.0,
+            "ndcg@5": 0.3391602052736161,
+            "hit@10": 1.0,
+            "ndcg@10": 0.2863459897524692,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0663,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.2346,
+        "hit@5": 0.0,
+        "ndcg@5": 0.1696,
+        "hit@10": 0.0,
+        "ndcg@10": 0.1763,
+        "mrr": 0.6667
+      }
+    },
+    "net_show_routing_table": {
+      "id": "net_show_routing_table",
+      "category": "networking",
+      "query": "display the kernel IP routing table and default gateway",
+      "relevant_commands": [
+        "ip"
+      ],
+      "relevant_alias_count": 22,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "networking:1451",
+            "networking:1464",
+            "networking:1479",
+            "networking:1511",
+            "networking:1525",
+            "networking:642",
+            "networking:655",
+            "networking:1495",
+            "networking:1538",
+            "networking:1124"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.07692307692307693
+          },
+          "hybrid_top_10": [
+            "networking:1451",
+            "networking:1464",
+            "networking:1479",
+            "networking:1511",
+            "networking:1525",
+            "networking:642",
+            "networking:655",
+            "networking:1495",
+            "networking:1538",
+            "networking:543"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.06362078819895171,
+            "mrr": 0.1
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:1451",
+            "networking:1525",
+            "networking:1538",
+            "networking:1479",
+            "networking:1495",
+            "networking:1464",
+            "networking:642",
+            "networking:655",
+            "networking:1511",
+            "networking:298"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "networking:1451",
+            "networking:1525",
+            "networking:1538",
+            "networking:1479",
+            "networking:1495",
+            "networking:1464",
+            "networking:642",
+            "networking:655",
+            "networking:1511",
+            "networking:543"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.06362078819895171,
+            "mrr": 0.1
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": -0.0769
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "net_download_recursive_website": {
+      "id": "net_download_recursive_website",
+      "category": "networking",
+      "query": "recursively mirror and download an entire website hierarchy",
+      "relevant_commands": [
+        "wget"
+      ],
+      "relevant_alias_count": 152,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "shellprogramming:2474",
+            "filesystem:3131",
+            "filesystem:2657",
+            "filesystem:3129",
+            "filesystem:280",
+            "filesystem:299",
+            "filesystem:2579",
+            "hardwaremanagement:1678",
+            "filesystem:3107",
+            "filesystem:2622"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7653606369886217,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6992148198508501,
+            "hit@10": 1.0,
+            "ndcg@10": 0.5894280199323518,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "shellprogramming:2474",
+            "filesystem:3131",
+            "filesystem:3129",
+            "filesystem:2657",
+            "filesystem:3107",
+            "hardwaremanagement:1678",
+            "security:1033",
+            "networking:782",
+            "filesystem:280",
+            "filesystem:299"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 1.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.8539316501572937,
+            "hit@10": 1.0,
+            "ndcg@10": 0.6325414799409712,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "shellprogramming:2474",
+            "filesystem:3129",
+            "filesystem:3131",
+            "filesystem:2657",
+            "filesystem:299",
+            "filesystem:280",
+            "filesystem:2581",
+            "filesystem:1946",
+            "filesystem:2579",
+            "hardwaremanagement:1678"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 1.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.7227265726449519,
+            "hit@10": 1.0,
+            "ndcg@10": 0.5326208815196265,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "shellprogramming:2474",
+            "filesystem:3131",
+            "filesystem:3129",
+            "filesystem:299",
+            "filesystem:280",
+            "filesystem:2657",
+            "filesystem:3107",
+            "hardwaremanagement:1678",
+            "networking:782",
+            "security:1033"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 1.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.7227265726449519,
+            "hit@10": 1.0,
+            "ndcg@10": 0.6117952373568122,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.2346,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0235,
+        "hit@10": 0.0,
+        "ndcg@10": -0.0568,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": -0.1312,
+        "hit@10": 0.0,
+        "ndcg@10": -0.0207,
+        "mrr": 0.0
+      }
+    },
+    "net_resume_broken_download": {
+      "id": "net_resume_broken_download",
+      "category": "networking",
+      "query": "resume an interrupted large file download without restarting from zero",
+      "relevant_commands": [
+        "curl",
+        "wget"
+      ],
+      "relevant_alias_count": 405,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "textprocessing:1450",
+            "processmanagement:1845",
+            "security:1203",
+            "security:1224",
+            "processmanagement:3212",
+            "security:2108",
+            "textprocessing:380",
+            "security:1204",
+            "security:1048",
+            "shellprogramming:2474"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 1.0,
+            "ndcg@5": 0.13120507751234178,
+            "hit@10": 1.0,
+            "ndcg@10": 0.1487639058405727,
+            "mrr": 0.2
+          },
+          "hybrid_top_10": [
+            "textprocessing:1450",
+            "processmanagement:3212",
+            "security:1048",
+            "security:2008",
+            "processmanagement:1845",
+            "processmanagement:338",
+            "shellprogramming:2470",
+            "filesystem:3101",
+            "shellprogramming:2474",
+            "security:1047"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.21398626473452756,
+            "hit@10": 1.0,
+            "ndcg@10": 0.4263100803427562,
+            "mrr": 0.5
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "textprocessing:1450",
+            "processmanagement:1845",
+            "security:1224",
+            "security:1203",
+            "security:2108",
+            "processmanagement:3212",
+            "textprocessing:380",
+            "security:1204",
+            "shellprogramming:2474",
+            "filesystem:3095"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 1.0,
+            "ndcg@10": 0.20827328063201608,
+            "mrr": 0.16666666666666666
+          },
+          "hybrid_top_10": [
+            "textprocessing:1450",
+            "processmanagement:3212",
+            "security:1048",
+            "security:2008",
+            "processmanagement:1845",
+            "processmanagement:338",
+            "shellprogramming:2470",
+            "filesystem:3103",
+            "filesystem:3101",
+            "shellprogramming:2474"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.2960819109658652,
+            "hit@5": 1.0,
+            "ndcg@5": 0.21398626473452756,
+            "hit@10": 1.0,
+            "ndcg@10": 0.48993086854170786,
+            "mrr": 0.5
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": -1.0,
+        "ndcg@5": -0.1312,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0595,
+        "mrr": -0.0333
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0636,
+        "mrr": 0.0
+      }
+    },
+    "net_http_response_headers_only": {
+      "id": "net_http_response_headers_only",
+      "category": "networking",
+      "query": "fetch and inspect only the HTTP status and response headers of a web endpoint",
+      "relevant_commands": [
+        "curl"
+      ],
+      "relevant_alias_count": 253,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "filesystem:464",
+            "keyboard:1182",
+            "misc:388",
+            "textprocessing:2887",
+            "security:270",
+            "textprocessing:2883",
+            "shellprogramming:358",
+            "textprocessing:1450",
+            "security:274",
+            "hardwaremanagement:233"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7039180890341347,
+            "hit@5": 1.0,
+            "ndcg@5": 0.639945385422766,
+            "hit@10": 1.0,
+            "ndcg@10": 0.6185197008414421,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "filesystem:464",
+            "misc:388",
+            "keyboard:1182",
+            "security:270",
+            "processmanagement:3244",
+            "shellprogramming:358",
+            "security:274",
+            "textprocessing:2883",
+            "hardwaremanagement:1672",
+            "security:1954"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7653606369886217,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6992148198508501,
+            "hit@10": 1.0,
+            "ndcg@10": 0.605504765619221,
+            "mrr": 1.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "filesystem:464",
+            "keyboard:1182",
+            "misc:388",
+            "filesystem:452",
+            "textprocessing:2887",
+            "security:270",
+            "textprocessing:2883",
+            "shellprogramming:358",
+            "textprocessing:1450",
+            "security:274"
+          ],
+          "bm25": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7039180890341347,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6548086577531307,
+            "hit@10": 1.0,
+            "ndcg@10": 0.6363762929310753,
+            "mrr": 1.0
+          },
+          "hybrid_top_10": [
+            "filesystem:464",
+            "misc:388",
+            "keyboard:1182",
+            "security:270",
+            "filesystem:1346",
+            "filesystem:2020",
+            "filesystem:2036",
+            "processmanagement:3244",
+            "shellprogramming:358",
+            "security:1954"
+          ],
+          "hybrid": {
+            "hit@1": 1.0,
+            "ndcg@1": 1.0,
+            "hit@3": 1.0,
+            "ndcg@3": 0.7653606369886217,
+            "hit@5": 1.0,
+            "ndcg@5": 0.6992148198508501,
+            "hit@10": 1.0,
+            "ndcg@10": 0.5199967979955745,
+            "mrr": 1.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0149,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0179,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": -0.0855,
+        "mrr": 0.0
+      }
+    },
+    "net_listen_arbitrary_port": {
+      "id": "net_listen_arbitrary_port",
+      "category": "networking",
+      "query": "listen on an arbitrary local TCP port to receive inbound data stream",
+      "relevant_commands": [
+        "nc"
+      ],
+      "relevant_alias_count": 7,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "keyboard:1177",
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "filesystem:908",
+            "processmanagement:2684",
+            "processmanagement:2725",
+            "shellprogramming:1296",
+            "networking:1372"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "keyboard:1177",
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "processmanagement:2684",
+            "processmanagement:2725",
+            "filesystem:908",
+            "misc:2392",
+            "networking:1372"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "keyboard:1177",
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "filesystem:908",
+            "processmanagement:2684",
+            "processmanagement:2725",
+            "networking:1284",
+            "shellprogramming:1296"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "keyboard:1177",
+            "processmanagement:2687",
+            "processmanagement:2728",
+            "processmanagement:2691",
+            "processmanagement:2732",
+            "processmanagement:2684",
+            "processmanagement:2725",
+            "filesystem:908",
+            "misc:2392",
+            "networking:1372"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    },
+    "net_reverse_ip_lookup": {
+      "id": "net_reverse_ip_lookup",
+      "category": "networking",
+      "query": "find the hostname corresponding to a public IP address",
+      "relevant_commands": [
+        "host",
+        "dig"
+      ],
+      "relevant_alias_count": 34,
+      "variants": {
+        "base": {
+          "bm25_top_10": [
+            "networking:526",
+            "security:765",
+            "security:1167",
+            "security:2272",
+            "security:342",
+            "security:345",
+            "processmanagement:3208",
+            "networking:2305",
+            "networking:277",
+            "networking:313"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "networking:526",
+            "networking:2305",
+            "networking:277",
+            "networking:313",
+            "networking:910",
+            "security:765",
+            "security:1167",
+            "security:2272",
+            "security:342",
+            "security:345"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        },
+        "paraphrases": {
+          "bm25_top_10": [
+            "networking:613",
+            "networking:1371",
+            "networking:526",
+            "networking:277",
+            "networking:611",
+            "networking:896",
+            "networking:910",
+            "networking:313",
+            "networking:2305",
+            "networking:109"
+          ],
+          "bm25": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          },
+          "hybrid_top_10": [
+            "networking:613",
+            "networking:896",
+            "networking:526",
+            "networking:277",
+            "networking:910",
+            "networking:313",
+            "networking:611",
+            "networking:2305",
+            "networking:109",
+            "networking:115"
+          ],
+          "hybrid": {
+            "hit@1": 0.0,
+            "ndcg@1": 0.0,
+            "hit@3": 0.0,
+            "ndcg@3": 0.0,
+            "hit@5": 0.0,
+            "ndcg@5": 0.0,
+            "hit@10": 0.0,
+            "ndcg@10": 0.0,
+            "mrr": 0.0
+          }
+        }
+      },
+      "bm25_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      },
+      "hybrid_delta": {
+        "hit@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0
+      }
+    }
+  }
+}

@@ -17,7 +17,33 @@ from semantic_search_engine.response_formatter_service.service import ResponseFo
 
 def create_engine(config_path: Path):
     config=load_config(config_path)
-    retrieval=RetrievalService(QueryAnalyzer(), RulePlanner(), FaissRetriever(config.index_path, config.aliases_path, SentenceTransformerEncoder(config.embedding_model)))
+    encoder = SentenceTransformerEncoder(config.embedding_model)
+    if config.retrieval_mode == "hybrid":
+        if config.bm25_index_path is None:
+            raise ValueError("bm25_index_path es obligatorio con retrieval_mode='hybrid'")
+        from semantic_search_engine.retrieval_service.bm25_search import HybridBM25Retriever
+
+        retriever = HybridBM25Retriever.from_paths(
+            config.bm25_index_path,
+            config.index_path,
+            config.aliases_path,
+            encoder,
+            top_k=config.retrieval_top_k,
+            alpha=config.hybrid_alpha,
+            allowed_categories=config.allowed_categories,
+        )
+    else:
+        retriever = FaissRetriever(
+            config.index_path,
+            config.aliases_path,
+            encoder,
+            config.allowed_categories,
+        )
+    retrieval=RetrievalService(
+        QueryAnalyzer(),
+        RulePlanner(),
+        retriever,
+    )
     reranker=CrossEncoderReranker(config.reranker_model) if config.reranker_model else IdentityReranker()
     pipeline=PipelineBuilderService(CommandResolver(config.corpus_path), PipelineBuilder(config.selection), ProposalValidator())
     return SemanticSearchEngine(retrieval, RerankerService(reranker), pipeline, PromptBuilderService(PromptBuilder()), ResponseFormatterService())

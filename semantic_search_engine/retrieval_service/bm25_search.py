@@ -32,9 +32,13 @@ class HybridBM25Retriever:
         aliases: np.ndarray,
         encoder: Encoder,
         top_k: int = 15,
+        alpha: float = 0.5,
+        allowed_categories: tuple[str, ...] | None = None,
     ) -> None:
         if top_k <= 0:
             raise ValueError("top_k debe ser mayor que cero.")
+        if not 0 <= alpha <= 1:
+            raise ValueError("alpha debe estar entre 0 y 1.")
         if faiss_index.ntotal != len(aliases):
             raise ValueError("El índice FAISS y sus aliases no están alineados.")
 
@@ -43,6 +47,25 @@ class HybridBM25Retriever:
         self.aliases = np.asarray(aliases).astype(str)
         self.encoder = encoder
         self.top_k = top_k
+        self.alpha = alpha
+        self.allowed_categories = (
+            frozenset(allowed_categories) if allowed_categories is not None else None
+        )
+        self.document_count = max(faiss_index.ntotal, len(self.aliases))
+        if self.allowed_categories is not None:
+            bm25_document_count = getattr(bm25_searcher, "num_docs", None)
+            if not isinstance(bm25_document_count, int) or bm25_document_count <= 0:
+                raise ValueError(
+                    "El buscador BM25 debe exponer num_docs para filtrar categorías"
+                )
+            self.document_count = max(self.document_count, bm25_document_count)
+            indexed_categories = {self._category(alias) for alias in self.aliases}
+            missing_categories = self.allowed_categories - indexed_categories
+            if missing_categories:
+                raise ValueError(
+                    "Categorías ausentes en aliases híbridos: "
+                    + ", ".join(sorted(missing_categories))
+                )
 
     @classmethod
     def from_paths(
@@ -52,6 +75,8 @@ class HybridBM25Retriever:
         aliases_path: Path,
         encoder: Encoder,
         top_k: int = 15,
+        alpha: float = 0.5,
+        allowed_categories: tuple[str, ...] | None = None,
     ) -> HybridBM25Retriever:
         """Load the Pyserini and FAISS indices from the project's artifact paths."""
         return cls(
@@ -60,7 +85,16 @@ class HybridBM25Retriever:
             np.load(aliases_path, allow_pickle=False),
             encoder,
             top_k,
+            alpha,
+            allowed_categories,
         )
+
+    @staticmethod
+    def _category(alias: str) -> str:
+        category, separator, _ = alias.partition(":")
+        if not separator or not category:
+            raise ValueError(f"Alias híbrido inválido: {alias!r}")
+        return category
 
     @staticmethod
     def _normalize(scores: list[float]) -> list[float]:
@@ -98,13 +132,14 @@ class HybridBM25Retriever:
         self,
         query: str,
         top_k: int | None = None,
-        alpha: float = 0.5,
+        alpha: float | None = None,
     ) -> list[tuple[str, float, str]]:
         """Return (alias, fused_score, intent), ordered by descending score.
 
         ``alpha`` is the dense-search weight: 0 selects BM25, 1 selects FAISS.
         """
-        if not 0 <= alpha <= 1:
+        weight = self.alpha if alpha is None else alpha
+        if not 0 <= weight <= 1:
             raise ValueError("alpha debe estar entre 0 y 1.")
         limit = self.top_k if top_k is None else top_k
         if limit <= 0:
@@ -131,10 +166,10 @@ class HybridBM25Retriever:
         for alias in aliases:
             bm25_score, intent, bm25_position = bm25_ranked.get(alias, (0.0, "", limit))
             dense_score, dense_position = dense_ranked.get(alias, (0.0, limit))
-            score = alpha * dense_score + (1 - alpha) * bm25_score
-            if alpha == 0:
+            score = weight * dense_score + (1 - weight) * bm25_score
+            if weight == 0:
                 tie_break = bm25_position
-            elif alpha == 1:
+            elif weight == 1:
                 tie_break = dense_position
             else:
                 tie_break = min(bm25_position, dense_position)
@@ -145,4 +180,17 @@ class HybridBM25Retriever:
 
     def retrieve(self, query: str, top_k: int) -> list[tuple[str, float]]:
         """Expose the retriever protocol used by the semantic search engine."""
-        return [(alias, score) for alias, score, _ in self.search(query, top_k)]
+        if top_k <= 0:
+            raise ValueError("top_k debe ser mayor que cero.")
+        search_limit = self.document_count if self.allowed_categories is not None else top_k
+        results = []
+        for alias, score, _ in self.search(query, search_limit):
+            if (
+                self.allowed_categories is not None
+                and self._category(alias) not in self.allowed_categories
+            ):
+                continue
+            results.append((alias, score))
+            if len(results) == top_k:
+                break
+        return results

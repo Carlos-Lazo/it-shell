@@ -23,19 +23,15 @@ import sys
 import tempfile
 from typing import List, Dict, Any
 
-# La clase LuceneIndexer no expone un método .main en la versión 0.22.0.
-# En su lugar utilizamos el módulo ejecutable de Pyserini vía subprocess, que
-# acepta los mismos argumentos de línea de comandos.
 import subprocess
 
 import yaml                     # PyYAML (ya está en requirements.txt)
 
-# Nueva API de Pyserini (v0.22.0)
-from pyserini.index.lucene import LuceneIndexer   # clase que implementa la indexación
-
 CORPUS_PATH = "../corpus"
 OUTPUT_INDEX_PATH = "artifacts/bm25_indexs_v2"
 BASE_THREADS = 4
+REPRESENTATIONS = ("command", "enriched", "curated", "enriched_paraphrases")
+MAX_INTENT_CHARS = 256
 # ----------------------------------------------------------------------
 # Helpers
 # ----------------------------------------------------------------------
@@ -62,6 +58,7 @@ def _load_yaml_folder(folder: pathlib.Path = CORPUS_PATH) -> List[Dict[str, Any]
                 "id": f"{category}:{doc.get('id')}",
                 "command": doc.get("command", ""),
                 "intent": doc.get("intent", ""),
+                "example": doc.get("example", ""),
             }
             records.append(rec)
 
@@ -84,16 +81,84 @@ def _load_json_corpus(json_path: pathlib.Path) -> List[Dict[str, Any]]:
         rec = {
             "id": str(entry.get("id")),
             "command": entry["command"],
-            "intent": entry["intent"],
+            "intent": entry.get("intent", ""),
+            "example": entry.get("example", ""),
         }
         records.append(rec)
     return records
 
 
+def _contents_for_record(
+    record: Dict[str, Any],
+    representation: str,
+    search_phrases: List[str] | None = None,
+) -> str:
+    if representation not in REPRESENTATIONS:
+        raise ValueError(
+            f"Representación BM25 inválida: {representation!r}; "
+            f"opciones: {', '.join(REPRESENTATIONS)}"
+        )
+    fields = [record.get("command", "")]
+    if representation in {"enriched", "enriched_paraphrases"}:
+        intent = record.get("intent", "")
+        if isinstance(intent, str):
+            intent = " ".join(intent.split())
+            if len(intent) > MAX_INTENT_CHARS:
+                intent = intent[:MAX_INTENT_CHARS].rsplit(" ", 1)[0]
+        fields.extend((intent, record.get("example", "")))
+    elif representation == "curated":
+        fields.extend(search_phrases or ())
+    if representation == "enriched_paraphrases":
+        fields.extend(search_phrases or ())
+    return " ".join(
+        value.strip()
+        for value in fields
+        if isinstance(value, str) and value.strip()
+    )
+
+
 def _prepare_input(
     records: List[Dict[str, Any]],
     tmp_dir: pathlib.Path,
+    representation: str = "command",
+    search_phrases: Dict[str, List[str]] | None = None,
 ) -> pathlib.Path:
+    if representation not in REPRESENTATIONS:
+        raise ValueError(
+            f"Representación BM25 inválida: {representation!r}; "
+            f"opciones: {', '.join(REPRESENTATIONS)}"
+        )
+    phrase_representations = {"curated", "enriched_paraphrases"}
+    if representation in phrase_representations and search_phrases is None:
+        raise ValueError(
+            f"La representación {representation} requiere un archivo de frases"
+        )
+    if representation not in phrase_representations and search_phrases is not None:
+        raise ValueError(
+            "Las frases de búsqueda solo se usan con representation=curated "
+            "o enriched_paraphrases"
+        )
+    known_aliases = {str(record["id"]) for record in records}
+    unknown_aliases = set(search_phrases or ()) - known_aliases
+    if unknown_aliases:
+        raise ValueError(
+            "Aliases sin documento en el corpus: " + ", ".join(sorted(unknown_aliases))
+        )
+    if representation == "enriched_paraphrases":
+        phrase_categories = {
+            alias.partition(":")[0] for alias in (search_phrases or ())
+        }
+        missing_aliases = {
+            str(record["id"])
+            for record in records
+            if str(record["id"]).partition(":")[0] in phrase_categories
+            and str(record["id"]) not in (search_phrases or {})
+        }
+        if missing_aliases:
+            raise ValueError(
+                "Aliases sin entrada de paráfrasis: "
+                + ", ".join(sorted(missing_aliases))
+            )
     tmp_dir.mkdir(parents=True, exist_ok=True)
     jsonl_path = tmp_dir / "corpus.jsonl"
 
@@ -101,19 +166,66 @@ def _prepare_input(
         for rec in records:
             doc = {
                 "id": rec["id"],
-                "contents": rec["command"],
+                "contents": _contents_for_record(
+                    rec,
+                    representation,
+                    (search_phrases or {}).get(str(rec["id"])),
+                ),
             }
-            # Si el registro lleva una descripción, la guardamos
-            if "intent" in rec:
-                doc["intent"] = rec["intent"]
+            for field in ("command", "intent", "example"):
+                if field in rec:
+                    doc[field] = rec[field]
+            if representation in {"curated", "enriched_paraphrases"}:
+                doc["search_phrases"] = (search_phrases or {}).get(str(rec["id"]), [])
             out.write(json.dumps(doc, ensure_ascii=False) + "\n")
     return jsonl_path
+
+
+def _load_search_phrases(
+    paths: pathlib.Path | List[pathlib.Path],
+    *,
+    allow_empty: bool = False,
+    deduplicate: bool = False,
+) -> Dict[str, List[str]]:
+    if isinstance(paths, pathlib.Path):
+        paths = [paths]
+    phrases: Dict[str, List[str]] = {}
+    for path in paths:
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            raise ValueError(
+                f"No se pudo cargar el archivo de frases {path}: {error}"
+            ) from error
+        if not isinstance(payload, dict) or not payload:
+            raise ValueError(
+                f"El archivo de frases {path} debe ser un objeto alias -> lista de frases"
+            )
+        for alias, values in payload.items():
+            if not isinstance(alias, str) or not alias.strip():
+                raise ValueError("Cada alias de frase debe ser una cadena no vacía")
+            if alias in phrases:
+                raise ValueError(f"Alias duplicado en archivos de frases: {alias}")
+            if not isinstance(values, list) or (
+                not allow_empty and not values
+            ) or not all(isinstance(value, str) and value.strip() for value in values):
+                qualifier = "una lista de textos" if allow_empty else "una lista no vacía"
+                raise ValueError(f"Las frases para {alias!r} deben ser {qualifier}")
+            normalized = [value.strip() for value in values]
+            if deduplicate:
+                normalized = list(dict.fromkeys(normalized))
+            elif len(set(normalized)) != len(normalized):
+                raise ValueError(f"Las frases para {alias!r} no deben repetirse")
+            phrases[alias] = normalized
+    return phrases
 
 
 def build_bm25_index(
     corpus_path: pathlib.Path = CORPUS_PATH,
     index_dir: pathlib.Path = OUTPUT_INDEX_PATH,
     threads: int = BASE_THREADS,
+    representation: str = "command",
+    search_phrases_path: pathlib.Path | List[pathlib.Path] | None = None,
 ) -> None:
     """
     Crea el índice BM25 a partir de ``corpus_path``.
@@ -137,13 +249,32 @@ def build_bm25_index(
 
     if not records:
         sys.exit("[ERROR] No se encontraron documentos en el corpus.")
+    phrase_representations = {"curated", "enriched_paraphrases"}
+    if representation in phrase_representations and search_phrases_path is None:
+        raise ValueError(
+            f"--search-phrases es obligatorio con --representation {representation}"
+        )
+    if representation not in phrase_representations and search_phrases_path is not None:
+        raise ValueError(
+            "--search-phrases requiere --representation curated "
+            "o enriched_paraphrases"
+        )
+    search_phrases = (
+        _load_search_phrases(
+            search_phrases_path,
+            allow_empty=representation == "enriched_paraphrases",
+            deduplicate=representation == "enriched_paraphrases",
+        )
+        if search_phrases_path is not None
+        else None
+    )
 
     # -----------------------------------------------------------------
     # 2️⃣  Preparar el archivo JSONL temporal que Pyserini consume
     # -----------------------------------------------------------------
     with tempfile.TemporaryDirectory(prefix="it-shell-bm25-input-") as temp_dir:
         tmp_input = pathlib.Path(temp_dir)
-        _prepare_input(records, tmp_input)
+        _prepare_input(records, tmp_input, representation, search_phrases)
 
         # -----------------------------------------------------------------
         # 3️⃣  Ejecutar el indexador de Pyserini
@@ -202,9 +333,35 @@ def _parse_cli() -> argparse.Namespace:
         default=4,
         help="Number of indexing threads (default: 4).",
     )
+    parser.add_argument(
+        "--representation",
+        choices=REPRESENTATIONS,
+        default="command",
+        help=(
+            "Text indexed in BM25: command preserves the legacy representation; "
+            f"enriched indexes command, up to {MAX_INTENT_CHARS} characters of intent, "
+            "and example; curated indexes command and manually reviewed search phrases; "
+            "enriched_paraphrases adds search paraphrases to the enriched content."
+        ),
+    )
+    parser.add_argument(
+        "--search-phrases",
+        type=pathlib.Path,
+        nargs="+",
+        help=(
+            "One or more JSON files mapping corpus aliases to search phrases. "
+            "Required by curated and enriched_paraphrases."
+        ),
+    )
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = _parse_cli()
-    build_bm25_index(args.corpus, args.output, args.threads)
+    build_bm25_index(
+        args.corpus,
+        args.output,
+        args.threads,
+        args.representation,
+        args.search_phrases,
+    )

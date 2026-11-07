@@ -47,6 +47,7 @@ dataset_builder/webcrawling/**/*.csv
 *.yaml
 !semantic_search_engine/config/default.yaml
 !dataset_builder/corpus/*.yaml
+!evaluation/capacity/plain_source.yaml
 
 # Índices FAISS
 *.index
@@ -70,7 +71,7 @@ dataset_builder/webcrawling/**/*.csv
 *.tip
 *.tmd
 *.jsonl
-dataset_builder/indexer/artifacts/bm25_indexs*/
+dataset_builder/indexer/artifacts/bm25_*/
 *.lock
 # ==========================================
 # IDE

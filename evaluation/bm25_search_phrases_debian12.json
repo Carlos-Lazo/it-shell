@@ -1,0 +1,37 @@
+{
+  "filesystem:877": [
+    "search for files by name under a directory",
+    "find files matching a filename or file extension",
+    "locate files in a directory tree"
+  ],
+  "textprocessing:909": [
+    "search a file for a word or text pattern",
+    "find matching lines in a log file",
+    "look for an error message in a system log"
+  ],
+  "filesystem:533": [
+    "show free disk space in human readable units",
+    "check available storage space on filesystems",
+    "report disk usage in megabytes or gigabytes"
+  ],
+  "filesystem:1673": [
+    "list files and directories in a folder",
+    "show the contents of the current directory",
+    "display files in a directory"
+  ],
+  "processmanagement:2416": [
+    "list running processes",
+    "show a snapshot of current processes",
+    "display processes running on the system"
+  ],
+  "networking:1419": [
+    "create or extract a tar archive",
+    "combine files into a compressed archive",
+    "archive selected files and directories"
+  ],
+  "filesystem:370": [
+    "copy a file or directory from a source to a destination",
+    "duplicate files into another directory",
+    "copy files and folders"
+  ]
+}

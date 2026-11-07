@@ -19,8 +19,11 @@ class Hit:
 class FakeBM25Searcher:
     def __init__(self, hits: list[Hit]) -> None:
         self.hits = hits
+        self.num_docs = len(hits)
+        self.requested_k = None
 
     def search(self, query: str, k: int) -> list[Hit]:
+        self.requested_k = k
         return self.hits[:k]
 
 
@@ -74,6 +77,42 @@ class TestHybridBM25Retriever(unittest.TestCase):
         )
         self.assertEqual(len(self.retriever.retrieve("query", 2)), 2)
         self.assertTrue(all(0.0 <= score <= 1.0 for _, score, _ in results))
+
+    def test_domain_filter_searches_full_ranking_before_filtering(self) -> None:
+        searcher = FakeBM25Searcher(
+            [
+                hit("docker:1", 9.0),
+                hit("filesystem:1", 8.0),
+                hit("git:1", 1.0),
+            ]
+        )
+        retriever = HybridBM25Retriever(
+            searcher,
+            self.index,
+            np.array(["docker:1", "filesystem:2", "git:1"]),
+            FakeEncoder(),
+            top_k=1,
+            alpha=0.0,
+            allowed_categories=("filesystem",),
+        )
+
+        results = retriever.retrieve("query", 1)
+
+        self.assertEqual(searcher.requested_k, searcher.num_docs)
+        self.assertEqual([alias for alias, _ in results], ["filesystem:1"])
+
+    def test_domain_filter_requires_searcher_document_count(self) -> None:
+        searcher = FakeBM25Searcher([hit("filesystem:1", 1.0)])
+        del searcher.num_docs
+
+        with self.assertRaisesRegex(ValueError, "exponer num_docs"):
+            HybridBM25Retriever(
+                searcher,
+                self.index,
+                self.aliases,
+                FakeEncoder(),
+                allowed_categories=("filesystem",),
+            )
 
     def test_invalid_parameters_and_misaligned_aliases_fail(self) -> None:
         with self.assertRaises(ValueError):
