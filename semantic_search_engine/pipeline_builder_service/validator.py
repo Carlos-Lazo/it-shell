@@ -1,9 +1,17 @@
 import re
+from dataclasses import replace
 from semantic_search_engine.retrieval_service.planner import _ambiguous_argument_types, _extract_arguments
 from semantic_search_engine.shared.contracts import PipelineProposal, PipelineStep, ValidationIssue
 
 class ProposalValidator:
     PLACEHOLDER_PATTERN = re.compile(r'<([^<>]+)>|\{([^{}]+)\}')
+    ROOT_RECURSIVE_DELETE_REQUEST = re.compile(
+        r'\brm\b'
+        r'(?=[^;&|\n]*\s(?:--recursive|-[a-z]*r[a-z]*)(?:[\s,]|$))'
+        r'(?=[^;&|\n]*\s(?:--force|-[a-z]*f[a-z]*)(?:[\s,]|$))'
+        r'[^;&|\n]*\s/(?:[\s,.;]|$)',
+        re.IGNORECASE,
+    )
     COMPRESSION_PATTERN = re.compile(
         r'\b(?:compress(?:es|ed|ing|ion)?|comprimir|comprime|comprim(?:ir|iendo|ido|ida))\b',
         re.IGNORECASE,
@@ -19,11 +27,10 @@ class ProposalValidator:
             'critical',
             'destructive_command',
             re.compile(
-                r'\brm\s+(?:(?:-[a-zA-Z]*r[a-zA-Z]*f[a-zA-Z]*|-[a-zA-Z]*f[a-zA-Z]*r[a-zA-Z]*)(?:\s|$)'
-                r'|(?:-[a-zA-Z]*r[a-zA-Z]*\s+-[a-zA-Z]*f[a-zA-Z]*|-[a-zA-Z]*f[a-zA-Z]*\s+-[a-zA-Z]*r[a-zA-Z]*)(?:\s|$))',
+                r'\brm\b(?=[^;&|\n]*\s(?:--recursive|-[a-zA-Z]*r[a-zA-Z]*)(?:[\s,]|$))',
                 re.IGNORECASE,
             ),
-            'Eliminación recursiva forzada de archivos.',
+            'Eliminación recursiva de archivos y directorios.',
             'No ejecutes el comando sin verificar cada ruta y contar con una copia de seguridad.',
         ),
         (
@@ -150,9 +157,33 @@ class ProposalValidator:
     def validate(self, proposal: PipelineProposal) -> PipelineProposal:
         issues = list(proposal.issues)
         missing = set(proposal.requires_input)
+        validated_steps = []
 
-        for step in proposal.steps:
-            if step.selected is None:
+        for original_step in proposal.steps:
+            root_delete_requested = bool(
+                self.ROOT_RECURSIVE_DELETE_REQUEST.search(original_step.query)
+            )
+            step = (
+                replace(
+                    original_step,
+                    selected=None,
+                    alternatives=(),
+                    command_template=None,
+                )
+                if root_delete_requested
+                else original_step
+            )
+            validated_steps.append(step)
+
+            if root_delete_requested:
+                issues.append(ValidationIssue(
+                    'critical',
+                    'destructive_command',
+                    'La solicitud incluye una eliminación recursiva forzada de la raíz del sistema (/).',
+                    step.id,
+                    'Es extremadamente peligroso: no se debe recomendar ni ejecutar. Puedo explicar el riesgo sin proporcionar ese comando.',
+                ))
+            elif step.selected is None:
                 issues.append(ValidationIssue(
                     'warning',
                     'no_candidate',
@@ -189,7 +220,7 @@ class ProposalValidator:
 
         return PipelineProposal(
             goal=proposal.goal,
-            steps=proposal.steps,
+            steps=tuple(validated_steps),
             requires_input=tuple(sorted(missing)),
             issues=tuple(issues),
             executable=False,

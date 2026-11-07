@@ -130,6 +130,18 @@ class TestAdvancedPlannerArguments(unittest.TestCase):
         self.assertEqual(plan.steps[1].redirect_target, "results.txt")
         self.assertEqual(plan.steps[1].connector_before, "&&")
 
+    def test_extracts_natural_language_append_redirection(self):
+        plan = self.planner.plan(self.analyzer.analyze(
+            "list files in /tmp and append the output to /tmp/listing.txt"
+        ))
+
+        self.assertEqual(len(plan.steps), 1)
+        self.assertEqual(plan.steps[0].query, "list files in /tmp")
+        self.assertEqual(plan.steps[0].arguments, (("path", "/tmp"),))
+        self.assertEqual(plan.steps[0].ambiguous_arguments, ())
+        self.assertEqual(plan.steps[0].redirect_operator, ">>")
+        self.assertEqual(plan.steps[0].redirect_target, "/tmp/listing.txt")
+
     def test_models_three_step_pipe_redirection_and_condition(self):
         plan = self.planner.plan(self.analyzer.analyze(
             "find /var/log | grep error > errors.txt && sort errors.txt"

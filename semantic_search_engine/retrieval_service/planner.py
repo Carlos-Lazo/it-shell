@@ -11,6 +11,8 @@ SEQUENCE_SPLITTER = re.compile(
     r'(?:and\s+)?(?:then|next|after\s+that|afterwards|followed\s+by)'
     r'|'
     r'(?:y\s+)?(?:luego|después|despues|a\s+continuación|a\s+continuacion|seguido\s+de)'
+    r'|'
+    r'append\s+(?:the\s+)?output\s+(?:to|into)'
     r')\s+',
     re.IGNORECASE,
 )
@@ -20,6 +22,11 @@ NATURAL_SEQUENCE_SPLITTER = re.compile(
     re.IGNORECASE,
 )
 SHELL_CONNECTORS = ('&&', '||', '|', ';')
+NATURAL_APPEND_REDIRECTION = re.compile(
+    r'\bappend\s+(?:the\s+)?output\s+(?:to|into)\s+'
+    r'(?P<target>"[^"]+"|\'[^\']+\'|(?:~|\.{1,2})?/[^\s,;|&]+)\s*$',
+    re.IGNORECASE,
+)
 
 ARGUMENT_PATTERNS = (
     (
@@ -195,6 +202,12 @@ def _extract_redirection(query: str) -> tuple[str, str | None, str | None]:
             normalized_target = parsed_target[0] if len(parsed_target) == 1 else None
             return query[:index].strip(), operator, normalized_target
         index += 1
+
+    append_match = NATURAL_APPEND_REDIRECTION.search(query)
+    if append_match:
+        target = shell_split(append_match.group('target'))[0]
+        command = re.sub(r'\band\s*$', '', query[:append_match.start()], flags=re.IGNORECASE)
+        return command.strip(), '>>', target
 
     return query.strip(), None, None
 
