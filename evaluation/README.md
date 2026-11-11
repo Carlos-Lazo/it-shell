@@ -127,6 +127,82 @@ Ese índice conserva la representación legacy basada en nombres de comando; sus
 resultados no deben generalizarse a los índices enriquecidos con intenciones o
 frases de búsqueda.
 
+### Comparación de MPNet y BGE-M3 en las capacidades revisadas
+
+Para comparar los dos encoders con las mismas 122 consultas, etiquetas y
+universo de aliases, ejecuta:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 PYTHONPATH=. \
+  dataset_builder/indexer/.venv/bin/python evaluation/compare_capacity_embeddings.py
+```
+
+El informe queda en `evaluation/capacity/embedding_model_comparison.json`.
+MPNet se filtra al universo de aliases compartidos antes de aplicar el Top-K;
+la relevancia se limita también a ese universo. El informe separa
+`development` y `test` y muestra métricas en inglés y español dentro de cada
+partición. No se seleccionan parámetros usando `test`.
+
+Los índices pueden tener dimensiones distintas: MPNet usa 768 y BGE-M3 1024;
+cada consulta se codifica con el encoder correspondiente a su índice. Aunque
+los aliases BGE coinciden con el subconjunto compartido, el artefacto de
+vectores BGE no registra hashes de los textos fuente. Por eso no puede
+confirmarse de forma independiente que sus embeddings se generaron a partir de
+la revisión exacta del corpus actual; el JSON deja constancia de esta
+limitación.
+
+### Comparación BGE-M3 + reglas frente a BGE-M3 + Ollama
+
+Este primer benchmark aísla la selección de candidatos: ambos métodos reciben
+exactamente los mismos resultados de retrieval BGE-M3 para la consulta original,
+con `top-k=15`, etiquetas y umbral fijos. `rules` elige el candidato elegible de
+mayor rango; Ollama selecciona dentro del mismo conjunto. Se excluyen
+deliberadamente la reformulación de consultas, el análisis de pasos y la
+generación de explicaciones para atribuir diferencias solo al selector.
+
+Con Ollama local disponible y `qwen2.5:1.5b` descargado:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 PYTHONPATH=. \
+  dataset_builder/indexer/.venv/bin/python evaluation/compare_bge_ollama.py
+```
+
+Los informes quedan en `evaluation/capacity/bge_ollama_comparison.json` y
+`evaluation/capacity/bge_ollama_comparison.md`. Hit@k/MRR y cobertura de
+candidatos son compartidos por diseño; la métrica comparativa es la exactitud
+del comando seleccionado, desglosada por partición e idioma. El informe también
+registra latencia del selector, llamadas/fallbacks de Ollama, digest del modelo
+y hashes del índice, aliases, corpus y consultas. El test se evalúa una vez con
+configuración fija y no se usa para elegir parámetros. La selección se puntúa
+por comando: no valida completamente los argumentos ni ejecuta propuestas. Se
+guarda un checkpoint reanudable durante la ejecución y se elimina al completar
+exitosamente.
+
+El benchmark falla explícitamente si Ollama/modelo no están disponibles o el
+índice no es BGE-M3 de 1024 dimensiones; no sustituye Ollama por el mock. La
+procedencia BGE tiene una limitación: el archivo de vectores no registra hashes
+de los textos fuente y no permite identificar de manera independiente su
+revisión exacta.
+
+#### Resultados de la ejecución actual
+
+En las 122 consultas, la selección por reglas acertó 48 (39,3 %) y Ollama
+acertó 67 (54,9 %), una diferencia de +15,6 puntos porcentuales. En el test
+fijo de 36 consultas, las cifras fueron 10/36 (27,8 %) y 16/36 (44,4 %),
+respectivamente. El retrieval compartido alcanzó Hit@15 de 84,4 % y MRR de
+0,524; estos valores no miden una diferencia entre selectores. La latencia
+media total reportada fue 7,22 s para reglas y 20,45 s para Ollama.
+
+Se registró una llamada de fallback entre las 122 consultas: `networking.tar::3`
+(development, inglés). La llamada no produjo una selección válida y se conservó
+el primer candidato elegible (`mksquashfs`), que no coincide con la etiqueta
+`tar`; este caso cuenta como selección incorrecta en el resultado de Ollama.
+El informe no conserva la causa de ese error, por lo que no se atribuye a un
+fallo específico del modelo o del servicio. Las métricas completas, los
+desgloses por idioma/partición y la procedencia están en el informe JSON y
+Markdown indicados arriba. Estos resultados describen esta muestra y no validan
+la corrección integral de argumentos ni la ejecución segura de comandos.
+
 `evaluate_reranker.py` evalúa a la vez FAISS puro y un Cross-Encoder sobre los
 candidatos iniciales. El JSON generado contiene `baseline_summary` y
 `reranked_summary`; por eso la ejecución MiniLM también proporciona las métricas
