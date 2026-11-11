@@ -93,6 +93,16 @@ it-shell "find large log files" --format markdown
 it-shell "find large log files" --format json
 ```
 
+El asistente determinista es el predeterminado. Para habilitar Ollama en una
+ejecución, configura el servicio local y usa `--assistant ollama`:
+
+```bash
+it-shell "crear los directorios padre que falten en /tmp/reportes" --assistant ollama
+```
+
+La selección de comandos sigue limitada a candidatos recuperados y la propuesta
+pasa siempre por el validador; el sistema no ejecuta comandos.
+
 `terminal` incluye colores ANSI para los avisos; `cli` es texto plano. También se
 puede indicar la cantidad de candidatos con `--top-k 10` y una configuración
 alternativa con `--config ruta/al/config.yaml`.

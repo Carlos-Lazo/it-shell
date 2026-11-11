@@ -52,7 +52,18 @@ selection:
   min_score: 0.45                # Umbral de abstención ante baja confianza
   alternative_margin: 0.04       # Margen de similitud para proponer alternativas
   max_alternatives: 3            # Límite de comandos alternativos
+assistant: rules                 # rules (predeterminado) u ollama
+ollama_model: qwen2.5:1.5b
+ollama_base_url: http://localhost:11434
+ollama_timeout: 45
 ```
+
+El modo `ollama` traduce/reescribe las consultas de retrieval, selecciona entre
+los candidatos recuperados y genera la explicación. El plan, los argumentos y
+la plantilla final del comando siguen siendo deterministas: el texto de comando
+generado por el modelo se ignora y la propuesta pasa siempre por
+`ProposalValidator`. Si Ollama no está disponible, se conserva el retrieval
+determinista y la explicación vuelve al generador local.
 
 ---
 
@@ -65,6 +76,16 @@ un checkout.
 ```bash
 it-shell "list files in a directory"
 ```
+
+Para activar Ollama solo en una ejecución, sin modificar la configuración:
+
+```bash
+it-shell "crear los directorios padre que falten en /tmp/reportes" --assistant ollama
+```
+
+Ollama debe estar ejecutándose localmente y tener descargado el modelo
+configurado. La CLI no requiere conectividad al servicio cuando se usa el modo
+predeterminado `rules`.
 
 ### Ejecución fuera de línea (Offline)
 Para asegurar reproducibilidad y evitar llamadas a la red durante la inferencia:

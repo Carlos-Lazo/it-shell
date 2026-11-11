@@ -69,6 +69,7 @@ class TestOllamaAssistant(unittest.TestCase):
 
         self.assertIsInstance(result, LLMQueryAnalysis)
         self.assertEqual(result.predicted_category, "filesystem")  # heuristic fallback
+        self.assertEqual(self.assistant.analysis_fallback_count, 1)
         self.assertEqual(len(result.steps), 1)
         self.assertIn("fallback", result.raw_response)
 
@@ -141,9 +142,9 @@ class TestOllamaAssistant(unittest.TestCase):
         self.assertEqual(result.selected_index, 1)
         self.assertEqual(result.selected_alias, "filesystem:1871")
         self.assertEqual(result.confidence, "low")
+        self.assertEqual(self.assistant.selection_fallback_count, 1)
         self.assertTrue(any("Fallback" in w for w in result.issues_or_warnings))
 
 
 if __name__ == "__main__":
     unittest.main()
-

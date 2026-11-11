@@ -14,9 +14,27 @@ from semantic_search_engine.pipeline_builder_service.service import PipelineBuil
 from semantic_search_engine.prompt_builder_service.prompt_builder import PromptBuilder
 from semantic_search_engine.prompt_builder_service.service import PromptBuilderService
 from semantic_search_engine.response_formatter_service.service import ResponseFormatterService
+from semantic_search_engine.llm.ollama_assistant import OllamaAssistant
 
-def create_engine(config_path: Path):
+
+def create_engine(config_path: Path, assistant_backend: str | None = None):
     config=load_config(config_path)
+    selected_assistant = (
+        config.assistant_backend
+        if assistant_backend is None
+        else assistant_backend
+    )
+    if not isinstance(selected_assistant, str) or selected_assistant not in {"rules", "ollama"}:
+        raise ValueError("assistant_backend debe ser 'rules' u 'ollama'")
+    assistant = (
+        OllamaAssistant(
+            model=config.ollama_model,
+            base_url=config.ollama_base_url,
+            timeout=config.ollama_timeout,
+        )
+        if selected_assistant == "ollama"
+        else None
+    )
     encoder = SentenceTransformerEncoder(config.embedding_model)
     if config.retrieval_mode == "hybrid":
         if config.bm25_index_path is None:
@@ -43,7 +61,20 @@ def create_engine(config_path: Path):
         QueryAnalyzer(),
         RulePlanner(),
         retriever,
+        query_assistant=assistant,
     )
     reranker=CrossEncoderReranker(config.reranker_model) if config.reranker_model else IdentityReranker()
-    pipeline=PipelineBuilderService(CommandResolver(config.corpus_path), PipelineBuilder(config.selection), ProposalValidator())
-    return SemanticSearchEngine(retrieval, RerankerService(reranker), pipeline, PromptBuilderService(PromptBuilder()), ResponseFormatterService())
+    pipeline=PipelineBuilderService(
+        CommandResolver(config.corpus_path),
+        PipelineBuilder(config.selection),
+        ProposalValidator(),
+        candidate_assistant=assistant,
+    )
+    prompts = PromptBuilderService(PromptBuilder(), llm_client=assistant)
+    return SemanticSearchEngine(
+        retrieval,
+        RerankerService(reranker),
+        pipeline,
+        prompts,
+        ResponseFormatterService(),
+    )

@@ -15,6 +15,8 @@ from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from semantic_search_engine.prompt_builder_service.llm_client import LLMClientError
+
 logger = logging.getLogger(__name__)
 
 DEFAULT_OLLAMA_URL = "http://localhost:11434"
@@ -149,6 +151,13 @@ SELECTION_SCHEMA = {
     "additionalProperties": False,
 }
 
+EXPLANATION_SCHEMA = {
+    "type": "object",
+    "properties": {"explanation": {"type": "string"}},
+    "required": ["explanation"],
+    "additionalProperties": False,
+}
+
 
 class OllamaAssistant:
     """Interacts with an Ollama model for query analysis and candidate reranking/synthesis."""
@@ -164,6 +173,33 @@ class OllamaAssistant:
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
         self.retries = retries
+        self.analysis_fallback_count = 0
+        self.selection_fallback_count = 0
+
+    def generate(self, prompt: str) -> str:
+        """Generate a grounded explanation for the validated proposal."""
+        try:
+            parsed = self._chat_request(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Explica brevemente la propuesta descrita en el contexto. "
+                            "No modifiques ni completes comandos. Devuelve solo el "
+                            "campo explanation del esquema JSON."
+                        ),
+                    },
+                    {"role": "user", "content": prompt},
+                ],
+                schema=EXPLANATION_SCHEMA,
+                temperature=0.1,
+            )
+        except (OllamaConnectionError, OllamaResponseError) as error:
+            raise LLMClientError(f"Ollama explanation failed: {error}") from error
+        explanation = parsed.get("explanation")
+        if not isinstance(explanation, str):
+            raise LLMClientError("Ollama returned no explanation string.")
+        return explanation
 
     def is_available(self) -> bool:
         """Check if the Ollama endpoint is reachable."""
@@ -179,6 +215,7 @@ class OllamaAssistant:
         messages: list[dict[str, str]],
         schema: dict[str, Any] | None = None,
         temperature: float = 0.1,
+        num_predict: int = 160,
     ) -> dict[str, Any]:
         """Perform a chat completion with JSON schema formatting."""
         payload: dict[str, Any] = {
@@ -188,7 +225,7 @@ class OllamaAssistant:
             "options": {
                 "temperature": temperature,
                 "num_ctx": 2048,
-                "num_predict": 160,
+                "num_predict": num_predict,
             },
         }
         if schema:
@@ -269,6 +306,7 @@ class OllamaAssistant:
         try:
             parsed = self._chat_request(messages, schema=QUERY_ANALYSIS_SCHEMA, temperature=0.1)
         except Exception as exc:
+            self.analysis_fallback_count += 1
             logger.warning("Ollama query analysis failed (%s); using deterministic fallback.", exc)
             return self.fallback_analysis(query)
 
@@ -394,6 +432,7 @@ class OllamaAssistant:
         try:
             parsed = self._chat_request(messages, schema=SELECTION_SCHEMA, temperature=0.1)
         except Exception as exc:
+            self.selection_fallback_count += 1
             logger.warning("Ollama candidate selection failed (%s); using top candidate fallback.", exc)
             top = candidates[0]
             return LLMSelectionResult(
@@ -450,4 +489,3 @@ class OllamaAssistant:
             steps=[AnalysisStep(step_index=1, task=query, search_query=query)],
             raw_response={"fallback": True},
         )
-

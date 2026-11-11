@@ -1,4 +1,8 @@
+import logging
+
 from semantic_search_engine.prompt_builder_service.llm_client import LLMClient, LLMClientError
+
+logger = logging.getLogger(__name__)
 
 
 class PromptBuilderService:
@@ -14,7 +18,11 @@ class PromptBuilderService:
             prompt = self.builder.explanation_prompt(proposal)
             try:
                 explanation = self.llm_client.generate(prompt)
-            except LLMClientError:
+            except LLMClientError as error:
+                logger.warning(
+                    "Optional explanation provider failed (%s); using deterministic explanation.",
+                    error,
+                )
                 return self.builder.offline_explanation(proposal)
             if explanation.strip():
                 return explanation.strip()

@@ -23,6 +23,10 @@ class EngineConfig:
     bm25_index_path: Path | None = None
     bm25_search_phrases_path: Path | None = None
     hybrid_alpha: float = 0.5
+    assistant_backend: str = "rules"
+    ollama_model: str = "qwen2.5:1.5b"
+    ollama_base_url: str = "http://localhost:11434"
+    ollama_timeout: float = 45.0
 
 def load_config(path: Path) -> EngineConfig:
     data=yaml.safe_load(path.read_text(encoding='utf-8')) or {}
@@ -73,6 +77,22 @@ def load_config(path: Path) -> EngineConfig:
     hybrid_alpha = float(raw_hybrid_alpha)
     if not 0 <= hybrid_alpha <= 1:
         raise ValueError("hybrid_alpha debe ser un número entre 0 y 1")
+    assistant_backend = data.get('assistant', 'rules')
+    if not isinstance(assistant_backend, str) or assistant_backend not in {'rules', 'ollama'}:
+        raise ValueError("assistant debe ser 'rules' u 'ollama'")
+    ollama_model = data.get('ollama_model', 'qwen2.5:1.5b')
+    if not isinstance(ollama_model, str) or not ollama_model.strip():
+        raise ValueError("ollama_model debe ser un nombre de modelo no vacío")
+    ollama_base_url = data.get('ollama_base_url', 'http://localhost:11434')
+    if not isinstance(ollama_base_url, str) or not ollama_base_url.strip():
+        raise ValueError("ollama_base_url debe ser una URL no vacía")
+    raw_ollama_timeout = data.get('ollama_timeout', 45.0)
+    if (
+        isinstance(raw_ollama_timeout, bool)
+        or not isinstance(raw_ollama_timeout, (int, float))
+        or raw_ollama_timeout <= 0
+    ):
+        raise ValueError("ollama_timeout debe ser un número positivo")
     return EngineConfig(
         index_path=(root/data['index_path']).resolve(),
         aliases_path=(root/data['aliases_path']).resolve(),
@@ -90,4 +110,8 @@ def load_config(path: Path) -> EngineConfig:
         ),
         bm25_search_phrases_path=search_phrases_path,
         hybrid_alpha=hybrid_alpha,
+        assistant_backend=assistant_backend,
+        ollama_model=ollama_model.strip(),
+        ollama_base_url=ollama_base_url.strip().rstrip('/'),
+        ollama_timeout=float(raw_ollama_timeout),
     )

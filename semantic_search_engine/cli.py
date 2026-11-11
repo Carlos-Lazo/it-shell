@@ -18,8 +18,19 @@ def main(argv: list[str] | None = None) -> None:
         default="cli",
     )
     parser.add_argument("--top-k", type=int, default=50)
+    parser.add_argument(
+        "--assistant",
+        choices=("rules", "ollama"),
+        default=None,
+        help="Asistente para selección y explicación (por defecto, reglas deterministas)",
+    )
     args = parser.parse_args(argv)
-    response = create_engine(args.config).search(
+    engine = (
+        create_engine(args.config)
+        if args.assistant is None
+        else create_engine(args.config, assistant_backend=args.assistant)
+    )
+    response = engine.search(
         QueryRequest(args.query, args.top_k, args.format)
     )
     print(response)

@@ -42,6 +42,16 @@ class TestCli(unittest.TestCase):
         )
         print_result.assert_called_once_with("result: find large files")
 
+    @patch("semantic_search_engine.cli.create_engine", return_value=FakeEngine())
+    def test_main_passes_assistant_override(self, create_engine):
+        with patch("builtins.print"):
+            main(["find large files", "--assistant", "ollama"])
+
+        create_engine.assert_called_once_with(
+            default_config_path(),
+            assistant_backend="ollama",
+        )
+
     def test_default_config_selects_repository_config(self):
         self.assertEqual(
             default_config_path(),
