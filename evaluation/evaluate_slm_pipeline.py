@@ -276,7 +276,9 @@ def evaluate_query(
             "slm_confidence": sel_result.confidence,
             "explanation": sel_result.explanation,
             "latency_s": selection_time,
+            "raw_response": sel_result.raw_response,
         },
+        "analysis_raw_response": analysis.raw_response,
     }
     # (end of evaluate_query)
 
@@ -329,24 +331,59 @@ def generate_markdown_report(report_data: dict[str, Any], output_path: Path) -> 
     ov = report_data["overall"]
     dev = report_data["by_partition"].get("development", {})
     tst = report_data["by_partition"].get("test", {})
-    boost = report_data["metadata"].get("category_boost", 0.10)
+    metadata = report_data["metadata"]
+    boost = metadata.get("category_boost", 0.10)
+    mock_mode = metadata.get("mock_mode", False)
+    classification_label = (
+        "Clasificador simulado (heurísticas)"
+        if mock_mode
+        else "Clasificador Ollama"
+    )
+    selection_label = (
+        "Selección simulada (heurísticas)"
+        if mock_mode
+        else "Selección asistida por Ollama"
+    )
+    selection_column = (
+        "Selección mock"
+        if mock_mode
+        else "Selección Ollama"
+    )
 
     lines = [
-        "# Informe de Evaluación Técnica: Pipeline Asistido por SLM (Qwen 2.5 1.5B)",
+        "# Evaluación exploratoria: pipeline de retrieval y asistente",
         "",
         f"**Fecha:** {time.strftime('%Y-%m-%d %H:%M:%S')}",
-        f"**Modelo evaluado:** `{report_data['metadata']['model']}`",
+        f"**Modelo configurado:** `{metadata['model']}`",
+        (
+            "**Implementación medida:** `MockSLMAssistant`; no se invocó Qwen."
+            if mock_mode
+            else "**Implementación medida:** llamadas al servicio Ollama."
+        ),
+        f"**Encoder de retrieval:** `{metadata.get('retrieval_encoder', EMBEDDER_NAME)}` (inglés)",
         f"**Total de consultas evaluadas:** {ov['count']} ({dev.get('count', 0)} desarrollo, {tst.get('count', 0)} prueba)",
         f"**Categorías de evaluación:** `filesystem`, `networking`",
         f"**Category Boost configurado:** `+{boost}`",
+        "",
+        "> Los resultados de consultas en español no miden el desempeño del asistente: "
+        "el encoder de retrieval es monolingüe inglés y el corpus está en inglés. "
+        "No deben usarse para concluir sobre soporte multilingüe.",
+        *(
+            [
+                "> En modo mock, la clasificación y selección son heurísticas locales; "
+                "las métricas no son evidencia de precisión ni latencia de Qwen."
+            ]
+            if mock_mode
+            else []
+        ),
         "",
         "## 1. Comparativa de Estrategias de Retrieval (Hit@k y MRR)",
         "",
         "| Estrategia de Retrieval | Hit@1 | Hit@3 | Hit@5 | Hit@10 | MRR |",
         "| :--- | :---: | :---: | :---: | :---: | :---: |",
         f"| **1. Global (Sin Filtro)** | {ov['retrieval']['global']['hit@1']*100:.1f}% | {ov['retrieval']['global']['hit@3']*100:.1f}% | {ov['retrieval']['global']['hit@5']*100:.1f}% | {ov['retrieval']['global']['hit@10']*100:.1f}% | {ov['retrieval']['global']['mrr']:.4f} |",
-        f"| **2. SLM Hard Filter (Exclusivo)** | {ov['retrieval']['slm_hard']['hit@1']*100:.1f}% | {ov['retrieval']['slm_hard']['hit@3']*100:.1f}% | {ov['retrieval']['slm_hard']['hit@5']*100:.1f}% | {ov['retrieval']['slm_hard']['hit@10']*100:.1f}% | {ov['retrieval']['slm_hard']['mrr']:.4f} |",
-        f"| **3. SLM Soft Boost (+{boost})** | **{ov['retrieval']['slm_boosted']['hit@1']*100:.1f}%** | **{ov['retrieval']['slm_boosted']['hit@3']*100:.1f}%** | **{ov['retrieval']['slm_boosted']['hit@5']*100:.1f}%** | **{ov['retrieval']['slm_boosted']['hit@10']*100:.1f}%** | **{ov['retrieval']['slm_boosted']['mrr']:.4f}** |",
+        f"| **2. {classification_label} Hard Filter (Exclusivo)** | {ov['retrieval']['slm_hard']['hit@1']*100:.1f}% | {ov['retrieval']['slm_hard']['hit@3']*100:.1f}% | {ov['retrieval']['slm_hard']['hit@5']*100:.1f}% | {ov['retrieval']['slm_hard']['hit@10']*100:.1f}% | {ov['retrieval']['slm_hard']['mrr']:.4f} |",
+        f"| **3. {classification_label} Soft Boost (+{boost})** | **{ov['retrieval']['slm_boosted']['hit@1']*100:.1f}%** | **{ov['retrieval']['slm_boosted']['hit@3']*100:.1f}%** | **{ov['retrieval']['slm_boosted']['hit@5']*100:.1f}%** | **{ov['retrieval']['slm_boosted']['hit@10']*100:.1f}%** | **{ov['retrieval']['slm_boosted']['mrr']:.4f}** |",
         f"| **4. Oracle Hard Filter** | {ov['retrieval']['oracle_hard']['hit@1']*100:.1f}% | {ov['retrieval']['oracle_hard']['hit@3']*100:.1f}% | {ov['retrieval']['oracle_hard']['hit@5']*100:.1f}% | {ov['retrieval']['oracle_hard']['hit@10']*100:.1f}% | {ov['retrieval']['oracle_hard']['mrr']:.4f} |",
         f"| **5. Oracle Soft Boost (+{boost})** | {ov['retrieval']['oracle_boosted']['hit@1']*100:.1f}% | {ov['retrieval']['oracle_boosted']['hit@3']*100:.1f}% | {ov['retrieval']['oracle_boosted']['hit@5']*100:.1f}% | {ov['retrieval']['oracle_boosted']['hit@10']*100:.1f}% | {ov['retrieval']['oracle_boosted']['mrr']:.4f} |",
         "",
@@ -354,22 +391,32 @@ def generate_markdown_report(report_data: dict[str, Any], output_path: Path) -> 
         "",
         "| Componente | Métrica | Valor Obtenido | Descripción |",
         "| :--- | :--- | :---: | :--- |",
-        f"| **Clasificador SLM** | Exactitud Categoría | **{ov['classification']['accuracy']*100:.1f}%** | Predicción correcta entre filesystem y networking |",
-        f"| **Clasificador SLM** | Tasa Exclusión Errónea | **{ov['classification']['false_exclusion_rate']*100:.1f}%** | Casos donde una clasificación errónea afectaría un filtro hard |",
+        f"| **{classification_label}** | Exactitud Categoría | **{ov['classification']['accuracy']*100:.1f}%** | Predicción correcta entre filesystem y networking |",
+        f"| **{classification_label}** | Tasa Exclusión Errónea | **{ov['classification']['false_exclusion_rate']*100:.1f}%** | Casos donde una clasificación errónea afectaría un filtro hard |",
         f"| **Selección Final** | Baseline (Top-1 FAISS) | {ov['selection']['baseline_accuracy']*100:.1f}% | Elección directa del primer resultado |",
-        f"| **Selección Final** | Asistida por SLM | **{ov['selection']['slm_accuracy']*100:.1f}%** | Grounding sobre Top-K con extracción de argumentos y explicación |",
+        f"| **Selección Final** | {selection_label} | **{ov['selection']['slm_accuracy']*100:.1f}%** | Selección dentro de Top-K; comando ensamblado no equivale a validación funcional |",
         "",
         "## 3. Rendimiento por Partición (Development vs Test)",
         "",
-        "| Partición | Consultas | Hit@1 (Global) | Hit@1 (Soft Boost) | Hit@5 (Soft Boost) | Selección Final (Baseline) | Selección Final (SLM) |",
+        f"| Partición | Consultas | Hit@1 (Global) | Hit@1 (Soft Boost) | Hit@5 (Soft Boost) | Selección Final (Baseline) | {selection_column} |",
         "| :--- | :---: | :---: | :---: | :---: | :---: | :---: |",
         f"| **Development** | {dev.get('count', 0)} | {dev.get('retrieval', {}).get('global', {}).get('hit@1', 0)*100:.1f}% | **{dev.get('retrieval', {}).get('slm_boosted', {}).get('hit@1', 0)*100:.1f}%** | **{dev.get('retrieval', {}).get('slm_boosted', {}).get('hit@5', 0)*100:.1f}%** | {dev.get('selection', {}).get('baseline_accuracy', 0)*100:.1f}% | **{dev.get('selection', {}).get('slm_accuracy', 0)*100:.1f}%** |",
         f"| **Test (Holdout)** | {tst.get('count', 0)} | {tst.get('retrieval', {}).get('global', {}).get('hit@1', 0)*100:.1f}% | **{tst.get('retrieval', {}).get('slm_boosted', {}).get('hit@1', 0)*100:.1f}%** | **{tst.get('retrieval', {}).get('slm_boosted', {}).get('hit@5', 0)*100:.1f}%** | {tst.get('selection', {}).get('baseline_accuracy', 0)*100:.1f}% | **{tst.get('selection', {}).get('slm_accuracy', 0)*100:.1f}%** |",
         "",
         "## 4. Conclusiones y Defensa Técnica",
         "",
-        "1. **Ventaja decisiva de Soft Boost frente a Hard Filter:** El Soft Boosting prioriza comandos de la categoría adecuada sin descartar herramientas universales que residen en otras categorías del corpus (ej. `grep` en `textprocessing`), resolviendo por completo el problema de exclusión errónea.",
-        "2. **Grounding y Selección Asistida:** El SLM de 1.5B actúa como reranker semántico final, desambiguando flags y generando una explicación amigable en español.",
+        (
+            "1. Estos resultados describen únicamente el modo mock y el encoder MPNet "
+            "en inglés; no permiten afirmar que Qwen mejore clasificación, retrieval o "
+            "selección."
+            if mock_mode
+            else
+            "1. Estos resultados corresponden a una ejecución de Ollama, pero su "
+            "calidad solo puede atribuirse al modelo si se conservan el digest, "
+            "versión del servidor, configuración y respuestas crudas."
+        ),
+        "2. La comparación español-inglés está confundida por el encoder monolingüe y el corpus en inglés; para evaluar el asistente multilingüe debe usarse un encoder/corpus compatible o limitar la métrica a consultas en inglés.",
+        "3. El contraste de category boost es exploratorio: requiere una comparación controlada y evidencia con categorías verificadas antes de recomendarlo como mejora general.",
     ]
     report_text = "\n".join(lines) + "\n"
     output_path.write_text(report_text, encoding="utf-8")
@@ -466,6 +513,16 @@ def main() -> None:
         "metadata": {
             "model": args.model,
             "mock_mode": isinstance(assistant, MockSLMAssistant),
+            "assistant_implementation": (
+                "MockSLMAssistant (heurísticas locales)"
+                if isinstance(assistant, MockSLMAssistant)
+                else "OllamaAssistant (API local)"
+            ),
+            "retrieval_encoder": EMBEDDER_NAME,
+            "retrieval_encoder_language": "English-only",
+            "cross_language_metrics_interpretable": False,
+            "analysis_fallback_calls": getattr(assistant, "analysis_fallback_count", 0),
+            "selection_fallback_calls": getattr(assistant, "selection_fallback_count", 0),
             "capacities_file": str(args.capacities),
             "total_queries": len(queries),
             "total_time_s": round(total_time, 2),
@@ -514,4 +571,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

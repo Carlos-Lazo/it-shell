@@ -75,7 +75,11 @@ class TestEvaluateSLMPipeline(unittest.TestCase):
         import tempfile
 
         report_data = {
-            "metadata": {"model": "qwen2.5:1.5b"},
+            "metadata": {
+                "model": "qwen2.5:1.5b",
+                "mock_mode": True,
+                "retrieval_encoder": "sentence-transformers/all-mpnet-base-v2",
+            },
             "overall": {
                 "count": 10,
                 "classification": {"accuracy": 0.9, "false_exclusion_rate": 0.05},
@@ -114,11 +118,13 @@ class TestEvaluateSLMPipeline(unittest.TestCase):
             out_file = Path(tmp_dir) / "report.md"
             content = generate_markdown_report(report_data, out_file)
             self.assertTrue(out_file.exists())
-            self.assertIn("# Informe de Evaluación Técnica", content)
+            self.assertIn("# Evaluación exploratoria", content)
             self.assertIn("qwen2.5:1.5b", content)
             self.assertIn("80.0%", content)
+            self.assertIn("no se invocó Qwen", content)
+            self.assertIn("no son evidencia de precisión ni latencia de Qwen", content)
+            self.assertIn("monolingüe inglés", content)
 
 
 if __name__ == "__main__":
     unittest.main()
-

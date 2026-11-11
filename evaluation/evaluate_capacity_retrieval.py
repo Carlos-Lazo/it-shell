@@ -309,6 +309,7 @@ def main() -> None:
     parser.add_argument("--index", type=Path, default=DEFAULT_INDEX)
     parser.add_argument("--aliases", type=Path, default=DEFAULT_ALIASES)
     parser.add_argument("--bm25-index", type=Path, default=DEFAULT_BM25_INDEX)
+    parser.add_argument("--embedder", default=EMBEDDER_NAME, help="Embedding model name or path")
     parser.add_argument("--candidate-top-k", type=int, default=15)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
@@ -344,7 +345,7 @@ def main() -> None:
             f"BM25 index has {searcher.num_docs} docs but corpus has "
             f"{expected_bm25_docs}; rebuild or select the matching index"
         )
-    encoder = SentenceTransformerEncoder(EMBEDDER_NAME)
+    encoder = SentenceTransformerEncoder(args.embedder)
     hybrid_retrievers = {
         alpha: HybridBM25Retriever(
             searcher,
@@ -450,7 +451,7 @@ def main() -> None:
             "faiss_index_sha256": sha256_file(args.index),
             "aliases_sha256": sha256_file(args.aliases),
             "corpus_sha256": corpus_hashes,
-            "embedding_model": EMBEDDER_NAME,
+            "embedding_model": args.embedder,
             "bm25_index_directory": args.bm25_index.resolve().relative_to(ROOT).as_posix(),
             "bm25_index_representation": (
                 "legacy command-only representation (bm25_indexs_v2)"
