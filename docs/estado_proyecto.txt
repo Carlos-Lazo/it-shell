@@ -1,5 +1,5 @@
 ESTADO DEL PROYECTO IT-SHELL
-Actualizado: 2026-10-28
+Actualizado: 2026-11-11
 
 1. PROPOSITO
 
@@ -71,31 +71,71 @@ mismo corte antes del cálculo de métricas hasta @10.
 - Clasificador TF-IDF: validación cruzada estratificada sobre 297 ejemplos:
   exactitud Top-1 67,7 %. Con sus umbrales, 55,2 % de respuestas concluyentes y
   84,1 % de precisión entre esas respuestas.
-- Baseline FAISS oficial: MRR 0,5377, Hit@5 0,7125 y Hit@10 0,8000.
+- Baseline FAISS oficial histórico: MRR 0,5377, Hit@5 0,7125 y Hit@10 0,8000
+  sobre el conjunto independiente de 160 consultas. Consultar el benchmark y
+  snapshot citados en la sección 4 antes de comparar con otras evaluaciones.
 - BM25 sobre el mismo conjunto: MRR 0,2408, Hit@5 0,2687 y Hit@10 0,3125;
   su búsqueda observó 3,99 ms por consulta. No alcanza el umbral de calidad
   establecido para reemplazar FAISS.
-- La CLI procesa consultas con FAISS y genera respuestas CLI, Markdown o JSON;
-  la propuesta queda marcada como no ejecutable.
+- En una evaluación separada de 122 consultas revisadas (86 development,
+  36 test; 81 en inglés y 41 en español), BGE-M3 obtuvo Hit@15 0,844 y MRR
+  0,524. Esas métricas son comunes a las dos condiciones porque el retrieval
+  se comparte; no son comparables directamente con el benchmark oficial de
+  160 consultas.
+- En el mismo benchmark, la selección por reglas acertó 48/122 (39,3 %) y
+  Ollama/Qwen 2.5 1.5B acertó 67/122 (54,9 %). En el test fijo, las cifras
+  fueron 10/36 (27,8 %) y 16/36 (44,4 %). Ollama aumentó la latencia media
+  total reportada de 7,22 s a 20,45 s y registró un fallback, contado como
+  incorrecto. Este resultado mide solo la selección entre los mismos
+  candidatos; no evalúa análisis de consulta, ensamblado de argumentos ni
+  ejecución funcional.
+- La CLI puede usar Ollama de forma opcional, manteniendo reglas como opción
+  predeterminada. Las propuestas se validan y quedan marcadas como no
+  ejecutables; esto no equivale a demostrar que cada propuesta sea
+  funcionalmente correcta.
+
+El informe completo de la comparación BGE-M3 está en
+`evaluation/capacity/bge_ollama_comparison.md` y los datos/procedencia en
+`evaluation/capacity/bge_ollama_comparison.json`. La ejecución usó Ollama
+0.40.13 y `qwen2.5:1.5b` con digest
+`65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b`.
+Los vectores BGE no incluyen hashes del texto fuente, por lo que no se pudo
+verificar de manera independiente la revisión exacta del corpus usada al
+generarlos.
 
 6. LIMITACIONES DE INTEGRACION
 
-- No hay pruebas del motor Python ni prueba de integración que cargue índice,
-  corpus y formatee una propuesta real.
-- El clasificador tiene pruebas Go; conviene conservar su ejecución en CI.
+- Hay pruebas unitarias para componentes Python y Go. Aún falta una evaluación
+  funcional end-to-end que compruebe propuestas completas y sus argumentos
+  contra efectos esperados en un entorno aislado.
 - El corpus y los artefactos binarios están ignorados por Git; el manifiesto
   proporciona checksums, pero falta definir una política de distribución.
+- El benchmark de selección mide si el comando del alias elegido coincide con
+  la etiqueta. No valida sintaxis completa, argumentos, comportamiento,
+  seguridad funcional ni ejecución del comando.
+- Las métricas históricas de `evaluation/capacity/slm_pipeline_evaluation.json`
+  provienen de `MockSLMAssistant` (`mock_mode: true`) y usan MPNet monolingüe
+  inglés; no deben atribuirse a Qwen ni interpretarse como evaluación
+  multilingüe.
 
 7. MEJORAS PROPUESTAS, EN ORDEN
 
-1. Establecer el baseline reproducible sobre el conjunto oficial de 160 consultas.
-2. Revisar fallos por consulta y dominio; ampliar después la evaluación en español.
-3. Comparar granularidad por comando frente a opción y reducir duplicados.
-4. Probar variantes de texto para embeddings, recuperación BM25/híbrida y
-   reranking solo sobre el mismo snapshot y conjunto de evaluación.
-5. Query Planner avanzado completado (Fase 3): extracción de argumentos,
-   conectores de shell, dependencias de flujo y validación de parámetros faltantes.
-6. Automatizar validaciones, pruebas Python/Go y benchmark en CI.
+1. Evaluar el flujo completo de Ollama sobre consultas anotadas: análisis,
+   recuperación, selección, ensamblado de argumentos, abstención y propuesta
+   validada. Mantener el test reservado hasta congelar el protocolo.
+2. Analizar errores de BGE-M3 por consulta, idioma y categoría; separar fallos
+   de retrieval de fallos de selección y priorizar consultas sin candidato
+   relevante en Top-15.
+3. Ejecutar validaciones funcionales de propuestas en un sandbox descartable,
+   sin permitir ejecución sobre el sistema anfitrión.
+4. Verificar y documentar la procedencia de los textos con los que se generaron
+   los vectores BGE; regenerarlos si no se puede certificar alineación con el
+   corpus evaluado.
+5. Mantener FAISS como referencia densa: los resultados históricos de BM25 no
+   justifican reemplazarlo. Comparar nuevas variantes BM25/híbridas solo con
+   corpus, candidatos, consultas y parámetros controlados.
+6. Consolidar suite Python/Go y benchmarks reproducibles en CI; definir una
+   política para distribuir corpus y artefactos ignorados por Git.
 
 8. ARCHIVOS DE REFERENCIA
 
@@ -109,10 +149,13 @@ mismo corte antes del cálculo de métricas hasta @10.
 RESUMEN EJECUTIVO
 
 El motor recibe consultas en lenguaje natural y propone comandos sin ejecutarlos.
-La Fase 2 se enfoca en mejorar y medir la recuperación usando el benchmark
-oficial de 160 consultas y snapshots reproducibles de corpus e índices. Las
-métricas vigentes deben citarse desde `evaluation/retrieval_benchmark_v2.json`,
-no desde resultados históricos.
+La evaluación oficial de retrieval usa 160 consultas y un snapshot reproducible;
+en paralelo, una evaluación de capacidades con 122 consultas comparó BGE-M3
+compartido más selección por reglas u Ollama. Ollama mejoró la selección
+observada, pero con más latencia. Esa evidencia no cierra la evaluación
+end-to-end: siguen pendientes los argumentos, la validación funcional aislada y
+la procedencia exacta de los textos fuente BGE. Citar cada resultado desde su
+informe correspondiente y no mezclar los dos conjuntos.
 
 ASPECTOS A DESTACAR
 
@@ -121,15 +164,18 @@ ASPECTOS A DESTACAR
 - Arquitectura modular: clasificador TF-IDF en Go y recuperación semántica
   en Python mediante Sentence Transformers y FAISS.
 - Evaluación local: los scripts calculan CommandHit@k, MRR y nDCG sin APIs
-  externas, y generan un tablero HTML.
+  externas para retrieval; el benchmark de selección usa Ollama local y
+  registra modelo, digest y fallbacks.
 - Trazabilidad: `evaluation/retrieval_snapshot_v2.json` registra los artefactos
   y sus hashes para que las métricas se vinculen a un snapshot concreto.
 
 PRÓXIMOS PASOS
 
-1. Ejecutar y archivar el baseline FAISS sobre el snapshot oficial.
-2. Regenerar BM25 para que corpus, consulta e índice compartan la misma versión;
-   luego medir BM25 e híbrido de forma comparable.
-3. Analizar errores por consulta/dominio y evaluar rerankers bajo los mismos
-   candidatos y parámetros.
-4. Llevar validaciones y pruebas Python/Go a CI.
+1. Completar la evaluación end-to-end y funcional del flujo con Ollama; mantener
+   separado el benchmark de selección ya ejecutado.
+2. Revisar errores de retrieval/selección y resolver la trazabilidad del
+   snapshot BGE.
+3. Continuar comparaciones BM25/híbridas sobre corpus y configuración
+   alineados, sin reemplazar FAISS hasta demostrar mejora.
+4. Llevar validaciones y pruebas Python/Go a CI y cerrar la política de
+   distribución de artefactos.

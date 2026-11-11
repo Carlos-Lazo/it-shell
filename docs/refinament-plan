@@ -1,13 +1,14 @@
 ## Resumen y Estado General
 
-**Actualizado:** 2026-11-06  
+**Actualizado:** 2026-11-11
 **Rama activa:** `feat/precision-refinement-plan`  
-**Estado:** Pasos 1, 2 y 3 completados con evidencia empírica; Paso 4 en curso; Paso 5 planificado.
+**Estado:** Pasos 1 y 2 completados; el paso 3 sigue siendo exploratorio/mock; el paso 4 cuenta con una comparación controlada y reproducible de selección BGE-M3 + reglas frente a BGE-M3 + Ollama, pero la calidad del flujo end-to-end sigue pendiente; paso 5 planificado.
 
 - El proyecto cuenta con un pipeline de reglas determinista como línea base estable.
 - Se implementó un asistente SLM local desacoplado (`semantic_search_engine/llm/ollama_assistant.py`) con esquemas JSON estrictos y fallback automático.
-- En retrieval, se descubrió que el filtrado rígido por categoría (*Hard Filtering*) causaba un 17.2% de falsas exclusiones debido a comandos transversales (ej. `grep` ubicado en `textprocessing` y `filesystem`). Se implementó **Category Boosting (Soft Filtering)** en `FaissRetriever`, aumentando Hit@1 en desarrollo de 38.4% a **43.0%** y MRR a **0.4661**.
-- Se realizaron pruebas en vivo con Ollama en CPU: **`qwen2.5:1.5b`** redujo la latencia más del 50% frente a `3b` (~21s vs ~48s) con idéntica exactitud funcional y explicaciones nativas en español.
+- Se implementó **Category Boosting (Soft Filtering)** en `FaissRetriever`. Las cifras disponibles (Hit@1 de desarrollo 38,4% a 43,0%; MRR global 0,4470 a 0,4661) provienen de `MockSLMAssistant` y del encoder monolingüe inglés MPNet; son exploratorias, no evidencia de rendimiento de Qwen ni de soporte en español.
+- Hay afirmaciones históricas de pruebas en vivo de Qwen 1.5B/3B, pero no se encontraron artefactos que permitan auditarlas; no se consideran resultados reproducibles.
+- La comparación controlada de selección sobre 122 consultas obtuvo 39,3% de acierto con reglas y 54,9% con Qwen 2.5 1.5B. En el test fijo (36 consultas), fue 27,8% frente a 44,4%. Ambas condiciones comparten exactamente el mismo retrieval BGE-M3; la mejora mide selección de candidatos, no el flujo completo. Ollama tuvo mayor latencia media total (20,45 s frente a 7,22 s) y un fallback contabilizado como error.
 - **Detalle técnico completo, benchmarks y tablas de latencia:** ver [`docs/slm_y_boosting.md`](slm_y_boosting.md).
 
 ---
@@ -24,21 +25,21 @@
 - **Revisión:** Todas las consultas marcadas con estado `reviewed` sin solapamiento de capacidades entre desarrollo y test.
 - **Resultado:** Conjunto de prueba limpio sin etiquetas inventadas.
 
-### 3. Probar clasificación de categoría y estrategia de retrieval [COMPLETADO]
+### 3. Probar clasificación de categoría y estrategia de retrieval [EXPLORATORIO; NO VALIDA QWEN]
 - **Implementación:** `evaluation/evaluate_slm_pipeline.py` y tests unitarios en `tests/test_retriever_boosting.py`.
 - **Hallazgo clave:**
-  - *Hard Filtering (Exclusivo):* Redujo Hit@1 a 29.5% por descarte de herramientas universales en categorías adyacentes (17.2% de falsas exclusiones).
-  - *Soft Boosting (+0.10):* Incrementó Hit@1 global a **38.5%** (y **43.0%** en desarrollo) y el MRR a **0.4661**, sin descartar opciones válidas.
-- **Resultado:** Evidencia empírica concluyente a favor del Soft Filtering para guiar la búsqueda sin riesgo de exclusión irreversible.
+  - El artefacto `slm_pipeline_evaluation.json` declara `mock_mode: true`. La clasificación proviene de reglas léxicas y la selección de solapamiento de tokens, no de llamadas al modelo.
+  - El retrieval usa `all-mpnet-base-v2` inglés sobre corpus inglés. Los resultados españoles no permiten evaluar el SLM ni generalizar calidad multilingüe.
+- **Resultado:** Las cifras se conservan como diagnóstico del mock y del retrieval MPNet; no son evidencia concluyente sobre Qwen o sobre category boosting general.
 
-### 4. Integrar el análisis de Ollama como opción experimental [EN CURSO]
+### 4. Integrar y evaluar Ollama como opción experimental [SELECCIÓN EVALUADA; FLUJO COMPLETO PENDIENTE]
 - **Completado:**
   - Módulo `semantic_search_engine/llm/ollama_assistant.py` con schemas JSON estrictos para análisis de query y selección de candidatos.
   - Soporte de fallback determinista inmediato ante error o timeout.
-  - Validación en vivo con `qwen2.5:1.5b` y `qwen2.5:3b`.
-- **Pendiente inmediato:**
-  - Conectar el asistente como opción configurable en `semantic_search_engine/shared/config.py`, `bootstrap.py` y `cli.py` (ej. `--assistant ollama` o flag de configuración).
-  - Mantener el modo determinista como default para asegurar retrocompatibilidad.
+  - Cableado opcional en configuración, bootstrap y CLI mediante `--assistant ollama`; `rules` sigue como default.
+  - Benchmark reproducible de la selección final con Ollama real y BGE-M3, sobre las mismas 122 consultas, etiquetas y candidatos que las reglas. Se registran modelo/digest, procedencia, llamadas, latencias, salidas estructuradas y fallback.
+  - El selector Ollama logró 54,9% de acierto frente a 39,3% de reglas en el conjunto completo; en el test fijo, 44,4% frente a 27,8%. El test no se usó para ajustar la configuración.
+- **Alcance y pendiente:** el benchmark excluye análisis/reformulación de consultas, selección de pasos, ensamblado correcto de argumentos y explicaciones; además, compara una muestra limitada y no ejecuta comandos. Las cifras históricas 1.5B/3B siguen sin ser reproducibles con los artefactos disponibles.
 
 ### 5. Evaluar la funcionalidad final y cierre del proyecto [PRÓXIMO PASO]
 - Ejecutar las propuestas generadas en entornos aislados/descartables (sandbox) para verificar que el comando ensamblado produce el efecto esperado en el sistema (ej. creación de directorios padre, inspección de sockets).
@@ -49,11 +50,20 @@
 
 ## Próximos Pasos Inmediatos
 
-1. **Cableado del Asistente en el Engine (CLI y Bootstrap):**
-   - Incorporar parámetro `--assistant [rules|ollama]` en `cli.py`.
-   - Extender `bootstrap.py` para instanciar `OllamaAssistant` de forma optativa.
-   - Enlazar la propuesta asistida al `validator.py` antes de presentarla.
+1. **Completar la evaluación end-to-end de Ollama:** medir análisis/reformulación, argumentos, abstención y propuesta final con etiquetas adjudicadas; separar desarrollo/test y registrar fallbacks. El benchmark actual solo respalda la selección entre candidatos compartidos.
 2. **Evaluación Funcional en Sandbox (Paso 5):**
    - Diseñar script de verificación funcional que compruebe los efectos reales en el sistema de archivos de prueba.
 3. **Consolidación Final:**
-   - Cierre de la rama `feat/precision-refinement-plan` con suite de tests íntegra en verde (138 tests actuales).
+   - Cierre de la rama `feat/precision-refinement-plan` con suite de tests íntegra en verde.
+
+### Conclusión provisional
+
+En esta muestra, Ollama mejora la selección del comando cuando BGE-M3 ya recuperó
+candidatos útiles: en el test sube de 10/36 a 16/36 selecciones correctas.
+También aumenta la latencia media medida en este benchmark en 13,23 s. El
+retrieval tiene Hit@15 de 84,4% y MRR de 0,524, idénticos para ambos selectores;
+por tanto, los casos sin ningún candidato relevante no se resuelven por cambiar
+el selector. La evidencia justifica seguir evaluando Ollama como reranker, pero
+no permite declarar terminado el refinamiento: faltan el flujo completo, la
+validación funcional en sandbox y la verificación independiente de la revisión
+textual exacta usada para generar los vectores BGE.

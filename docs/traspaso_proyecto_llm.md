@@ -1,6 +1,6 @@
 # Traspaso de contexto del proyecto IT Shell
 
-**Actualizado:** 2026-10-31  
+**Actualizado:** 2026-11-11
 **Rama observada:** `feat/precision-refinement-plan`  
 **Estado Git:** hay cambios modificados y archivos sin seguimiento; el trabajo
 actual todavía no está committeado. No tratar el último commit como si incluyera
@@ -20,6 +20,31 @@ curadas. Una prueba manual de 21 frases asociadas a siete aliases mejoró la
 presencia de comandos relevantes en los candidatos, pero no corrigió todas las
 propuestas finales. Todavía no es una métrica de precisión adjudicada ni motivo
 para activar este modo por defecto.
+
+### Estado de la evaluación BGE-M3 + Ollama (2026-11-11)
+
+Se completó una comparación reproducible de selección final con 122 consultas
+revisadas (86 development, 36 test), el índice BGE-M3 compartido y
+`qwen2.5:1.5b` de Ollama (`0.40.13`, digest
+`65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b`).
+Reglas acertó 48/122 (39,3%) y Ollama 67/122 (54,9%); en el test, 10/36
+(27,8%) y 16/36 (44,4%), respectivamente. El retrieval compartido tuvo
+Hit@15 84,4% y MRR 0,524. La latencia media total reportada fue 7,22 s con
+reglas y 20,45 s con Ollama.
+
+La comparación solo atribuye diferencias al selector: no mide reformulación,
+análisis de pasos, exactitud de argumentos o ejecución. Hubo un fallback en
+`networking.tar::3`, conservando `mksquashfs` como incorrecto. La procedencia
+del índice no permite verificar de forma independiente la revisión exacta de
+los textos usados para generar los vectores BGE. Ver los informes
+[`bge_ollama_comparison.md`](../evaluation/capacity/bge_ollama_comparison.md)
+y [`bge_ollama_comparison.json`](../evaluation/capacity/bge_ollama_comparison.json).
+
+**Conclusión actual:** hay una señal positiva para usar Ollama como selector
+sobre candidatos BGE-M3, con un costo de latencia importante. No alcanza para
+cerrar la evaluación del asistente ni para afirmar mejor calidad end-to-end.
+Siguen pendientes la evaluación del flujo completo y las pruebas funcionales
+aisladas.
 
 ## Hitos previos del proyecto
 
@@ -129,10 +154,14 @@ Prompt inicial sugerido:
 
 ## Ollama y un Modelfile para proponer paráfrasis
 
-Ollama no estaba instalado en el entorno de desarrollo observado; por eso el
-ejemplo siguiente es una plantilla, no una ejecución ya verificada. Confirmar
-el tag exacto local con `ollama list`. Sustituir `qwen3:8b` por el modelo/tag
-Qwen concreto disponible; no usar `latest` si se busca reproducibilidad.
+En la sesión de traspaso original se observó que Ollama no estaba instalado; por
+eso el ejemplo siguiente se redactó como plantilla y no como ejecución
+verificada en esa sesión. En una comprobación posterior del entorno local
+(2026-11-11), el endpoint respondió y reportó `qwen2.5:1.5b` disponible. Esa
+disponibilidad actual no valida retrospectivamente las mediciones históricas
+descritas en `docs/slm_y_boosting.md`; esas cifras siguen sin logs, digest,
+versión del servidor ni entradas/salidas archivadas. Confirmar el tag exacto
+con `ollama list`; no usar `latest` si se busca reproducibilidad.
 
 ```text
 FROM qwen3:8b
